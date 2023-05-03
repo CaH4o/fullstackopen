@@ -1,0 +1,40 @@
+  sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+
+    User->>Browser: Open the notes page by URL https://studies.cs.helsinki.fi/exampleapp/spa
+    
+    activate Browser
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    deactivate Browser
+
+    activate Server
+    Server-->>Browser: HTML document
+    deactivate Server
+
+    activate Browser
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate Server
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    Browser->>User: Show to User the HTML document without CSS and JS file.
+    deactivate Browser
+
+    Server-->>Browser: the css file
+    activate Browser
+    deactivate Server
+    activate Server
+    Server-->>Browser: the JavaScript file
+    deactivate Server
+    Note right of Browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+
+    Browser->>Server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate Server    
+    Browser->>User: Show to User the HTML document with CSS and JS file but without notes data.
+    deactivate Browser
+    Server-->>Browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    deactivate Server
+    activate Browser
+    Note right of Browser: The browser executes the function that renders the notes 
+    Browser->>User: Show to User the HTML document with CSS and JS file and with notes data.
+    deactivate Browser
