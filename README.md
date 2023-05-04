@@ -18,38 +18,38 @@ https://fullstackopen.com/en/
 
 ### Links:
 
-[HTTP protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP)
-[GET request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET)
-[Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
-[Request and the server response headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields)
-[Content-Type of a header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type)
-[HyperText Markup Language or HTML](https://en.wikipedia.org/wiki/HTML)
-[Sequence diagram](https://fullstackopen.com/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6)
-[Java Spring](https://spring.io/projects/spring-framework)
-[Python Flask](https://flask.palletsprojects.com/en/2.2.x/)
-[Ruby on Rails](https://rubyonrails.org/)
-[Express library with Node.js](https://expressjs.com/)
-[JSON](https://en.wikipedia.org/wiki/JSON)
-[JSONVue on Chrome](https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc)
-[XMLHttpReques, readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState)
-[Callback function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function)
-[Document Object Model, or DOM](https://en.wikipedia.org/wiki/Document_Object_Model)
-[CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[Class selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors)
-[Class attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class)
-[POST request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST)
-[URL redirection](https://en.wikipedia.org/wiki/URL_redirection)
-[AJAX (Asynchronous JavaScript and XML)](<https://en.wikipedia.org/wiki/Ajax_(programming)>)
-[Single-page application (SPA)](https://en.wikipedia.org/wiki/Single-page_application)
-[Vanilla JavaDcript](https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/)
-[jQuery](https://jquery.com/)
-[BackboneJS](https://backbonejs.org/)
-[AngularJS](https://angularjs.org/)
-[React library](https://react.dev/)
-[Redux library](https://github.com/reduxjs/redux)
-[VueJS](https://vuejs.org/)
-[Frontend and backend](https://en.wikipedia.org/wiki/Frontend_and_backend)
-[Node.js](https://nodejs.org/en)
+[HTTP protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP),
+[GET request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET),
+[Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes),
+[Request and the server response headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields),
+[Content-Type of a header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type),
+[HyperText Markup Language or HTML](https://en.wikipedia.org/wiki/HTML),
+[Sequence diagram](https://fullstackopen.com/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6),
+[Java Spring](https://spring.io/projects/spring-framework),
+[Python Flask](https://flask.palletsprojects.com/en/2.2.x/),
+[Ruby on Rails](https://rubyonrails.org/),
+[Express library with Node.js](https://expressjs.com/),
+[JSON](https://en.wikipedia.org/wiki/JSON),
+[JSONVue on Chrome](https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc),
+[XMLHttpReques, readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState),
+[Callback function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function),
+[Document Object Model, or DOM](https://en.wikipedia.org/wiki/Document_Object_Model),
+[CSS](https://developer.mozilla.org/en-US/docs/Web/CSS),
+[Class selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors),
+[Class attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class),
+[POST request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST),
+[URL redirection](https://en.wikipedia.org/wiki/URL_redirection),
+[AJAX (Asynchronous JavaScript and XML)](<https://en.wikipedia.org/wiki/Ajax_(programming)>),
+[Single-page application (SPA)](https://en.wikipedia.org/wiki/Single-page_application),
+[Vanilla JavaDcript](https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/),
+[jQuery](https://jquery.com/),
+[BackboneJS](https://backbonejs.org/),
+[AngularJS](https://angularjs.org/),
+[React library](https://react.dev/),
+[Redux library](https://github.com/reduxjs/redux),
+[VueJS](https://vuejs.org/),
+[Frontend and backend](https://en.wikipedia.org/wiki/Frontend_and_backend),
+[Node.js](https://nodejs.org/en).
 
 ### Tasks:
 
@@ -91,3 +91,26 @@ Create a diagram depicting the situation where the user goes to the single-page 
 Create a diagram depicting the situation where the user creates a new note using the single-page version of the app.
 
 [Task is done](https://github.com/CaH4o/fullstackopen/issues/3)
+
+## Part 1
+
+[Lesson](https://fullstackopen.com/en/part1/introduction_to_react)
+
+### Links:
+
+[React](https://react.dev/),
+[create-react-app](https://github.com/facebook/create-react-app),
+[Vite](https://vitejs.dev/),
+[React, component](https://react.dev/learn/your-first-component),
+[React, Arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions),
+[ECMAScript 6](http://es6-features.org/#Constants),
+[Writing Markup with JSX](https://react.dev/learn/writing-markup-with-jsx),
+[Babel](https://babeljs.io/repl/),
+[XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction),
+[React, props](https://react.dev/learn/passing-props-to-a-component),
+[React, fragments](https://react.dev/reference/react/Fragment);
+
+[](),
+[](),
+[](),
+[](),
