@@ -51,7 +51,7 @@ https://fullstackopen.com/en/
 [Frontend and backend](https://en.wikipedia.org/wiki/Frontend_and_backend),
 [Node.js](https://nodejs.org/en).
 
-### Tasks:
+### Exercises:
 
 #### 0.1: HTML
 
@@ -105,12 +105,51 @@ Create a diagram depicting the situation where the user creates a new note using
 [React, Arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions),
 [ECMAScript 6](http://es6-features.org/#Constants),
 [Writing Markup with JSX](https://react.dev/learn/writing-markup-with-jsx),
-[Babel](https://babeljs.io/repl/),
+[Babel](https://babeljs.io/),
 [XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction),
 [React, props](https://react.dev/learn/passing-props-to-a-component),
 [React, fragments](https://react.dev/reference/react/Fragment);
 
+[ECMAScript](https://en.wikipedia.org/wiki/ECMAScript),
+[JS Bin](https://jsbin.com/?js,console),
+[JavaScript, let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let),
+[JavaScript, const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const),
+[JavaScript, var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var),
+[Javascript variables; should you use let, var or const?](https://medium.com/podiihq/javascript-variables-should-you-use-let-var-or-const-394f7645c88f),
+[Variable Hoisting](https://www.jstips.co/en/javascript/keyword-var-vs-let/),
+[var, let and const - What, why and how - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8),
+[JavaScript, Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array),
+[Immutable](https://en.wikipedia.org/wiki/Immutable_object),
+[JavaScript, Array.forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach),
+[JavaScript, Array.push()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push),
+[JavaScript, Array.concat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat),
+[JavaScript, Array.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
+[JavaScript, Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment),
+[object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#object_literals),
+[JavaScript, function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function),
+[JavaScript, function expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function),
+[JavaScript, this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this),
+[JavaScript, Global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object),
+[JavaScript, setTimeout()](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout),
+[JavaScript, bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind),
+[JavaScript, Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes),
+[JavaScript, data types and data structures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures),
+[Mozilla's JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript),
+[Mozilla's JavaScript (JS) tutorial](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_overview),
+[Free book series "You-Dont-Know-JS"](https://github.com/getify/You-Dont-Know-JS),
+[The Modern JavaScript Tutorial](https://javascript.info/),
+[The free and highly engaging book Eloquent "JavaScript"](https://eloquentjavascript.net/),
+[Namaste 🙏 JavaScript - free JavaScript video tutorial](https://www.youtube.com/playlist?list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP),
+[Plenty of quality screencasts on JavaScript, React, and other interesting topics](https://egghead.io/),
+
 [](),
 [](),
 [](),
-[](),
+
+### Exercises:
+
+#### 1.1-1.5: Course information
+
+Create the application about "course information" with requairments in exercises 1.1-1.5
+
+[Task is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/courseinfo)
