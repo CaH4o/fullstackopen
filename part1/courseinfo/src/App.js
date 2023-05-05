@@ -1,14 +1,10 @@
 import React from "react";
 
-const Header = (props) => {
-  const name = props.courseName;
-
+const Header = ({ name }) => {
   return <h1>{name}</h1>;
 };
 
-const Part = (props) => {
-  const { name, exercises } = { ...props };
-
+const Part = ({ name, exercises }) => {
   return (
     <p>
       {name} {exercises}
@@ -16,9 +12,7 @@ const Part = (props) => {
   );
 };
 
-const Content = (props) => {
-  const parts = props.courseParts;
-
+const Content = ({ parts }) => {
   return (
     <>
       {parts.map((part) => (
@@ -28,8 +22,8 @@ const Content = (props) => {
   );
 };
 
-const Total = (props) => {
-  const exercisesNumber = props.courseParts.reduce(
+const Total = ({ parts }) => {
+  const exercisesNumber = parts.reduce(
     (priv, curr) => priv + curr.exercises,
     0
   );
@@ -53,9 +47,9 @@ const App = () => {
 
   return (
     <div>
-      <Header courseName={course.name} />
-      <Content courseParts={course.parts} />
-      <Total courseParts={course.parts} />
+      <Header name={course.name} />
+      <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   );
 };
