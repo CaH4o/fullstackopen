@@ -142,9 +142,27 @@ Create a diagram depicting the situation where the user creates a new note using
 [Namaste 🙏 JavaScript - free JavaScript video tutorial](https://www.youtube.com/playlist?list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP),
 [Plenty of quality screencasts on JavaScript, React, and other interesting topics](https://egghead.io/),
 
-[](),
-[](),
-[](),
+[JavaScript, setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/setInterval),
+[React, state hook](https://react.dev/learn/state-a-components-memory),
+[HTML, button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button),
+[Mouse Event](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent),
+[React, Responding to Events](https://react.dev/learn/responding-to-events),
+[React, Sharing State Between Components](https://react.dev/learn/sharing-state-between-components),
+[React, Tic-Tac-Toe tutorial](https://react.dev/learn/tutorial-tic-tac-toe),
+[React, useState()](https://react.dev/reference/react/useState),
+
+[JavaScript, object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax),
+[React, State structure](https://react.dev/learn/choosing-the-state-structure),
+[JavaScript, Array, join()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join),
+[React, state update asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates),
+[React, conditional rendering](https://react.dev/learn/conditional-rendering),
+[React, State: A Component's Memory](https://react.dev/learn/state-a-components-memory),
+[debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger),
+[React Developer Tools, Chrome extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi),
+[React documentation](https://react.dev/learn),
+[React course on Egghead.io](https://egghead.io/),
+[React course on Start learning React](https://egghead.io/courses/start-learning-react),
+[Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-react),
 
 ### Exercises:
 
@@ -152,4 +170,4 @@ Create a diagram depicting the situation where the user creates a new note using
 
 Create the application about "course information" with requairments in exercises 1.1-1.5
 
-[Task is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/courseinfo)
+[Task "course information" is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/courseinfo)

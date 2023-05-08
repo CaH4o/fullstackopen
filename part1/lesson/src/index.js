@@ -1,10 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import App from "./App";
+//import App from "./App1";
+//import App from "./App2";
+//import App from "./App3";
+//import App from "./App4";
+import App from "./App5";
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-
+//<<--1./App2-->>
 /* let counter = 1;
 
 const refresh = () => {
@@ -17,3 +20,6 @@ setInterval(() => {
   refresh();
   counter += 1;
 }, 1000); */
+
+//<<--2+-->>
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
