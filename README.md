@@ -78,19 +78,19 @@ If necessary, show operations on the browser or on the server as comments on the
 [Creating Mermaid diagrams](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)
 [Examples](https://github.com/mermaid-js/mermaid#sequence-diagram-docs---live-editor)
 
-[Task is done](https://github.com/CaH4o/fullstackopen/issues/1)
+[Exercise is done](https://github.com/CaH4o/fullstackopen/issues/1)
 
 #### 0.5: Single page app diagram
 
 Create a diagram depicting the situation where the user goes to the single-page app version of the notes app at https://studies.cs.helsinki.fi/exampleapp/spa.
 
-[Task is done](https://github.com/CaH4o/fullstackopen/issues/2)
+[Exercise is done](https://github.com/CaH4o/fullstackopen/issues/2)
 
 #### 0.6: New note in Single page app diagram
 
 Create a diagram depicting the situation where the user creates a new note using the single-page version of the app.
 
-[Task is done](https://github.com/CaH4o/fullstackopen/issues/3)
+[Exercise is done](https://github.com/CaH4o/fullstackopen/issues/3)
 
 ## Part 1
 
@@ -163,11 +163,31 @@ Create a diagram depicting the situation where the user creates a new note using
 [React course on Egghead.io](https://egghead.io/),
 [React course on Start learning React](https://egghead.io/courses/start-learning-react),
 [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-react),
+[HTML, tables](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics),
+[JavaScript, Math.random()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random),
+[JavaScript, search engine on Mozilla Developer Network](https://developer.mozilla.org/en/),
+[JavaScript, create 0 filled array](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
 
 ### Exercises:
 
 #### 1.1-1.5: Course information
 
-Create the application about "course information" with requairments in exercises 1.1-1.5
+Create the application, which can show information about a course.
 
-[Task "course information" is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/courseinfo)
+Create an application according to the requirements described in [exercise #1.1 - #1.2](https://fullstackopen.com/en/part1/introduction_to_react#exercises-1-1-1-2), [exercise #1.3 - #1.5](https://fullstackopen.com/en/part1/java_script#exercises-1-3-1-5)
+[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/courseinfo)
+
+#### 1.6-1.11: unicafe
+
+Like most companies, the student restaurant of the University of Helsinki Unicafe collects feedback from its customers. Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: good, neutral, and bad.
+
+Create an application according to the requirements described in [exercise #1.6 - #1.11](https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14)
+[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/unicafe)
+
+#### 1.12-1.14: anecdotes
+
+The world of software engineering is filled with anecdotes that distill timeless truths from our field into short one-liners.
+Expand the application that can display a random anecdote from the field of software engineering. Also user can vote for anecdote.
+
+Create an application according to the requirements described in [exercise #1.12 - #1.14](https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14)
+[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/anecdotes)
