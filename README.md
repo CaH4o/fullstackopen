@@ -14,7 +14,7 @@ https://fullstackopen.com/en/
 
 ## Part 0: [Fundamentals of Web apps](https://fullstackopen.com/en/part0)
 
-### Links: ### Links: [General info](https://fullstackopen.com/en/part0/general_info)
+### Links: [General info](https://fullstackopen.com/en/part0/general_info)
 
 [Mastery learning)](https://en.wikipedia.org/wiki/Mastery_learning),
 [Submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen),
@@ -27,11 +27,11 @@ https://fullstackopen.com/en/
 [Visual Studio Code](https://code.visualstudio.com/),
 [Node.js](https://nodejs.org/en),
 [Node.js installation instructions](https://nodejs.org/en/download/package-manager),
-[Node.js, npm](https://docs.npmjs.com/getting-started),
-[Node.js, npx](https://www.npmjs.com/package/npx),
+[Node.js: npm](https://docs.npmjs.com/getting-started),
+[Node.js: npx](https://www.npmjs.com/package/npx),
 [Materials on GitHub](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/blob/source/src/content/0/en/part0.md).
 
-### Links: ### Links: [Fundamentals of Web apps](https://fullstackopen.com/en/part0/fundamentals_of_web_apps)
+### Links: [Fundamentals of Web apps](https://fullstackopen.com/en/part0/fundamentals_of_web_apps)
 
 [HTTP protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP),
 [GET request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET),
@@ -114,78 +114,78 @@ Create a diagram depicting the situation where the user creates a new note using
 [React](https://react.dev/),
 [create-react-app](https://github.com/facebook/create-react-app),
 [Vite](https://vitejs.dev/),
-[React, component](https://react.dev/learn/your-first-component),
-[React, Arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions),
+[React: component](https://react.dev/learn/your-first-component),
+[React: Arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions),
 [ECMAScript 6](http://es6-features.org/#Constants),
 [Writing Markup with JSX](https://react.dev/learn/writing-markup-with-jsx),
 [Babel](https://babeljs.io/),
 [XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction),
-[React, props](https://react.dev/learn/passing-props-to-a-component),
-[React, fragments](https://react.dev/reference/react/Fragment);
+[React: props](https://react.dev/learn/passing-props-to-a-component),
+[React: fragments](https://react.dev/reference/react/Fragment);
 
 ### Links: [JavaScript](https://fullstackopen.com/en/part1/java_script)
 
 [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript),
 [JS Bin](https://jsbin.com/?js,console),
-[JavaScript, let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let),
-[JavaScript, const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const),
-[JavaScript, var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var),
-[Javascript variables; should you use let, var or const?](https://medium.com/podiihq/javascript-variables-should-you-use-let-var-or-const-394f7645c88f),
+[JavaScript: let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let),
+[JavaScript: const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const),
+[JavaScript: var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var),
+[Javascript variables: should you use let, var or const?](https://medium.com/podiihq/javascript-variables-should-you-use-let-var-or-const-394f7645c88f),
 [Variable Hoisting](https://www.jstips.co/en/javascript/keyword-var-vs-let/),
-[var, let and const - What, why and how - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8),
-[JavaScript, Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array),
+[var: let and const](https://youtu.be/sjyJBL5fkp8),
+[JavaScript: Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array),
 [Immutable](https://en.wikipedia.org/wiki/Immutable_object),
-[JavaScript, Array.forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach),
-[JavaScript, Array.push()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push),
-[JavaScript, Array.concat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat),
-[JavaScript, Array.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
-[JavaScript, Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment),
+[JavaScript: Array.forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach),
+[JavaScript: Array.push()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push),
+[JavaScript: Array.concat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat),
+[JavaScript: Array.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
+[JavaScript: Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment),
 [object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#object_literals),
-[JavaScript, function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function),
-[JavaScript, function expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function),
-[JavaScript, this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this),
-[JavaScript, Global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object),
-[JavaScript, setTimeout()](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout),
-[JavaScript, bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind),
-[JavaScript, Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes),
-[JavaScript, data types and data structures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures),
+[JavaScript: function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function),
+[JavaScript: function expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function),
+[JavaScript: this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this),
+[JavaScript: Global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object),
+[JavaScript: setTimeout()](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout),
+[JavaScript: bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind),
+[JavaScript: Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes),
+[JavaScript: data types and data structures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures),
 [Mozilla's JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript),
 [Mozilla's JavaScript (JS) tutorial](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_overview),
 [Free book series "You-Dont-Know-JS"](https://github.com/getify/You-Dont-Know-JS),
 [The Modern JavaScript Tutorial](https://javascript.info/),
 [The free and highly engaging book Eloquent "JavaScript"](https://eloquentjavascript.net/),
-[Namaste 🙏 JavaScript - free JavaScript video tutorial](https://www.youtube.com/playlist?list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP),
+[Namaste JavaScript - free JavaScript video tutorial](https://www.youtube.com/playlist?list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP),
 [Plenty of quality screencasts on JavaScript, React, and other interesting topics](https://egghead.io/);
 
 ### Links: [Component state, event handlers](https://fullstackopen.com/en/part1/component_state_event_handlers)
 
-[JavaScript, setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/setInterval),
-[React, state hook](https://react.dev/learn/state-a-components-memory),
-[HTML, button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button),
+[JavaScript: setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/setInterval),
+[React: state hook](https://react.dev/learn/state-a-components-memory),
+[HTML: button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button),
 [Mouse Event](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent),
-[React, Responding to Events](https://react.dev/learn/responding-to-events),
-[React, Sharing State Between Components](https://react.dev/learn/sharing-state-between-components),
-[React, Tic-Tac-Toe tutorial](https://react.dev/learn/tutorial-tic-tac-toe),
-[React, useState()](https://react.dev/reference/react/useState);
+[React: Responding to Events](https://react.dev/learn/responding-to-events),
+[React: Sharing State Between Components](https://react.dev/learn/sharing-state-between-components),
+[React: Tic-Tac-Toe tutorial](https://react.dev/learn/tutorial-tic-tac-toe),
+[React: useState()](https://react.dev/reference/react/useState);
 
 ### Links: [A more complex state, debugging React apps](https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps)
 
-[JavaScript, object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax),
-[React, State structure](https://react.dev/learn/choosing-the-state-structure),
-[JavaScript, Array, join()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join),
-[React, state update asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates),
-[React, conditional rendering](https://react.dev/learn/conditional-rendering),
-[React, State: A Component's Memory](https://react.dev/learn/state-a-components-memory),
+[JavaScript: object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax),
+[React: State structure](https://react.dev/learn/choosing-the-state-structure),
+[JavaScript: Array .join()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join),
+[React: state update asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates),
+[React: conditional rendering](https://react.dev/learn/conditional-rendering),
+[React: State: A Component's Memory](https://react.dev/learn/state-a-components-memory),
 [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger),
-[React Developer Tools, Chrome extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi),
+[React Developer Tools: Chrome extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi),
 [React documentation](https://react.dev/learn),
 [React course on Egghead.io](https://egghead.io/),
 [React course on Start learning React](https://egghead.io/courses/start-learning-react),
 [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-react),
-[HTML, tables](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics),
-[JavaScript, Math.random()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random),
-[JavaScript, search engine on Mozilla Developer Network](https://developer.mozilla.org/en/),
-[JavaScript, create 0 filled array](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
+[HTML: tables](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics),
+[JavaScript: Math.random()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random),
+[JavaScript: search engine on Mozilla Developer Network](https://developer.mozilla.org/en/),
+[JavaScript: create 0 filled array](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
 
 ### Exercises:
 
@@ -215,33 +215,35 @@ Create an application according to the requirements described in [exercise #1.12
 
 ### Links: [Rendering a collectin, modules](https://fullstackopen.com/en/part2/rendering_a_collection_modules)
 
-[Visual Studio Code snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets),
-[VS Code plugins snippet](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets),
-[VS Code plugins Console log snippets](https://marketplace.visualstudio.com/search?term=console.log&target=VSCode&category=All%20categories&sortBy=Relevance),
-[JavaScript, Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array),
+[Visual Studio Code: snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets),
+[VS Code plugins: snippet](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets),
+[VS Code plugins: Console log snippets](https://marketplace.visualstudio.com/search?term=console.log&target=VSCode&category=All%20categories&sortBy=Relevance),
+[JavaScript: Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array),
 [Functional Programming in JavaScript](),
 [Higher-order functions](https://youtu.be/BMUiFMZr7vk),
 [Map](https://youtu.be/bCqtb-Z5YGQ),
 [Reduce basics](https://youtu.be/Wl98eZpkp-c),
-[JavaScript, Array .map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
-[React, items key](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key),
-[React, Component key](https://react.dev/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key),
-[React, import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import),
-[React, export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export),
-[JavaScript, Array .reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce),
+[JavaScript: Array .map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
+[React: items key](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key),
+[React: Component key](https://react.dev/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key),
+[React: import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import),
+[React: export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export),
+[JavaScript: Array .reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce),
 [VS Code plugins code former snippet](https://marketplace.visualstudio.com/items?itemName=cmstead.js-codeformer)
 
 ### Links: [Forms](https://fullstackopen.com/en/part2/forms)
 
-[](),
-[](),
-[](),
-[](),
-[](),
-[](),
-[](),
-[](),
-[](),
-[](),
-[](),
-[](),
+[React: useState](https://react.dev/reference/react/useState),
+[HTML: Forms](https://developer.mozilla.org/en-US/docs/Learn/Forms),
+[Event handlers](https://react.dev/learn/responding-to-events),
+[HTMLFormElement: submit event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event),
+[HTML: input](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable),
+[JavaScript: Array .concat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat),
+[React: Never mutate state directly](https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react),
+[JavaScript: Conditional (ternary) operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator),
+[JavaScript: Array .filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
+[Equality comparisons and sameness](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness),
+[JavaScript: Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array),
+[JavaScript: object equality](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/),
+[alert()](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert),
+[JavaScript: Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
