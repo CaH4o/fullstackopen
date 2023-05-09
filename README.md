@@ -12,11 +12,26 @@ https://www.helsinki.fi/en/admissions-and-education/open-university/multidiscipl
 Platform:
 https://fullstackopen.com/en/
 
-## Part 0
+## Part 0: [Fundamentals of Web apps](https://fullstackopen.com/en/part0)
 
-[Lesson](https://fullstackopen.com/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6)
+### Links: ### Links: [General info](https://fullstackopen.com/en/part0/general_info)
 
-### Links:
+[Mastery learning)](https://en.wikipedia.org/wiki/Mastery_learning),
+[Submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen),
+[Discord](https://study.cs.helsinki.fi/discord/join/fullstack),
+[Telegram](https://t.me/fullstackcourse),
+[Parts and completion](https://fullstackopen.com/en/part0/general_info#parts-and-completion),
+[Chrome browser](https://www.google.com/chrome/),
+[Developer Edition of Firefox](https://www.mozilla.org/en-US/firefox/developer/),
+[Git and GitHub tutorial for beginners](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners),
+[Visual Studio Code](https://code.visualstudio.com/),
+[Node.js](https://nodejs.org/en),
+[Node.js installation instructions](https://nodejs.org/en/download/package-manager),
+[Node.js, npm](https://docs.npmjs.com/getting-started),
+[Node.js, npx](https://www.npmjs.com/package/npx),
+[Materials on GitHub](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/blob/source/src/content/0/en/part0.md).
+
+### Links: ### Links: [Fundamentals of Web apps](https://fullstackopen.com/en/part0/fundamentals_of_web_apps)
 
 [HTTP protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP),
 [GET request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET),
@@ -92,11 +107,9 @@ Create a diagram depicting the situation where the user creates a new note using
 
 [Exercise is done](https://github.com/CaH4o/fullstackopen/issues/3)
 
-## Part 1
+## Part 1: [Introduction to React](https://fullstackopen.com/en/part1)
 
-[Lesson](https://fullstackopen.com/en/part1/introduction_to_react)
-
-### Links:
+### Links: [Introduction to React](https://fullstackopen.com/en/part1/introduction_to_react)
 
 [React](https://react.dev/),
 [create-react-app](https://github.com/facebook/create-react-app),
@@ -109,6 +122,8 @@ Create a diagram depicting the situation where the user creates a new note using
 [XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction),
 [React, props](https://react.dev/learn/passing-props-to-a-component),
 [React, fragments](https://react.dev/reference/react/Fragment);
+
+### Links: [JavaScript](https://fullstackopen.com/en/part1/java_script)
 
 [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript),
 [JS Bin](https://jsbin.com/?js,console),
@@ -140,7 +155,9 @@ Create a diagram depicting the situation where the user creates a new note using
 [The Modern JavaScript Tutorial](https://javascript.info/),
 [The free and highly engaging book Eloquent "JavaScript"](https://eloquentjavascript.net/),
 [Namaste 🙏 JavaScript - free JavaScript video tutorial](https://www.youtube.com/playlist?list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP),
-[Plenty of quality screencasts on JavaScript, React, and other interesting topics](https://egghead.io/),
+[Plenty of quality screencasts on JavaScript, React, and other interesting topics](https://egghead.io/);
+
+### Links: [Component state, event handlers](https://fullstackopen.com/en/part1/component_state_event_handlers)
 
 [JavaScript, setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/setInterval),
 [React, state hook](https://react.dev/learn/state-a-components-memory),
@@ -149,7 +166,9 @@ Create a diagram depicting the situation where the user creates a new note using
 [React, Responding to Events](https://react.dev/learn/responding-to-events),
 [React, Sharing State Between Components](https://react.dev/learn/sharing-state-between-components),
 [React, Tic-Tac-Toe tutorial](https://react.dev/learn/tutorial-tic-tac-toe),
-[React, useState()](https://react.dev/reference/react/useState),
+[React, useState()](https://react.dev/reference/react/useState);
+
+### Links: [A more complex state, debugging React apps](https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps)
 
 [JavaScript, object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax),
 [React, State structure](https://react.dev/learn/choosing-the-state-structure),
@@ -174,20 +193,55 @@ Create a diagram depicting the situation where the user creates a new note using
 
 Create the application, which can show information about a course.
 
-Create an application according to the requirements described in [exercise #1.1 - #1.2](https://fullstackopen.com/en/part1/introduction_to_react#exercises-1-1-1-2), [exercise #1.3 - #1.5](https://fullstackopen.com/en/part1/java_script#exercises-1-3-1-5)
+Create an application according to the requirements described in [exercise #1.1 - #1.2](https://fullstackopen.com/en/part1/introduction_to_react#exercises-1-1-1-2), [exercise #1.3 - #1.5](https://fullstackopen.com/en/part1/java_script#exercises-1-3-1-5).
 [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/courseinfo)
 
-#### 1.6-1.11: unicafe
+#### 1.6-1.11: Unicafe
 
 Like most companies, the student restaurant of the University of Helsinki Unicafe collects feedback from its customers. Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: good, neutral, and bad.
 
-Create an application according to the requirements described in [exercise #1.6 - #1.11](https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14)
+Create an application according to the requirements described in [exercise #1.6 - #1.11](https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14).
 [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/unicafe)
 
-#### 1.12-1.14: anecdotes
+#### 1.12-1.14: Anecdotes
 
 The world of software engineering is filled with anecdotes that distill timeless truths from our field into short one-liners.
 Expand the application that can display a random anecdote from the field of software engineering. Also user can vote for anecdote.
 
-Create an application according to the requirements described in [exercise #1.12 - #1.14](https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14)
+Create an application according to the requirements described in [exercise #1.12 - #1.14](https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14).
 [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/anecdotes)
+
+## Part 2: [Communicating with server](https://fullstackopen.com/en/part2)
+
+### Links: [Rendering a collectin, modules](https://fullstackopen.com/en/part2/rendering_a_collection_modules)
+
+[Visual Studio Code snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets),
+[VS Code plugins snippet](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets),
+[VS Code plugins Console log snippets](https://marketplace.visualstudio.com/search?term=console.log&target=VSCode&category=All%20categories&sortBy=Relevance),
+[JavaScript, Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array),
+[Functional Programming in JavaScript](),
+[Higher-order functions](https://youtu.be/BMUiFMZr7vk),
+[Map](https://youtu.be/bCqtb-Z5YGQ),
+[Reduce basics](https://youtu.be/Wl98eZpkp-c),
+[JavaScript, Array .map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
+[React, items key](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key),
+[React, Component key](https://react.dev/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key),
+[React, import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import),
+[React, export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export),
+[JavaScript, Array .reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce),
+[VS Code plugins code former snippet](https://marketplace.visualstudio.com/items?itemName=cmstead.js-codeformer)
+
+### Links: [Forms](https://fullstackopen.com/en/part2/forms)
+
+[](),
+[](),
+[](),
+[](),
+[](),
+[](),
+[](),
+[](),
+[](),
+[](),
+[](),
+[](),
