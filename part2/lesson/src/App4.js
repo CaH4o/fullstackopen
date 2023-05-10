@@ -55,7 +55,7 @@ const App = () => {
 
   const notesToShow = showAll
     ? notes
-    : notes; /* notes.filter((note) => note.important === true); */
+    : notes.filter((note) => note.important === true);
 
   const addNote = (event) => {
     event.preventDefault();
