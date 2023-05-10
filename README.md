@@ -247,3 +247,24 @@ Create an application according to the requirements described in [exercise #1.12
 [JavaScript: object equality](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/),
 [alert()](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert),
 [JavaScript: Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
+
+### Links: [Getting data from server](https://fullstackopen.com/en/part2/getting_data_from_server)
+
+[JSON Server](https://github.com/typicode/json-server),
+[JSON Server: install](https://github.com/typicode/json-server#getting-started),
+[Chrome extentions: JSONVue](https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc),
+[API: XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest),
+[API: fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch),
+[JavaScript: promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise),
+[JavaScript: runtime environments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop),
+[Input/output](https://en.wikipedia.org/wiki/Input/output),
+[What the heck is the event loop anyway?](https://youtu.be/8aGhZQkoFbQ),
+[API: Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers),
+[Javascript Multithreading](https://medium.com/techtrument/multithreading-javascript-46156179cf9a),
+[React, library](https://github.com/axios/axios),
+[About npm](https://docs.npmjs.com/about-npm),
+[Computer networking: Port](<https://en.wikipedia.org/wiki/Port_(computer_networking)>),
+[JavaScript: Using promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises),
+[React: state hook](https://react.dev/learn/state-a-components-memory),
+[React: useEffect](https://react.dev/reference/react#effect-hooks),
+[React: useEffect, conditional](https://legacy.reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect),
