@@ -291,5 +291,18 @@ Create an application according to the requirements described in [exercise #1.12
 [Web: Window: alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert),
 [JavaScript: Array .filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
 [Web: Window: confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm),
-[React: axios library](https://github.com/axios/axios),
+[React: axios library](https://github.com/axios/axios).
 
+### Links: [Adding styles to React app](https://fullstackopen.com/en/part2/adding_styles_to_react_app)
+
+[Mozilla's CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics),
+[CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor),
+[Different types of CSS selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors),
+[CSS: Class selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors),
+[React: adding styles](https://react.dev/learn#adding-styles),
+[React: inline styles](https://react-cn.github.io/react/tips/inline-styles.html),
+[React: style attribute](https://react.dev/reference/react-dom/components/common#applying-css-styles),
+[CSS: Pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes),
+[](),
+[](),
+[](),

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import personService from "../services/persons";
 
-const PersonForm = ({ persons, setPersons }) => {
+const PersonForm = ({ persons, setPersons, setMessage }) => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
 
@@ -28,13 +28,15 @@ const PersonForm = ({ persons, setPersons }) => {
             )
           )
           .catch((error) => {
-            alert(
-              `the person '${changedPerson.name}' was already deleted from server`
-            );
             console.log(error);
             setPersons(
               persons.filter((person) => person.id !== changedPerson.id)
             );
+            setMessage({
+              type: "error",
+              text: `The person '${changedPerson.name}' was already deleted from server`,
+            });
+            setTimeout(() => setMessage(null), 5000);
           });
       }
     } else {
@@ -43,9 +45,11 @@ const PersonForm = ({ persons, setPersons }) => {
         number: newNumber,
         id: persons.length + 1,
       };
-      personService
-        .create(newPerson)
-        .then((createdPerson) => setPersons(persons.concat(createdPerson)));
+      personService.create(newPerson).then((createdPerson) => {
+        setPersons(persons.concat(createdPerson));
+        setMessage({ type: "create", text: `Added '${createdPerson.name}'` });
+        setTimeout(() => setMessage(null), 5000);
+      });
     }
     setNewNumber("");
     setNewName("");
