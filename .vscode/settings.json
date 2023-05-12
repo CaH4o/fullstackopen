@@ -1,6 +1,5 @@
 {
     "js/ts.implicitProjectConfig.strictNullChecks": false,
-    "typescript.validate.enable": true,
+    "typescript.validate.enable": false,
     "javascript.validate.enable": true,
-    "reactSnippets.settings.importReactOnTop": true
 }
