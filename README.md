@@ -303,6 +303,36 @@ Create an application according to the requirements described in [exercise #1.12
 [React: inline styles](https://react-cn.github.io/react/tips/inline-styles.html),
 [React: style attribute](https://react.dev/reference/react-dom/components/common#applying-css-styles),
 [CSS: Pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes),
-[](),
-[](),
-[](),
+[React: Conditionally firing an effect](https://legacy.reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect),
+[Exchange rate API](https://www.exchangerate-api.com/),
+[currency exchange rates API](https://open.er-api.com/v6/latest/eur),
+[Countires (open API)](https://restcountries.com/),
+[Countires (open API): endpoint GET all](https://restcountries.com/v3.1/all),
+[Weather (open API)](https://openweathermap.org/),
+[Weather (open API): icons](https://openweathermap.org/weather-conditions#Icon-list),
+[Environment variables](https://create-react-app.dev/docs/adding-custom-environment-variables/)
+
+### Exercises:
+
+#### 2.1-1.5: Course information
+
+Course information application to show a topics and exercices with logic to render and count the component with conditions.
+
+Create an application according to the requirements described in [exercise #2.1 - #2.5](https://fullstackopen.com/en/part2/rendering_a_collection_modules#exercises-2-1-2-5).
+[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part2/courseinfo)
+
+#### 2.6-2.17: Phone book
+
+Phone book for maintaining persons, use json server for this. Create a single page with a form and buttons to add, update, and remove a person. All code is divided into modules and components. Logc uses axios for data manipulation, rendering hooks, promises, and Windows objects for error handling and user experience. Added some style.
+
+Create an application according to the requirements described in [exercise #2.6 - #2.10](https://fullstackopen.com/en/part2/forms#exercises-2-6-2-10), [exercise #2.11](https://fullstackopen.com/en/part2/getting_data_from_server#exercise-2-11),  
+[exercise #2.12 - 2.15](https://fullstackopen.com/en/part2/altering_data_in_server#exercises-2-12-2-15), [exercise #2.16-2.17](https://fullstackopen.com/en/part2/adding_styles_to_react_app#exercises-2-16-2-17).
+
+[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part2/phonebook)
+
+#### 2.18-2.20: Countries
+
+A single page application for displaying counties. Data is getting from open API services. The user can search for counties by name and browse the county to get all information including whether. Use React, axios library.
+
+Create an application according to the requirements described in [exercise #2.18 - #2.20](https://fullstackopen.com/en/part2/adding_styles_to_react_app#exercises-2-18-2-20).
+[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part2/countries)
