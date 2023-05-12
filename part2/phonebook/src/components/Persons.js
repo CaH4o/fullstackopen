@@ -1,13 +1,14 @@
 import React from "react";
 
-const Persons = ({ persons, showPersons }) => {
+const Persons = ({ persons, personsToShow, personDelete }) => {
   return (
     <div>
       {persons.length
-        ? showPersons.length
-          ? showPersons.map((perosn) => (
+        ? personsToShow.length
+          ? personsToShow.map((perosn) => (
               <div key={perosn.id}>
-                {perosn.name} {perosn.number}
+                {perosn.name} {perosn.number}{" "}
+                <button onClick={() => personDelete(perosn.id)}>delete</button>
               </div>
             ))
           : "No matching with persons"

@@ -245,7 +245,7 @@ Create an application according to the requirements described in [exercise #1.12
 [Equality comparisons and sameness](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness),
 [JavaScript: Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array),
 [JavaScript: object equality](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/),
-[alert()](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert),
+[Web: Window: alert()](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert),
 [JavaScript: Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
 ### Links: [Getting data from server](https://fullstackopen.com/en/part2/getting_data_from_server)
@@ -288,5 +288,8 @@ Create an application according to the requirements described in [exercise #1.12
 [JavaScript: Object initializer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Property_definitions),
 [JavaScript: using promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises),
 [JavaScript: Promise .catch()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch),
-[alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert),
+[Web: Window: alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert),
 [JavaScript: Array .filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
+[Web: Window: confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm),
+[React: axios library](https://github.com/axios/axios),
+
