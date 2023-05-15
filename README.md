@@ -390,7 +390,7 @@ Create an application according to the requirements described in [exercise #2.18
 [status code 400 bad request](https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request),
 [JavaScript: Math .max()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max),
 [JavaScript: Spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax),
-
+[Express: request-timestamp](https://www.npmjs.com/package/express-timestamp)
 
 
 ### Exercises:
