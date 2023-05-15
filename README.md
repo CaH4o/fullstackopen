@@ -314,7 +314,7 @@ Create an application according to the requirements described in [exercise #1.12
 
 ### Exercises:
 
-#### 2.1-1.5: Course information
+#### 2.1-2.5: Course information
 
 Course information application to show a topics and exercices with logic to render and count the component with conditions.
 
@@ -336,3 +336,65 @@ A single page application for displaying counties. Data is getting from open API
 
 Create an application according to the requirements described in [exercise #2.18 - #2.20](https://fullstackopen.com/en/part2/adding_styles_to_react_app#exercises-2-18-2-20).
 [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part2/countries)
+
+## Part 3: [Programming a server with NodeJS and Express](https://fullstackopen.com/en/part3)
+
+### Links: [Node.js and Express](https://fullstackopen.com/en/part3/node_js_and_express)
+
+[NodeJS](https://nodejs.org/en),
+[Google's Chrome V8 JavaScript engine](https://v8.dev/),
+[babel (transpiler)](https://babeljs.io/),
+[npm: scripts](https://docs.npmjs.com/cli/v9/using-npm/scripts),
+[NodeJS: http](https://nodejs.org/docs/latest-v8.x/api/http.html),
+[JavaScript: export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export),
+[JavaScript: import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import),
+[Node.js: CommonJS modules](https://en.wikipedia.org/wiki/CommonJS),
+[Modules: ECMAScript modules](ttps://nodejs.org/api/esm.html#modules-ecmascript-modules),
+[json-server](https://github.com/typicode/json-server),
+[Express](https://expressjs.com/),
+[Transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/),
+[Semantic versioning](https://docs.npmjs.com/about-semantic-versioning),
+[Backward compatibility](https://en.wikipedia.org/wiki/Backward_compatibility),
+[Moving to Express 5](https://expressjs.com/en/guide/migrating-5.html),
+[Express: request](https://expressjs.com/en/4x/api.html#req),
+[Express: response](https://expressjs.com/en/4x/api.html#res),
+[Express: response .semd()](https://expressjs.com/en/4x/api.html#res.send),
+[Express: response .json()](https://expressjs.com/en/4x/api.html#res.json),
+[JSON](https://en.wikipedia.org/wiki/JSON),
+[NodeJS: Repl](https://nodejs.org/docs/latest-v8.x/api/repl.html),
+[nodemon](https://github.com/remy/nodemon),
+[React Hot Loader](https://gaearon.github.io/react-hot-loader/getstarted/),
+[json-server: routs](https://github.com/typicode/json-server#routes),
+[Representational State Transfer (REST) architectural style](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm),
+[levels of RESTful maturity](https://martinfowler.com/articles/richardsonMaturityModel.html),
+[REST APIs must be hypertext-driven](https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven),
+[Book 'RESTful Web Services'](https://www.oreilly.com/library/view/restful-web-services/9780596529260/),
+[CRUD API](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete),
+[Resource-oriented architecture](https://en.wikipedia.org/wiki/Resource-oriented_architecture),
+[Express: routing](https://expressjs.com/en/guide/routing.html),
+[Express: routing route-parameters](http://expressjs.com/en/guide/routing.html#route-parameters),
+[JavaScript: Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number),
+[status code 404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found),
+[Express: response .status()](https://expressjs.com/en/4x/api.html#res.status),
+[Express: response .end()](https://expressjs.com/en/4x/api.html#res.end),
+[JavaScript: Truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy),
+[JavaScript: Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy),
+[status code 204 no content](https://www.rfc-editor.org/rfc/rfc9110.html#name-204-no-content),
+[curl](https://curl.se/),
+[Postman](https://www.postman.com/),
+[VS Code REST client plugin](https://marketplace.visualstudio.com/items?itemName=humao.rest-client),
+[The WebStorm HTTP Client](https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html),
+[Express: json-parser](https://expressjs.com/en/api.html),
+[Multipurpose Internet Mail Extensions or MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types),
+[VS Code REST client plugin: instructions in the documentation](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage),
+[status code 400 bad request](https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request),
+[JavaScript: Math .max()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max),
+[JavaScript: Spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax),
+
+
+
+### Exercises:
+
+#### 3.1-3.6: Phonebook backend
+
+[exercises 3.1-3.6](https://fullstackopen.com/en/part3/node_js_and_express#exercises-3-1-3-6)

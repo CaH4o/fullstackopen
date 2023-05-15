@@ -1,5 +1,11 @@
 {
-    "js/ts.implicitProjectConfig.strictNullChecks": false,
-    "typescript.validate.enable": false,
+    "typescript.validate.enable": true,
     "javascript.validate.enable": true,
+    "js/ts.implicitProjectConfig.checkJs": true,
+    "files.associations": {
+        "*.tsx": "typescriptreact",
+        "*.ts": "typescript",
+        "*.jsx": "javascriptreact",
+        "*.js": "javascript"
+    }
 }
