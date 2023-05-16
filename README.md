@@ -390,8 +390,14 @@ Create an application according to the requirements described in [exercise #2.18
 [status code 400 bad request](https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request),
 [JavaScript: Math .max()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max),
 [JavaScript: Spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax),
-[Express: request-timestamp](https://www.npmjs.com/package/express-timestamp)
-
+[Express: request-timestamp (middleware)](https://www.npmjs.com/package/express-timestamp)
+[HTTP standard](https://www.rfc-editor.org/rfc/rfc9110.html#name-common-method-properties),
+[HTTP HEAD](https://www.rfc-editor.org/rfc/rfc9110.html#name-head),
+[Express: json-parser](https://expressjs.com/en/api.html),
+[Express: using middleware](http://expressjs.com/en/guide/using-middleware.html),
+[Express: morgan (logger middleware)](https://github.com/expressjs/morgan),
+[Express: morgan - creating new tokens (logger middleware) ](https://github.com/expressjs/morgan#creating-new-tokens),
+[JavaScript: JSON .stringify()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
 
 ### Exercises:
 

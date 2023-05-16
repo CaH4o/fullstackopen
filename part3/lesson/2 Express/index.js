@@ -2,7 +2,21 @@
 const express = require('express')
 const app = express()
 
+const requestLogger = (request, response, next) => {
+  console.log('Method:', request.method)
+  console.log('Path:  ', request.path)
+  console.log('Body:  ', request.body)
+  console.log('---')
+  next()
+}
+
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
+
 app.use(express.json())
+
 /* 
 notes/10	GET	fetches a single resource
 notes	GET	fetches all resources in the collection
@@ -57,7 +71,7 @@ app.get('/api/notes/:id', (request, response) => {
     response.status(404).end()
   }
 })
-
+app.use(requestLogger)
 app.delete('/api/notes/:id', (request, response) => {
   const id = Number(request.params.id)
   notes = notes.filter(note => note.id !== id)
@@ -110,6 +124,8 @@ app.post('/api/notes', (request, response) => {
 
   response.json(note)
 })
+
+app.use(unknownEndpoint)
 
 const PORT = 3001
 app.listen(PORT, () => {
