@@ -14,7 +14,7 @@ const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
 
-
+app.use(requestLogger)
 app.use(express.json())
 
 /* 
@@ -71,7 +71,7 @@ app.get('/api/notes/:id', (request, response) => {
     response.status(404).end()
   }
 })
-app.use(requestLogger)
+
 app.delete('/api/notes/:id', (request, response) => {
   const id = Number(request.params.id)
   notes = notes.filter(note => note.id !== id)
