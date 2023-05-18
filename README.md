@@ -399,6 +399,25 @@ Create an application according to the requirements described in [exercise #2.18
 [Express: morgan - creating new tokens (logger middleware) ](https://github.com/expressjs/morgan#creating-new-tokens),
 [JavaScript: JSON .stringify()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
 
+### Links: [Deploying app to internet](https://fullstackopen.com/en/part3/deploying_app_to_internet)
+
+[CORS(Cross-Origin Resource Sharing)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing),
+[Web: CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS),
+[Heroku](https://www.heroku.com/?),
+[Fly.io](https://fly.io/),
+[Render](https://render.com/),
+[Railway](https://railway.app/),
+[Cyclic](https://www.cyclic.sh/),
+[Replit](https://replit.com/),
+[CodeSandBox](https://codesandbox.io/),
+[Environment variable](https://en.wikipedia.org/wiki/Environment_variable),
+[](),
+[](),
+[](),
+[](),
+[](),
+[](),
+
 ### Exercises:
 
 #### 3.1-3.6: Phonebook backend
