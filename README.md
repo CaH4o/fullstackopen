@@ -412,11 +412,13 @@ Create an application according to the requirements described in [exercise #2.18
 [CodeSandBox](https://codesandbox.io/),
 [Environment variable](https://en.wikipedia.org/wiki/Environment_variable),
 [React: Use the Production Build](https://legacy.reactjs.org/docs/optimizing-performance.html#use-the-production-build),
-[Minification](https://en.wikipedia.org/wiki/Minification_(programming)),
+[Minification](<https://en.wikipedia.org/wiki/Minification_(programming)>),
 [Express: middleware static](https://expressjs.com/en/starter/static-files.html),
 [Relative URLs](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2),
-[](),
-[](),
+[npm Shx](https://www.npmjs.com/package/shx),
+[React: Proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/),
+[create-react-app with a Node server on Heroku](https://github.com/mars/heroku-cra-node),
+[Heroku Buildpack for create-react-app](https://github.com/mars/create-react-app-buildpack)
 
 ### Exercises:
 
