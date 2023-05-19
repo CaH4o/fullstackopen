@@ -349,7 +349,7 @@ Create an application according to the requirements described in [exercise #2.18
 [JavaScript: export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export),
 [JavaScript: import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import),
 [Node.js: CommonJS modules](https://en.wikipedia.org/wiki/CommonJS),
-[Modules: ECMAScript modules](ttps://nodejs.org/api/esm.html#modules-ecmascript-modules),
+[Modules: ECMAScript modules](https://nodejs.org/api/esm.html#modules-ecmascript-modules),
 [json-server](https://github.com/typicode/json-server),
 [Express](https://expressjs.com/),
 [Transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/),

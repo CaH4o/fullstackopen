@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "build:ui": "rmdir /s build && cd ..\\frontend && npm run build && xcopy build ..\\backend\\build /s /e /i"
   },
   "author": "Oleksandr Tertyshnyk",
   "license": "ISC",

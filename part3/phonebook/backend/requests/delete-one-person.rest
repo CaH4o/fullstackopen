@@ -4,3 +4,7 @@ GET http://localhost:3001/api/persons/
 
 DELETE  http://localhost:3001/api/persons/2
 
+###
+
+DELETE  https://phonebook-1oyz.onrender.com/api/persons/1
+

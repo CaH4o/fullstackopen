@@ -58,6 +58,7 @@ const generateId = () => {
 };
 
 app.use(cors());
+app.use(express.static("build"));
 app.use(express.json());
 app.use(time.init);
 //app.use(morgan('tiny'));
@@ -75,7 +76,6 @@ app.get("/", (request, response) => {
 });
 
 app.get("/info", (request, response) => {
-  //@ts-ignore
   const date = new Date(request.timestamp || Date.now());
 
   response.send(`<div>

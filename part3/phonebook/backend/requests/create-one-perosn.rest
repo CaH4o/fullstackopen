@@ -11,3 +11,13 @@ Content-Type: application/json
     "number": "123-456"
 }
 
+###
+
+POST https://phonebook-1oyz.onrender.com/api/persons
+Content-Type: application/json
+
+{
+    "id": 0,
+    "name": "Ole2",
+    "number": "123-456"
+}
