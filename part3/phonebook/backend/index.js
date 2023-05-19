@@ -1,26 +1,10 @@
 const express = require("express");
 const time = require("express-timestamp");
 const morgan = require("morgan");
+const cors = require("cors");
 
+const PORT = process.env.PORT || 3001;
 const app = express();
-app.use(express.json());
-app.use(time.init);
-//app.use(morgan('tiny'));
-
-const morganCustom = (tokens, req, res) => {
-  return [
-    tokens.method(req, res),
-    tokens.url(req, res),
-    tokens.status(req, res),
-    tokens.res(req, res, "content-length"),
-    "-",
-    tokens["response-time"](req, res),
-    "ms",
-    JSON.stringify(req["body"]),
-  ].join(" ");
-};
-
-app.use(morgan(morganCustom));
 
 let persons = [
   {
@@ -45,6 +29,23 @@ let persons = [
   },
 ];
 
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: "unknown endpoint" });
+};
+
+const morganCustom = (tokens, req, res) => {
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.status(req, res),
+    tokens.res(req, res, "content-length"),
+    "-",
+    tokens["response-time"](req, res),
+    "ms",
+    JSON.stringify(req["body"]),
+  ].join(" ");
+};
+
 const generateId = () => {
   const ids = persons.map((p) => p.id);
   let id = 0;
@@ -55,6 +56,12 @@ const generateId = () => {
 
   return id;
 };
+
+app.use(cors());
+app.use(express.json());
+app.use(time.init);
+//app.use(morgan('tiny'));
+app.use(morgan(morganCustom));
 
 app.get("/", (request, response) => {
   response.send(`<div>
@@ -68,6 +75,7 @@ app.get("/", (request, response) => {
 });
 
 app.get("/info", (request, response) => {
+  //@ts-ignore
   const date = new Date(request.timestamp || Date.now());
 
   response.send(`<div>
@@ -128,7 +136,8 @@ app.post("/api/persons", (request, response) => {
   response.json(person);
 });
 
-const PORT = 3001;
+app.use(unknownEndpoint);
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
