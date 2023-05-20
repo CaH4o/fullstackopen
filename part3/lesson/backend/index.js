@@ -1,6 +1,30 @@
 //@ts-ignore-start
 const express = require('express')
 const cors = require('cors')
+/* const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://fullstack:<password>@cluster0.bqsahnp.mongodb.net/?retryWrites=true&w=majority";
+ */
+
+const PORT = process.env.PORT || 3001
+const app = express()
+
+let notes = [
+  {
+    id: 1,
+    content: "HTML is easy",
+    important: true
+  },
+  {
+    id: 2,
+    content: "Browser can execute only JavaScript",
+    important: false
+  },
+  {
+    id: 3,
+    content: "GET and POST are the most important methods of HTTP protocol",
+    important: true
+  }
+]
 
 const requestLogger = (request, response, next) => {
   console.log('Method:', request.method)
@@ -21,30 +45,11 @@ const generateId = () => {
   return maxId + 1
 }
 
-const PORT = process.env.PORT || 3001
-const app = express()
+
 app.use(express.static('build'))
 app.use(cors())
 app.use(express.json())
 app.use(requestLogger)
-
-let notes = [
-  {
-    id: 1,
-    content: "HTML is easy",
-    important: true
-  },
-  {
-    id: 2,
-    content: "Browser can execute only JavaScript",
-    important: false
-  },
-  {
-    id: 3,
-    content: "GET and POST are the most important methods of HTTP protocol",
-    important: true
-  }
-]
 
 app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>')

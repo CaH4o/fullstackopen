@@ -418,7 +418,33 @@ Create an application according to the requirements described in [exercise #2.18
 [npm Shx](https://www.npmjs.com/package/shx),
 [React: Proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/),
 [create-react-app with a Node server on Heroku](https://github.com/mars/heroku-cra-node),
-[Heroku Buildpack for create-react-app](https://github.com/mars/create-react-app-buildpack)
+[Heroku Buildpack for create-react-app](https://github.com/mars/create-react-app-buildpack).
+
+
+[Saving data to MongoDB](https://fullstackopen.com/en/part3/saving_data_to_mongo_db)
+[I am a puts debuggerer](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html),
+[debugging console.log](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/),
+[VSCode: debugging](https://code.visualstudio.com/docs/editor/debugging),
+[stopping fix principle](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/),
+[MongoDB](https://www.mongodb.com/),
+[Document oriented database](https://en.wikipedia.org/wiki/Document-oriented_database),
+[NoSQL](https://en.wikipedia.org/wiki/NoSQL),
+[MongoDB: collections](https://www.mongodb.com/docs/manual/core/databases-and-collections/),
+[MongoDB: documents](https://www.mongodb.com/docs/manual/core/document/),
+[MongoDB Atlas](https://www.mongodb.com/atlas/database),
+[MongoDB and Node.js](https://mongodb.github.io/node-mongodb-native/),
+[Node.js: mongoosejs library](https://mongoosejs.com/index.html),
+[MongoDB Atlas: password](https://www.mongodb.com/docs/atlas/troubleshoot-connection/#special-characters-in-connection-string-password),
+[Mongoose: schema](https://mongoosejs.com/docs/guide.html),
+[Mongoose: models](https://mongoosejs.com/docs/models.html),
+[Mongoose: models.find()](https://mongoosejs.com/docs/api/model.html#Model.find()),
+[MongoDB: find operators](https://www.mongodb.com/docs/manual/reference/operator/),
+[](),
+[](),
+[](),
+[](),
+[](),
+[](),
 
 ### Exercises:
 

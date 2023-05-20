@@ -8,13 +8,15 @@
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "rmdir /s build && cd ..\\frontend && npm run build && xcopy build ..\\backend\\build /s /e /i",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
+    "debugging": "node --inspect index.js"
   },
   "author": "Oleksandr Tertyshnyk",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongoose": "^7.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
