@@ -439,7 +439,7 @@ Create an application according to the requirements described in [exercise #2.18
 [Mongoose: models](https://mongoosejs.com/docs/models.html),
 [Mongoose: models.find()](https://mongoosejs.com/docs/api/model.html#Model.find()),
 [MongoDB: find operators](https://www.mongodb.com/docs/manual/reference/operator/),
-[](),
+[Node.js: process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv),
 [](),
 [](),
 [](),
@@ -453,3 +453,4 @@ Create an application according to the requirements described in [exercise #2.18
 [exercises 3.1-3.6](https://fullstackopen.com/en/part3/node_js_and_express#exercises-3-1-3-6)
 [exercises 3.7-3.8](https://fullstackopen.com/en/part3/node_js_and_express#exercises-3-7-3-8)
 [exercises 3.9-3.11](https://fullstackopen.com/en/part3/deploying_app_to_internet#exercises-3-9-3-11)
+[exercise 3.12](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercise-3-12)
