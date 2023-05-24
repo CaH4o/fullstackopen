@@ -1,8 +1,8 @@
 ## Structure for part3
 
 lesson - folder for exercises and practice while studying the course
-phonebook - the folder for exercise #3.1-3.12 "phonebook" ([Phonebook site](https://phonebook-1oyz.onrender.com))
+phonebook - the folder for exercise #3.1-3.14 "phonebook" ([Phonebook site](https://phonebook-1oyz.onrender.com))
 
 a) 8
 b) 5.5
-c) 3.5
+c) 4.5

@@ -420,7 +420,6 @@ Create an application according to the requirements described in [exercise #2.18
 [create-react-app with a Node server on Heroku](https://github.com/mars/heroku-cra-node),
 [Heroku Buildpack for create-react-app](https://github.com/mars/create-react-app-buildpack).
 
-
 [Saving data to MongoDB](https://fullstackopen.com/en/part3/saving_data_to_mongo_db)
 [I am a puts debuggerer](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html),
 [debugging console.log](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/),
@@ -437,18 +436,18 @@ Create an application according to the requirements described in [exercise #2.18
 [MongoDB Atlas: password](https://www.mongodb.com/docs/atlas/troubleshoot-connection/#special-characters-in-connection-string-password),
 [Mongoose: schema](https://mongoosejs.com/docs/guide.html),
 [Mongoose: models](https://mongoosejs.com/docs/models.html),
-[Mongoose: models.find()](https://mongoosejs.com/docs/api/model.html#Model.find()),
+[Mongoose: models.find()](<https://mongoosejs.com/docs/api/model.html#Model.find()>),
 [MongoDB: find operators](https://www.mongodb.com/docs/manual/reference/operator/),
 [Node.js: process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv),
 [MongoDB: Modify output](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id),
 [Mongoose: options](https://mongoosejs.com/docs/guide.html#options),
 [Mongoose: toJSON](https://mongoosejs.com/docs/guide.html#toJSON),
-[Mongoose: toObject()](https://mongoosejs.com/docs/api/document.html#Document.prototype.toObject()),
+[Mongoose: toObject()](<https://mongoosejs.com/docs/api/document.html#Document.prototype.toObject()>),
 [Mongoose: transform()](https://mongoosejs.com/docs/api/document.html#transform),
 [Node: modules](https://nodejs.org/docs/latest-v8.x/api/modules.html),
 [Node: dotenv](https://github.com/motdotla/dotenv#readme),
 [fly: dockerignore](https://community.fly.io/t/clarification-on-environment-variables/6309),
-[Mongoose: Model.findById()](https://mongoosejs.com/docs/api/model.html#Model.findById()),
+[Mongoose: Model.findById()](<https://mongoosejs.com/docs/api/model.html#Model.findById()>),
 [](),
 
 ### Exercises:
@@ -459,3 +458,4 @@ Create an application according to the requirements described in [exercise #2.18
 [exercises 3.7-3.8](https://fullstackopen.com/en/part3/node_js_and_express#exercises-3-7-3-8)
 [exercises 3.9-3.11](https://fullstackopen.com/en/part3/deploying_app_to_internet#exercises-3-9-3-11)
 [exercise 3.12](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercise-3-12)
+[exercises 3.13-3.14](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercises-3-13-3-14)
