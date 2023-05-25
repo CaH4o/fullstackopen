@@ -448,7 +448,10 @@ Create an application according to the requirements described in [exercise #2.18
 [Node: dotenv](https://github.com/motdotla/dotenv#readme),
 [fly: dockerignore](https://community.fly.io/t/clarification-on-environment-variables/6309),
 [Mongoose: Model.findById()](<https://mongoosejs.com/docs/api/model.html#Model.findById()>),
-[](),
+[Sentry](https://sentry.io/welcome/),
+[Express: Error Handling](https://expressjs.com/en/guide/error-handling.html),
+[Mongoose: Model .findByIdAndRemove()](<https://mongoosejs.com/docs/api/model.html#Model.findByIdAndRemove()>),
+[Mongoose: Model .findByIdAndUpdate()](<https://mongoosejs.com/docs/api/model.html#Model.findByIdAndUpdate()>).
 
 ### Exercises:
 

@@ -5,4 +5,4 @@ phonebook - the folder for exercise #3.1-3.14 "phonebook" ([Phonebook site](http
 
 a) 8
 b) 5.5
-c) 4.5
+c) 6
