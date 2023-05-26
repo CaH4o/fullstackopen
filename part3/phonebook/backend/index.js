@@ -8,31 +8,8 @@ const Person = require("./models/person");
 const PORT = process.env.PORT;
 const app = express();
 
-let persons = [
-  {
-    id: 1,
-    name: "Arto Hellas",
-    number: "040-123456",
-  },
-  {
-    id: 2,
-    name: "Ada Lovelace",
-    number: "39-44-5323523",
-  },
-  {
-    id: 3,
-    name: "Dan Abramov",
-    number: "12-43-234345",
-  },
-  {
-    id: 4,
-    name: "Mary Poppendieck",
-    number: "39-23-6423122",
-  },
-];
-
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: "unknown endpoint" });
+const unknownEndpoint = (request, response, next) => {
+  next({ name: "UnknownEndpoint" });
 };
 
 const morganCustom = (tokens, req, res) => {
@@ -48,15 +25,28 @@ const morganCustom = (tokens, req, res) => {
   ].join(" ");
 };
 
-const generateId = () => {
-  const ids = persons.map((p) => p.id);
-  let id = 0;
+const errorHandler = (error, request, response, next) => {
+  console.error(error.name);
 
-  do {
-    id = Math.floor(Math.random() * 1000000);
-  } while (ids.some((i) => i === id));
-
-  return id;
+  switch (error.name) {
+    case "CastError":
+      return response.status(400).send({ error: "malformatted id" });
+    case "SyntaxError":
+      return response.status(400).send({ error: "malformatted JSON" });
+    case "InvalidName":
+      return response.status(400).send({ error: "The name is missing" });
+    case "InvalidNumber":
+      return response.status(400).send({ error: "The number is missing" });
+    case "ExistName":
+      return response
+        .status(400)
+        .send({ error: "The name already exists in the phonebook" });
+    case "UnknownEndpoint":
+      return response.status(404).send({ error: "unknown endpoint" });
+    default:
+      console.error(error.message);
+      next(error);
+  }
 };
 
 app.use(cors());
@@ -65,75 +55,106 @@ app.use(express.json());
 app.use(time.init);
 app.use(morgan(morganCustom));
 
-app.get("/", (request, response) => {
+app.get("/api", (request, response) => {
   response.send(`<div>
   <h1>Phonebook API</h1>
   <div>GET <b>./info</b> - get general information.</div>
   <div>GET <b>./api/persons</b> - get all persons.</div>
   <div>GET <b>./api/persons/{id}</b> - get a singl person by id.</div>
   <div>POST <b>./api/persons</b> - create a singl person by body.</div>
+  <div>PUT <b>./api/persons/{id}</b> - update a singl person by id.</div>
   <div>DELETE <b>./api/persons/{id}</b> - delete a singl person by id.</div>
 </div>`);
 });
 
-app.get("/info", (request, response) => {
+app.get("/info", (request, response, next) => {
   //@ts-ignore
   const date = new Date(request.timestamp || Date.now());
-
-  response.send(`<div>
-  <div>Phonebook has info for ${persons.length} people</div>
-  <div>${date.toString()}</div>
-</div>`);
+  Person.aggregate([{ $count: "Person" }])
+    .then(([result]) => {
+      response.send(`<div>
+    <div>Phonebook has info for ${result["Person"]} people</div>
+    <div>${date.toString()}</div>
+  </div>`);
+    })
+    .catch((error) => next(error));
 });
 
-app.get("/api/persons", (request, response) => {
+app.get("/api/persons", (request, response, next) => {
   Person.find({})
     .then((persons) => response.json(persons))
-    .catch(() => response.status(404).end());
+    .catch((error) => next(error));
 });
 
-app.get("/api/persons/:id", (request, response) => {
+app.get("/api/persons/:id", (request, response, next) => {
   Person.findById(request.params.id)
     .then((person) => response.json(person))
-    .catch(() => response.status(404).end());
+    .catch((error) => next(error));
 });
 
-app.delete("/api/persons/:id", (request, response) => {
-  const id = Number(request.params.id);
-  const person = persons.find((person) => person.id === id);
-
-  if (person) {
-    persons = persons.filter((p) => p.id !== id);
-    response.status(204).end();
-  } else {
-    response.status(404).end();
-  }
+app.delete("/api/persons/:id", (request, response, next) => {
+  Person.findByIdAndRemove(request.params.id)
+    .then((result) => {
+      if (result) {
+        response.status(204).end();
+      } else {
+        response.status(404).end();
+      }
+    })
+    .catch((error) => next(error));
 });
 
-app.post("/api/persons", (request, response) => {
+app.post("/api/persons", (request, response, next) => {
   const body = request.body;
 
-  if (body.name === undefined || body.number === undefined) {
-    return response.status(400).json({
-      error: "The name or number is missing",
-    });
+  if (body.name === undefined || body.name.trim().length === 0) {
+    return next({ name: "InvalidName" });
+  }
+  if (body.number === undefined) {
+    return next({ name: "InvalidNumber" });
   }
 
-  /*   if (persons.some((p) => p.name === body.name)) {
-    return response.status(400).json({
-      error: "The name already exists in the phonebook",
-    });
-  } */
+  Person.find({ name: body.name })
+    .then((result) => {
+      if (result.length) {
+        return next({ name: "ExistName" });
+      } else {
+        const person = new Person({
+          name: body.name,
+          number: body.number,
+        });
 
-  const person = new Person({
+        person
+          .save()
+          .then((returnedPerson) => response.json(returnedPerson))
+          .catch((error) => next(error));
+      }
+    })
+    .catch((error) => next(error));
+});
+
+app.put("/api/persons/:id", (request, response, next) => {
+  const body = request.body;
+
+  if (body.name === undefined || body.name.trim().length === 0) {
+    return next({ name: "InvalidName" });
+  }
+  if (body.number === undefined) {
+    return next({ name: "InvalidNumber" });
+  }
+
+  const person = {
     name: body.name,
     number: body.number,
-  });
+  };
 
-  person.save().then((returnedPerson) => response.json(returnedPerson));
+  Person.findByIdAndUpdate(request.params.id, person, { new: true })
+    .then((updatedPerson) => response.json(updatedPerson))
+    .catch((error) => next(error));
 });
 
 app.use(unknownEndpoint);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

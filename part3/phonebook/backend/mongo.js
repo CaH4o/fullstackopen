@@ -20,7 +20,7 @@ const personSchema = new mongoose.Schema({
   number: String,
 });
 
-const Person = mongoose.model("Note", personSchema);
+const Person = mongoose.model("Person", personSchema);
 
 if (argvl === 5) {
   const name = process.argv[3];

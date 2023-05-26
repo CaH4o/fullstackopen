@@ -2,7 +2,7 @@ GET http://localhost:3001/api/persons/
 
 ###
 
-DELETE  http://localhost:3001/api/persons/2
+DELETE  http://localhost:3001/api/persons/6470e5b6d42c6c8e834e0db5
 
 ###
 

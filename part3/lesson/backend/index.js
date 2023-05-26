@@ -7,7 +7,7 @@ const Note = require("./models/note");
 const PORT = process.env.PORT;
 const app = express();
 
-let notes = [
+/* let notes = [
   {
     id: 1,
     content: "HTML is easy",
@@ -23,7 +23,7 @@ let notes = [
     content: "GET and POST are the most important methods of HTTP protocol",
     important: true,
   },
-];
+]; */
 
 const requestLogger = (request, response, next) => {
   console.log("Method:", request.method);
@@ -173,7 +173,6 @@ app.put("/api/notes/:id", (request, response, next) => {
 });
 
 app.use(unknownEndpoint);
-
 app.use(errorHandler);
 
 app.listen(PORT, () => {

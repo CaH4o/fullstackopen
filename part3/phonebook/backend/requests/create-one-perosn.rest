@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
     "id": 0,
-    "name": "Ole",
+    "name": "Ol2",
     "number": "123-456"
 }
 
