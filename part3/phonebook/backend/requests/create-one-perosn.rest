@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
     "id": 0,
-    "name": "Ol2",
+    "name": "Oleks",
     "number": "123-456"
 }
 
@@ -18,6 +18,6 @@ Content-Type: application/json
 
 {
     "id": 0,
-    "name": "Ole2",
+    "name": "Oleks",
     "number": "123-456"
 }

@@ -29,13 +29,22 @@ const PersonForm = ({ persons, setPersons, setMessage }) => {
           )
           .catch((error) => {
             console.log(error);
-            setPersons(
-              persons.filter((person) => person.id !== changedPerson.id)
-            );
-            setMessage({
-              type: "error",
-              text: `The person '${changedPerson.name}' was already deleted from server`,
-            });
+
+            if ("response" in error) {
+              setMessage({
+                type: "error",
+                text: `'${changedPerson.name}' - ${error.response.data.error}`,
+              });
+            } else {
+              setPersons(
+                persons.filter((person) => person.id !== changedPerson.id)
+              );
+              setMessage({
+                type: "error",
+                text: `The person '${changedPerson.name}' was already deleted from server`,
+              });
+            }
+
             setTimeout(() => setMessage(null), 5000);
           });
       }
@@ -45,11 +54,21 @@ const PersonForm = ({ persons, setPersons, setMessage }) => {
         number: newNumber,
         id: persons.length + 1,
       };
-      personService.create(newPerson).then((createdPerson) => {
-        setPersons(persons.concat(createdPerson));
-        setMessage({ type: "create", text: `Added '${createdPerson.name}'` });
-        setTimeout(() => setMessage(null), 5000);
-      });
+      personService
+        .create(newPerson)
+        .then((createdPerson) => {
+          setPersons(persons.concat(createdPerson));
+          setMessage({ type: "create", text: `Added '${createdPerson.name}'` });
+          setTimeout(() => setMessage(null), 5000);
+        })
+        .catch((error) => {
+          setMessage({
+            type: "error",
+            text: error.response.data.error,
+          });
+          setTimeout(() => setMessage(null), 5000);
+          console.log(error.response.data.error);
+        });
     }
     setNewNumber("");
     setNewName("");
