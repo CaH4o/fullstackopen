@@ -420,7 +420,8 @@ Create an application according to the requirements described in [exercise #2.18
 [create-react-app with a Node server on Heroku](https://github.com/mars/heroku-cra-node),
 [Heroku Buildpack for create-react-app](https://github.com/mars/create-react-app-buildpack).
 
-[Saving data to MongoDB](https://fullstackopen.com/en/part3/saving_data_to_mongo_db)
+### Links: [Saving data to MongoDB](https://fullstackopen.com/en/part3/saving_data_to_mongo_db)
+
 [I am a puts debuggerer](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html),
 [debugging console.log](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/),
 [VSCode: debugging](https://code.visualstudio.com/docs/editor/debugging),
@@ -453,9 +454,19 @@ Create an application according to the requirements described in [exercise #2.18
 [Mongoose: Model .findByIdAndRemove()](<https://mongoosejs.com/docs/api/model.html#Model.findByIdAndRemove()>),
 [Mongoose: Model .findByIdAndUpdate()](<https://mongoosejs.com/docs/api/model.html#Model.findByIdAndUpdate()>).
 
+### Links: [Validation and ESLint](https://fullstackopen.com/en/part3/validation_and_es_lint)
+
+[Mongoose: validation](https://mongoosejs.com/docs/validation.html),
+[Mongoose: Built-in validation](https://mongoosejs.com/docs/validation.html#built-in-validators),
+[Mongoose: Custom validation](https://mongoosejs.com/docs/validation.html#custom-validators),
+[Mongoose: Validation with update](https://github.com/mongoose-unique-validator/mongoose-unique-validator#find--updates),
+[](),
+[](),
+[](),
+
 ### Exercises:
 
-#### 3.1-3.6: Phonebook backend
+#### 3.1-3.18: Phonebook backend
 
 [exercises 3.1-3.6](https://fullstackopen.com/en/part3/node_js_and_express#exercises-3-1-3-6)
 [exercises 3.7-3.8](https://fullstackopen.com/en/part3/node_js_and_express#exercises-3-7-3-8)
