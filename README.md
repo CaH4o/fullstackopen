@@ -460,9 +460,19 @@ Create an application according to the requirements described in [exercise #2.18
 [Mongoose: Built-in validation](https://mongoosejs.com/docs/validation.html#built-in-validators),
 [Mongoose: Custom validation](https://mongoosejs.com/docs/validation.html#custom-validators),
 [Mongoose: Validation with update](https://github.com/mongoose-unique-validator/mongoose-unique-validator#find--updates),
-[](),
-[](),
-[](),
+[Lint](<https://en.wikipedia.org/wiki/Lint_(software)>),
+[Static program analysis](https://en.wikipedia.org/wiki/Static_program_analysis),
+[checkstyle](https://checkstyle.sourceforge.io/),
+[ESLint](https://eslint.org/),
+[ESLint: ignoring](https://eslint.org/docs/latest/use/configure/#ignoring-files-and-directories),
+[VSCode: eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint),
+[ESLint: rules](https://eslint.org/docs/latest/rules/),
+[ESLint: the eqeqeq rule](https://eslint.org/docs/latest/rules/eqeqeq),
+[ESLint: the no trailing spaces rule](https://eslint.org/docs/latest/rules/no-trailing-spaces)
+[ESLint: the object curly spacing rule ](https://eslint.org/docs/latest/rules/object-curly-spacing)
+[ESLint: configuring rules](https://eslint.org/docs/latest/use/configure/#configuring-rules)
+[Airbnb Javascript style guide](https://github.com/airbnb/javascript),
+[Airbnb's ESlint configuration](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb).
 
 ### Exercises:
 
