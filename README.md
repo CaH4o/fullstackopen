@@ -478,10 +478,17 @@ Create an application according to the requirements described in [exercise #2.18
 
 #### 3.1-3.18: Phonebook backend
 
-[exercises 3.1-3.6](https://fullstackopen.com/en/part3/node_js_and_express#exercises-3-1-3-6)
-[exercises 3.7-3.8](https://fullstackopen.com/en/part3/node_js_and_express#exercises-3-7-3-8)
-[exercises 3.9-3.11](https://fullstackopen.com/en/part3/deploying_app_to_internet#exercises-3-9-3-11)
-[exercise 3.12](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercise-3-12)
-[exercises 3.13-3.14](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercises-3-13-3-14)
-[exercises 3.15-3.18](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercises-3-15-3-18)
-[exercises 3.19-3.21](https://fullstackopen.com/en/part3/validation_and_es_lint#exercises-3-19-3-21)
+Full stack project 'Phone book' for maintaining persons, use mongoDB server with back-end and front-end for this. Create a single page with a form and buttons to add, update, and remove a person with REAT API. All front-end code is divided into modules and components. Logc uses axios for data manipulation, rendering hooks, promises, and Windows objects for error handling and user experience. Added some style. Backend use enviroment to hide toket for connetion to database. Created CRUD API for manipulate data. All API tested by requests. Made validation and linting. The app deployed by [this link](https://phonebook-1oyz.onrender.com).
+
+##### REST:
+
+Markup : _ GET ./info - get general information.
+_ GET ./api/persons - get all persons.
+_ GET ./api/persons/:id - get a singl person by id.
+_ POST ./api/persons - create a singl person by body.
+_ PUT ./api/persons/:id - update a singl person by id.
+_ DELETE ./api/persons/:id - delete a singl person by id.
+
+Create an application according to the requirements described in [exercises 3.1-3.6](https://fullstackopen.com/en/part3/node_js_and_express#exercises-3-1-3-6), [exercises 3.7-3.8](https://fullstackopen.com/en/part3/node_js_and_express#exercises-3-7-3-8), [exercises 3.9-3.11](https://fullstackopen.com/en/part3/deploying_app_to_internet#exercises-3-9-3-11), [exercise 3.12](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercise-3-12), [exercises 3.13-3.14](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercises-3-13-3-14), [exercises 3.15-3.18](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercises-3-15-3-18), [exercises 3.19-3.21](https://fullstackopen.com/en/part3/validation_and_es_lint#exercises-3-19-3-21), [exercise 3.22](https://fullstackopen.com/en/part3/validation_and_es_lint#exercise-3-22).
+
+[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part3/phonebook)

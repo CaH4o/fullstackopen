@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build:ui": "rmdir /s build && cd ..\\frontend && npm run build && xcopy build ..\\backend\\build /s /e /i"
+    "build:ui": "rmdir /s build && cd ..\\frontend && npm run build && xcopy build ..\\backend\\build /s /e /i",
+    "debugging": "node --inspect index.js",
+    "mongo": "node mongoTest.js test",
+    "lint": "eslint ."
   },
   "author": "Oleksandr Tertyshnyk",
   "license": "ISC",
@@ -20,6 +23,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "eslint": "^8.41.0",
     "nodemon": "^2.0.22"
   }
 }

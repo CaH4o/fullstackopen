@@ -10,7 +10,8 @@
     "build:ui": "rmdir /s build && cd ..\\frontend && npm run build && xcopy build ..\\backend\\build /s /e /i",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
     "debugging": "node --inspect index.js",
-    "mongo": "node mongo.js"
+    "mongo": "node mongo.js",
+    "lint": "eslint ."
   },
   "author": "Oleksandr Tertyshnyk",
   "license": "ISC",
