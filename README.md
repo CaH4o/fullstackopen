@@ -2,69 +2,161 @@
 
 ### Discription
 
-This repositoroy for assignements of the course Full Stack Web Development, Open Uni: Full Stack Web Development (CSM141081).
+This repositoroy for assignements of the course Full Stack Web Development, Open Uni: Full Stack Web Development.
+
+Parts:
+
+- Parts 0-5 (core course) - Full Stack Web Development (5 cr, CSM141081)
+- ~~Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)~~
+- ~~Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)~~
+- ~~Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)~~
+- ~~Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)~~
+- ~~Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)~~
+- ~~Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)~~
+- ~~Part 12 - Full Stack Web Development: Containers (1 cr, CSM141084)~~
+- ~~Part 13 - Full Stack Web Development: Relational databases (1 cr, CSM14114)~~
 
 ### Links:
 
-About course:
-https://www.helsinki.fi/en/admissions-and-education/open-university/multidisciplinary-themed-modules/full-stack
+About course: https://www.helsinki.fi/en/admissions-and-education/open-university/multidisciplinary-themed-modules/full-stack
 
-Platform:
-https://fullstackopen.com/en/
+Platform: https://fullstackopen.com/en/
+
+[Full Stack -web development project 5, 7 or 10 credits](https://github.com/fullstack-hy2020/misc/blob/master/project.md)
+
+---
 
 ## Part 0: [Fundamentals of Web apps](https://fullstackopen.com/en/part0)
 
-### Links: [General info](https://fullstackopen.com/en/part0/general_info)
+### Sub-part A: [General info](https://fullstackopen.com/en/part0/general_info)
 
-[Mastery learning)](https://en.wikipedia.org/wiki/Mastery_learning),
-[Submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen),
-[Discord](https://study.cs.helsinki.fi/discord/join/fullstack),
-[Telegram](https://t.me/fullstackcourse),
-[Parts and completion](https://fullstackopen.com/en/part0/general_info#parts-and-completion),
-[Chrome browser](https://www.google.com/chrome/),
-[Developer Edition of Firefox](https://www.mozilla.org/en-US/firefox/developer/),
-[Git and GitHub tutorial for beginners](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners),
-[Visual Studio Code](https://code.visualstudio.com/),
-[Node.js](https://nodejs.org/en),
-[Node.js installation instructions](https://nodejs.org/en/download/package-manager),
-[Node.js: npm](https://docs.npmjs.com/getting-started),
-[Node.js: npx](https://www.npmjs.com/package/npx),
-[Materials on GitHub](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/blob/source/src/content/0/en/part0.md).
+<details>
+<summary>Links:</summary>
+<li><a href="https://en.wikipedia.org/wiki/Mastery_learning" title="Mastery Learning">Mastery learning</a></li>
+<li><a href="https://studies.cs.helsinki.fi/stats/courses/fullstackopen" title="Submission system">Submission system</a></li>
+<li><a href="https://study.cs.helsinki.fi/discord/join/fullstack" title="Discord">Course channel in Telegram</a></li>
+<li><a href="https://t.me/fullstackcourse" title="Telegram">Course channel in Telegram</a></li>
+<li><a href="https://fullstackopen.com/en/part0/general_info#parts-and-completion" title="Parts and completion">Parts and completion</a></li>
+<li><a href="https://www.google.com/chrome/" title="Chrome browser">Using the Chrome browser</a></li>
+<li><a href="https://www.mozilla.org/en-US/firefox/developer/" title="Developer Edition of Firefox">alternative Chrome is the Developer Edition of Firefox</a></li>
+<li><a href="https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners" title="Git and GitHub tutorial for beginners">Git must be installed and you should know how to use it. Git and GitHub tutorial for beginners</a></li>
+<li><a href="https://code.visualstudio.com/" title="Visual Studio Code">Install a sensible text editor that supports web development. Visual Studio Code</a></li>
+<li><a href="https://nodejs.org/en" title="Node.js">Node.js (version 18.13.0)</a></li>
+<li><a href="https://nodejs.org/en/download/package-manager" title="Node.js installation instructions">Node.js installation instructions</a></li>
+<li><a href="https://docs.npmjs.com/getting-started" title="Node.js: npm">Node package manager npm</a></li>
+<li><a href="https://www.npmjs.com/package/npx" title="Node.js: npx">Node.js, command npx</a></li>
+<li><a href="https://github.com/fullstack-hy2020/fullstack-hy2020.github.io" title="Materials on GitHub">Course material in the repository on GitHub</a></li>
+<li><a href="https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/blob/source/src/content/0/en/part0.md" title="Materials on GitHub Part0">Course material in the repository on GitHub Part 0</a></li>
+</details>
 
-### Links: [Fundamentals of Web apps](https://fullstackopen.com/en/part0/fundamentals_of_web_apps)
+<details>
+<summary>Commands</summary>
 
-[HTTP protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP),
-[GET request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET),
-[Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes),
-[Request and the server response headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields),
-[Content-Type of a header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type),
-[HyperText Markup Language or HTML](https://en.wikipedia.org/wiki/HTML),
-[Sequence diagram](https://fullstackopen.com/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6),
-[Java Spring](https://spring.io/projects/spring-framework),
-[Python Flask](https://flask.palletsprojects.com/en/2.2.x/),
-[Ruby on Rails](https://rubyonrails.org/),
-[Express library with Node.js](https://expressjs.com/),
-[JSON](https://en.wikipedia.org/wiki/JSON),
-[JSONVue on Chrome](https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc),
-[XMLHttpReques, readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState),
-[Callback function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function),
-[Document Object Model, or DOM](https://en.wikipedia.org/wiki/Document_Object_Model),
-[CSS](https://developer.mozilla.org/en-US/docs/Web/CSS),
-[Class selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors),
-[Class attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class),
-[POST request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST),
-[URL redirection](https://en.wikipedia.org/wiki/URL_redirection),
-[AJAX (Asynchronous JavaScript and XML)](<https://en.wikipedia.org/wiki/Ajax_(programming)>),
-[Single-page application (SPA)](https://en.wikipedia.org/wiki/Single-page_application),
-[Vanilla JavaDcript](https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/),
-[jQuery](https://jquery.com/),
-[BackboneJS](https://backbonejs.org/),
-[AngularJS](https://angularjs.org/),
-[React library](https://react.dev/),
-[Redux library](https://github.com/reduxjs/redux),
-[VueJS](https://vuejs.org/),
-[Frontend and backend](https://en.wikipedia.org/wiki/Frontend_and_backend),
-[Node.js](https://nodejs.org/en).
+> npm install -g npx
+
+</details>
+
+### Sub-part B: [Fundamentals of Web apps](https://fullstackopen.com/en/part0/fundamentals_of_web_apps)
+
+<details>
+<summary>Links:</summary>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP" title="HTTP protocol">The server and the web browser communicate with each other using the HTTP protocol</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET" title="GET request method">GET request method</a></li>
+<li><a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" title="Status code">Status code</a></li>
+<li><a href="https://en.wikipedia.org/wiki/List_of_HTTP_header_fields" title="Request and the server response headers">Request and the server response headers</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type" title="Content-Type of a header">Content-Type of a header</a></li>
+<li><a href="https://en.wikipedia.org/wiki/HTML" title="HyperText Markup Language or HTML">HyperText Markup Language or HTML</a></li>
+<li><a href="https://fullstackopen.com/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6" title="Sequence diagram">Sequence diagram</a></li>
+<li><a href="https://spring.io/projects/spring-framework" title="Java Spring">A server can be created using Java Spring</a></li>
+<li><a href="https://flask.palletsprojects.com/en/2.2.x/" title="Python Flask">A server can be created using Python Flask</a></li>
+<li><a href="https://rubyonrails.org/" title="Ruby on Rails">A server can be created using Ruby on Rails</a></li>
+<li><a href="https://expressjs.com/" title="Express library with Node.js">A server can be created using Express library with Node.js</a></li>
+<li><a href="https://en.wikipedia.org/wiki/JSON" title="JSON">JSON</a></li>
+<li><a href="https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc" title="JSONVue on Chrome">JSONVue on Chrome</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState" title="XMLHttpReques, readyState">XMLHttpReques, readyState</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function" title="Callback function">Callback function</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Document_Object_Model" title="Document Object Model, or DOM">Document Object Model, or DOM</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS" title="CSS">CSS</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors" title="Class selectors">Class selectors</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class" title="Class attributes">Class attributes</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST" title="POST request method">POST request method</a></li>
+<li><a href="https://en.wikipedia.org/wiki/URL_redirection" title="URL redirection">URL redirection</a></li>
+<li><a href="Asynchronous JavaScript and XML" title="AJAX (Asynchronous JavaScript and XML)">AJAX (Asynchronous JavaScript and XML)</a></li>
+<li><a href="SPA" title="Single-page application (SPA)">Single-page application (SPA)</a></li>
+<li><a href="https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/" title="Vanilla JavaDcript">Vanilla JavaDcript</a></li>
+<li><a href="https://jquery.com/" title="jQuery">jQuery</a></li>
+<li><a href="https://backbonejs.org/" title="BackboneJS">BackboneJS</a></li>
+<li><a href="https://angularjs.org/" title="AngularJS">AngularJS</a></li>
+<li><a href="https://react.dev/" title="React library">React library</a></li>
+<li><a href="https://github.com/reduxjs/redux" title="Redux library">Redux library</a></li>
+<li><a href="https://vuejs.org/" title="VueJS">VueJS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Frontend_and_backend" title="Frontend and backend">Frontend and backend</a></li>
+<li><a href="https://nodejs.org/en" title="Node.js">Node.js</a></li>
+</details>
+
+<details>
+<summary>Сommands and fragments</summary>
+
+Open Developer Console in Chrome
+
+> windows: fn-F12
+> macOS: option-cmd-i
+
+To refresh a webpage
+
+> windows: fn-F5
+> macOS: command-R
+
+HTML index
+
+```html
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <div class="container"></div>
+  </body>
+</html>
+```
+
+output on the console
+
+> console.log("object")
+
+http request
+
+```javascript
+var xhttp = new XMLHttpRequest()
+
+xhttp.onreadystatechange = function () {
+  // code that takes care of the server response
+}
+
+xhttp.open('GET', '/data.json', true)
+xhttp.send()
+```
+
+teg manipulation
+
+> var ul = document.createElement('ul')
+> ul.setAttribute('class', 'notes')
+> var li = document.createElement('li')
+> li.appendChild(document.createTextNode('some text'))
+> ul.appendChild(li)
+> document.getElementById('root').appendChild(ul)
+
+> list = document.getElementsByTagName('ul')[0]
+
+JSON parsing
+
+> JSON.parse()
+
+Array methodes
+
+> .forEach()
+> .push()
+
+</details>
 
 ### Exercises:
 
@@ -93,99 +185,121 @@ If necessary, show operations on the browser or on the server as comments on the
 [Creating Mermaid diagrams](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)
 [Examples](https://github.com/mermaid-js/mermaid#sequence-diagram-docs---live-editor)
 
-[Exercise is done](https://github.com/CaH4o/fullstackopen/issues/1)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/issues/1)
 
 #### 0.5: Single page app diagram
 
 Create a diagram depicting the situation where the user goes to the single-page app version of the notes app at https://studies.cs.helsinki.fi/exampleapp/spa.
 
-[Exercise is done](https://github.com/CaH4o/fullstackopen/issues/2)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/issues/2)
 
 #### 0.6: New note in Single page app diagram
 
 Create a diagram depicting the situation where the user creates a new note using the single-page version of the app.
 
-[Exercise is done](https://github.com/CaH4o/fullstackopen/issues/3)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/issues/3)
+
+---
 
 ## Part 1: [Introduction to React](https://fullstackopen.com/en/part1)
 
-### Links: [Introduction to React](https://fullstackopen.com/en/part1/introduction_to_react)
+### Sub-part A: [Introduction to React](https://fullstackopen.com/en/part1/introduction_to_react)
 
-[React](https://react.dev/),
-[create-react-app](https://github.com/facebook/create-react-app),
-[Vite](https://vitejs.dev/),
-[React: component](https://react.dev/learn/your-first-component),
-[React: Arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions),
-[ECMAScript 6](http://es6-features.org/#Constants),
-[Writing Markup with JSX](https://react.dev/learn/writing-markup-with-jsx),
-[Babel](https://babeljs.io/),
-[XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction),
-[React: props](https://react.dev/learn/passing-props-to-a-component),
-[React: fragments](https://react.dev/reference/react/Fragment);
+<details>
+<summary>Links:</summary>
 
-### Links: [JavaScript](https://fullstackopen.com/en/part1/java_script)
+<li><a href="https://react.dev/" title="React">React</a></li>
+<li><a href="https://github.com/facebook/create-react-app" title="create-react-app">create-react-app</a></li>
+<li><a href="https://vitejs.dev/" title="Vite">Vite</a></li>
+<li><a href="https://react.dev/learn/your-first-component" title="React: component">React: component</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" title="React: Arrow function">React: Arrow function</a></li>
+<li><a href="http://es6-features.org/#Constants" title="ECMAScript 6">ECMAScript 6</a></li>
+<li><a href="https://react.dev/learn/writing-markup-with-jsx" title="Writing Markup with JSX">Writing Markup with JSX</a></li>
+<li><a href="https://babeljs.io/" title="Babel">Babel</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction" title="XML">XML</a></li>
+<li><a href="https://react.dev/learn/passing-props-to-a-component" title="React: props">React: props</a></li>
+<li><a href="https://react.dev/reference/react/Fragment" title="React: fragments">React: fragments</a></li>
 
-[ECMAScript](https://en.wikipedia.org/wiki/ECMAScript),
-[JS Bin](https://jsbin.com/?js,console),
-[JavaScript: let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let),
-[JavaScript: const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const),
-[JavaScript: var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var),
-[Javascript variables: should you use let, var or const?](https://medium.com/podiihq/javascript-variables-should-you-use-let-var-or-const-394f7645c88f),
-[Variable Hoisting](https://www.jstips.co/en/javascript/keyword-var-vs-let/),
-[var: let and const](https://youtu.be/sjyJBL5fkp8),
-[JavaScript: Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array),
-[Immutable](https://en.wikipedia.org/wiki/Immutable_object),
-[JavaScript: Array.forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach),
-[JavaScript: Array.push()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push),
-[JavaScript: Array.concat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat),
-[JavaScript: Array.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
-[JavaScript: Destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment),
-[object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#object_literals),
-[JavaScript: function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function),
-[JavaScript: function expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function),
-[JavaScript: this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this),
-[JavaScript: Global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object),
-[JavaScript: setTimeout()](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout),
-[JavaScript: bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind),
-[JavaScript: Classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes),
-[JavaScript: data types and data structures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures),
-[Mozilla's JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript),
-[Mozilla's JavaScript (JS) tutorial](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_overview),
-[Free book series "You-Dont-Know-JS"](https://github.com/getify/You-Dont-Know-JS),
-[The Modern JavaScript Tutorial](https://javascript.info/),
-[The free and highly engaging book Eloquent "JavaScript"](https://eloquentjavascript.net/),
-[Namaste JavaScript - free JavaScript video tutorial](https://www.youtube.com/playlist?list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP),
-[Plenty of quality screencasts on JavaScript, React, and other interesting topics](https://egghead.io/);
+</details>
 
-### Links: [Component state, event handlers](https://fullstackopen.com/en/part1/component_state_event_handlers)
+### Sub-part B: [JavaScript](https://fullstackopen.com/en/part1/java_script)
 
-[JavaScript: setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/setInterval),
-[React: state hook](https://react.dev/learn/state-a-components-memory),
-[HTML: button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button),
-[Mouse Event](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent),
-[React: Responding to Events](https://react.dev/learn/responding-to-events),
-[React: Sharing State Between Components](https://react.dev/learn/sharing-state-between-components),
-[React: Tic-Tac-Toe tutorial](https://react.dev/learn/tutorial-tic-tac-toe),
-[React: useState()](https://react.dev/reference/react/useState);
+<details>
+<summary>Links:</summary>
 
-### Links: [A more complex state, debugging React apps](https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps)
+<li><a href="https://en.wikipedia.org/wiki/ECMAScript" title="ECMAScript">ECMAScript</a></li>
+<li><a href="https://jsbin.com/?js,console" title="JS Bin">JS Bin</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" title="JavaScript: let">JavaScript: let</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const" title="JavaScript: const">JavaScript: const</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var" title="JavaScript: var">JavaScript: var</a></li>
+<li><a href="https://medium.com/podiihq/javascript-variables-should-you-use-let-var-or-const-394f7645c88f" title="Javascript variables: should you use let, var or const?">Javascript variables: should you use let, var or const?</a></li>
+<li><a href="https://www.jstips.co/en/javascript/keyword-var-vs-let/" title="Variable Hoisting">Variable Hoisting</a></li>
+<li><a href="https://youtu.be/sjyJBL5fkp8" title="var: let and const">var: let and const</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" title="JavaScript: Array">JavaScript: Array</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Immutable_object" title="Immutable">Immutable</a></li>
+<li><a href="" title="JavaScript: Array.forEach()">JavaScript: Array.forEach()</a></li>
+<li><a href="" title="JavaScript: Array.push()">JavaScript: Array.push()</a></li>
+<li><a href="" title="JavaScript: Array.concat()">JavaScript: Array.concat()</a></li>
+<li><a href="" title="JavaScript: Array.map()">JavaScript: Array.map()</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" title="JavaScript: Destructuring assignment">JavaScript: Destructuring assignment</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#object_literals" title="object literals">object literals</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function" title="JavaScript: function declaration">JavaScript: function declaration</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function" title="JavaScript: function expression">JavaScript: function expression</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this" title="JavaScript: this">JavaScript: this</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Global_object" title="JavaScript: Global object">JavaScript: Global object</a></li>
+<li><a href="" title="JavaScript: setTimeout()">JavaScript: setTimeout()</a></li>
+<li><a href="" title="JavaScript: bind()">JavaScript: bind()</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes" title="JavaScript: Classes">JavaScript: Classes</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures" title="JavaScript: data types and data structures">JavaScript: data types and data structures</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" title="Mozilla's JavaScript Guide">Mozilla's JavaScript Guide</a></li>
+<li><a href="JS" title="Mozilla's JavaScript (JS) tutorial">Mozilla's JavaScript (JS) tutorial</a></li>
+<li><a href="https://github.com/getify/You-Dont-Know-JS" title="Free book series 'You-Dont-Know-JS'">Free book series "You-Dont-Know-JS"</a></li>
+<li><a href="https://javascript.info/" title="The Modern JavaScript Tutorial">The Modern JavaScript Tutorial</a></li>
+<li><a href="https://eloquentjavascript.net/" title="The free and highly engaging book Eloquent 'JavaScript'">The free and highly engaging book Eloquent "JavaScript"</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP" title="Namaste JavaScript - free JavaScript video tutorial">Namaste JavaScript - free JavaScript video tutorial</a></li>
+<li><a href="https://egghead.io/" title="Plenty of quality screencasts on JavaScript, React, and other interesting topics">Plenty of quality screencasts on JavaScript, React, and other interesting topics</a></li>
 
-[JavaScript: object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax),
-[React: State structure](https://react.dev/learn/choosing-the-state-structure),
-[JavaScript: Array .join()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join),
-[React: state update asynchronously](https://react.dev/learn/queueing-a-series-of-state-updates),
-[React: conditional rendering](https://react.dev/learn/conditional-rendering),
-[React: State: A Component's Memory](https://react.dev/learn/state-a-components-memory),
-[debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger),
-[React Developer Tools: Chrome extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi),
-[React documentation](https://react.dev/learn),
-[React course on Egghead.io](https://egghead.io/),
-[React course on Start learning React](https://egghead.io/courses/start-learning-react),
-[Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-react),
-[HTML: tables](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics),
-[JavaScript: Math.random()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random),
-[JavaScript: search engine on Mozilla Developer Network](https://developer.mozilla.org/en/),
-[JavaScript: create 0 filled array](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
+</details>
+
+### Sub-part C: [Component state, event handlers](https://fullstackopen.com/en/part1/component_state_event_handlers)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title="JavaScript: setInterval()">JavaScript: setInterval()</a></li>
+<li><a href="https://react.dev/learn/state-a-components-memory" title="React: state hook">React: state hook</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button" title="HTML: button">HTML: button</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent" title="Mouse Event">Mouse Event</a></li>
+<li><a href="https://react.dev/learn/responding-to-events" title="React: Responding to Events">React: Responding to Events</a></li>
+<li><a href="https://react.dev/learn/sharing-state-between-components" title="React: Sharing State Between Components">React: Sharing State Between Components</a></li>
+<li><a href="https://react.dev/learn/tutorial-tic-tac-toe" title="React: Tic-Tac-Toe tutorial">React: Tic-Tac-Toe tutorial</a></li>
+<li><a href="" title="React: useState()">React: useState()</a></li>
+
+</details>
+
+### Sub-part D: [A more complex state, debugging React apps](https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" title="JavaScript: object spread">JavaScript: object spread</a></li>
+<li><a href="https://react.dev/learn/choosing-the-state-structure" title="React: State structure">React: State structure</a></li>
+<li><a href="" title="JavaScript: Array .join()">JavaScript: Array .join()</a></li>
+<li><a href="https://react.dev/learn/queueing-a-series-of-state-updates" title="React: state update asynchronously">React: state update asynchronously</a></li>
+<li><a href="https://react.dev/learn/conditional-rendering" title="React: conditional rendering">React: conditional rendering</a></li>
+<li><a href="https://react.dev/learn/state-a-components-memory" title="React: State: A Component's Memory">React: State: A Component's Memory</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger" title="debugger">debugger</a></li>
+<li><a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi" title="React Developer Tools: Chrome extension">React Developer Tools: Chrome extension</a></li>
+<li><a href="https://react.dev/learn" title="React documentation">React documentation</a></li>
+<li><a href="https://egghead.io/" title="React course on Egghead.io">React course on Egghead.io</a></li>
+<li><a href="https://egghead.io/courses/start-learning-react" title="React course on Start learning React">React course on Start learning React</a></li>
+<li><a href="https://egghead.io/courses/the-beginner-s-guide-to-react" title="Beginner's Guide to React">Beginner's Guide to React</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics" title="HTML: tables">HTML: tables</a></li>
+<li><a href="" title="JavaScript: Math.random()">JavaScript: Math.random()</a></li>
+<li><a href="https://developer.mozilla.org/en/" title="JavaScript: search engine on Mozilla Developer Network">JavaScript: search engine on Mozilla Developer Network</a></li>
+<li><a href="https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781" title="JavaScript: create 0 filled array">JavaScript: create 0 filled array</a></li>
+
+</details>
 
 ### Exercises:
 
@@ -194,14 +308,16 @@ Create a diagram depicting the situation where the user creates a new note using
 Create the application, which can show information about a course.
 
 Create an application according to the requirements described in [exercise #1.1 - #1.2](https://fullstackopen.com/en/part1/introduction_to_react#exercises-1-1-1-2), [exercise #1.3 - #1.5](https://fullstackopen.com/en/part1/java_script#exercises-1-3-1-5).
-[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/courseinfo)
+
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/courseinfo)
 
 #### 1.6-1.11: Unicafe
 
 Like most companies, the student restaurant of the University of Helsinki Unicafe collects feedback from its customers. Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: good, neutral, and bad.
 
 Create an application according to the requirements described in [exercise #1.6 - #1.11](https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14).
-[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/unicafe)
+
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/unicafe)
 
 #### 1.12-1.14: Anecdotes
 
@@ -209,108 +325,136 @@ The world of software engineering is filled with anecdotes that distill timeless
 Expand the application that can display a random anecdote from the field of software engineering. Also user can vote for anecdote.
 
 Create an application according to the requirements described in [exercise #1.12 - #1.14](https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14).
-[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/anecdotes)
+
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part1/anecdotes)
+
+---
 
 ## Part 2: [Communicating with server](https://fullstackopen.com/en/part2)
 
-### Links: [Rendering a collectin, modules](https://fullstackopen.com/en/part2/rendering_a_collection_modules)
+### Sub-part A: [Rendering a collectin, modules](https://fullstackopen.com/en/part2/rendering_a_collection_modules)
 
-[Visual Studio Code: snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets),
-[VS Code plugins: snippet](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets),
-[VS Code plugins: Console log snippets](https://marketplace.visualstudio.com/search?term=console.log&target=VSCode&category=All%20categories&sortBy=Relevance),
-[JavaScript: Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array),
-[Functional Programming in JavaScript](),
-[Higher-order functions](https://youtu.be/BMUiFMZr7vk),
-[Map](https://youtu.be/bCqtb-Z5YGQ),
-[Reduce basics](https://youtu.be/Wl98eZpkp-c),
-[JavaScript: Array .map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
-[React: items key](https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key),
-[React: Component key](https://react.dev/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key),
-[React: import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import),
-[React: export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export),
-[JavaScript: Array .reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce),
-[VS Code plugins code former snippet](https://marketplace.visualstudio.com/items?itemName=cmstead.js-codeformer)
+<details>
+<summary>Links:</summary>
 
-### Links: [Forms](https://fullstackopen.com/en/part2/forms)
+<li><a href="https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets" title="Visual Studio Code: snippets">Visual Studio Code: snippets</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets" title="VS Code plugins: snippet">VS Code plugins: snippet</a></li>
+<li><a href="https://marketplace.visualstudio.com/search?term=console.log&target=VSCode&category=All%20categories&sortBy=Relevance" title="VS Code plugins: Console log snippets">VS Code plugins: Console log snippets</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" title="JavaScript: Array">JavaScript: Array</a></li>
+<li><a href="" title="Functional Programming in JavaScript">Functional Programming in JavaScript</a></li>
+<li><a href="https://youtu.be/BMUiFMZr7vk" title="Higher-order functions">Higher-order functions</a></li>
+<li><a href="https://youtu.be/bCqtb-Z5YGQ" title="Map">Map</a></li>
+<li><a href="https://youtu.be/Wl98eZpkp-c" title="Reduce basics">Reduce basics</a></li>
+<li><a href="" title="JavaScript: Array .map()">JavaScript: Array .map()</a></li>
+<li><a href="https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key" title="React: items key">React: items key</a></li>
+<li><a href="https://react.dev/learn/preserving-and-resetting-state#option-2-resetting-state-with-a-key" title="React: Component key">React: Component key</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" title="React: import">React: import</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export" title="React: export">React: export</a></li>
+<li><a href="" title="JavaScript: Array .reduce()">JavaScript: Array .reduce()</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=cmstead.js-codeformer" title="VS Code plugins code former snippet">VS Code plugins code former snippet</a></li>
 
-[React: useState](https://react.dev/reference/react/useState),
-[HTML: Forms](https://developer.mozilla.org/en-US/docs/Learn/Forms),
-[Event handlers](https://react.dev/learn/responding-to-events),
-[HTMLFormElement: submit event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event),
-[HTML: input](https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable),
-[JavaScript: Array .concat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat),
-[React: Never mutate state directly](https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react),
-[JavaScript: Conditional (ternary) operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator),
-[JavaScript: Array .filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
-[Equality comparisons and sameness](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness),
-[JavaScript: Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array),
-[JavaScript: object equality](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/),
-[Web: Window: alert()](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert),
-[JavaScript: Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
+</details>
 
-### Links: [Getting data from server](https://fullstackopen.com/en/part2/getting_data_from_server)
+### Sub-part B: [Forms](https://fullstackopen.com/en/part2/forms)
 
-[JSON Server](https://github.com/typicode/json-server),
-[JSON Server: install](https://github.com/typicode/json-server#getting-started),
-[Chrome extentions: JSONVue](https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc),
-[API: XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest),
-[API: fetch](https://developer.mozilla.org/en-US/docs/Web/API/fetch),
-[JavaScript: promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise),
-[JavaScript: runtime environments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop),
-[Input/output](https://en.wikipedia.org/wiki/Input/output),
-[What the heck is the event loop anyway?](https://youtu.be/8aGhZQkoFbQ),
-[API: Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers),
-[Javascript Multithreading](https://medium.com/techtrument/multithreading-javascript-46156179cf9a),
-[React, library](https://github.com/axios/axios),
-[About npm](https://docs.npmjs.com/about-npm),
-[Computer networking: Port](<https://en.wikipedia.org/wiki/Port_(computer_networking)>),
-[JavaScript: Using promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises),
-[React: state hook](https://react.dev/learn/state-a-components-memory),
-[React: useEffect](https://react.dev/reference/react#effect-hooks),
-[React: useEffect, conditional](https://legacy.reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect),
+<details>
+<summary>Links:</summary>
 
-### Links: [Altering data in server](https://fullstackopen.com/en/part2/altering_data_in_server)
+<li><a href="https://react.dev/reference/react/useState" title="React: useState">React: useState</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/Forms" title="HTML: Forms">HTML: Forms</a></li>
+<li><a href="https://react.dev/learn/responding-to-events" title="Event handlers">Event handlers</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event" title="HTMLFormElement: submit event">HTMLFormElement: submit event</a></li>
+<li><a href="https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable" title="HTML: input">HTML: input</a></li>
+<li><a href="" title="JavaScript: Array .concat()">JavaScript: Array .concat()</a></li>
+<li><a href="https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react" title="React: Never mutate state directly">React: Never mutate state directly</a></li>
+<li><a href="ternary" title="JavaScript: Conditional (ternary) operator">JavaScript: Conditional (ternary) operator</a></li>
+<li><a href="" title="JavaScript: Array .filter()">JavaScript: Array .filter()</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness" title="Equality comparisons and sameness">Equality comparisons and sameness</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" title="JavaScript: Array">JavaScript: Array</a></li>
+<li><a href="https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/" title="JavaScript: object equality">JavaScript: object equality</a></li>
+<li><a href="" title="Web: Window: alert()">Web: Window: alert()</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" title="JavaScript: Template literals">JavaScript: Template literals</a></li>
 
-[json-server](https://github.com/typicode/json-server),
-[Representational state transfer (REST)](https://en.wikipedia.org/wiki/Representational_state_transfer),
-[RESTful APIs](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services),
-[Routes](https://github.com/typicode/json-server#routes),
-[Postman](https://www.postman.com/downloads/),
-[JavaScript: Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals),
-[JavaScript: Array .find()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find),
-[JavaScript: Spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax),
-[React: mutating state](https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react),
-[Shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy),
-[Single-responsibility principle](https://en.wikipedia.org/wiki/Single-responsibility_principle),
-[JavaScript: Promise .then()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then),
-[JavaScript: Promise chaining](https://javascript.info/promise-chaining),
-[JavaScript: Book 'You-Dont-Know-JS' promise](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md),
-[JavaScript: Object initializer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Property_definitions),
-[JavaScript: using promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises),
-[JavaScript: Promise .catch()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch),
-[Web: Window: alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert),
-[JavaScript: Array .filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
-[Web: Window: confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm),
-[React: axios library](https://github.com/axios/axios).
+</details>
 
-### Links: [Adding styles to React app](https://fullstackopen.com/en/part2/adding_styles_to_react_app)
+### Sub-part C: [Getting data from server](https://fullstackopen.com/en/part2/getting_data_from_server)
 
-[Mozilla's CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics),
-[CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor),
-[Different types of CSS selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors),
-[CSS: Class selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors),
-[React: adding styles](https://react.dev/learn#adding-styles),
-[React: inline styles](https://react-cn.github.io/react/tips/inline-styles.html),
-[React: style attribute](https://react.dev/reference/react-dom/components/common#applying-css-styles),
-[CSS: Pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes),
-[React: Conditionally firing an effect](https://legacy.reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect),
-[Exchange rate API](https://www.exchangerate-api.com/),
-[currency exchange rates API](https://open.er-api.com/v6/latest/eur),
-[Countires (open API)](https://restcountries.com/),
-[Countires (open API): endpoint GET all](https://restcountries.com/v3.1/all),
-[Weather (open API)](https://openweathermap.org/),
-[Weather (open API): icons](https://openweathermap.org/weather-conditions#Icon-list),
-[Environment variables](https://create-react-app.dev/docs/adding-custom-environment-variables/)
+<details>
+<summary>Links:</summary>
+
+<li><a href="https://github.com/typicode/json-server" title="JSON Server">JSON Server</a></li>
+<li><a href="https://github.com/typicode/json-server#getting-started" title="JSON Server: install">JSON Server: install</a></li>
+<li><a href="https://chrome.google.com/webstore/detail/jsonvue/chklaanhfefbnpoihckbnefhakgolnmc" title="Chrome extentions: JSONVue">Chrome extentions: JSONVue</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest" title="API: XMLHttpRequest">API: XMLHttpRequest</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/fetch" title="API: fetch">API: fetch</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" title="JavaScript: promises">JavaScript: promises</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop" title="JavaScript: runtime environments">JavaScript: runtime environments</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Input/output" title="Input/output">Input/output</a></li>
+<li><a href="https://youtu.be/8aGhZQkoFbQ" title="What the heck is the event loop anyway?">What the heck is the event loop anyway?</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers" title="API: Web Workers">API: Web Workers</a></li>
+<li><a href="https://medium.com/techtrument/multithreading-javascript-46156179cf9a" title="Javascript Multithreading">Javascript Multithreading</a></li>
+<li><a href="https://github.com/axios/axios" title="React, library">React, library</a></li>
+<li><a href="https://docs.npmjs.com/about-npm" title="About npm">About npm</a></li>
+<li><a href="<https://en.wikipedia.org/wiki/Port_(computer_networking" title="Computer networking: Port">Computer networking: Port</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises" title="JavaScript: Using promises">JavaScript: Using promises</a></li>
+<li><a href="https://react.dev/learn/state-a-components-memory" title="React: state hook">React: state hook</a></li>
+<li><a href="https://react.dev/reference/react#effect-hooks" title="React: useEffect">React: useEffect</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect" title="React: useEffect, conditional">React: useEffect, conditional</a></li>
+
+</details>
+
+### Sub-part D: [Altering data in server](https://fullstackopen.com/en/part2/altering_data_in_server)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="https://github.com/typicode/json-server" title="json-server">json-server</a></li>
+<li><a href="REST" title="Representational state transfer (REST)">Representational state transfer (REST)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services" title="RESTful APIs">RESTful APIs</a></li>
+<li><a href="https://github.com/typicode/json-server#routes" title="Routes">Routes</a></li>
+<li><a href="https://www.postman.com/downloads/" title="Postman">Postman</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" title="JavaScript: Template literals">JavaScript: Template literals</a></li>
+<li><a href="" title="JavaScript: Array .find()">JavaScript: Array .find()</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" title="JavaScript: Spread syntax">JavaScript: Spread syntax</a></li>
+<li><a href="https://react.dev/learn/updating-objects-in-state#why-is-mutating-state-not-recommended-in-react" title="React: mutating state">React: mutating state</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Object_copying#Shallow_copy" title="Shallow copy">Shallow copy</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Single-responsibility_principle" title="Single-responsibility principle">Single-responsibility principle</a></li>
+<li><a href="" title="JavaScript: Promise .then()">JavaScript: Promise .then()</a></li>
+<li><a href="https://javascript.info/promise-chaining" title="JavaScript: Promise chaining">JavaScript: Promise chaining</a></li>
+<li><a href="https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md" title="JavaScript: Book 'You-Dont-Know-JS' promise">JavaScript: Book 'You-Dont-Know-JS' promise</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Property_definitions" title="JavaScript: Object initializer">JavaScript: Object initializer</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises" title="JavaScript: using promises">JavaScript: using promises</a></li>
+<li><a href="" title="JavaScript: Promise .catch()">JavaScript: Promise .catch()</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/alert" title="Web: Window: alert">Web: Window: alert</a></li>
+<li><a href="" title="JavaScript: Array .filter()">JavaScript: Array .filter()</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm" title="Web: Window: confirm">Web: Window: confirm</a></li>
+<li><a href="https://github.com/axios/axios" title="React: axios library">React: axios library</a></li>
+
+</details>
+
+### Sub-part E: [Adding styles to React app](https://fullstackopen.com/en/part2/adding_styles_to_react_app)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics" title="Mozilla's CSS tutorial">Mozilla's CSS tutorial</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor" title="CSS preprocessor">CSS preprocessor</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors" title="Different types of CSS selectors">Different types of CSS selectors</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors" title="CSS: Class selectors">CSS: Class selectors</a></li>
+<li><a href="https://react.dev/learn#adding-styles" title="React: adding styles">React: adding styles</a></li>
+<li><a href="https://react-cn.github.io/react/tips/inline-styles.html" title="React: inline styles">React: inline styles</a></li>
+<li><a href="https://react.dev/reference/react-dom/components/common#applying-css-styles" title="React: style attribute">React: style attribute</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes" title="CSS: Pseudo classes">CSS: Pseudo classes</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect" title="React: Conditionally firing an effect">React: Conditionally firing an effect</a></li>
+<li><a href="https://www.exchangerate-api.com/" title="Exchange rate API">Exchange rate API</a></li>
+<li><a href="https://open.er-api.com/v6/latest/eur" title="currency exchange rates API">currency exchange rates API</a></li>
+<li><a href="open API" title="Countires (open API)">Countires (open API)</a></li>
+<li><a href="open API" title="Countires (open API): endpoint GET all">Countires (open API): endpoint GET all</a></li>
+<li><a href="open API" title="Weather (open API)">Weather (open API)</a></li>
+<li><a href="open API" title="Weather (open API): icons">Weather (open API): icons</a></li>
+<li><a href="https://create-react-app.dev/docs/adding-custom-environment-variables/" title="Environment variables">Environment variables</a></li>
+
+</details>
 
 ### Exercises:
 
@@ -319,7 +463,8 @@ Create an application according to the requirements described in [exercise #1.12
 Course information application to show a topics and exercices with logic to render and count the component with conditions.
 
 Create an application according to the requirements described in [exercise #2.1 - #2.5](https://fullstackopen.com/en/part2/rendering_a_collection_modules#exercises-2-1-2-5).
-[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part2/courseinfo)
+
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part2/courseinfo)
 
 #### 2.6-2.17: Phone book
 
@@ -328,167 +473,247 @@ Phone book for maintaining persons, use json server for this. Create a single pa
 Create an application according to the requirements described in [exercise #2.6 - #2.10](https://fullstackopen.com/en/part2/forms#exercises-2-6-2-10), [exercise #2.11](https://fullstackopen.com/en/part2/getting_data_from_server#exercise-2-11),  
 [exercise #2.12 - 2.15](https://fullstackopen.com/en/part2/altering_data_in_server#exercises-2-12-2-15), [exercise #2.16-2.17](https://fullstackopen.com/en/part2/adding_styles_to_react_app#exercises-2-16-2-17).
 
-[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part2/phonebook)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part2/phonebook)
 
 #### 2.18-2.20: Countries
 
 A single page application for displaying counties. Data is getting from open API services. The user can search for counties by name and browse the county to get all information including whether. Use React, axios library.
 
 Create an application according to the requirements described in [exercise #2.18 - #2.20](https://fullstackopen.com/en/part2/adding_styles_to_react_app#exercises-2-18-2-20).
-[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part2/countries)
+
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part2/countries)
+
+---
 
 ## Part 3: [Programming a server with NodeJS and Express](https://fullstackopen.com/en/part3)
 
-### Links: [Node.js and Express](https://fullstackopen.com/en/part3/node_js_and_express)
+### Sub-part A: [Node.js and Express](https://fullstackopen.com/en/part3/node_js_and_express)
 
-[NodeJS](https://nodejs.org/en),
-[Google's Chrome V8 JavaScript engine](https://v8.dev/),
-[babel (transpiler)](https://babeljs.io/),
-[npm: scripts](https://docs.npmjs.com/cli/v9/using-npm/scripts),
-[NodeJS: http](https://nodejs.org/docs/latest-v8.x/api/http.html),
-[JavaScript: export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export),
-[JavaScript: import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import),
-[Node.js: CommonJS modules](https://en.wikipedia.org/wiki/CommonJS),
-[Modules: ECMAScript modules](https://nodejs.org/api/esm.html#modules-ecmascript-modules),
-[json-server](https://github.com/typicode/json-server),
-[Express](https://expressjs.com/),
-[Transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/),
-[Semantic versioning](https://docs.npmjs.com/about-semantic-versioning),
-[Backward compatibility](https://en.wikipedia.org/wiki/Backward_compatibility),
-[Moving to Express 5](https://expressjs.com/en/guide/migrating-5.html),
-[Express: request](https://expressjs.com/en/4x/api.html#req),
-[Express: response](https://expressjs.com/en/4x/api.html#res),
-[Express: response .semd()](https://expressjs.com/en/4x/api.html#res.send),
-[Express: response .json()](https://expressjs.com/en/4x/api.html#res.json),
-[JSON](https://en.wikipedia.org/wiki/JSON),
-[NodeJS: Repl](https://nodejs.org/docs/latest-v8.x/api/repl.html),
-[nodemon](https://github.com/remy/nodemon),
-[React Hot Loader](https://gaearon.github.io/react-hot-loader/getstarted/),
-[json-server: routs](https://github.com/typicode/json-server#routes),
-[Representational State Transfer (REST) architectural style](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm),
-[levels of RESTful maturity](https://martinfowler.com/articles/richardsonMaturityModel.html),
-[REST APIs must be hypertext-driven](https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven),
-[Book 'RESTful Web Services'](https://www.oreilly.com/library/view/restful-web-services/9780596529260/),
-[CRUD API](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete),
-[Resource-oriented architecture](https://en.wikipedia.org/wiki/Resource-oriented_architecture),
-[Express: routing](https://expressjs.com/en/guide/routing.html),
-[Express: routing route-parameters](http://expressjs.com/en/guide/routing.html#route-parameters),
-[JavaScript: Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number),
-[status code 404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found),
-[Express: response .status()](https://expressjs.com/en/4x/api.html#res.status),
-[Express: response .end()](https://expressjs.com/en/4x/api.html#res.end),
-[JavaScript: Truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy),
-[JavaScript: Falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy),
-[status code 204 no content](https://www.rfc-editor.org/rfc/rfc9110.html#name-204-no-content),
-[curl](https://curl.se/),
-[Postman](https://www.postman.com/),
-[VS Code REST client plugin](https://marketplace.visualstudio.com/items?itemName=humao.rest-client),
-[The WebStorm HTTP Client](https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html),
-[Express: json-parser](https://expressjs.com/en/api.html),
-[Multipurpose Internet Mail Extensions or MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types),
-[VS Code REST client plugin: instructions in the documentation](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage),
-[status code 400 bad request](https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request),
-[JavaScript: Math .max()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max),
-[JavaScript: Spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax),
-[Express: request-timestamp (middleware)](https://www.npmjs.com/package/express-timestamp)
-[HTTP standard](https://www.rfc-editor.org/rfc/rfc9110.html#name-common-method-properties),
-[HTTP HEAD](https://www.rfc-editor.org/rfc/rfc9110.html#name-head),
-[Express: json-parser](https://expressjs.com/en/api.html),
-[Express: using middleware](http://expressjs.com/en/guide/using-middleware.html),
-[Express: morgan (logger middleware)](https://github.com/expressjs/morgan),
-[Express: morgan - creating new tokens (logger middleware) ](https://github.com/expressjs/morgan#creating-new-tokens),
-[JavaScript: JSON .stringify()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).
+<details>
+<summary>Links:</summary>
 
-### Links: [Deploying app to internet](https://fullstackopen.com/en/part3/deploying_app_to_internet)
+<li><a href="https://nodejs.org/en" title="NodeJS">NodeJS</a></li>
+<li><a href="https://v8.dev/" title="Google's Chrome V8 JavaScript engine">Google's Chrome V8 JavaScript engine</a></li>
+<li><a href="transpiler" title="babel (transpiler)">babel (transpiler)</a></li>
+<li><a href="https://docs.npmjs.com/cli/v9/using-npm/scripts" title="npm: scripts">npm: scripts</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/http.html" title="NodeJS: http">NodeJS: http</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export" title="JavaScript: export">JavaScript: export</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" title="JavaScript: import">JavaScript: import</a></li>
+<li><a href="https://en.wikipedia.org/wiki/CommonJS" title="Node.js: CommonJS modules">Node.js: CommonJS modules</a></li>
+<li><a href="https://nodejs.org/api/esm.html#modules-ecmascript-modules" title="Modules: ECMAScript modules">Modules: ECMAScript modules</a></li>
+<li><a href="https://github.com/typicode/json-server" title="json-server">json-server</a></li>
+<li><a href="https://expressjs.com/" title="Express">Express</a></li>
+<li><a href="https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/" title="Transitive dependencies">Transitive dependencies</a></li>
+<li><a href="https://docs.npmjs.com/about-semantic-versioning" title="Semantic versioning">Semantic versioning</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Backward_compatibility" title="Backward compatibility">Backward compatibility</a></li>
+<li><a href="https://expressjs.com/en/guide/migrating-5.html" title="Moving to Express 5">Moving to Express 5</a></li>
+<li><a href="https://expressjs.com/en/4x/api.html#req" title="Express: request">Express: request</a></li>
+<li><a href="https://expressjs.com/en/4x/api.html#res" title="Express: response">Express: response</a></li>
+<li><a href="" title="Express: response .semd()">Express: response .semd()</a></li>
+<li><a href="" title="Express: response .json()">Express: response .json()</a></li>
+<li><a href="https://en.wikipedia.org/wiki/JSON" title="JSON">JSON</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/repl.html" title="NodeJS: Repl">NodeJS: Repl</a></li>
+<li><a href="https://github.com/remy/nodemon" title="nodemon">nodemon</a></li>
+<li><a href="https://gaearon.github.io/react-hot-loader/getstarted/" title="React Hot Loader">React Hot Loader</a></li>
+<li><a href="https://github.com/typicode/json-server#routes" title="json-server: routs">json-server: routs</a></li>
+<li><a href="REST" title="Representational State Transfer (REST) architectural style">Representational State Transfer (REST) architectural style</a></li>
+<li><a href="https://martinfowler.com/articles/richardsonMaturityModel.html" title="levels of RESTful maturity">levels of RESTful maturity</a></li>
+<li><a href="https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven" title="REST APIs must be hypertext-driven">REST APIs must be hypertext-driven</a></li>
+<li><a href="https://www.oreilly.com/library/view/restful-web-services/9780596529260/" title="Book 'RESTful Web Services'">Book 'RESTful Web Services'</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete" title="CRUD API">CRUD API</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Resource-oriented_architecture" title="Resource-oriented architecture">Resource-oriented architecture</a></li>
+<li><a href="https://expressjs.com/en/guide/routing.html" title="Express: routing">Express: routing</a></li>
+<li><a href="http://expressjs.com/en/guide/routing.html#route-parameters" title="Express: routing route-parameters">Express: routing route-parameters</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" title="JavaScript: Number">JavaScript: Number</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found" title="status code 404 not found">status code 404 not found</a></li>
+<li><a href="" title="Express: response .status()">Express: response .status()</a></li>
+<li><a href="" title="Express: response .end()">Express: response .end()</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Truthy" title="JavaScript: Truthy">JavaScript: Truthy</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy" title="JavaScript: Falsy">JavaScript: Falsy</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-204-no-content" title="status code 204 no content">status code 204 no content</a></li>
+<li><a href="https://curl.se/" title="curl">curl</a></li>
+<li><a href="https://www.postman.com/" title="Postman">Postman</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=humao.rest-client" title="VS Code REST client plugin">VS Code REST client plugin</a></li>
+<li><a href="https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html" title="The WebStorm HTTP Client">The WebStorm HTTP Client</a></li>
+<li><a href="https://expressjs.com/en/api.html" title="Express: json-parser">Express: json-parser</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types" title="Multipurpose Internet Mail Extensions or MIME type">Multipurpose Internet Mail Extensions or MIME type</a></li>
+<li><a href="https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage" title="VS Code REST client plugin: instructions in the documentation">VS Code REST client plugin: instructions in the documentation</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request" title="status code 400 bad request">status code 400 bad request</a></li>
+<li><a href="" title="JavaScript: Math .max()">JavaScript: Math .max()</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" title="JavaScript: Spread syntax">JavaScript: Spread syntax</a></li>
+<li><a href="middleware" title="Express: request-timestamp (middleware)">Express: request-timestamp (middleware)</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-common-method-properties" title="HTTP standard">HTTP standard</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-head" title="HTTP HEAD">HTTP HEAD</a></li>
+<li><a href="https://expressjs.com/en/api.html" title="Express: json-parser">Express: json-parser</a></li>
+<li><a href="http://expressjs.com/en/guide/using-middleware.html" title="Express: using middleware">Express: using middleware</a></li>
+<li><a href="logger middleware" title="Express: morgan (logger middleware)">Express: morgan (logger middleware)</a></li>
+<li><a href="logger middleware" title="Express: morgan - creating new tokens (logger middleware) ">Express: morgan - creating new tokens (logger middleware) </a></li>
+<li><a href="" title="JavaScript: JSON .stringify()">JavaScript: JSON .stringify()</a></li>
 
-[CORS(Cross-Origin Resource Sharing)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing),
-[Web: CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS),
-[Heroku](https://www.heroku.com/?),
-[Fly.io](https://fly.io/),
-[Render](https://render.com/),
-[Railway](https://railway.app/),
-[Cyclic](https://www.cyclic.sh/),
-[Replit](https://replit.com/),
-[CodeSandBox](https://codesandbox.io/),
-[Environment variable](https://en.wikipedia.org/wiki/Environment_variable),
-[React: Use the Production Build](https://legacy.reactjs.org/docs/optimizing-performance.html#use-the-production-build),
-[Minification](<https://en.wikipedia.org/wiki/Minification_(programming)>),
-[Express: middleware static](https://expressjs.com/en/starter/static-files.html),
-[Relative URLs](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2),
-[npm Shx](https://www.npmjs.com/package/shx),
-[React: Proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/),
-[create-react-app with a Node server on Heroku](https://github.com/mars/heroku-cra-node),
-[Heroku Buildpack for create-react-app](https://github.com/mars/create-react-app-buildpack).
+</details>
 
-### Links: [Saving data to MongoDB](https://fullstackopen.com/en/part3/saving_data_to_mongo_db)
+### Sub-part B: [Deploying app to internet](https://fullstackopen.com/en/part3/deploying_app_to_internet)
 
-[I am a puts debuggerer](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html),
-[debugging console.log](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/),
-[VSCode: debugging](https://code.visualstudio.com/docs/editor/debugging),
-[stopping fix principle](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/),
-[MongoDB](https://www.mongodb.com/),
-[Document oriented database](https://en.wikipedia.org/wiki/Document-oriented_database),
-[NoSQL](https://en.wikipedia.org/wiki/NoSQL),
-[MongoDB: collections](https://www.mongodb.com/docs/manual/core/databases-and-collections/),
-[MongoDB: documents](https://www.mongodb.com/docs/manual/core/document/),
-[MongoDB Atlas](https://www.mongodb.com/atlas/database),
-[MongoDB and Node.js](https://mongodb.github.io/node-mongodb-native/),
-[Node.js: mongoosejs library](https://mongoosejs.com/index.html),
-[MongoDB Atlas: password](https://www.mongodb.com/docs/atlas/troubleshoot-connection/#special-characters-in-connection-string-password),
-[Mongoose: schema](https://mongoosejs.com/docs/guide.html),
-[Mongoose: models](https://mongoosejs.com/docs/models.html),
-[Mongoose: models.find()](<https://mongoosejs.com/docs/api/model.html#Model.find()>),
-[MongoDB: find operators](https://www.mongodb.com/docs/manual/reference/operator/),
-[Node.js: process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv),
-[MongoDB: Modify output](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id),
-[Mongoose: options](https://mongoosejs.com/docs/guide.html#options),
-[Mongoose: toJSON](https://mongoosejs.com/docs/guide.html#toJSON),
-[Mongoose: toObject()](<https://mongoosejs.com/docs/api/document.html#Document.prototype.toObject()>),
-[Mongoose: transform()](https://mongoosejs.com/docs/api/document.html#transform),
-[Node: modules](https://nodejs.org/docs/latest-v8.x/api/modules.html),
-[Node: dotenv](https://github.com/motdotla/dotenv#readme),
-[fly: dockerignore](https://community.fly.io/t/clarification-on-environment-variables/6309),
-[Mongoose: Model.findById()](<https://mongoosejs.com/docs/api/model.html#Model.findById()>),
-[Sentry](https://sentry.io/welcome/),
-[Express: Error Handling](https://expressjs.com/en/guide/error-handling.html),
-[Mongoose: Model .findByIdAndRemove()](<https://mongoosejs.com/docs/api/model.html#Model.findByIdAndRemove()>),
-[Mongoose: Model .findByIdAndUpdate()](<https://mongoosejs.com/docs/api/model.html#Model.findByIdAndUpdate()>).
+<details>
+<summary>Links:</summary>
 
-### Links: [Validation and ESLint](https://fullstackopen.com/en/part3/validation_and_es_lint)
+<li><a href="Cross-Origin Resource Sharing" title="CORS(Cross-Origin Resource Sharing)">CORS(Cross-Origin Resource Sharing)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" title="Web: CORS">Web: CORS</a></li>
+<li><a href="https://www.heroku.com/?" title="Heroku">Heroku</a></li>
+<li><a href="https://fly.io/" title="Fly.io">Fly.io</a></li>
+<li><a href="https://render.com/" title="Render">Render</a></li>
+<li><a href="https://railway.app/" title="Railway">Railway</a></li>
+<li><a href="https://www.cyclic.sh/" title="Cyclic">Cyclic</a></li>
+<li><a href="https://replit.com/" title="Replit">Replit</a></li>
+<li><a href="https://codesandbox.io/" title="CodeSandBox">CodeSandBox</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Environment_variable" title="Environment variable">Environment variable</a></li>
+<li><a href="https://legacy.reactjs.org/docs/optimizing-performance.html#use-the-production-build" title="React: Use the Production Build">React: Use the Production Build</a></li>
+<li><a href="<https://en.wikipedia.org/wiki/Minification_(programming" title="Minification">Minification</a></li>
+<li><a href="https://expressjs.com/en/starter/static-files.html" title="Express: middleware static">Express: middleware static</a></li>
+<li><a href="https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2" title="Relative URLs">Relative URLs</a></li>
+<li><a href="https://www.npmjs.com/package/shx" title="npm Shx">npm Shx</a></li>
+<li><a href="https://create-react-app.dev/docs/proxying-api-requests-in-development/" title="React: Proxy">React: Proxy</a></li>
+<li><a href="https://github.com/mars/heroku-cra-node" title="create-react-app with a Node server on Heroku">create-react-app with a Node server on Heroku</a></li>
+<li><a href="https://github.com/mars/create-react-app-buildpack" title="Heroku Buildpack for create-react-app">Heroku Buildpack for create-react-app</a></li>
 
-[Mongoose: validation](https://mongoosejs.com/docs/validation.html),
-[Mongoose: Built-in validation](https://mongoosejs.com/docs/validation.html#built-in-validators),
-[Mongoose: Custom validation](https://mongoosejs.com/docs/validation.html#custom-validators),
-[Mongoose: Validation with update](https://github.com/mongoose-unique-validator/mongoose-unique-validator#find--updates),
-[Lint](<https://en.wikipedia.org/wiki/Lint_(software)>),
-[Static program analysis](https://en.wikipedia.org/wiki/Static_program_analysis),
-[checkstyle](https://checkstyle.sourceforge.io/),
-[ESLint](https://eslint.org/),
-[ESLint: ignoring](https://eslint.org/docs/latest/use/configure/#ignoring-files-and-directories),
-[VSCode: eslint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint),
-[ESLint: rules](https://eslint.org/docs/latest/rules/),
-[ESLint: the eqeqeq rule](https://eslint.org/docs/latest/rules/eqeqeq),
-[ESLint: the no trailing spaces rule](https://eslint.org/docs/latest/rules/no-trailing-spaces)
-[ESLint: the object curly spacing rule ](https://eslint.org/docs/latest/rules/object-curly-spacing)
-[ESLint: configuring rules](https://eslint.org/docs/latest/use/configure/#configuring-rules)
-[Airbnb Javascript style guide](https://github.com/airbnb/javascript),
-[Airbnb's ESlint configuration](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb).
+</details>
+
+### Sub-part C: [Saving data to MongoDB](https://fullstackopen.com/en/part3/saving_data_to_mongo_db)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html" title="I am a puts debuggerer">I am a puts debuggerer</a></li>
+<li><a href="https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/" title="debugging console.log">debugging console.log</a></li>
+<li><a href="https://code.visualstudio.com/docs/editor/debugging" title="VSCode: debugging">VSCode: debugging</a></li>
+<li><a href="http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/" title="stopping fix principle">stopping fix principle</a></li>
+<li><a href="https://www.mongodb.com/" title="MongoDB">MongoDB</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Document-oriented_database" title="Document oriented database">Document oriented database</a></li>
+<li><a href="https://en.wikipedia.org/wiki/NoSQL" title="NoSQL">NoSQL</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/core/databases-and-collections/" title="MongoDB: collections">MongoDB: collections</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/core/document/" title="MongoDB: documents">MongoDB: documents</a></li>
+<li><a href="https://www.mongodb.com/atlas/database" title="MongoDB Atlas">MongoDB Atlas</a></li>
+<li><a href="https://mongodb.github.io/node-mongodb-native/" title="MongoDB and Node.js">MongoDB and Node.js</a></li>
+<li><a href="https://mongoosejs.com/index.html" title="Node.js: mongoosejs library">Node.js: mongoosejs library</a></li>
+<li><a href="https://www.mongodb.com/docs/atlas/troubleshoot-connection/#special-characters-in-connection-string-password" title="MongoDB Atlas: password">MongoDB Atlas: password</a></li>
+<li><a href="https://mongoosejs.com/docs/guide.html" title="Mongoose: schema">Mongoose: schema</a></li>
+<li><a href="https://mongoosejs.com/docs/models.html" title="Mongoose: models">Mongoose: models</a></li>
+<li><a href="" title="Mongoose: models.find()">Mongoose: models.find()</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/reference/operator/" title="MongoDB: find operators">MongoDB: find operators</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv" title="Node.js: process.argv">Node.js: process.argv</a></li>
+<li><a href="https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id" title="MongoDB: Modify output">MongoDB: Modify output</a></li>
+<li><a href="https://mongoosejs.com/docs/guide.html#options" title="Mongoose: options">Mongoose: options</a></li>
+<li><a href="https://mongoosejs.com/docs/guide.html#toJSON" title="Mongoose: toJSON">Mongoose: toJSON</a></li>
+<li><a href="" title="Mongoose: toObject()">Mongoose: toObject()</a></li>
+<li><a href="" title="Mongoose: transform()">Mongoose: transform()</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/modules.html" title="Node: modules">Node: modules</a></li>
+<li><a href="https://github.com/motdotla/dotenv#readme" title="Node: dotenv">Node: dotenv</a></li>
+<li><a href="https://community.fly.io/t/clarification-on-environment-variables/6309" title="fly: dockerignore">fly: dockerignore</a></li>
+<li><a href="" title="Mongoose: Model.findById()">Mongoose: Model.findById()</a></li>
+<li><a href="https://sentry.io/welcome/" title="Sentry">Sentry</a></li>
+<li><a href="https://expressjs.com/en/guide/error-handling.html" title="Express: Error Handling">Express: Error Handling</a></li>
+<li><a href="" title="Mongoose: Model .findByIdAndRemove()">Mongoose: Model .findByIdAndRemove()</a></li>
+<li><a href="" title="Mongoose: Model .findByIdAndUpdate()">Mongoose: Model .findByIdAndUpdate()</a></li>
+
+</details>
+
+### Sub-part D: [Validation and ESLint](https://fullstackopen.com/en/part3/validation_and_es_lint)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="https://mongoosejs.com/docs/validation.html" title="Mongoose: validation">Mongoose: validation</a></li>
+<li><a href="https://mongoosejs.com/docs/validation.html#built-in-validators" title="Mongoose: Built-in validation">Mongoose: Built-in validation</a></li>
+<li><a href="https://mongoosejs.com/docs/validation.html#custom-validators" title="Mongoose: Custom validation">Mongoose: Custom validation</a></li>
+<li><a href="https://github.com/mongoose-unique-validator/mongoose-unique-validator#find--updates" title="Mongoose: Validation with update">Mongoose: Validation with update</a></li>
+<li><a href="<https://en.wikipedia.org/wiki/Lint_(software" title="Lint">Lint</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Static_program_analysis" title="Static program analysis">Static program analysis</a></li>
+<li><a href="https://checkstyle.sourceforge.io/" title="checkstyle">checkstyle</a></li>
+<li><a href="https://eslint.org/" title="ESLint">ESLint</a></li>
+<li><a href="https://eslint.org/docs/latest/use/configure/#ignoring-files-and-directories" title="ESLint: ignoring">ESLint: ignoring</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint" title="VSCode: eslint">VSCode: eslint</a></li>
+<li><a href="https://eslint.org/docs/latest/rules/" title="ESLint: rules">ESLint: rules</a></li>
+<li><a href="https://eslint.org/docs/latest/rules/eqeqeq" title="ESLint: the eqeqeq rule">ESLint: the eqeqeq rule</a></li>
+<li><a href="https://eslint.org/docs/latest/rules/no-trailing-spaces" title="ESLint: the no trailing spaces rule">ESLint: the no trailing spaces rule</a></li>
+<li><a href="https://eslint.org/docs/latest/rules/object-curly-spacing" title="ESLint: the object curly spacing rule ">ESLint: the object curly spacing rule </a></li>
+<li><a href="https://eslint.org/docs/latest/use/configure/#configuring-rules" title="ESLint: configuring rules">ESLint: configuring rules</a></li>
+<li><a href="https://github.com/airbnb/javascript" title="Airbnb Javascript style guide">Airbnb Javascript style guide</a></li>
+<li><a href="https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb" title="Airbnb's ESlint configuration">Airbnb's ESlint configuration</a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments</summary>
+
+fix errors, like example with 'windows' or 'unix' system
+
+> npx eslint . --fix
+
+file in a project root for linting rulse
+
+> .eslintrc.js
+
+include the next rules
+
+```javascript
+module.exports = {
+  'env': {
+    'commonjs': true,
+    'es2021': true,
+    'node': true,
+  },
+  'extends': 'eslint:recommended',
+  'parserOptions': {
+    'ecmaVersion': 'latest',
+  },
+  'rules': {
+    'indent': ['error', 2],
+    'linebreak-style': ['error', 'unix'],
+    'quotes': ['error', 'single'],
+    'semi': ['error', 'never'],
+    'eqeqeq': 'error',
+    'no-trailing-spaces': 'error',
+    'object-curly-spacing': ['error', 'always'],
+    'arrow-spacing': ['error', { before: true, after: true }],
+    'no-console': 0,
+  },
+}
+```
+
+</details>
 
 ### Exercises:
 
-#### 3.1-3.18: Phonebook backend
+#### 3.1-3.22: Phonebook backend
 
-Full stack project 'Phone book' for maintaining persons, use mongoDB server with back-end and front-end for this. Create a single page with a form and buttons to add, update, and remove a person with REAT API. All front-end code is divided into modules and components. Logc uses axios for data manipulation, rendering hooks, promises, and Windows objects for error handling and user experience. Added some style. Backend use enviroment to hide toket for connetion to database. Created CRUD API for manipulate data. All API tested by requests. Made validation and linting. The app deployed by [this link](https://phonebook-1oyz.onrender.com).
+Full stack project **'Phone book'** for maintaining persons, use mongoDB server with back-end and front-end for this. Create a single page with a form and buttons to add, update, and remove a person with REAT API. All front-end code is divided into modules and components. Logc uses axios for data manipulation, rendering hooks, promises, and Windows objects for error handling and user experience. Added some style. Backend use enviroment to hide toket for connetion to database. Created CRUD API for manipulate data. All API tested by requests. Made validation and linting. The app deployed by [this link](https://phonebook-1oyz.onrender.com).
 
 ##### REST:
 
-Markup : _ GET ./info - get general information.
-_ GET ./api/persons - get all persons.
-_ GET ./api/persons/:id - get a singl person by id.
-_ POST ./api/persons - create a singl person by body.
-_ PUT ./api/persons/:id - update a singl person by id.
-_ DELETE ./api/persons/:id - delete a singl person by id.
+- GET **./info** - get general information.
+- GET **./api/persons** - get all persons.
+- GET **./api/persons/:id** - get a singl person by id.
+- POST **./api/persons** - create a singl person by body.
+- PUT **./api/persons/:id** - update a singl person by id.
+- DELETE **./api/persons/:id** - delete a singl person by id.
 
 Create an application according to the requirements described in [exercises 3.1-3.6](https://fullstackopen.com/en/part3/node_js_and_express#exercises-3-1-3-6), [exercises 3.7-3.8](https://fullstackopen.com/en/part3/node_js_and_express#exercises-3-7-3-8), [exercises 3.9-3.11](https://fullstackopen.com/en/part3/deploying_app_to_internet#exercises-3-9-3-11), [exercise 3.12](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercise-3-12), [exercises 3.13-3.14](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercises-3-13-3-14), [exercises 3.15-3.18](https://fullstackopen.com/en/part3/saving_data_to_mongo_db#exercises-3-15-3-18), [exercises 3.19-3.21](https://fullstackopen.com/en/part3/validation_and_es_lint#exercises-3-19-3-21), [exercise 3.22](https://fullstackopen.com/en/part3/validation_and_es_lint#exercise-3-22).
 
-[Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part3/phonebook)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part3/phonebook)
+
+---
+
+## Part 4: [Testing Express servers, user administration](https://fullstackopen.com/en/part4)
+
+### Sub-part A: [Structure of backend application, introduction to testing](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="_" title="_">_</a></li>
+
+</details>
+
+### Exercises:
+
+#### 4.1: xxx
