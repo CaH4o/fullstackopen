@@ -138,14 +138,16 @@ xhttp.send()
 
 teg manipulation
 
-> var ul = document.createElement('ul')
-> ul.setAttribute('class', 'notes')
-> var li = document.createElement('li')
-> li.appendChild(document.createTextNode('some text'))
-> ul.appendChild(li)
-> document.getElementById('root').appendChild(ul)
+```javascript
+var ul = document.createElement('ul')
+ul.setAttribute('class', 'notes')
+var li = document.createElement('li')
+li.appendChild(document.createTextNode('some text'))
+ul.appendChild(li)
+document.getElementById('root').appendChild(ul)
 
-> list = document.getElementsByTagName('ul')[0]
+list = document.getElementsByTagName('ul')[0]
+```
 
 JSON parsing
 
@@ -710,7 +712,39 @@ Create an application according to the requirements described in [exercises 3.1-
 <details>
 <summary>Links:</summary>
 
+<li><a href="https://www.graylog.org/" title="graylog - external logging service">graylog</a></li>
+<li><a href="https://papertrailapp.com/" title="papertrail - external logging service">papertrail</a></li>
+<li><a href="https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7" title="Always separate app and server files !">The best practices in the Express app and the code</a></li>
+<li><a href="https://nodejsbestpractices.com/sections/projectstructre/separateexpress/" title="Separate Express 'app' and 'server'">The best practices in the Express app and the code</a></li>
+<li><a href="https://expressjs.com/en/api.html#router" title="Router">Express: Router</a></li>
 <li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments</summary>
+
+Structure
+
+```
+
+├── index.js
+├── app.js
+├── build
+│   └── ...
+├── controllers
+│   └── notes.js
+├── models
+│   └── note.js
+├── package-lock.json
+├── package.json
+├── utils
+│   ├── config.js
+│   ├── logger.js
+│   └── middleware.js
+
+```
 
 </details>
 
