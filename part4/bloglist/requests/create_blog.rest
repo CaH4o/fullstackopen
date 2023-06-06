@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:3003/api/blogs
+
+### get all blogs
+
+GET {{baseUrl}}
+
+### create a single blog
+
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "title": "The first blog",
+  "author": "OTI",
+  "url": "http://localhost:3003/oti",
+  "likes": 2
+}
