@@ -647,9 +647,11 @@ Create an application according to the requirements described in [exercise #2.18
 <details>
 <summary>Сommands and fragments</summary>
 
-fix errors, like example with 'windows' or 'unix' system
+> fix errors, like example with 'windows' or 'unix' system
 
-> npx eslint . --fix
+```bash
+npx eslint . --fix
+```
 
 file in a project root for linting rulse
 
@@ -657,7 +659,7 @@ file in a project root for linting rulse
 
 include the next rules
 
-```javascript
+```json
 module.exports = {
   'env': {
     'commonjs': true,
@@ -717,6 +719,16 @@ Create an application according to the requirements described in [exercises 3.1-
 <li><a href="https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7" title="Always separate app and server files !">The best practices in the Express app and the code</a></li>
 <li><a href="https://nodejsbestpractices.com/sections/projectstructre/separateexpress/" title="Separate Express 'app' and 'server'">The best practices in the Express app and the code</a></li>
 <li><a href="https://expressjs.com/en/api.html#router" title="Router">Express: Router</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce" title="Array.prototype.reduce()">JavaScript Array .reduce()</a></li>
+<li><a href="https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84" title="Functional Javascript">Functional Javascript series on YouTube</a></li>
+<li><a href="https://jestjs.io/" title="Jest">Jest - JavaScript Testing Framework</a></li>
+<li><a href="https://mochajs.org/" title="Mocha">JavaScript testing libraries Mocha</a></li>
+<li><a href="https://jestjs.io/docs/expect#expectvalue" title="Jest: expect function">Jest: .expect() </a></li>
+<li><a href="https://jestjs.io/docs/expect#tobevalue
+" title="Jest: toBe function">Jest: .toBe()</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
 
@@ -728,7 +740,6 @@ Create an application according to the requirements described in [exercises 3.1-
 Structure
 
 ```
-
 ├── index.js
 ├── app.js
 ├── build
@@ -743,11 +754,284 @@ Structure
 │   ├── config.js
 │   ├── logger.js
 │   └── middleware.js
+```
 
+> index.js
+
+```javascript
+const app = require('./app')
+const PORT = require('./utils/config').PORT
+const logger = require('./utils/logger')
+
+app.listen(config.PORT, () => {
+  logger.info(`Server running on port ${PORT}`)
+})
+```
+
+> app.js
+
+```javascript
+const { MONGODB_URI } = require('./utils/config')
+const express = require('express')
+const app = express()
+const cors = require('cors')
+const notesRouter = require('./controllers/notes')
+const middleware = require('./utils/middleware')
+const logger = require('./utils/logger')
+const mongoose = require('mongoose')
+
+mongoose.set('strictQuery', false)
+
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => {
+    logger.info('connected to MongoDB')
+  })
+  .catch((error) => {
+    logger.error('error connecting to MongoDB:', error.message)
+  })
+
+app.use(cors())
+app.use(express.static('build'))
+app.use(express.json())
+app.use(middleware.requestLogger)
+
+app.use('/api/notes', notesRouter)
+
+app.use(middleware.unknownEndpoint)
+app.use(middleware.errorHandler)
+
+module.exports = app
+```
+
+> controllers/notes.js
+
+```javascript
+const notesRouter = require('express').Router()
+const Note = require('../models/note')
+
+notesRouter.get('/', (request, response) => {
+  Note.find({}).then((notes) => {
+    response.json(notes)
+  })
+})
+
+notesRouter.get('/:id', (request, response, next) => {
+  Note.findById(request.params.id)
+    .then((note) => {
+      if (note) {
+        response.json(note)
+      } else {
+        response.status(404).end()
+      }
+    })
+    .catch((error) => next(error))
+})
+
+notesRouter.post('/', (request, response, next) => {
+  const body = request.body
+
+  const note = new Note({
+    content: body.content,
+    important: body.important || false,
+  })
+
+  note
+    .save()
+    .then((savedNote) => {
+      response.json(savedNote)
+    })
+    .catch((error) => next(error))
+})
+
+notesRouter.delete('/:id', (request, response, next) => {
+  Note.findByIdAndRemove(request.params.id)
+    .then(() => {
+      response.status(204).end()
+    })
+    .catch((error) => next(error))
+})
+
+notesRouter.put('/:id', (request, response, next) => {
+  const body = request.body
+
+  const note = {
+    content: body.content,
+    important: body.important,
+  }
+
+  Note.findByIdAndUpdate(request.params.id, note, { new: true })
+    .then((updatedNote) => {
+      response.json(updatedNote)
+    })
+    .catch((error) => next(error))
+})
+
+module.exports = notesRouter
+```
+
+> module/note.js
+
+```javascript
+const mongoose = require('mongoose')
+
+const noteSchema = new mongoose.Schema({
+  content: {
+    type: String,
+    required: true,
+    minlength: 5,
+  },
+  important: Boolean,
+})
+
+noteSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  },
+})
+
+module.exports = mongoose.model('Note', noteSchema)
+```
+
+> utils/logger.js
+
+```javascript
+const info = (...params) => {
+  console.log(...params)
+}
+
+const error = (...params) => {
+  console.error(...params)
+}
+
+module.exports = {
+  info,
+  error,
+}
+```
+
+> utils/config.js
+
+```javascript
+require('dotenv').config()
+
+const PORT = process.env.PORT
+const MONGODB_URI = process.env.MONGODB_URI
+
+module.exports = {
+  MONGODB_URI,
+  PORT,
+}
+```
+
+> utils/middleware.js
+
+```javascript
+const logger = require('./logger')
+
+const requestLogger = (request, response, next) => {
+  logger.info('Method:', request.method)
+  logger.info('Path:  ', request.path)
+  logger.info('Body:  ', request.body)
+  logger.info('---')
+  next()
+}
+
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
+const errorHandler = (error, request, response, next) => {
+  logger.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  }
+
+  next(error)
+}
+
+module.exports = {
+  requestLogger,
+  unknownEndpoint,
+  errorHandler,
+}
+```
+
+install jest library in a project as development part
+
+```bash
+npm install --save-dev jest
+```
+
+update package to run test
+
+> package.json
+
+```json
+{
+  //...
+  "scripts": {
+    //...
+    "test": "jest --verbose"
+  }
+  //...
+}
+```
+
+Jest requires one to specify that the execution environment is Node.
+
+> package.json
+
+```json
+{
+  //...
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
+```
+
+Add to lint rules file to work with jest
+
+> .eslintrc.js
+
+```json
+module.exports = {
+  'env': {
+    //...
+    'jest': true,
+  },
+  // ...
+
+```
+
+Tests and descriptions
+
+```javascript
+describe('description of the block with tests', () => {
+  // tests
+})
+```
+
+```javascript
+test('description of the single test', () => {
+  expect(true === true).toBe(true)
+})
 ```
 
 </details>
 
 ### Exercises:
 
-#### 4.1: xxx
+#### 4.1-4.2: Blog list
+
+To building a blog list application, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
+
+Create an application according to the requirements described in [exercises 4.1-4.2]
+
+- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part4/bloglist)
