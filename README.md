@@ -659,7 +659,7 @@ file in a project root for linting rulse
 
 include the next rules
 
-```json
+```javascript
 module.exports = {
   'env': {
     'commonjs': true,
@@ -726,10 +726,19 @@ Create an application according to the requirements described in [exercises 3.1-
 <li><a href="https://jestjs.io/docs/expect#expectvalue" title="Jest: expect function">Jest: .expect() </a></li>
 <li><a href="https://jestjs.io/docs/expect#tobevalue
 " title="Jest: toBe function">Jest: .toBe()</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
+<li><a href="https://jestjs.io/docs/troubleshooting" title="Jest: Troubleshooting">Jest: Troubleshooting</a></li>
+<li><a href="https://jestjs.io/docs/api#testonlyname-fn-timeout" title="Jest: test.only()">Jest: test.only function</a></li>
+<li><a href="https://jestjs.io/docs/cli" title="Jest CLI Options">Jest: Running tests from the command line</a></li>
+<li><a href="https://jestjs.io/docs/expect#toequalvalue" title="Jest toEqual function">Jest: .toEqual()</a></li>
+<li><a href="https://lodash.com/" title="Lodash">A modern JavaScript utility library delivering modularity, performance & extras</a></li>
+<li><a href="https://lodash.com/docs/4.17.15#chain" title="Lodash chain function">Lodash .chain()</a></li>
+<li><a href="https://lodash.com/docs/4.17.15#groupBy" title="Lodash groupBy function">Lodash .groupBy()</a></li>
+<li><a href="https://lodash.com/docs/4.17.15#mapValues" title="Lodash mapValues function">Lodash .mapValues()</a></li>
+<li><a href="https://lodash.com/docs/4.17.15#transform" title="Lodash transform function">Lodash .transform()</a></li>
+<li><a href="https://lodash.com/docs/4.17.15#maxBy" title="Lodash maxBy function">Lodash .maxBy()</a></li>
+<li><a href="https://lodash.com/docs/4.17.15#toPairs" title="Lodash toPairs function">Lodash .toPairs()</a></li>
+<li><a href="https://lodash.com/docs/4.17.15#sumBy" title="Lodash sumBy function">Lodash .sumBy()</a></li>
+
 <li><a href="_" title="_">_</a></li>
 
 </details>
@@ -737,7 +746,9 @@ Create an application according to the requirements described in [exercises 3.1-
 <details>
 <summary>Сommands and fragments</summary>
 
-Structure
+#### Structure
+
+The backend has the next structure
 
 ```
 ├── index.js
@@ -756,6 +767,8 @@ Structure
 │   └── middleware.js
 ```
 
+The enterpoint with configing and starting a server
+
 > index.js
 
 ```javascript
@@ -767,6 +780,8 @@ app.listen(config.PORT, () => {
   logger.info(`Server running on port ${PORT}`)
 })
 ```
+
+The main app with configing, all settings and connections
 
 > app.js
 
@@ -803,6 +818,8 @@ app.use(middleware.errorHandler)
 
 module.exports = app
 ```
+
+Controllers folder for control requests on certain API with response on it
 
 > controllers/notes.js
 
@@ -870,6 +887,8 @@ notesRouter.put('/:id', (request, response, next) => {
 module.exports = notesRouter
 ```
 
+Module folder for keeping all modules of data structure
+
 > module/note.js
 
 ```javascript
@@ -894,6 +913,8 @@ noteSchema.set('toJSON', {
 
 module.exports = mongoose.model('Note', noteSchema)
 ```
+
+Utils folder for keeping all nessesery functions and data
 
 > utils/logger.js
 
@@ -962,6 +983,8 @@ module.exports = {
 }
 ```
 
+#### Testing
+
 install jest library in a project as development part
 
 ```bash
@@ -989,7 +1012,7 @@ Jest requires one to specify that the execution environment is Node.
 
 ```json
 {
-  //...
+  ...
   "jest": {
     "testEnvironment": "node"
   }
@@ -1000,7 +1023,7 @@ Add to lint rules file to work with jest
 
 > .eslintrc.js
 
-```json
+```javascript
 module.exports = {
   'env': {
     //...
@@ -1011,6 +1034,8 @@ module.exports = {
 ```
 
 Tests and descriptions
+
+> tests/name.test.js
 
 ```javascript
 describe('description of the block with tests', () => {
@@ -1024,6 +1049,48 @@ test('description of the single test', () => {
 })
 ```
 
+#### Lodash library
+
+install Lodash
+
+> npm i -g lodash
+
+> npm i --save lodash
+
+> npm i --save-dev lodash
+
+```javascript
+const _ = require('lodash')
+const blogs = require('dummy_data').blogs
+
+const result = _.chain(blogs)
+  .groupBy('author')
+  .mapValues((blogs) => blogs.length)
+  .transform((result, value, key) => {
+    return result.push({ 'author': key, 'blogs': value })
+  }, [])
+  .maxBy('blogs')
+  .value()
+```
+
+</details>
+
+### Sub-part B: []()
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments</summary>
+
 </details>
 
 ### Exercises:
@@ -1032,6 +1099,6 @@ test('description of the single test', () => {
 
 To building a blog list application, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
 
-Create an application according to the requirements described in [exercises 4.1-4.2]
+Create an application according to the requirements described in [exercises 4.1-4.2](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-1-4-2), [exercises 4.3-4.7](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7)
 
 - [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part4/bloglist)
