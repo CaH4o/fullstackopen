@@ -11,7 +11,7 @@ module.exports = {
   },
   'rules': {
     'indent': ['error', 2],
-    'linebreak-style': ['error', 'windows'], //npx eslint . --fix
+    'linebreak-style': ['error', 'windows'],
     'quotes': ['error', 'single'],
     'semi': ['error', 'never'],
     'eqeqeq': 'error',

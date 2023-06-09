@@ -739,8 +739,6 @@ Create an application according to the requirements described in [exercises 3.1-
 <li><a href="https://lodash.com/docs/4.17.15#toPairs" title="Lodash toPairs function">Lodash .toPairs()</a></li>
 <li><a href="https://lodash.com/docs/4.17.15#sumBy" title="Lodash sumBy function">Lodash .sumBy()</a></li>
 
-<li><a href="_" title="_">_</a></li>
-
 </details>
 
 <details>
@@ -1075,11 +1073,21 @@ const result = _.chain(blogs)
 
 </details>
 
-### Sub-part B: []()
+### Sub-part B: [Testing the backend](https://fullstackopen.com/en/part4/testing_the_backend)
 
 <details>
 <summary>Links:</summary>
 
+<li><a href="https://en.wikipedia.org/wiki/Unit_testing" title="Unit testing">Unit testing</a></li>
+<li><a href="https://github.com/nodkz/mongodb-memory-server" title="Mongodb memory server">Mongodb memory server</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Integration_testing" title="Integration testing">Integration testing</a></li>
+<li><a href="https://jestjs.io/docs/cli#--runinband" title="Jest --runInBand">Jest --runInBand</a></li>
+<li><a href="https://www.npmjs.com/package/cross-env" title="cross-env">Use cross-env to set environment variables in Windows</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/core/inmemory/" title="Mongo DB In-Memory Storage Engine">Mongo DB In-Memory Storage Engine</a></li>
+<li><a href="https://www.docker.com/" title="Docker">Docker</a></li>
+<li><a href="https://github.com/node-config/node-config" title="node-config">Node-config package</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
@@ -1090,6 +1098,44 @@ const result = _.chain(blogs)
 
 <details>
 <summary>Сommands and fragments</summary>
+
+Add execution mode of the application with the NODE_ENV
+
+> package.json
+
+```json
+  // ...
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    // ...
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
+  },
+  // ...
+```
+
+install cross-env to set environment variables in Windows
+
+> npm install --save-dev cross-env
+
+> npm install cross-env
+
+Update confivg and env to use separate database for testing
+
+> config.js
+
+```javascript
+const MONGODB_URI =
+  process.env.NODE_ENV === 'test'
+    ? process.env.TEST_MONGODB_URI
+    : process.env.MONGODB_URI
+```
+
+> .env
+
+```javascript
+TEST_MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/testApp?retryWrites=true&w=majority
+```
 
 </details>
 
