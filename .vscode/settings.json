@@ -1,7 +1,7 @@
 {
     "typescript.validate.enable": true,
     "javascript.validate.enable": true,
-    "js/ts.implicitProjectConfig.checkJs": true,
+    "js/ts.implicitProjectConfig.checkJs": false,
     "files.associations": {
         "*.tsx": "typescriptreact",
         "*.ts": "typescript",

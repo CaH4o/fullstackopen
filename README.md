@@ -1086,9 +1086,26 @@ const result = _.chain(blogs)
 <li><a href="https://www.mongodb.com/docs/manual/core/inmemory/" title="Mongo DB In-Memory Storage Engine">Mongo DB In-Memory Storage Engine</a></li>
 <li><a href="https://www.docker.com/" title="Docker">Docker</a></li>
 <li><a href="https://github.com/node-config/node-config" title="node-config">Node-config package</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
+<li><a href="https://github.com/ladjs/supertest" title="SuperTest">SuperTest</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions" title="Regular Expressions">Regular Expressions</a></li>
+<li><a href="https://jestjs.io/docs/asynchronous" title="Jest: asynchronous">Jest: Testing Asynchronous Code</a></li>
+<li><a href="https://jestjs.io/docs/api#afterallfn-timeout" title="Jest: afterAll method">Jest: afterAll method</a></li>
+<li><a href="https://mongoosejs.com/docs/jest.html" title="Mongoose and Jest">Mongoose documentation does not recommend testing Mongoose applications with Jest.</a></li>
+<li><a href="https://jestjs.io/docs/expect#expectvalue" title="Jest: expect">Jest Expect method</a></li>
+<li><a href="https://jestjs.io/docs/api#beforeeachfn-timeout" title="Jest: beforeEach method">Jest: beforeEach method</a></li>
+<li><a href="https://jestjs.io/docs/setup-teardown" title="Jest: Setup and Teardown">Jest: Setup and Teardown</a></li>
+<li><a href="https://jestjs.io/docs/expect#tocontainitem" title="Jest: toContain">Jest toContain method</a></li>
+<li><a href="https://jestjs.io/docs/api#testonlyname-fn-timeout" title="Jest: test.only">Jest: run only one tests (if one file)</a></li>
+<li><a href="http://callbackhell.com/" title="JavaScript: Callback hell">JavaScript: What is Callback hell</a></li>
+<li><a href="https://javascript.info/promise-chaining" title="JavaScript: Promises chaining">JavaScript: Promises chaining</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator" title="JavaScript: Generator">JavaScript: Generator</a></li>
+<li><a href="https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch4.md#iterating-generators-asynchronously" title="JavaScript: asynchronous code">JavaScript: clever way of writing asynchronous code in a way that "looks synchronous"</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await" title="JavaScript: await">JavaScript: await</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function" title="JavaScript: async function">JavaScript: async function</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Regression_testing" title="Regression testing">Regression testing</a></li>
+<li><a href="https://github.com/davidbanham/express-async-errors" title="ExpressJS Async Errors">ExpressJS Async Errors</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all" title="JavaScript: Promise all">JavaScript: Promise all</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of" title="JavaScript: for...of">JavaScript: for...of</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
@@ -1134,8 +1151,153 @@ const MONGODB_URI =
 > .env
 
 ```javascript
-TEST_MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/testApp?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://user:<password>@cluster0.o1opl.mongodb.net/prodApp?retryWrites=true&w=majority
+TEST_MONGODB_URI=mongodb+srv://user:<password>@cluster0.o1opl.mongodb.net/testApp?retryWrites=true&w=majority
 ```
+
+Install SuperTest as an npm module and save it to your package.json file as a development dependency
+
+> npm install supertest --save-dev
+
+Cod for testing
+
+> tests/note_api.test.js
+
+```javascript
+const mongoose = require('mongoose')
+const supertest = require('supertest')
+const app = require('../app')
+const api = supertest(app)
+
+beforeEach(async () => {
+  //...
+})
+
+test(/* .only */ 'notes are returned as json', async () => {
+  await api
+    .get('/api/notes')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+})
+
+test('there are two notes', async () => {
+  const response = await api.get('/api/notes')
+  expect(response.body).toHaveLength(2)
+})
+
+test('the first note is about HTTP methods', async () => {
+  const response = await api.get('/api/notes')
+  expect(response.body[0].content).toBe('HTML is easy')
+})
+
+afterAll(async () => {
+  await mongoose.connection.close()
+})
+```
+
+JS file with functions to test
+
+> tests/test_helper.js
+
+```javascript
+const Note = require('../models/note')
+
+const initialNotes = [
+  {
+    content: 'HTML is easy',
+    important: false,
+  },
+  //...
+]
+
+const nonExistingId = async () => {
+  //...
+}
+
+const notesInDb = async () => {
+  const notes = await Note.find({})
+  return notes.map((note) => note.toJSON())
+}
+
+module.exports = {
+  initialNotes,
+  nonExistingId,
+  notesInDb,
+}
+```
+
+update logger
+
+```javascript
+const info = (...params) => {
+  if (process.env.NODE_ENV !== 'test') {
+    console.log(...params)
+  }
+}
+```
+
+update controller with async and await
+
+```javascript
+notesRouter.get('/', async (request, response) => {
+  const notes = await Note.find({})
+  response.json(notes)
+})
+```
+
+Test sertan file with tests or test
+
+> npm test -- tests/note_api.test.js
+
+> npm test -- -t "a specific note is within the returned notes"
+
+> npm test -- -t 'notes'
+
+Try catch block
+
+```javascript
+try {
+  // do the async operations here
+} catch (exception) {
+  next(exception)
+}
+```
+
+install the ExpressJS Async Errors library
+
+> npm install express-async-errors
+
+update app not to use try catch in routers
+
+> app.js
+
+```javascript
+require('express-async-errors')
+```
+
+Update before Ench tests function with Promise.all (can use map for init aray)
+
+> tests/note_api.test.js
+
+```javascript
+beforeEach(async () => {
+  await Note.deleteMany({})
+
+  const noteObjects = helper.initialNotes.map((note) => new Note(note))
+  const promiseArray = noteObjects.map((note) => note.save())
+  await Promise.all(promiseArray)
+})
+```
+
+Tests:
+
+- notes are returned as json
+- all notes are returned
+- a specific note is within the returned notes
+- a valid note can be added
+- note without content is not added
+- a specific note can be viewed
+- a note can be deleted'
 
 </details>
 
