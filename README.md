@@ -1106,8 +1106,8 @@ const result = _.chain(blogs)
 <li><a href="https://github.com/davidbanham/express-async-errors" title="ExpressJS Async Errors">ExpressJS Async Errors</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all" title="JavaScript: Promise all">JavaScript: Promise all</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of" title="JavaScript: for...of">JavaScript: for...of</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
+<li><a href="https://jestjs.io/docs/expect#tocontainequalitem" title="Jest: toContainEqual">Jest toContainEqual method</a></li>
+<li><a href="https://jestjs.io/docs/expect#tobedefined" title="Jest: toBeDefined">Jest toBeDefined method</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
 
@@ -1115,6 +1115,8 @@ const result = _.chain(blogs)
 
 <details>
 <summary>Сommands and fragments</summary>
+
+#### NODE_ENV and cross-env
 
 Add execution mode of the application with the NODE_ENV
 
@@ -1133,9 +1135,9 @@ Add execution mode of the application with the NODE_ENV
 
 install cross-env to set environment variables in Windows
 
-> npm install --save-dev cross-env
-
 > npm install cross-env
+
+> npm install --save-dev cross-env
 
 Update confivg and env to use separate database for testing
 
@@ -1155,6 +1157,18 @@ MONGODB_URI=mongodb+srv://user:<password>@cluster0.o1opl.mongodb.net/prodApp?ret
 TEST_MONGODB_URI=mongodb+srv://user:<password>@cluster0.o1opl.mongodb.net/testApp?retryWrites=true&w=majority
 ```
 
+> utils/logger.js
+
+```javascript
+const info = (...params) => {
+  if (process.env.NODE_ENV !== 'test') {
+    console.log(...params)
+  }
+}
+```
+
+#### SuperTest
+
 Install SuperTest as an npm module and save it to your package.json file as a development dependency
 
 > npm install supertest --save-dev
@@ -1169,27 +1183,81 @@ const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 
-beforeEach(async () => {
-  //...
-})
+//...
 
-test('notes are returned as json', async () => {
+test('blogs are returned as json', async () => {
   await api
-    .get('/api/notes')
+    .get('/api/blogs')
     .expect(200)
     .expect('Content-Type', /application\/json/)
 })
 
-test('there are two notes', async () => {
-  const response = await api.get('/api/notes')
-  expect(response.body).toHaveLength(2)
+test('there are two blogs', async () => {
+  const response = await api.get('/api/blogs')
+  expect(response.body).toHaveLength(init.listWithManyBlog.length)
 })
 
-test('the first note is about HTTP methods', async () => {
-  const response = await api.get('/api/notes')
-  expect(response.body[0].content).toBe('HTML is easy')
+test('"id" property is defined in a blog', async () => {
+  const blogsInDb = await helper.blogsInDb()
+  expect(blogsInDb[0].id).toBeDefined()
 })
 
+test('a valid blog can be added', async () => {
+  const newBlog = { ...init.listWithOneBlog[0] }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsInDbAfterPost = await helper.blogsInDb()
+  expect(blogsInDbAfterPost).toHaveLength(init.listWithManyBlog.length + 1)
+
+  const titles = blogsInDbAfterPost.map((b) => b.title)
+  expect(titles).toContain(newBlog.title)
+})
+
+test('a blog without likes can be added with 0', async () => {
+  const newBlog = { ...init.listWithOneBlog[0] }
+  delete newBlog.likes
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsInDbAfterPost = await helper.blogsInDb()
+  expect(blogsInDbAfterPost).toHaveLength(init.listWithManyBlog.length + 1)
+
+  const savedBlog = response.body
+  expect(savedBlog.likes).toBe(0)
+  expect(blogsInDbAfterPost).toContainEqual(savedBlog)
+
+  delete savedBlog.likes
+  delete savedBlog.id
+  delete newBlog._id
+  expect(savedBlog).toEqual(newBlog)
+})
+
+test('a blog without title cannot be added', async () => {
+  const newBlog = { ...init.listWithOneBlog[0] }
+  delete newBlog.title
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+    .expect((res) => res.statusMessage === 'Bad Request')
+})
+
+//...
+```
+
+add close db connection after all tests
+
+```javascript
 afterAll(async () => {
   await mongoose.connection.close()
 })
@@ -1210,10 +1278,6 @@ const initialNotes = [
   //...
 ]
 
-const nonExistingId = async () => {
-  //...
-}
-
 const notesInDb = async () => {
   const notes = await Note.find({})
   return notes.map((note) => note.toJSON())
@@ -1221,58 +1285,8 @@ const notesInDb = async () => {
 
 module.exports = {
   initialNotes,
-  nonExistingId,
   notesInDb,
 }
-```
-
-update logger
-
-```javascript
-const info = (...params) => {
-  if (process.env.NODE_ENV !== 'test') {
-    console.log(...params)
-  }
-}
-```
-
-update controller with async and await
-
-```javascript
-notesRouter.get('/', async (request, response) => {
-  const notes = await Note.find({})
-  response.json(notes)
-})
-```
-
-Test sertan file with tests or test
-
-> npm test -- tests/note_api.test.js
-
-> npm test -- -t "a specific note is within the returned notes"
-
-> npm test -- -t 'notes'
-
-Try catch block
-
-```javascript
-try {
-  // do the async operations here
-} catch (exception) {
-  next(exception)
-}
-```
-
-install the ExpressJS Async Errors library
-
-> npm install express-async-errors
-
-update app not to use try catch in routers
-
-> app.js
-
-```javascript
-require('express-async-errors')
 ```
 
 Update before Ench tests function with Promise.all (can use map for init aray)
@@ -1289,24 +1303,91 @@ beforeEach(async () => {
 })
 ```
 
-Tests:
+or
 
-- notes are returned as json
-- all notes are returned
-- a specific note is within the returned notes
-- a valid note can be added
-- note without content is not added
-- a specific note can be viewed
-- a note can be deleted'
+````javascript
+beforeEach(async () => {
+  await Note.deleteMany({})
+  await Note.insertMany(helper.initialNotes)
+})
+
+
+
+update controller with async and await
+
+```javascript
+notesRouter.get('/', async (request, response) => {
+  const notes = await Note.find({})
+  response.json(notes)
+})
+````
+
+Test sertan file with tests or test
+
+> npm test -- tests/note_api.test.js
+
+> npm test -- -t "a specific note is within the returned notes"
+
+> npm test -- -t 'notes'
+
+#### Try catch block or ExpressJS Async Errors
+
+Try catch block
+
+```javascript
+try {
+  // do the async operations here
+} catch (exception) {
+  next(exception)
+}
+```
+
+install the ExpressJS Async Errors library
+
+> npm install express-async-errors
+
+update app not to use try catch in routers. No need more use next() and catch errors in router, but need to use a middlwear for catch it futher.
+
+> app.js
+
+```javascript
+const express = require('express')
+require('express-async-errors')
+const app = express()
+//...
+```
+
+#### Tests:
+
+- when there is initially some notes saved
+
+  - notes are returned as json
+  - all notes are returned
+  - a specific note is within the returned notes
+  - "id" property is defined in notes
+
+- viewing a specific note
+
+  - succeeds with a valid id
+  - fails with statuscode 404 if note does not exist
+  - fails with statuscode 400 if id is invalid
+
+- addition of a new note
+
+  - succeeds with valid data
+  - fails with status code 400 if data invalid
+
+- deletion of a note
+  - succeeds with status code 204 if id is valid
 
 </details>
 
 ### Exercises:
 
-#### 4.1-4.2: Blog list
+#### 4.1-4.12: Blog list
 
 To building a blog list application, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
 
-Create an application according to the requirements described in [exercises 4.1-4.2](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-1-4-2), [exercises 4.3-4.7](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7)
+Create an application according to the requirements described in [exercises 4.1-4.2](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-1-4-2), [exercises 4.3-4.7](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), [exercises 4.8-4.12](https://fullstackopen.com/en/part4/testing_the_backend#exercises-4-8-4-12)
 
 - [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part4/bloglist)
