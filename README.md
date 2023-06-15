@@ -1185,71 +1185,79 @@ const api = supertest(app)
 
 //...
 
-test('blogs are returned as json', async () => {
-  await api
-    .get('/api/blogs')
-    .expect(200)
-    .expect('Content-Type', /application\/json/)
+describe('get blogs after dummy_blogs saved', () => {
+  test('successful with status code 200 as json', async () => {
+    await api
+      .get('/api/blogs')
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+  })
+
+  test('returned the same length of blogs', async () => {
+    const response = await api.get('/api/blogs')
+    expect(response.body).toHaveLength(init.listWithManyBlog.length)
+  })
+
+  test('there are defined "id" property', async () => {
+    const blogsInDb = await helper.blogsInDb()
+    expect(blogsInDb[0].id).toBeDefined()
+  })
 })
 
-test('there are two blogs', async () => {
-  const response = await api.get('/api/blogs')
-  expect(response.body).toHaveLength(init.listWithManyBlog.length)
+describe('post a single blog after dummy_blogs saved', () => {
+  //...
+
+  test('the value of likes is as default if without likes', async () => {
+    const postBlog = {
+      title: 'Blog',
+      author: 'Member of Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Blog',
+    }
+
+    const response = await api.post('/api/blogs').send(postBlog)
+    expect(response.body.likes).toBe(0)
+  })
+
+  //...
 })
 
-test('"id" property is defined in a blog', async () => {
-  const blogsInDb = await helper.blogsInDb()
-  expect(blogsInDb[0].id).toBeDefined()
+describe('delete a blog after dummy_blogs saved', () => {
+  //...
+
+  test('fails with status code 400 if id is invalid', async () => {
+    let idBlogToDelete
+    await api.delete(`/api/blogs/${idBlogToDelete}`).expect(400)
+
+    idBlogToDelete = '0000'
+    await api.delete(`/api/blogs/${idBlogToDelete}`).expect(400)
+
+    const blogsInDb = await helper.blogsInDb()
+    expect(blogsInDb).toHaveLength(init.listWithManyBlog.length)
+  })
 })
 
-test('a valid blog can be added', async () => {
-  const newBlog = { ...init.listWithOneBlog[0] }
+describe('put a blog after dummy_blogs saved', () => {
+  //...
 
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(201)
-    .expect('Content-Type', /application\/json/)
+  test('successful the put blog still in the DB', async () => {
+    const blogsInDb = await helper.blogsInDb()
+    const putBlog = {
+      title: 'Blog',
+      author: 'Member of Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Blog',
+      likes: 5,
+    }
 
-  const blogsInDbAfterPost = await helper.blogsInDb()
-  expect(blogsInDbAfterPost).toHaveLength(init.listWithManyBlog.length + 1)
+    await api.put(`/api/blogs/${blogsInDb[0].id}`).send(putBlog)
 
-  const titles = blogsInDbAfterPost.map((b) => b.title)
-  expect(titles).toContain(newBlog.title)
-})
+    const blogsInDbAfterPut = await helper.blogsInDb()
+    expect(blogsInDbAfterPut).toHaveLength(init.listWithManyBlog.length)
 
-test('a blog without likes can be added with 0', async () => {
-  const newBlog = { ...init.listWithOneBlog[0] }
-  delete newBlog.likes
+    const ids = blogsInDbAfterPut.map((b) => b.id)
+    expect(ids).toContain(blogsInDb[0].id)
+  })
 
-  const response = await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(201)
-    .expect('Content-Type', /application\/json/)
-
-  const blogsInDbAfterPost = await helper.blogsInDb()
-  expect(blogsInDbAfterPost).toHaveLength(init.listWithManyBlog.length + 1)
-
-  const savedBlog = response.body
-  expect(savedBlog.likes).toBe(0)
-  expect(blogsInDbAfterPost).toContainEqual(savedBlog)
-
-  delete savedBlog.likes
-  delete savedBlog.id
-  delete newBlog._id
-  expect(savedBlog).toEqual(newBlog)
-})
-
-test('a blog without title cannot be added', async () => {
-  const newBlog = { ...init.listWithOneBlog[0] }
-  delete newBlog.title
-
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(400)
-    .expect((res) => res.statusMessage === 'Bad Request')
+  //...
 })
 
 //...
@@ -1359,35 +1367,50 @@ const app = express()
 
 #### Tests:
 
-- when there is initially some notes saved
+- get all notes after dummy notes saved in DB
 
-  - notes are returned as json
-  - all notes are returned
+  - successful with status code 200 as json
+  - returned the same length of blogs
   - a specific note is within the returned notes
-  - "id" property is defined in notes
+  - there are defined "id" property'
 
-- viewing a specific note
+- get a specific/single note by id
 
   - succeeds with a valid id
-  - fails with statuscode 404 if note does not exist
-  - fails with statuscode 400 if id is invalid
+  - fails with status code 404 if note does not exist
+  - fails with status code 400 if id is invalid
 
-- addition of a new note
+- post a specific/single note after dummy notes saved
 
-  - succeeds with valid data
-  - fails with status code 400 if data invalid
+  - successful with status code 201 as json
+  - successful the same blog is returned
+  - successful the post blog is saved in DB
+  - successful with status code 201 as json if without specific data
+  - successful the value of specific data is as default if without specific data
+  - fails with status code 400 if specific data invalid
 
-- deletion of a note
-  - succeeds with status code 204 if id is valid
+- delete of a note after dummy notes saved
+
+  - successful with status code 204 if id is valid
+  - successful delete in DB
+  - fails with status code 404 if id is incorrect
+  - fails with status code 400 if id is invalid
+
+- put a note after dummy notes saved
+  - successful with status code 200 as json
+  - successful the same blog is returned
+  - successful the put blog still in the DB
+  - fails with status code 404 if id is incorrect
+  - fails with status code 400 if id is invalid
 
 </details>
 
 ### Exercises:
 
-#### 4.1-4.12: Blog list
+#### 4.1-4.14: Blog list
 
 To building a blog list application, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
 
-Create an application according to the requirements described in [exercises 4.1-4.2](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-1-4-2), [exercises 4.3-4.7](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), [exercises 4.8-4.12](https://fullstackopen.com/en/part4/testing_the_backend#exercises-4-8-4-12)
+Create an application according to the requirements described in [exercises 4.1-4.2](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-1-4-2), [exercises 4.3-4.7](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), [exercises 4.8-4.12](https://fullstackopen.com/en/part4/testing_the_backend#exercises-4-8-4-12) [exercises 4.13-4.14](https://fullstackopen.com/en/part4/testing_the_backend#exercises-4-13-4-14)
 
 - [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part4/bloglist)

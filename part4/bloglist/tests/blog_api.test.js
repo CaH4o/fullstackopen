@@ -8,100 +8,249 @@ const helper = require('../utils/blog_api_helper')
 
 beforeEach(async () => {
   await Blog.deleteMany({})
-
-  const blogObjects = init.listWithManyBlog.map((blog) => new Blog(blog))
-  const promiseArray = blogObjects.map((blog) => blog.save())
-  await Promise.all(promiseArray)
+  await Blog.insertMany(init.listWithManyBlog)
 })
 
-test('blogs are returned as json', async () => {
-  await api
-    .get('/api/blogs')
-    .expect(200)
-    .expect('Content-Type', /application\/json/)
+describe('get blogs after dummy_blogs saved', () => {
+  test('successful with status code 200 as json', async () => {
+    await api
+      .get('/api/blogs')
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+  })
+
+  test('returned the same length of blogs', async () => {
+    const response = await api.get('/api/blogs')
+    expect(response.body).toHaveLength(init.listWithManyBlog.length)
+  })
+
+  test('there are defined "id" property', async () => {
+    const blogsInDb = await helper.blogsInDb()
+    expect(blogsInDb[0].id).toBeDefined()
+  })
 })
 
-test('there are two blogs', async () => {
-  const response = await api.get('/api/blogs')
-  expect(response.body).toHaveLength(init.listWithManyBlog.length)
+describe('post a single blog after dummy_blogs saved', () => {
+  test('successful with status code 201 as json', async () => {
+    const postBlog = {
+      title: 'Blog',
+      author: 'Member of Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Blog',
+      likes: 5,
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(postBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+  })
+
+  test('successful the same blog is returned', async () => {
+    const postBlog = {
+      title: 'Blog',
+      author: 'Member of Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Blog',
+      likes: 5,
+    }
+
+    const response = await api.post('/api/blogs').send(postBlog)
+
+    expect(response.body.author).toEqual(postBlog.author)
+    expect(response.body.title).toEqual(postBlog.title)
+    expect(response.body.url).toEqual(postBlog.url)
+    expect(response.body.likes).toEqual(postBlog.likes)
+  })
+
+  test('successful the post blog is saved in DB', async () => {
+    const postBlog = {
+      title: 'Blog',
+      author: 'Member of Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Blog',
+      likes: 5,
+    }
+
+    const response = await api.post('/api/blogs').send(postBlog)
+
+    const blogsInDbAfterPost = await helper.blogsInDb()
+    expect(blogsInDbAfterPost).toHaveLength(init.listWithManyBlog.length + 1)
+
+    const ids = blogsInDbAfterPost.map((b) => b.id)
+    expect(ids).toContain(response.body.id)
+  })
+
+  test('successful with status code 201 as json if without likes', async () => {
+    const postBlog = {
+      title: 'Blog',
+      author: 'Member of Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Blog',
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(postBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+  })
+
+  test('the value of likes is as default if without likes', async () => {
+    const postBlog = {
+      title: 'Blog',
+      author: 'Member of Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Blog',
+    }
+
+    const response = await api.post('/api/blogs').send(postBlog)
+    expect(response.body.likes).toBe(0)
+  })
+
+  test('fails with status code 400 if without title', async () => {
+    const postBlog = {
+      author: 'Member of Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Blog',
+      likes: 5,
+    }
+
+    await api.post('/api/blogs').send(postBlog).expect(400)
+
+    const blogsInDbAfterPost = await helper.blogsInDb()
+    expect(blogsInDbAfterPost).toHaveLength(init.listWithManyBlog.length)
+  })
+
+  test('fails with status code 400 if without url', async () => {
+    const postBlog = {
+      title: 'Blog',
+      author: 'Member of Wikipedia',
+      likes: 5,
+    }
+
+    await api.post('/api/blogs').send(postBlog).expect(400)
+
+    const blogsInDbAfterPost = await helper.blogsInDb()
+    expect(blogsInDbAfterPost).toHaveLength(init.listWithManyBlog.length)
+  })
 })
 
-test('"id" property is defined in a blog', async () => {
-  const blogsInDb = await helper.blogsInDb()
-  expect(blogsInDb[0].id).toBeDefined()
+describe('delete a blog after dummy_blogs saved', () => {
+  test('successful with status code 204 if id is valid', async () => {
+    const blogsInDb = await helper.blogsInDb()
+    const idBlogToDelete = blogsInDb[0].id
+
+    await api.delete(`/api/blogs/${idBlogToDelete}`).expect(204)
+  })
+
+  test('successful delete in DB', async () => {
+    const blogsInDbBeforeDelete = await helper.blogsInDb()
+    const idBlogToDelete = blogsInDbBeforeDelete[0].id
+
+    await api.delete(`/api/blogs/${idBlogToDelete}`)
+
+    const blogsInDbAfterDelete = await helper.blogsInDb()
+    expect(blogsInDbAfterDelete).toHaveLength(blogsInDbBeforeDelete.length - 1)
+
+    const ids = blogsInDbAfterDelete.map((b) => b.id)
+    expect(ids).not.toContain(idBlogToDelete)
+  })
+
+  test('fails with status code 404 if id is incorrect', async () => {
+    const idBlogToDelete = '000000000000000000000000'
+
+    await api.delete(`/api/blogs/${idBlogToDelete}`).expect(404)
+
+    const blogsInDb = await helper.blogsInDb()
+    expect(blogsInDb).toHaveLength(init.listWithManyBlog.length)
+  })
+
+  test('fails with status code 400 if id is invalid', async () => {
+    let idBlogToDelete
+    await api.delete(`/api/blogs/${idBlogToDelete}`).expect(400)
+
+    idBlogToDelete = '0000'
+    await api.delete(`/api/blogs/${idBlogToDelete}`).expect(400)
+
+    const blogsInDb = await helper.blogsInDb()
+    expect(blogsInDb).toHaveLength(init.listWithManyBlog.length)
+  })
 })
 
-test('a valid blog can be added', async () => {
-  const newBlog = { ...init.listWithOneBlog[0] }
+describe('put a blog after dummy_blogs saved', () => {
+  test('successful with status code 200 as json', async () => {
+    const blogsInDb = await helper.blogsInDb()
+    const putBlog = {
+      title: 'Blog',
+      author: 'Member of Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Blog',
+      likes: 5,
+    }
 
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(201)
-    .expect('Content-Type', /application\/json/)
+    await api
+      .put(`/api/blogs/${blogsInDb[0].id}`)
+      .send(putBlog)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+  })
 
-  const blogsInDbAfterPost = await helper.blogsInDb()
-  expect(blogsInDbAfterPost).toHaveLength(init.listWithManyBlog.length + 1)
+  test('successful the same blog is returned', async () => {
+    const blogsInDb = await helper.blogsInDb()
+    const putBlog = {
+      title: 'Blog',
+      author: 'Member of Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Blog',
+      likes: 5,
+    }
 
-  const titles = blogsInDbAfterPost.map((b) => b.title)
-  expect(titles).toContain(newBlog.title)
+    const response = await api
+      .put(`/api/blogs/${blogsInDb[0].id}`)
+      .send(putBlog)
 
-  const authors = blogsInDbAfterPost.map((b) => b.author)
-  expect(authors).toContain(newBlog.author)
+    expect(response.body.author).toEqual(putBlog.author)
+    expect(response.body.title).toEqual(putBlog.title)
+    expect(response.body.url).toEqual(putBlog.url)
+    expect(response.body.likes).toEqual(putBlog.likes)
+  })
 
-  const urls = blogsInDbAfterPost.map((b) => b.url)
-  expect(urls).toContain(newBlog.url)
-})
+  test('successful the put blog still in the DB', async () => {
+    const blogsInDb = await helper.blogsInDb()
+    const putBlog = {
+      title: 'Blog',
+      author: 'Member of Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Blog',
+      likes: 5,
+    }
 
-test('a blog without likes can be added with 0', async () => {
-  const newBlog = { ...init.listWithOneBlog[0] }
-  delete newBlog.likes
+    await api.put(`/api/blogs/${blogsInDb[0].id}`).send(putBlog)
 
-  const response = await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(201)
-    .expect('Content-Type', /application\/json/)
+    const blogsInDbAfterPut = await helper.blogsInDb()
+    expect(blogsInDbAfterPut).toHaveLength(init.listWithManyBlog.length)
 
-  const blogsInDbAfterPost = await helper.blogsInDb()
-  expect(blogsInDbAfterPost).toHaveLength(init.listWithManyBlog.length + 1)
+    const ids = blogsInDbAfterPut.map((b) => b.id)
+    expect(ids).toContain(blogsInDb[0].id)
+  })
 
-  const savedBlog = response.body
-  expect(savedBlog.likes).toBe(0)
-  expect(blogsInDbAfterPost).toContainEqual(savedBlog)
+  test('fails with status code 404 if id is incorrect', async () => {
+    const putBlog = {
+      id: '000000000000000000000000',
+      title: 'Blog',
+      author: 'Member of Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Blog',
+      likes: 5,
+    }
 
-  delete savedBlog.likes
-  delete savedBlog.id
-  delete newBlog._id
-  expect(savedBlog).toEqual(newBlog)
-})
+    await api.put(`/api/blogs/${putBlog.id}`).send(putBlog).expect(404)
+  })
 
-test('a blog without title cannot be added', async () => {
-  const newBlog = { ...init.listWithOneBlog[0] }
-  delete newBlog.title
+  test('fails with status code 400 if id is invalid', async () => {
+    const putBlog = {
+      title: 'Blog',
+      author: 'Member of Wikipedia',
+      url: 'https://en.wikipedia.org/wiki/Blog',
+      likes: 5,
+    }
 
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(400)
-    .expect((res) => res.statusMessage === 'Bad Request')
+    await api.put(`/api/blogs/${putBlog.id}`).send(putBlog).expect(400)
 
-  const blogsInDbAfterPost = await helper.blogsInDb()
-  expect(blogsInDbAfterPost).toHaveLength(init.listWithManyBlog.length)
-})
-
-test('a blog without url cannot be added', async () => {
-  const newBlog = { ...init.listWithOneBlog[0] }
-  delete newBlog.url
-
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(400)
-    .expect((res) => res.statusMessage === 'Bad Request')
-
-  const blogsInDbAfterPost = await helper.blogsInDb()
-  expect(blogsInDbAfterPost).toHaveLength(init.listWithManyBlog.length)
+    await api.put(`/api/blogs/${'fake id'}`).send(putBlog).expect(400)
+  })
 })
 
 afterAll(async () => {
