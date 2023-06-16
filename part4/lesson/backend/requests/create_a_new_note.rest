@@ -27,3 +27,14 @@ content-type: application/json
     "content": "lol",
     "important": false
 }
+
+###
+POST http://localhost:3001/api/notes/
+content-type: application/json
+
+{
+    "content": "content with user 2",
+    "important": true,
+    "userId": "648ca30e70b0819ef3a855d0"
+}
+

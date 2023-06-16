@@ -1108,9 +1108,6 @@ const result = _.chain(blogs)
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of" title="JavaScript: for...of">JavaScript: for...of</a></li>
 <li><a href="https://jestjs.io/docs/expect#tocontainequalitem" title="Jest: toContainEqual">Jest toContainEqual method</a></li>
 <li><a href="https://jestjs.io/docs/expect#tobedefined" title="Jest: toBeDefined">Jest toBeDefined method</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
-
 </details>
 
 <details>
@@ -1402,6 +1399,193 @@ const app = express()
   - successful the put blog still in the DB
   - fails with status code 404 if id is incorrect
   - fails with status code 400 if id is invalid
+
+</details>
+
+### Sub-part B: [User administration](https://fullstackopen.com/en/part4/user_administration)
+
+<details>
+<summary>Links:</summary>
+<li><a href="https://www.mongodb.com/docs/manual/reference/operator/aggregation/lookup/" title="Mongo DB: lookup (aggregation)">Mongo DB: lookup (aggregation)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function" title="Cryptographic hash function">Cryptographic hash function</a></li>
+<li><a href="https://codahale.com/how-to-safely-store-a-password/" title="How To Safely Store A Password">How To Safely Store A Password</a></li>
+<li><a href="https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds" title="A Note on Rounds">A Note on Rounds</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Test-driven_development" title="Test-driven development">Test-driven development</a></li>
+<li><a href="https://www.npmjs.com/package/mongoose-unique-validator" title="Mongoose: unique validator">Mongoose: unique validator</a></li>
+<li><a href="https://mongoosejs.com/docs/populate.html" title="Mongoose: populate method">Mongoose: populate method</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only" title="Mongoose: populate method - conditions">Mongoose: populate method - conditions</a></li>
+<li><a href="_" title="_">_</a></li>
+</details>
+
+<details>
+<summary>Сommands and fragments</summary>
+
+Add user document schema to models
+
+```javascript
+const mongoose = require('mongoose')
+
+const userSchema = new mongoose.Schema({
+  username: String,
+  name: String,
+  passwordHash: String,
+  notes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Note',
+    },
+  ],
+})
+
+userSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+    // the passwordHash should not be revealed
+    delete returnedObject.passwordHash
+  },
+})
+
+const User = mongoose.model('User', userSchema)
+
+module.exports = User
+```
+
+Change schema of the note defined in the models/note.js file
+
+```javascript
+//...
+const noteSchema = new mongoose.Schema({
+  //...
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+  //...
+```
+
+#### bcrypt for password
+
+install the bcrypt package for generating the password hashes
+
+> npm install bcrypt
+
+Create controller for users routs in file
+
+> controllers/users.js
+
+```javascript
+const bcrypt = require('bcrypt')
+const usersRouter = require('express').Router()
+const User = require('../models/user')
+
+usersRouter.get('/', async (request, response) => {
+  const users = await User.find({})
+  response.json(users)
+})
+
+usersRouter.post('/', async (request, response) => {
+  const { username, name, password } = request.body
+
+  const saltRounds = 10
+  const passwordHash = await bcrypt.hash(password, saltRounds)
+
+  const user = new User({
+    username,
+    name,
+    passwordHash,
+  })
+
+  const savedUser = await user.save()
+
+  response.status(201).json(savedUser)
+})
+
+module.exports = usersRouter
+```
+
+Add users rout in app.js
+
+> app.js
+
+```javascript
+const usersRouter = require('./controllers/users')
+
+// ...
+
+app.use('/api/users', usersRouter)
+```
+
+#### mongoose unique validator
+
+install the mongoose-unique-validator library
+
+> npm install mongoose-unique-validator
+
+Update user schema
+
+> models/user.js
+
+```javascript
+const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator')
+
+const userSchema = mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  //...
+})
+
+userSchema.plugin(uniqueValidator)
+
+//...
+```
+
+Update note controller to post note with user
+
+> controllers/notes.js
+
+```javascript
+const User = require('../models/user')
+
+//...
+
+notesRouter.post('/', async (request, response) => {
+  const body = request.body
+
+  const user = await User.findById(body.userId)
+
+  const note = new Note({
+    content: body.content,
+    important: body.important === undefined ? false : body.important,
+    user: user.id,
+  })
+
+  const savedNote = await note.save()
+  user.notes = user.notes.concat(savedNote._id)
+  await user.save()
+
+  response.json(savedNote)
+})
+```
+
+Update user controller to get all users with full notes array (not only ids) with content only
+
+> controllers/users.js
+
+```javascript
+usersRouter.get('/', async (request, response) => {
+  const users = await User.find({}).populate('notes', {
+    content: 1,
+  })
+
+  response.json(users)
+})
+```
 
 </details>
 
