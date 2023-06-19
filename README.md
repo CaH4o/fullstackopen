@@ -1402,7 +1402,7 @@ const app = express()
 
 </details>
 
-### Sub-part B: [User administration](https://fullstackopen.com/en/part4/user_administration)
+### Sub-part C: [User administration](https://fullstackopen.com/en/part4/user_administration)
 
 <details>
 <summary>Links:</summary>
@@ -1414,7 +1414,6 @@ const app = express()
 <li><a href="https://www.npmjs.com/package/mongoose-unique-validator" title="Mongoose: unique validator">Mongoose: unique validator</a></li>
 <li><a href="https://mongoosejs.com/docs/populate.html" title="Mongoose: populate method">Mongoose: populate method</a></li>
 <li><a href="https://www.mongodb.com/docs/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only" title="Mongoose: populate method - conditions">Mongoose: populate method - conditions</a></li>
-<li><a href="_" title="_">_</a></li>
 </details>
 
 <details>
@@ -1585,6 +1584,148 @@ usersRouter.get('/', async (request, response) => {
 
   response.json(users)
 })
+```
+
+</details>
+
+### Sub-part D: [Token authentication](https://fullstackopen.com/en/part4/token_authentication)
+
+<details>
+<summary>Links</summary>
+<li><a href="https://www.digitalocean.com/community/tutorials/the-ins-and-outs-of-token-based-authentication#how-token-based-works" title="Token-based authentication">Token-based authentication</a></li>
+<li><a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2" title="Status code 401 unauthorized">Status code 401 unauthorized</a></li>
+<li><a href="https://github.com/auth0/node-jsonwebtoken" title="node jsonwebtoken">An implementation of JSON Web Tokens.</a></li>
+<li><a href="https://jwt.io/" title="JSON web tokens">JSON web tokens</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization" title="_">_</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization" title="Headers, Authorization">Headers, Authorization</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes" title="Headers, Authorization schemes">Headers, Authorization schemes</a></li>
+<li><a href="https://www.npmjs.com/package/express-jwt" title="express-jwt">Express jwt (JSON Web Tokens)</a></li>
+<li><a href="https://redis.io/" title="Redis">Redis</a></li>
+<li><a href="https://en.wikipedia.org/wiki/HTTPS" title="HTTPS">Hypertext Transfer Protocol Secure (HTTPS)</a></li>
+<li><a href="https://nodejs.org/api/https.html" title="Node HTTPS server">Node HTTPS server Node.js v20.3.0 documentation</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/http.html" title="Node HTTPS server">Node HTTPS server Node.js v8.17.0 Documentation</a></li>
+
+<li><a href="_" title="_">_</a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments</summary>
+
+Install the jsonwebtoken library, which allows us to generate JSON web tokens.
+
+> npm install jsonwebtoken
+
+The code for login functionality goes to the file controllers/login.js.
+
+> controllers/login.js
+
+```javascript
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const loginRouter = require('express').Router()
+const User = require('../models/user')
+
+loginRouter.post('/', async (request, response) => {
+  const { username, password } = request.body
+
+  const user = await User.findOne({ username })
+  const passwordCorrect =
+    user === null ? false : await bcrypt.compare(password, user.passwordHash)
+
+  if (!(user && passwordCorrect)) {
+    return response.status(401).json({
+      error: 'invalid username or password',
+    })
+  }
+
+  const userForToken = {
+    username: user.username,
+    id: user._id,
+  }
+
+  const token = jwt.sign(userForToken, process.env.SECRET, {
+    expiresIn: 60 * 60,
+  })
+
+  response.status(200).send({ token, username: user.username, name: user.name })
+})
+
+module.exports = loginRouter
+```
+
+Update app
+
+> app.js
+
+```javascript
+const loginRouter = require('./controllers/login')
+
+//...
+
+app.use('/api/login', loginRouter)
+```
+
+Update note router
+
+> controllers/notes.js
+
+```javascript
+const jwt = require('jsonwebtoken')
+
+// ...
+
+const getTokenFrom = (request) => {
+  const authorization = request.get('authorization')
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace('Bearer ', '')
+  }
+  return null
+}
+
+notesRouter.post('/', async (request, response) => {
+  const body = request.body
+
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'token invalid' })
+  }
+  const user = await User.findById(decodedToken.id)
+
+  const note = new Note({
+    content: body.content,
+    important: body.important === undefined ? false : body.important,
+    user: user._id,
+  })
+
+  const savedNote = await note.save()
+  user.notes = user.notes.concat(savedNote._id)
+  await user.save()
+
+  response.json(savedNote)
+})
+```
+
+Update middleware
+
+> middleware.js
+
+```javascript
+const errorHandler = (error, request, response, next) => {
+  logger.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  } else if (error.name === 'JsonWebTokenError') {
+    return response.status(401).json({ error: 'invalid token' })
+  } else if (error.name === 'TokenExpiredError') {
+    return response.status(401).json({ error: 'token expired' })
+  }
+
+  next(error)
+}
 ```
 
 </details>

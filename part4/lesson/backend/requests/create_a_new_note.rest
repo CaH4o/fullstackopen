@@ -38,3 +38,27 @@ content-type: application/json
     "userId": "648ca30e70b0819ef3a855d0"
 }
 
+###
+
+# @name response
+post http://localhost:{{$dotenv PORT}}/api/login
+Content-Type: application/json
+
+{
+    "username": "mluukkai",
+    "password": "salainen"
+}
+
+###
+
+@authToken = {{response.response.body.token}}
+
+### 
+POST http://localhost:{{$dotenv PORT}}/api/notes
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "content": "Use woken is simple, isn't?",
+    "important": true
+}
