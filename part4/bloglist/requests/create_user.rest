@@ -1,0 +1,25 @@
+GET http://localhost:{{$dotenv PORT}}/api/users
+
+###
+
+POST http://localhost:{{$dotenv PORT}}/api/users
+Content-Type: application/json
+
+{
+    "username": "root",
+    "name": "Superuser",
+    "password": "salainen"
+}
+
+###
+
+POST http://localhost:{{$dotenv PORT}}/api/users
+Content-Type: application/json
+
+{
+    "username": "mluukkai",
+    "name": "Matti Luukkainen",
+    "password": "salainen"
+}
+
+

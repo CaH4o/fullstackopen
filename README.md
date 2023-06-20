@@ -1604,6 +1604,7 @@ usersRouter.get('/', async (request, response) => {
 <li><a href="https://en.wikipedia.org/wiki/HTTPS" title="HTTPS">Hypertext Transfer Protocol Secure (HTTPS)</a></li>
 <li><a href="https://nodejs.org/api/https.html" title="Node HTTPS server">Node HTTPS server Node.js v20.3.0 documentation</a></li>
 <li><a href="https://nodejs.org/docs/latest-v8.x/api/http.html" title="Node HTTPS server">Node HTTPS server Node.js v8.17.0 Documentation</a></li>
+<li><a href="https://www.npmjs.com/package/bcryptjs" title="bcrypt.js">Optimized bcrypt in JavaScript with zero dependencies</a></li>
 
 <li><a href="_" title="_">_</a></li>
 
@@ -1728,14 +1729,19 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
+Some Windows users have had problems with bcrypt. If you run into problems, remove the library with command and install bcryptjs instead.
+
+> npm uninstall bcrypt
+
 </details>
 
 ### Exercises:
 
-#### 4.1-4.14: Blog list
+#### 4.1-4.23: Blog list
 
-To building a blog list application, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
+To building a blog list application (backend), that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
+In the next exercises, the basics of user management will be implemented for the Bloglist application.
 
-Create an application according to the requirements described in [exercises 4.1-4.2](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-1-4-2), [exercises 4.3-4.7](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), [exercises 4.8-4.12](https://fullstackopen.com/en/part4/testing_the_backend#exercises-4-8-4-12) [exercises 4.13-4.14](https://fullstackopen.com/en/part4/testing_the_backend#exercises-4-13-4-14)
+Create an application according to the requirements described in [exercises 4.1-4.2](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-1-4-2), [exercises 4.3-4.7](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), [exercises 4.8-4.12](https://fullstackopen.com/en/part4/testing_the_backend#exercises-4-8-4-12) [exercises 4.13-4.14](https://fullstackopen.com/en/part4/testing_the_backend#exercises-4-13-4-14) [exercises 4.15-4.23](https://fullstackopen.com/en/part4/token_authentication#exercises-4-15-4-23)
 
 - [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part4/bloglist)
