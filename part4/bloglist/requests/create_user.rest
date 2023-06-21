@@ -1,8 +1,12 @@
-GET http://localhost:{{$dotenv PORT}}/api/users
+@baseUrl = http://localhost:{{$dotenv PORT}}/api/users
 
-###
+### get all users
 
-POST http://localhost:{{$dotenv PORT}}/api/users
+GET {{baseUrl}}
+
+### post 1st user
+
+POST {{baseUrl}}
 Content-Type: application/json
 
 {
@@ -11,9 +15,9 @@ Content-Type: application/json
     "password": "salainen"
 }
 
-###
+### post 2nd user
 
-POST http://localhost:{{$dotenv PORT}}/api/users
+POST {{baseUrl}}
 Content-Type: application/json
 
 {

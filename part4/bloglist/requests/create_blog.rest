@@ -1,17 +1,33 @@
-@baseUrl = http://localhost:3003/api/blogs
+@baseUrl = http://localhost:{{$dotenv PORT}}/api
 
 ### get all blogs
 
-GET {{baseUrl}}
+GET {{baseUrl}}/blogs
 
-### create a single blog
+###
 
-POST {{baseUrl}}
+# @name userResp
+POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-  "title": "The first blog",
+  "username": "mluukkai",
+  "password": "salainen"
+}
+
+###
+
+@authToken = {{userResp.response.body.token}}
+
+### create a single blog
+
+POST {{baseUrl}}/blogs
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "title": "The second blog - delete",
   "author": "OTI",
   "url": "http://localhost:3003/oti",
-  "likes": 2
+  "likes": 4
 }

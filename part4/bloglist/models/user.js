@@ -25,6 +25,12 @@ const userSchema = new mongoose.Schema({
       message: () => 'The password must start with a character',
     },
   },
+  blogs: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Blog',
+    },
+  ],
 })
 
 userSchema.plugin(uniqueValidator)
