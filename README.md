@@ -1605,6 +1605,7 @@ usersRouter.get('/', async (request, response) => {
 <li><a href="https://nodejs.org/api/https.html" title="Node HTTPS server">Node HTTPS server Node.js v20.3.0 documentation</a></li>
 <li><a href="https://nodejs.org/docs/latest-v8.x/api/http.html" title="Node HTTPS server">Node HTTPS server Node.js v8.17.0 Documentation</a></li>
 <li><a href="https://www.npmjs.com/package/bcryptjs" title="bcrypt.js">Optimized bcrypt in JavaScript with zero dependencies</a></li>
+<li><a href="https://github.com/ladjs/supertest/issues/398" title="Set Authorization header to post request">Set Authorization header to post request</a></li>
 
 <li><a href="_" title="_">_</a></li>
 
@@ -1733,6 +1734,57 @@ Some Windows users have had problems with bcrypt. If you run into problems, remo
 
 > npm uninstall bcrypt
 
+We can create middlewares for extracting token and user
+
+> utils/middleware.js
+
+```js
+const jwt = require('jsonwebtoken')
+
+const config = require('./config')
+const User = require('../models/user')
+
+const tokenExtractor = (request, response, next) => {
+  const authorization = request.get('authorization')
+
+  const token =
+    authorization && authorization.startsWith('Bearer ')
+      ? authorization.replace('Bearer ', '')
+      : null
+
+  request.body.token = token
+
+  next()
+}
+
+const userExtractor = async (request, response, next) => {
+  const decodedToken = jwt.verify(request.body.token, config.SECRET)
+
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'token invalid' })
+  }
+
+  const user = await User.findById(decodedToken.id)
+
+  request.body.token = undefined
+  request.body.user = user
+
+  next()
+}
+```
+
+middleware we can add in app, in router or in rout
+
+```js
+app.use(userExtractor)
+
+app.use('/api/blogs', userExtractor, blogsRouter)
+
+router.post('/', userExtractor, async (request, response) => {
+  // ...
+})
+```
+
 </details>
 
 ### Exercises:
@@ -1740,8 +1792,8 @@ Some Windows users have had problems with bcrypt. If you run into problems, remo
 #### 4.1-4.23: Blog list
 
 To building a blog list application (backend), that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
-In the next exercises, the basics of user management will be implemented for the Bloglist application.
+In the next exercises, the basics of user management will be implemented for the Bloglist application. Tests are provided.
 
 Create an application according to the requirements described in [exercises 4.1-4.2](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-1-4-2), [exercises 4.3-4.7](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), [exercises 4.8-4.12](https://fullstackopen.com/en/part4/testing_the_backend#exercises-4-8-4-12) [exercises 4.13-4.14](https://fullstackopen.com/en/part4/testing_the_backend#exercises-4-13-4-14) [exercises 4.15-4.23](https://fullstackopen.com/en/part4/token_authentication#exercises-4-15-4-23)
 
-- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part4/bloglist)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part4/bloglist)

@@ -1,5 +1,6 @@
-const dummy_blogs = require('../utils/dummy_blogs')
 const _ = require('lodash')
+
+const dummy_blogs = require('../utils/dummy_blogs')
 
 const dummy = (blogs) => {
   return 1

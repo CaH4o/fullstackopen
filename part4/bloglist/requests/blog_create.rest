@@ -1,0 +1,34 @@
+@baseUrl = http://localhost:{{$dotenv PORT}}/api
+
+### Get Token by users: root | mluukkai
+
+# @name userResp
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "username": "mluukkai",
+  "password": "salainen"
+}
+
+###
+
+@authToken = {{userResp.response.body.token}}
+
+### create a single blog
+
+POST {{baseUrl}}/blogs
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+  "title": "The fourth blog - to delete",
+  "author": "OTI",
+  "url": "http://localhost:3003/oti",
+  "likes": 4
+}
+
+### get all blogs
+
+GET {{baseUrl}}/blogs
+Authorization: Bearer {{authToken}}

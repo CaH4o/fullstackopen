@@ -25,5 +25,3 @@ Content-Type: application/json
     "name": "Matti Luukkainen",
     "password": "salainen"
 }
-
-

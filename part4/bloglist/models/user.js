@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     required: [true, ' is missing'],
     minLength: [3, "'{VALUE}' is shorter than the minimum allowed length (3)"],
     validate: {
-      validator: (n) => /(^[a-zA-Z]+)$/.test(n),
+      validator: (n) => /^[a-zA-Z]\w+$/.test(n),
       message: () => 'The password must start with a character',
     },
   },
