@@ -1606,9 +1606,6 @@ usersRouter.get('/', async (request, response) => {
 <li><a href="https://nodejs.org/docs/latest-v8.x/api/http.html" title="Node HTTPS server">Node HTTPS server Node.js v8.17.0 Documentation</a></li>
 <li><a href="https://www.npmjs.com/package/bcryptjs" title="bcrypt.js">Optimized bcrypt in JavaScript with zero dependencies</a></li>
 <li><a href="https://github.com/ladjs/supertest/issues/398" title="Set Authorization header to post request">Set Authorization header to post request</a></li>
-
-<li><a href="_" title="_">_</a></li>
-
 </details>
 
 <details>
@@ -1797,3 +1794,109 @@ In the next exercises, the basics of user management will be implemented for the
 Create an application according to the requirements described in [exercises 4.1-4.2](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-1-4-2), [exercises 4.3-4.7](https://fullstackopen.com/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), [exercises 4.8-4.12](https://fullstackopen.com/en/part4/testing_the_backend#exercises-4-8-4-12) [exercises 4.13-4.14](https://fullstackopen.com/en/part4/testing_the_backend#exercises-4-13-4-14) [exercises 4.15-4.23](https://fullstackopen.com/en/part4/token_authentication#exercises-4-15-4-23)
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part4/bloglist)
+
+## Part 5: [Testing React apps](https://fullstackopen.com/en/part5)
+
+### Sub-part A: [Login in frontend](https://fullstackopen.com/en/part5/login_in_frontend)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+>
+
+```js
+
+```
+
+</details>
+
+### Sub-part B: [props.children and proptypes](https://fullstackopen.com/en/part5/props_children_and_proptypes)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+>
+
+```js
+
+```
+
+</details>
+
+### Sub-part C: [Testing React apps](https://fullstackopen.com/en/part5/testing_react_apps)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+>
+
+```js
+
+```
+
+</details>
+
+### Sub-part D: [End to end testing](https://fullstackopen.com/en/part5/end_to_end_testing)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+<li><a href="_" title="_">_</a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+>
+
+```js
+
+```
+
+</details>
+
+### Exercises:
+
+#### 5.1-5.xx: Name
