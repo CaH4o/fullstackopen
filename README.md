@@ -1802,11 +1802,24 @@ Create an application according to the requirements described in [exercises 4.1-
 <details>
 <summary>Links:</summary>
 
+<li><a href="https://legacy.reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator" title="React trick">React: Inline If with Logical && Operator</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Falsy" title="Falsy">JavaScript: Falsy</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator" title="conditional operator">JavaScript: Conditional (ternary) operator</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Truthy" title="Truthy">JavaScript: Truthy</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage" title="Web: local storage">Web: local storage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Key%E2%80%93value_database" title="Key–value database">Key–value database</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem" title="Web: local storage - setItem">Web: local storage - setItem</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem" title="Web: local storage - getItem">Web: local storage - getItem</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem" title="Web: local storage - removeItem">Web: local storage - removeItem</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Origin" title="Web: Origin">Web: Origin</a></li>
+<li><a href="https://docs.w3cub.com/dom/domstring" title="DOMString">A DOMString is a sequence of 16-bit unsigned integers, typically interpreted as UTF-16 code units.</a></li>
+<li><a href="https://developer.chrome.com/docs/devtools/" title="Chrome DevTools">Chrome DevTools</a></li>
+<li><a href="https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html" title="Storage Inspector">Storage Inspector</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-effect.html" title="React: Using the Effect Hook">React: Using the Effect Hook</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect" title="React: Using the Effect Hook - conditionally firing">React: Using the Effect Hook - conditionally firing</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
+
 <li><a href="_" title="_">_</a></li>
 
 </details>
@@ -1814,10 +1827,177 @@ Create an application according to the requirements described in [exercises 4.1-
 <details>
 <summary>Сommands and fragments:</summary>
 
->
+After clone the repo, install all dependencies before attempting to run the frontend.
+
+> npm install
+
+add the form and the
+
+> App.js
 
 ```js
+import loginService from './services/login'
+//...
+const App = () => {
+  //...
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
+  //...
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      noteService.setToken(user.token)
+    }
+  }, [])
+  //...
+  const handleLogin = (event) => {
+    event.preventDefault()
+    try {
+      const user = await loginService.login({ username, password })
+      window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user))
+      noteService.setToken(user.token)
+      setUser(user)
+      setUsername('')
+      setPassword('')
+    } catch (exception) {
+      setErrorMessage('Wrong credentials')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
 
+  return (
+    //...
+
+    <form onSubmit={handleLogin}>
+      <div>
+        username
+        <input
+          type='text'
+          value={username}
+          name='Username'
+          onChange={({ target }) => setUsername(target.value)}
+        />
+      </div>
+      <div>
+        password
+        <input
+          type='password'
+          value={password}
+          name='Password'
+          onChange={({ target }) => setPassword(target.value)}
+        />
+      </div>
+      <button type='submit'>login</button>
+    </form>
+    // ...
+  )
+}
+```
+
+create servoce for wotjing with login
+
+> services/login.js.
+
+```js
+import axios from 'axios'
+const baseUrl = '/api/login'
+
+const login = async (credentials) => {
+  const response = await axios.post(baseUrl, credentials)
+  return response.data
+}
+
+export default { login }
+```
+
+add functionality to work with roken in note service
+
+> services/noteService.js
+
+```js
+//...
+let token = null
+
+const setToken = (newToken) => {
+  token = `Bearer ${newToken}`
+}
+//...
+const create = async (newObject) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+
+  const response = await axios.post(baseUrl, newObject, config)
+  return response.data
+}
+//...
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { /* ... */ setToken }
+```
+
+We can change cod to use function for returning a component
+
+```js
+const App = () => {
+  // ...
+
+  const loginForm = () => (
+    <form onSubmit={handleLogin}>
+      <div>
+        username
+          <input
+          type="text"
+          value={username}
+          name="Username"
+          onChange={({ target }) => setUsername(target.value)}
+        />
+      </div>
+      <div>
+        password
+          <input
+          type="password"
+          value={password}
+          name="Password"
+          onChange={({ target }) => setPassword(target.value)}
+        />
+      </div>
+      <button type="submit">login</button>
+    </form>
+  )
+
+  const noteForm = () => (
+    <form onSubmit={addNote}>
+      <input
+        value={newNote}
+        onChange={handleNoteChange}
+      />
+      <button type="submit">save</button>
+    </form>
+  )
+
+  return (
+    // ...
+  )
+}
+```
+
+and use conditions to render these components
+
+```js
+return (
+  <div>
+    {user === null && loginForm()}
+    {user !== null && noteForm()}
+    /* Or */
+    {user === null ? loginForm() : noteForm()}
+  </div>
+)
 ```
 
 </details>

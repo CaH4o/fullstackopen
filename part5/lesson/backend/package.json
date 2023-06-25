@@ -1,0 +1,39 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "build:ui": "rmdir /s build && cd ..\\frontend && npm run build && xcopy build ..\\backend\\build /s /e /i",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
+    "debugging": "node --inspect index.js",
+    "mongo": "node mongo.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand"
+  },
+  "author": "Oleksandr Tertyshnyk",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.2.0",
+    "mongoose-unique-validator": "^4.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.41.0",
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
