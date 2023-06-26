@@ -1817,10 +1817,11 @@ Create an application according to the requirements described in [exercises 4.1-
 <li><a href="https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html" title="Storage Inspector">Storage Inspector</a></li>
 <li><a href="https://legacy.reactjs.org/docs/hooks-effect.html" title="React: Using the Effect Hook">React: Using the Effect Hook</a></li>
 <li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect" title="React: Using the Effect Hook - conditionally firing">React: Using the Effect Hook - conditionally firing</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
-
-<li><a href="_" title="_">_</a></li>
+<li><a href="https://owasp.org/www-community/attacks/xss/" title="Cross Site Scripting (XSS) attacks">Cross Site Scripting (XSS) attacks</a></li>
+<li><a href="https://legacy.reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks" title="React: JSX Prevents Injection Attacks">React: JSX Prevents Injection Attacks</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies" title="httpOnly cookies">Using HTTP cookies</a></li>
+<li><a href="https://academind.com/tutorials/localstorage-vs-cookies-xss/" title="localstorage vs cookies (xss)">Cookies are not any safer than the use of local storage</a></li>
+<li><a href="https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html" title="Minimize the risk of XSS attacks altogether">Minimize the risk of XSS attacks altogether</a></li>
 
 </details>
 
@@ -2000,6 +2001,22 @@ return (
 )
 ```
 
+Clone the application from GitHub with the command:
+
+> git clone https://github.com/fullstack-hy2020/bloglist-frontendcopy
+
+remove the git configuration of the cloned application
+
+> cd bloglist-frontend // go to cloned repository
+
+> rm -rf .gitcopy
+
+The application is started the usual way, but you have to install its dependencies first:
+
+> npm install
+
+> npm start
+
 </details>
 
 ### Sub-part B: [props.children and proptypes](https://fullstackopen.com/en/part5/props_children_and_proptypes)
@@ -2079,4 +2096,10 @@ return (
 
 ### Exercises:
 
-#### 5.1-5.xx: Name
+#### 5.1-5.4: Blog list application
+
+To building a blog list application (frontend, with completed backend), that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
+
+Create an application according to the requirements described in [exercises 5.1-5.4](https://fullstackopen.com/en/part5/login_in_frontend#exercises-5-1-5-4),
+
+- [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part5/bloglist)
