@@ -2024,7 +2024,15 @@ The application is started the usual way, but you have to install its dependenci
 <details>
 <summary>Links:</summary>
 
-<li><a href="_" title="_">_</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display" title="CSS: display">CSS: display</a></li>
+<li><a href="https://legacy.reactjs.org/docs/glossary.html#propschildren" title="React: props.children">React: props.children</a></li>
+<li><a href="https://legacy.reactjs.org/docs/lifting-state-up.html" title="React: Lifting State Up">React: Lifting State Up</a></li>
+<li><a href="https://react.dev/learn/referencing-values-with-refs" title="React: Referencing Values with Refs">React: Referencing Values with Refs</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#useref" title="React: useRef hook">React: useRef hook</a></li>
+<li><a href="https://legacy.reactjs.org/docs/react-api.html#reactforwardref" title="React: function forwardRef">React: function forwardRef</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#useimperativehandle" title="React: function useImperativeHandle">React: function useImperativeHandle</a></li>
+<li><a href="https://legacy.reactjs.org/docs/refs-and-the-dom.html" title="React: Refs and the DOM">React: Refs and the DOM</a></li>
+
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
@@ -2036,10 +2044,122 @@ The application is started the usual way, but you have to install its dependenci
 <details>
 <summary>Сommands and fragments:</summary>
 
->
+Create a separated NoteForm component to create Note with all functionality inside instad of LoginForm
+
+> NoteForm.js
 
 ```js
+import { useState } from 'react'
 
+const NoteForm = ({ createNote }) => {
+  const [newNote, setNewNote] = useState('')
+
+  const addNote = (event) => {
+    event.preventDefault()
+    createNote({ content: newNote, important: true })
+    setNewNote('')
+  }
+
+  return (
+    <div>
+      <h2>Create a new note</h2>
+
+      <form onSubmit={addNote}>
+        <input
+          value={newNote}
+          onChange={(event) => setNewNote(event.target.value)}
+        />
+        <button type='submit'>save</button>
+      </form>
+    </div>
+  )
+}
+
+export default NoteForm
+```
+
+Create a togglable component to wrapped other components to hide or unhide them.
+
+> Togglable.js
+
+```js
+import { useState, forwardRef, useImperativeHandle } from 'react'
+
+const Togglable = forwardRef((props, refs) => {
+  const [visible, setVisible] = useState(false)
+
+  const hideWhenVisible = { display: visible ? 'none' : '' }
+  const showWhenVisible = { display: visible ? '' : 'none' }
+
+  const toggleVisibility = () => {
+    setVisible(!visible)
+  }
+
+  useImperativeHandle(refs, () => {
+    return { toggleVisibility }
+  })
+
+  return (
+    <div>
+      <div style={hideWhenVisible}>
+        <button onClick={toggleVisibility}>{props.buttonLabel}</button>
+      </div>
+      <div style={showWhenVisible}>
+        {props.children}
+        <button onClick={toggleVisibility}>cancel</button>
+      </div>
+    </div>
+  )
+})
+
+export default Togglable
+```
+
+Add NoteForm in App with changing logic in creating a note function and use Togglable component.
+
+> App.js
+
+```js
+import React, { useState, useEffect, useRef } from 'react'
+//...
+import Togglable from './components/Togglable'
+import LoginForm from './components/LoginForm'
+import NoteForm from './components/NoteForm'
+
+const App = () => {
+  //...
+  const noteFormRef = useRef()
+
+  //...
+
+  const addNote = (noteObject) => {
+    noteFormRef.current.toggleVisibility()
+    noteService.create(noteObject).then((returnedNote) => {
+      setNotes(notes.concat(returnedNote))
+    })
+  }
+  //...
+
+  return (
+    <div>
+      {/* ...  */}
+      <Togglable buttonLabel='new note' ref={noteFormRef}>
+        <NoteForm createNote={addNote} />
+      </Togglable>
+      {/* ...  */}
+      <Togglable buttonLabel='log in'>
+        <LoginForm
+          username={username}
+          password={password}
+          handleUsernameChange={({ target }) => setUsername(target.value)}
+          handlePasswordChange={({ target }) => setPassword(target.value)}
+          handleSubmit={handleLogin}
+        />
+      </Togglable>
+      {/* ...  */}
+    </div>
+  )
+}
 ```
 
 </details>

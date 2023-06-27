@@ -11,7 +11,8 @@ const CreateBlog = ({ blogs, setBlogs, setMessage }) => {
     event.preventDefault()
 
     try {
-      const newBlog = { title, author, url }
+      const secureUrl = url.replace(/['"`]/g, '')
+      const newBlog = { title, author, url: secureUrl }
       const returnedBlog = await blogService.create(newBlog)
       setBlogs([...blogs, returnedBlog])
 
