@@ -1,8 +1,6 @@
 import { useState } from 'react'
 
-import blogService from '../services/blogs'
-
-const CreateBlog = ({ blogs, setBlogs, setMessage }) => {
+const CreateBlog = ({ createBlog, setMessage }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
@@ -10,23 +8,14 @@ const CreateBlog = ({ blogs, setBlogs, setMessage }) => {
   const handleCreateBlog = async (event) => {
     event.preventDefault()
 
-    try {
-      const secureUrl = url.replace(/['"`]/g, '')
-      const newBlog = { title, author, url: secureUrl }
-      const returnedBlog = await blogService.create(newBlog)
-      setBlogs([...blogs, returnedBlog])
+    const secureUrl = url.replace(/['"`]/g, '')
+    const newBlog = { title, author, url: secureUrl }
 
-      setMessage({
-        type: 'create',
-        text: `a new blog '${title}' by ${author} added`,
-      })
-      setTitle('')
-      setAuthor('')
-      setUrl('')
-    } catch (exception) {
-      const text = exception.response.data.error || 'Unexpected error'
-      setMessage({ type: 'error', text })
-    }
+    createBlog(newBlog)
+
+    setTitle('')
+    setAuthor('')
+    setUrl('')
   }
 
   return (

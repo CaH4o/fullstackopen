@@ -2032,8 +2032,7 @@ The application is started the usual way, but you have to install its dependenci
 <li><a href="https://legacy.reactjs.org/docs/react-api.html#reactforwardref" title="React: function forwardRef">React: function forwardRef</a></li>
 <li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#useimperativehandle" title="React: function useImperativeHandle">React: function useImperativeHandle</a></li>
 <li><a href="https://legacy.reactjs.org/docs/refs-and-the-dom.html" title="React: Refs and the DOM">React: Refs and the DOM</a></li>
-
-<li><a href="_" title="_">_</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm" title="Web: confirm">Web: confirm</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>

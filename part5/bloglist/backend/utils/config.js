@@ -7,10 +7,12 @@ const MONGODB_URI =
     : process.env.MONGODB_URI
 const SALTROUNDS = process.env.SALTROUNDS
 const SECRET = process.env.SECRET
+const TOKENTIME = 360
 
 module.exports = {
   PORT,
   MONGODB_URI,
   SALTROUNDS,
   SECRET,
+  TOKENTIME,
 }

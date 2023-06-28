@@ -20,3 +20,13 @@
   color: blue;
   background: lightgrey;
 }
+
+.update {
+  color: rgb(23, 101, 8);
+  background: lightgrey;
+}
+
+.remove {
+  color: brown;
+  background: lightgrey;
+}
