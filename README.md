@@ -2033,10 +2033,12 @@ The application is started the usual way, but you have to install its dependenci
 <li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#useimperativehandle" title="React: function useImperativeHandle">React: function useImperativeHandle</a></li>
 <li><a href="https://legacy.reactjs.org/docs/refs-and-the-dom.html" title="React: Refs and the DOM">React: Refs and the DOM</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm" title="Web: confirm">Web: confirm</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
+<li><a href="https://github.com/facebook/prop-types" title="React: prop-types">React: prop-types</a></li>
+<li><a href="https://www.npmjs.com/package/eslint-plugin-jest" title="eslint-plugin-jest">ESlint</a></li>
+<li><a href="https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807" title="Visual Studio Code together with ESLint plugin">Visual Studio Code together with ESLint plugin</a></li>
+<li><a href="https://eslint.org/docs/latest/use/configure/#ignoring-files-and-directories" title="Configure ESLint">Configure ESLint</a></li>
+<li><a href="https://www.npmjs.com/package/eslint-config-react-app" title="ESLint: Config React app">ESLint: Config React app</a></li>
+<li><a href="https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config" title="Extending or replacing the default ESLint config">Extending or replacing the default ESLint config</a></li>
 
 </details>
 
@@ -2111,6 +2113,8 @@ const Togglable = forwardRef((props, refs) => {
   )
 })
 
+Togglable.displayName = 'Togglable'
+
 export default Togglable
 ```
 
@@ -2159,6 +2163,109 @@ const App = () => {
     </div>
   )
 }
+```
+
+Runtime type checking for React props and similar objects.
+
+> npm install --save prop-types
+
+We can define the buttonLabel prop as a mandatory or required string-type prop as shown below:
+
+```js
+import PropTypes from 'prop-types'
+
+const Togglable = React.forwardRef((props, ref) => {
+  // ..
+})
+
+Togglable.propTypes = {
+  buttonLabel: PropTypes.string.isRequired,
+}
+```
+
+#### The ESlint code style tool to the Frontend.
+
+Install
+
+> npm install --save-dev eslint-plugin-jest
+
+Create config for ESlint.
+
+NOT RUN "eslint --init" It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app
+
+> .eslintrc.js
+
+```js
+/* eslint-env node */
+module.exports = {
+  'env': {
+    'browser': true,
+    'es6': true,
+    'jest/globals': true,
+  },
+  'extends': ['eslint:recommended', 'plugin:react/recommended'],
+  'parserOptions': {
+    'ecmaFeatures': {
+      'jsx': true,
+    },
+    'ecmaVersion': 2018,
+    'sourceType': 'module',
+  },
+  'plugins': ['react', 'jest'],
+  'rules': {
+    'indent': ['error', 2],
+    'linebreak-style': ['error', 'unix'], //windows
+    'quotes': ['error', 'single'],
+    'semi': ['error', 'never'],
+    'eqeqeq': 'error',
+    'no-trailing-spaces': 'error',
+    'object-curly-spacing': ['error', 'always'],
+    'arrow-spacing': ['error', { 'before': true, 'after': true }],
+    'no-console': 0,
+    'react/prop-types': 0,
+    'react/react-in-jsx-scope': 'off',
+  },
+  'settings': {
+    'react': {
+      'version': 'detect',
+    },
+  },
+}
+```
+
+Create ELlint ignore file
+
+> .eslintignore
+
+```js
+.eslintrc.js
+build
+node_modules
+```
+
+Update scrypts in package.json to run ESlint
+
+> package.json
+
+```js
+{
+  // ...
+  {
+    "scripts": {
+    //...
+    "eslint": "eslint ."
+    //, "eslint:fix": "eslint . --fix"  //for fix windows string ending ls and crls
+  },
+  // ...
+}
+```
+
+Add line in VSCode settings to use Visual Studio Code together with ESLint plugin.
+
+> .vscode/settings.json
+
+```js
+"eslint.workingDirectories": [{ "mode": "auto" }]
 ```
 
 </details>
@@ -2215,10 +2322,10 @@ const App = () => {
 
 ### Exercises:
 
-#### 5.1-5.4: Blog list application
+#### 5.1-5.11: Blog list application
 
 To building a blog list application (frontend, with completed backend), that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
 
-Create an application according to the requirements described in [exercises 5.1-5.4](https://fullstackopen.com/en/part5/login_in_frontend#exercises-5-1-5-4),
+Create an application according to the requirements described in [exercises 5.1-5.4](https://fullstackopen.com/en/part5/login_in_frontend#exercises-5-1-5-4), [exercises 5.5-5.11](https://fullstackopen.com/en/part5/props_children_and_proptypes#exercises-5-5-5-11),
 
 - [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part5/bloglist)

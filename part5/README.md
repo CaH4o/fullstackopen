@@ -2,6 +2,6 @@
 
 lesson - the project for exercises and practice while studying the course
 
-bloglist - the project for the first exercise #5.1-5.423 "Blog list"
+bloglist - the project for the first exercise #5.1-5.11 "Blog list"
 
-time: 12
+time: 13
