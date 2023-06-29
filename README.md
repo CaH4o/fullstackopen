@@ -2322,10 +2322,10 @@ Add line in VSCode settings to use Visual Studio Code together with ESLint plugi
 
 ### Exercises:
 
-#### 5.1-5.11: Blog list application
+#### 5.1-5.12: Blog list application
 
 To building a blog list application (frontend, with completed backend), that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
 
-Create an application according to the requirements described in [exercises 5.1-5.4](https://fullstackopen.com/en/part5/login_in_frontend#exercises-5-1-5-4), [exercises 5.5-5.11](https://fullstackopen.com/en/part5/props_children_and_proptypes#exercises-5-5-5-11),
+Create an application according to the requirements described in [exercises 5.1-5.4](https://fullstackopen.com/en/part5/login_in_frontend#exercises-5-1-5-4), [exercises 5.5-5.11](https://fullstackopen.com/en/part5/props_children_and_proptypes#exercises-5-5-5-11), [exercise 5.12](https://fullstackopen.com/en/part5/props_children_and_proptypes#exercise-5-12)
 
 - [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part5/bloglist)

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 
 import blogService from '../services/blogs'
 import Blog from './Blog'
@@ -19,7 +20,6 @@ const Blogs = ({ user, setMessage }) => {
         const text = error.response.data.error || 'Unexpected error'
         setMessage({ type: 'error', text })
       })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const addBlog = async (newBlog) => {
@@ -84,4 +84,10 @@ const Blogs = ({ user, setMessage }) => {
     </div>
   )
 }
+
+Blogs.propTypes = {
+  user: PropTypes.object.isRequired,
+  setMessage: PropTypes.func.isRequired,
+}
+
 export default Blogs
