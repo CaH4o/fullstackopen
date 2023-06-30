@@ -2275,9 +2275,18 @@ Add line in VSCode settings to use Visual Studio Code together with ESLint plugi
 <details>
 <summary>Links:</summary>
 
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
+<li><a href="https://jestjs.io/" title="Jest testing library">Jest testing library</a></li>
+<li><a href="https://github.com/testing-library/react-testing-library" title="React Testing Library">React Testing Library</a></li>
+<li><a href="https://legacy.reactjs.org/docs/dom-elements.html#classname" title="React: className">React: className</a></li>
+<li><a href="https://testing-library.com/docs/react-testing-library/api/#render" title="Testing Library: render">Testing Library: render</a></li>
+<li><a href="https://testing-library.com/docs/queries/about/#screen" title="Testing Library: screen">Testing Library: screen</a></li>
+<li><a href="https://testing-library.com/docs/queries/bytext/" title="Testing Library: ByText">Testing Library: ByText</a></li>
+<li><a href="https://facebook.github.io/watchman/" title="Watchman">Watchman</a></li>
+<li><a href="https://medium.com/@jeff_long/organizing-tests-in-jest-17fc431ff850" title="Organizing Tests in Jest">Organizing Tests in Jest</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors" title="Web: CSS Selectors">Web: CSS Selectors</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector" title="Web: querySelector">Web: querySelector</a></li>
+<li><a href="https://testing-library.com/docs/react-testing-library/api/#container-1" title="Testing Library: container">Testing Library: container</a></li>
+<li><a href="https://testing-library.com/docs/queries/bytestid/" title="Testing Library: ByTestId">Testing Library: ByTestId</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
@@ -2287,10 +2296,81 @@ Add line in VSCode settings to use Visual Studio Code together with ESLint plugi
 <details>
 <summary>Сommands and fragments:</summary>
 
->
+Install the testing library that will help us render components for testing purposes and install jest-dom which provides some nice Jest-related helper methods with the command:
+
+> npm install --save-dev @testing-library/react @testing-library/jest-dom
+
+Create a test for Note in the sqme folder as the next code:
+
+> src/components/Note.js
 
 ```js
+const Note = ({ note, toggleImportance }) => {
+  const label = note.important ? 'make not important' : 'make important'
 
+  return (
+    <li className='note'>
+      {note.content}
+      <button onClick={toggleImportance}>{label}</button>
+    </li>
+  )
+}
+
+export default Note
+```
+
+> src/components/Note.test.js
+
+```js
+import React from 'react'
+import '@testing-library/jest-dom/extend-expect'
+import { render, screen } from '@testing-library/react'
+import Note from './Note'
+
+test('renders content', () => {
+  const note = {
+    content: 'Component testing is done with react-testing-library',
+    important: true,
+  }
+
+  render(<Note note={note} />)
+
+  const element = screen.getByText(
+    'Component testing is done with react-testing-library'
+  )
+  expect(element).toBeDefined()
+})
+```
+
+To run test with automatic retesting
+
+> npm test
+
+If you want to run tests "normally", you can do so with the command:
+
+> CI=true npm testcopy
+
+For Windows (PowerShell) users
+
+> $env:CI=$true; npm test
+
+to add it in scrypt it needs to install cross-env
+
+> npm install cross-env
+
+and add command to the scrypt in package.json
+
+> package.json
+
+```js
+{
+  "scripts": {
+    //..
+    "test": "react-scripts test",
+    "test:single": "cross-env CI=true npm test",
+    //...
+  },
+}
 ```
 
 </details>
