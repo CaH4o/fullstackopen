@@ -2287,6 +2287,12 @@ Add line in VSCode settings to use Visual Studio Code together with ESLint plugi
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector" title="Web: querySelector">Web: querySelector</a></li>
 <li><a href="https://testing-library.com/docs/react-testing-library/api/#container-1" title="Testing Library: container">Testing Library: container</a></li>
 <li><a href="https://testing-library.com/docs/queries/bytestid/" title="Testing Library: ByTestId">Testing Library: ByTestId</a></li>
+<li><a href="https://testing-library.com/docs/queries/about/#screendebug" title="Testing Library: screen.debug">Testing Library: screen.debug</a></li>
+<li><a href="https://testing-library.com/docs/user-event/intro/" title="Testing Library: user-event">Testing Library: user-event</a></li>
+<li><a href="https://jestjs.io/docs/mock-functions" title="jestjs: mock-functions">jestjs: mock-functions</a></li>
+<li><a href="https://testing-library.com/docs/user-event/setup/" title="Testing Library: user-event - setup">Testing Library: user-event - setup</a></li>
+<li><a href="https://testing-library.com/docs/user-event/convenience/#click" title="Testing Library: user-event - click">Testing Library: user-event - click</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mock_object" title="Mock object">Mock object</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
@@ -2335,11 +2341,40 @@ test('renders content', () => {
 
   render(<Note note={note} />)
 
+  screen.debug()
+
   const element = screen.getByText(
     'Component testing is done with react-testing-library'
   )
+
+  screen.debug(element)
+
   expect(element).toBeDefined()
 })
+```
+
+There are console.log of debuging
+
+> screen.debug()
+
+```html
+<body>
+  <div>
+    <li class="note">
+      Component testing is done with react-testing-library
+      <button>make not important</button>
+    </li>
+  </div>
+</body>
+```
+
+> screen.debug(element)
+
+```html
+<li class="note">
+  Component testing is done with react-testing-library
+  <button>make not important</button>
+</li>
 ```
 
 To run test with automatic retesting
@@ -2371,6 +2406,39 @@ and add command to the scrypt in package.json
     //...
   },
 }
+```
+
+install a library user-event that makes simulating user input
+
+> npm install --save-dev @testing-library/user-event
+
+We can use it in test file as:
+
+```js
+import React from 'react'
+import '@testing-library/jest-dom/extend-expect'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import Note from './Note'
+
+// ...
+
+test('clicking the button calls event handler once', async () => {
+  const note = {
+    content: 'Component testing is done with react-testing-library',
+    important: true,
+  }
+
+  const mockHandler = jest.fn()
+
+  render(<Note note={note} toggleImportance={mockHandler} />)
+
+  const user = userEvent.setup()
+  const button = screen.getByText('make not important')
+  await user.click(button)
+
+  expect(mockHandler.mock.calls).toHaveLength(1)
+})
 ```
 
 </details>
