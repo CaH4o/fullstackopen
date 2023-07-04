@@ -2293,9 +2293,12 @@ Add line in VSCode settings to use Visual Studio Code together with ESLint plugi
 <li><a href="https://testing-library.com/docs/user-event/setup/" title="Testing Library: user-event - setup">Testing Library: user-event - setup</a></li>
 <li><a href="https://testing-library.com/docs/user-event/convenience/#click" title="Testing Library: user-event - click">Testing Library: user-event - click</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Mock_object" title="Mock object">Mock object</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
+<li><a href="https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle" title="jest toHaveStyle">jest toHaveStyle</a></li>
+<li><a href="https://testing-library.com/docs/queries/byrole/" title="Testing Library: ByRole">Testing Library: ByRole</a></li>
+<li><a href="https://testing-library.com/docs/user-event/utility/#type" title="Testing Library: user-event - type">Testing Library: user-event - type</a></li>
+<li><a href="https://testing-library.com/docs/queries/byplaceholdertext/" title="Testing Library: ByPlaceholderText">Testing Library: ByPlaceholderText</a></li>
+<li><a href="https://github.com/facebook/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting" title="Test Coverage Reporting">Test Coverage Reporting</a></li>
+<li><a href="https://jestjs.io/docs/snapshot-testing" title="Jest: Snapshot Testing">Jest: Snapshot Testing</a></li>
 
 </details>
 
@@ -2414,6 +2417,8 @@ install a library user-event that makes simulating user input
 
 We can use it in test file as:
 
+> src/components/Note.test.js
+
 ```js
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
@@ -2439,6 +2444,140 @@ test('clicking the button calls event handler once', async () => {
 
   expect(mockHandler.mock.calls).toHaveLength(1)
 })
+```
+
+> src/components/Togglable.js
+
+```js
+const Togglable = forwardRef((props, ref) => {
+  // ...
+  return (
+   //...
+      <div style={showWhenVisible} className="togglableContent">
+   //...
+  )
+})
+```
+
+> src/components/Togglable.test.js
+
+```js
+import React from 'react'
+import '@testing-library/jest-dom/extend-expect'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import Togglable from './Togglable'
+
+describe('<Togglable />', () => {
+  let container
+
+  beforeEach(() => {
+    container = render(
+      <Togglable buttonLabel='show...'>
+        <div className='testDiv'>togglable content</div>
+      </Togglable>
+    ).container
+  })
+
+  test('renders its children', async () => {
+    await screen.findAllByText('togglable content')
+  })
+
+  test('at start the children are not displayed', () => {
+    const div = container.querySelector('.togglableContent')
+    expect(div).toHaveStyle('display: none')
+  })
+
+  test('after clicking the button, children are displayed', async () => {
+    const user = userEvent.setup()
+    const button = screen.getByText('show...')
+    await user.click(button)
+
+    const div = container.querySelector('.togglableContent')
+    expect(div).not.toHaveStyle('display: none')
+  })
+})
+```
+
+Testing forms
+
+> src/components/NoteForm.js
+
+```js
+import { useState } from 'react'
+
+const NoteForm = ({ createNote } /* { onSubmit, handleChange, value } */) => {
+  //...
+
+  return (
+    <div className='formDiv'>
+      <input
+        value={newNote}
+        onChange={handleChange}
+        id='note-input'
+        placeholder='write note content here'
+      />
+      {/* ... */}
+    </div>
+  )
+}
+
+export default NoteForm
+```
+
+> src/components/NoteForm.js
+
+```js
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
+import NoteForm from './NoteForm'
+import userEvent from '@testing-library/user-event'
+
+test('<NoteForm /> updates parent state and calls onSubmit', async () => {
+  const createNote = jest.fn()
+  const user = userEvent.setup()
+
+  render(<NoteForm createNote={createNote} />)
+
+  //const inputs = screen.getAllByRole('textbox') //if input teg with textbox type more then 1
+  // or by Placeholder
+  // const input = screen.getByPlaceholderText('write note content here')
+  // or by Selector
+  // const { container } = render(<NoteForm createNote={createNote} />)
+  // const input = container.querySelector('#note-input')
+
+  const input = screen.getByRole('textbox')
+  const sendButton = screen.getByText('save')
+
+  await user.type(input, 'testing a form...')
+  // await user.type(inputs[0], 'testing a form...') //if input teg with textbox type more then 1
+
+  await user.click(sendButton)
+
+  expect(createNote.mock.calls).toHaveLength(1)
+  expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
+})
+```
+
+#### coverage
+
+> $env:CI=$true; npm test -- --coverage
+
+and add command to the scrypt in package.json
+
+> package.json
+
+```js
+{
+  "scripts": {
+    //..
+    "test": "react-scripts test",
+    "test:single": "cross-env CI=true npm test",
+    "test:coverage": "cross-env CI=true npm test -- --coverage",
+    //...
+  },
+}
 ```
 
 </details>
