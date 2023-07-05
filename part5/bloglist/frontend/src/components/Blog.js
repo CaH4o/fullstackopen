@@ -29,8 +29,8 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
   }
 
   return (
-    <div style={blogStyle}>
-      <div>
+    <div style={blogStyle} className='blog'>
+      <div className='blog_title'>
         {blog.title}
         {' by '}
         {blog.author}{' '}
@@ -38,13 +38,25 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
           {isCollapsed ? 'view' : 'hide'}
         </button>
       </div>
-      <div style={{ 'display': isCollapsed ? 'none' : '' }}>
+      <div
+        style={{ 'display': isCollapsed ? 'none' : '' }}
+        className='blog_url'
+      >
         <a href={blog.url}>{blog.url}</a>
       </div>
-      <div style={{ 'display': isCollapsed ? 'none' : '' }}>
-        {blog.likes} <button onClick={updateLikes}>like</button>
+      <div
+        style={{ 'display': isCollapsed ? 'none' : '' }}
+        className='blog_likes'
+      >
+        Likes: {blog.likes}{' '}
+        <button onClick={updateLikes} className='blog_btn_update_like'>
+          like
+        </button>
       </div>
-      <div style={{ 'display': isCollapsed ? 'none' : '' }}>
+      <div
+        style={{ 'display': isCollapsed ? 'none' : '' }}
+        className='blog_user'
+      >
         {blog.user.name}
       </div>
       <button
@@ -53,6 +65,7 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
           backgroundColor: 'lightblue',
           'display': isCollapsed ? 'none' : '',
         }}
+        className='blog_btn_remove'
         onClick={handleRemoveBlog}
       >
         remove
