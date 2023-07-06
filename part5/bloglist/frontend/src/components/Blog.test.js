@@ -50,7 +50,7 @@ describe('<Blog />', () => {
     expect(btnCollapsed).toHaveStyle('display: none')
   })
 
-  test('clicking the button to view all content', async () => {
+  test('clicking the view button to view all content', async () => {
     const user = userEvent.setup()
     const button = screen.getByText('view')
 
@@ -69,7 +69,7 @@ describe('<Blog />', () => {
     expect(btnCollapsed).not.toHaveStyle('display: none')
   })
 
-  test('clicking the button two times to view and to hide content', async () => {
+  test('clicking the view/hide button two times to view/hide content', async () => {
     const user = userEvent.setup()
     const buttonView = screen.getByText('view')
 
@@ -89,5 +89,20 @@ describe('<Blog />', () => {
 
     const btnCollapsed = container.querySelector('.blog_btn_remove')
     expect(btnCollapsed).toHaveStyle('display: none')
+  })
+
+  test('clicking the likes button two times to incrice likes', async () => {
+    const user = userEvent.setup()
+    const buttonLikes = screen.getByText('like')
+
+    await user.click(buttonLikes)
+
+    expect(updateBlog.mock.calls).toHaveLength(1)
+    expect(updateBlog.mock.calls[0][0].likes).toBe(1)
+
+    await user.click(buttonLikes, '{enter}', { skipClick: true })
+
+    expect(updateBlog.mock.calls).toHaveLength(2)
+    expect(updateBlog.mock.calls[1][0].likes).toBe(1)
   })
 })
