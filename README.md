@@ -2587,9 +2587,14 @@ and add command to the scrypt in package.json
 <details>
 <summary>Links:</summary>
 
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
+<li><a href="https://en.wikipedia.org/wiki/System_testing" title="System testing">System testing</a></li>
+<li><a href="https://www.selenium.dev/" title="Selenium">Selenium</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Headless_browser" title="Headless browser">Headless browser</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Regression_testing" title="Regression testing">Regression testing</a></li>
+<li><a href="https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359" title="Flaky Tests">Flaky Tests</a></li>
+<li><a href="https://www.cypress.io/" title="E2E library Cypress">E2E library Cypress</a></li>
+<li><a href="https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux" title="Installing Cypress">Installing Cypress</a></li>
+<li><a href="https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress" title="Using Graphical User Interfaces like Cypress' in WSL2">Using Graphical User Interfaces like Cypress' in WSL2</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
@@ -2599,10 +2604,23 @@ and add command to the scrypt in package.json
 <details>
 <summary>Сommands and fragments:</summary>
 
->
+installing Cypress E2E library
+
+> npm install --save-dev cypress
+
+Add to scripts
+
+> package.json
 
 ```js
-
+{
+  // ...
+  "scripts": {
+    // ...
+    "cypress:open": "cypress open"
+  },
+  // ...
+}
 ```
 
 </details>
