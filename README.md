@@ -2595,6 +2595,11 @@ and add command to the scrypt in package.json
 <li><a href="https://www.cypress.io/" title="E2E library Cypress">E2E library Cypress</a></li>
 <li><a href="https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux" title="Installing Cypress">Installing Cypress</a></li>
 <li><a href="https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress" title="Using Graphical User Interfaces like Cypress' in WSL2">Using Graphical User Interfaces like Cypress' in WSL2</a></li>
+<li><a href="https://mochajs.org/" title="The feature-rich JavaScript test framework 'Mocha'">The feature-rich JavaScript test framework "Mocha"</a></li>
+<li><a href="https://docs.cypress.io/api/commands/visit" title="Cypress: visit command">Cypress: visit command</a></li>
+<li><a href="https://docs.cypress.io/api/commands/contains" title="Cypress: contains command">Cypress: contains command</a></li>
+<li><a href="https://mochajs.org/#arrow-functions" title="Mocha arrow-functions">Mocha arrow-functions</a></li>
+<li><a href="https://github.com/cypress-io/eslint-plugin-cypress" title="An ESLint plugin for your Cypress tests">An ESLint plugin for your Cypress tests</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
 <li><a href="_" title="_">_</a></li>
@@ -2620,6 +2625,35 @@ Add to scripts
     "cypress:open": "cypress open"
   },
   // ...
+}
+```
+
+Install an ESLint plugin for your Cypress tests
+
+> npm install eslint-plugin-cypress --save-dev
+
+and changing the configuration in .eslintrc.js like so:
+
+> .eslintrc.js
+
+```js
+module.exports = {
+  'env': {
+    'browser': true,
+    'es6': true,
+    'jest/globals': true,
+    'cypress/globals': true,
+  },
+  'extends': [
+    // ...
+  ],
+  'parserOptions': {
+    // ...
+  },
+  'plugins': ['react', 'jest', 'cypress'],
+  'rules': {
+    // ...
+  },
 }
 ```
 
