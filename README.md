@@ -2600,8 +2600,29 @@ and add command to the scrypt in package.json
 <li><a href="https://docs.cypress.io/api/commands/contains" title="Cypress: contains command">Cypress: contains command</a></li>
 <li><a href="https://mochajs.org/#arrow-functions" title="Mocha arrow-functions">Mocha arrow-functions</a></li>
 <li><a href="https://github.com/cypress-io/eslint-plugin-cypress" title="An ESLint plugin for your Cypress tests">An ESLint plugin for your Cypress tests</a></li>
-<li><a href="_" title="_">_</a></li>
-<li><a href="_" title="_">_</a></li>
+<li><a href="https://docs.cypress.io/api/commands/click#Syntax" title="Cypress: click command">Cypress: click command</a></li>
+<li><a href="https://docs.cypress.io/api/commands/get#Syntax" title="Cypress: get command">Cypress: get command</a></li>
+<li><a href="https://docs.cypress.io/api/commands/type#Syntax" title="Cypress: type command">Cypress: type command</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors" title="CSS: ID selectors">CSS: ID selectors</a></li>
+<li><a href="https://docs.cypress.io/api/commands/request" title="Cypress: request command">Cypress: request command</a></li>
+<li><a href="https://docs.cypress.io/api/commands/should" title="Cypress: should command">Cypress: should command</a></li>
+<li><a href="https://docs.cypress.io/guides/references/assertions#Common-Assertions" title="Cypress: Common Assertions">Cypress: Common Assertions</a></li>
+<li><a href="https://rgbcolorcode.com/color/red" title="Color RGB format">Color RGB format</a></li>
+<li><a href="https://docs.cypress.io/api/commands/and" title="Cypress: and command">Cypress: and command</a></li>
+<li><a href="https://github.com/cypress-io/cypress/issues/9349" title="Cypress: check style in Firefox">Cypress: check style in Firefox</a></li>
+<li><a href="https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Fully-test-the-login-flow-but-only-once" title="Cypress: advice for testing Your App">Cypress: advice for testing Your App</a></li>
+<li><a href="https://docs.cypress.io/api/cypress-api/custom-commands" title="Cypress: custom command">Cypress: custom command</a></li>
+<li><a href="https://docs.cypress.io/guides/references/configuration" title="Cypress: configuration">Cypress: configuration</a></li>
+<li><a href="https://docs.cypress.io/guides/guides/environment-variables" title="Cypress: Environment Variables">Cypress: Environment Variables</a></li>
+<li><a href="https://docs.cypress.io/guides/core-concepts/cypress-app" title="Cypress App">Cypress App</a></li>
+<li><a href="https://docs.cypress.io/api/commands/parent" title="Cypress: parent command">Cypress: parent command</a></li>
+<li><a href="https://docs.cypress.io/api/commands/find#Syntax" title="Cypress: find command">Cypress: find command</a></li>
+<li><a href="https://docs.cypress.io/api/commands/as" title="Cypress: as command">Cypress: as command</a></li>
+<li><a href="https://docs.cypress.io/api/commands/then" title="Cypress: then command">Cypress: then command</a></li>
+<li><a href="https://docs.cypress.io/api/commands/debug" title="Cypress: debug command">Cypress: debug command</a></li>
+<li><a href="https://docs.cypress.io/guides/guides/command-line" title="Cypress: command line">Cypress: command line</a></li>
+<li><a href="https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos" title="Cypress: Videos">Cypress: Videos</a></li>
+
 <li><a href="_" title="_">_</a></li>
 
 </details>

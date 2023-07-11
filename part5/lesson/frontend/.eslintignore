@@ -3,3 +3,4 @@ build
 .eslintrc.js
 App old 1.js
 App old 2.js
+cypress.config.js

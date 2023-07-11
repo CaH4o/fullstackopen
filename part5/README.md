@@ -4,4 +4,4 @@ lesson - the project for exercises and practice while studying the course
 
 bloglist - the project for the first exercise #5.1-5.16 "Blog list"
 
-time: 16
+time: 20
