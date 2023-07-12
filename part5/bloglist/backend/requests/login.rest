@@ -6,4 +6,3 @@ Content-Type: application/json
     "password": "salainen"
 }
 
-

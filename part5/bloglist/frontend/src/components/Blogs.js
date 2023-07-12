@@ -79,6 +79,7 @@ const Blogs = ({ user, setMessage }) => {
           blog={blog}
           updateBlog={updateBlog}
           removeBlog={removeBlog}
+          user={user}
         />
       ))}
     </div>

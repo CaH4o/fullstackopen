@@ -32,10 +32,11 @@ const Login = ({ setUser, setMessage }) => {
   }
 
   return (
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleLogin} id='login-form'>
       <div>
-        username
+        <span>username </span>
         <input
+          id='username'
           type='text'
           value={username}
           name='Username'
@@ -43,15 +44,18 @@ const Login = ({ setUser, setMessage }) => {
         />
       </div>
       <div>
-        password
+        <span>password </span>
         <input
+          id='password'
           type='password'
           value={password}
           name='Password'
           onChange={({ target }) => setPassword(target.value)}
         />
       </div>
-      <button type='submit'>login</button>
+      <button id='login-button' type='submit'>
+        login
+      </button>
     </form>
   )
 }

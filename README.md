@@ -2622,8 +2622,9 @@ and add command to the scrypt in package.json
 <li><a href="https://docs.cypress.io/api/commands/debug" title="Cypress: debug command">Cypress: debug command</a></li>
 <li><a href="https://docs.cypress.io/guides/guides/command-line" title="Cypress: command line">Cypress: command line</a></li>
 <li><a href="https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos" title="Cypress: Videos">Cypress: Videos</a></li>
-
-<li><a href="_" title="_">_</a></li>
+<li><a href="https://docs.cypress.io/guides/overview/why-cypress#In-a-nutshell" title="Cypress: In-a-nutshell">Cypress: In-a-nutshell</a></li>
+<li><a href="https://docs.cypress.io/guides/core-concepts/introduction-to-cypress#Cypress-Can-Be-Simple-Sometimes" title="Cypress Can Be Simple (Sometimes)">Cypress Can Be Simple (Sometimes)</a></li>
+<li><a href="https://docs.cypress.io/api/commands/eq#Syntax" title="Cypress: eq command">Cypress: eq command</a></li>
 
 </details>
 
@@ -2641,7 +2642,7 @@ Add an npm script to the backend which starts it in test mode.
   // ...
   "scripts": {
     // ...
-    "start:test": "NODE_ENV=test node index.js"
+    "start:test": "cross-env NODE_ENV=test node index.js"
   },
   // ...
 }
@@ -2666,7 +2667,7 @@ testingRouter.post('/reset', async (request, response) => {
 module.exports = testingRouter
 ```
 
-Add the controller to the app for routing 
+Add the controller to the app for routing
 
 > app.js
 
@@ -2916,4 +2917,4 @@ To building a blog list application (frontend, with completed backend), that all
 
 Create an application according to the requirements described in [exercises 5.1-5.4](https://fullstackopen.com/en/part5/login_in_frontend#exercises-5-1-5-4), [exercises 5.5-5.11](https://fullstackopen.com/en/part5/props_children_and_proptypes#exercises-5-5-5-11), [exercise 5.12](https://fullstackopen.com/en/part5/props_children_and_proptypes#exercise-5-12), [exercises 5.13-5.16](https://fullstackopen.com/en/part5/testing_react_apps#exercises-5-13-5-16), [exercises 5.17-5.23](https://fullstackopen.com/en/part5/end_to_end_testing#exercises-5-17-5-23)
 
-- [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part5/bloglist)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part5/bloglist)

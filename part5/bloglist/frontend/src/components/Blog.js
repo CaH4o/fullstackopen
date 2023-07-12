@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const Blog = ({ blog, updateBlog, removeBlog }) => {
+const Blog = ({ user, blog, updateBlog, removeBlog }) => {
   const [isCollapsed, setIsCollapsed] = useState(true)
 
   const blogStyle = {
@@ -31,9 +31,9 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
   return (
     <div style={blogStyle} className='blog'>
       <div className='blog_title'>
-        {blog.title}
-        {' by '}
-        {blog.author}{' '}
+        <span>{blog.title}</span>
+        <span> by </span>
+        <span>{blog.author} </span>
         <button onClick={toggleVisibility}>
           {isCollapsed ? 'view' : 'hide'}
         </button>
@@ -63,7 +63,8 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
         style={{
           color: 'blue',
           backgroundColor: 'lightblue',
-          'display': isCollapsed ? 'none' : '',
+          'display':
+            user.username !== blog.user.username || isCollapsed ? 'none' : '',
         }}
         className='blog_btn_remove'
         onClick={handleRemoveBlog}
