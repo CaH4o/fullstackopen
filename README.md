@@ -2630,11 +2630,9 @@ and add command to the scrypt in package.json
 <details>
 <summary>Сommands and fragments:</summary>
 
-installing Cypress E2E library
+#### Back end
 
-> npm install --save-dev cypress
-
-Add to scripts
+Add an npm script to the backend which starts it in test mode.
 
 > package.json
 
@@ -2643,7 +2641,65 @@ Add to scripts
   // ...
   "scripts": {
     // ...
-    "cypress:open": "cypress open"
+    "start:test": "NODE_ENV=test node index.js"
+  },
+  // ...
+}
+```
+
+Add a new controller for testing app. This will clean test DB.
+
+> controllers/testing.js
+
+```js
+const testingRouter = require('express').Router()
+const Note = require('../models/note')
+const User = require('../models/user')
+
+testingRouter.post('/reset', async (request, response) => {
+  await Note.deleteMany({})
+  await User.deleteMany({})
+
+  response.status(204).end()
+})
+
+module.exports = testingRouter
+```
+
+Add the controller to the app for routing 
+
+> app.js
+
+```js
+// ...
+app.use('/api/notes', notesRouter)
+
+if (process.env.NODE_ENV === 'test') {
+  const testingRouter = require('./controllers/testing')
+  app.use('/api/testing', testingRouter)
+}
+
+app.use(middleware.unknownEndpoint)
+// ...
+```
+
+#### Front end
+
+installing Cypress E2E library
+
+> npm install --save-dev cypress
+
+Add to scripts "cypress open" to run in browser "cypress run" to tun in terminal
+
+> package.json
+
+```js
+{
+  // ...
+  "scripts": {
+    // ...
+    "cypress:open": "cypress open",
+    "test:e2e": "cypress run"
   },
   // ...
 }
@@ -2678,14 +2734,186 @@ module.exports = {
 }
 ```
 
+Create/update confige for cypress
+
+> cypress.config.js
+
+```js
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {},
+    baseUrl: 'http://localhost:3000',
+  },
+  env: {
+    BACKEND: 'http://localhost:3001/api',
+  },
+  'video': false,
+})
+```
+
+Create custom commands to post data in database
+
+> cypress/support/commands.js
+
+```js
+Cypress.Commands.add('login', ({ username, password }) => {
+  cy.request('POST', `${Cypress.env('BACKEND')}/login`, {
+    username,
+    password,
+  }).then(({ body }) => {
+    localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
+
+    cy.visit('')
+  })
+})
+
+Cypress.Commands.add('createNote', ({ content, important }) => {
+  cy.request({
+    url: `${Cypress.env('BACKEND')}/notes`,
+    method: 'POST',
+    body: { content, important },
+    headers: {
+      'Authorization': `Bearer ${
+        JSON.parse(localStorage.getItem('loggedNoteappUser')).token
+      }`,
+    },
+  })
+
+  cy.visit('')
+})
+```
+
+Update components with id css selectors (LoginForm as an example)
+
+> src/components/LoginForm.js
+
+```js
+//...
+const LoginForm = ({ ... }) => {
+  return (
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          username
+          <input
+            id='username'
+            value={username}
+            onChange={handleUsernameChange}
+          />
+        </div>
+        <div>
+          password
+          <input
+            id='password'
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </div>
+        <button id="login-button" type="submit">
+          login
+        </button>
+      </form>
+    </div>
+  )
+}
+```
+
+Create file with e2e tests for applicaton
+
+> cypress/e2e/note_app.cy.js
+
+```js
+describe('Note app', function () {
+  beforeEach(function () {
+    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`)
+    const user = {
+      name: 'Matti Luukkainen',
+      username: 'mluukkai',
+      password: 'salainen',
+    }
+    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user)
+    cy.visit('')
+  })
+
+  it('front page can be opened', function () {
+    cy.contains('Notes')
+    cy.contains(
+      'Note app, Department of Computer Science, University of Helsinki 2023'
+    )
+  })
+
+  //it.only()
+  it('user can login', function () {
+    cy.contains('log in').click()
+    cy.get('#username').type('mluukkai')
+    cy.get('#password').type('salainen')
+    cy.get('#login-button').click()
+
+    cy.contains('Matti Luukkainen logged in')
+  })
+
+  it('login fails with wrong password', function () {
+    cy.contains('log in').click()
+    cy.get('#username').type('mluukkai')
+    cy.get('#password').type('wrong')
+    cy.get('#login-button').click()
+
+    cy.get('.error')
+      .should('contain', 'Wrong credentials')
+      .and('have.css', 'color', 'rgb(255, 0, 0)')
+      .and('have.css', 'border-style', 'solid')
+
+    cy.contains('Matti Luukkainen logged in').should('not.exist')
+  })
+
+  describe('when logged in', function () {
+    beforeEach(function () {
+      cy.login({ username: 'mluukkai', password: 'salainen' })
+    })
+
+    it('a new note can be created', function () {
+      cy.contains('new note').click()
+      cy.get('input').type('a note created by cypress')
+      cy.contains('save').click()
+      cy.contains('a note created by cypress')
+    })
+
+    describe('and several notes exist', function () {
+      beforeEach(function () {
+        cy.createNote({ content: 'first note', important: false })
+        cy.createNote({ content: 'second note', important: false })
+        cy.createNote({ content: 'third note', important: false })
+      })
+
+      it('one of those can be made important', function () {
+        cy.contains('second note').parent().find('button').as('theButton')
+        cy.get('@theButton').click()
+        cy.get('@theButton').should('contain', 'make not important')
+      })
+
+      it('then example', function () {
+        cy.get('button').then((buttons) => {
+          console.log('number of buttons', buttons.length)
+          cy.wrap(buttons[0]).click()
+        })
+      })
+    })
+  })
+})
+```
+
 </details>
 
 ### Exercises:
 
-#### 5.1-5.12: Blog list application
+#### 5.1-5.23: Blog list application
 
 To building a blog list application (frontend, with completed backend), that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.
 
-Create an application according to the requirements described in [exercises 5.1-5.4](https://fullstackopen.com/en/part5/login_in_frontend#exercises-5-1-5-4), [exercises 5.5-5.11](https://fullstackopen.com/en/part5/props_children_and_proptypes#exercises-5-5-5-11), [exercise 5.12](https://fullstackopen.com/en/part5/props_children_and_proptypes#exercise-5-12), [exercises 5.13-5.16](https://fullstackopen.com/en/part5/testing_react_apps#exercises-5-13-5-16)
+Create an application according to the requirements described in [exercises 5.1-5.4](https://fullstackopen.com/en/part5/login_in_frontend#exercises-5-1-5-4), [exercises 5.5-5.11](https://fullstackopen.com/en/part5/props_children_and_proptypes#exercises-5-5-5-11), [exercise 5.12](https://fullstackopen.com/en/part5/props_children_and_proptypes#exercise-5-12), [exercises 5.13-5.16](https://fullstackopen.com/en/part5/testing_react_apps#exercises-5-13-5-16), [exercises 5.17-5.23](https://fullstackopen.com/en/part5/end_to_end_testing#exercises-5-17-5-23)
 
 - [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part5/bloglist)
