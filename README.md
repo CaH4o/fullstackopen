@@ -2918,3 +2918,150 @@ To building a blog list application (frontend, with completed backend), that all
 Create an application according to the requirements described in [exercises 5.1-5.4](https://fullstackopen.com/en/part5/login_in_frontend#exercises-5-1-5-4), [exercises 5.5-5.11](https://fullstackopen.com/en/part5/props_children_and_proptypes#exercises-5-5-5-11), [exercise 5.12](https://fullstackopen.com/en/part5/props_children_and_proptypes#exercise-5-12), [exercises 5.13-5.16](https://fullstackopen.com/en/part5/testing_react_apps#exercises-5-13-5-16), [exercises 5.17-5.23](https://fullstackopen.com/en/part5/end_to_end_testing#exercises-5-17-5-23)
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part5/bloglist)
+
+## Part 6: [Advanced state management](https://fullstackopen.com/en/part6)
+
+### Sub-part A: [Flux-architecture and Redux](https://fullstackopen.com/en/part6/flux_architecture_and_redux)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="https://legacy.reactjs.org/docs/lifting-state-up.html" title="React: Lifting State Up">React: Lifting State Up</a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+### Sub-part B: [Many reducers](https://fullstackopen.com/en/part6/many_reducers)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+### Sub-part C: [Communicating with server in a redux application](https://fullstackopen.com/en/part6/communicating_with_server_in_a_redux_application)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+### Sub-part D: [React Query, useReducer and the context](https://fullstackopen.com/en/part6/react_query_use_reducer_and_the_context)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+### Sub-part E: [connect (the old part)](https://fullstackopen.com/en/part6/connect_the_old_part)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+### Exercises:
+
+#### 6.1-6.2: Xsd application
+
+Description: to update
+
+Create an application according to the requirements described in [exercises 6.1-6.2](),
+
+- [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/)
