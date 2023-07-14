@@ -2927,9 +2927,23 @@ Create an application according to the requirements described in [exercises 5.1-
 <summary>Links:</summary>
 
 <li><a href="https://legacy.reactjs.org/docs/lifting-state-up.html" title="React: Lifting State Up">React: Lifting State Up</a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://redux.js.org/" title="Redux - library">Redux - library</a></li>
+<li><a href="https://redux.js.org/tutorials/fundamentals/part-4-store" title="Redux: store">Redux: store</a></li>
+<li><a href="https://redux.js.org/tutorials/fundamentals/part-2-concepts-data-flow" title="Redux: action">Redux: concepts data flow</a></li>
+<li><a href="https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers" title="Redux: state, actions, reducers">Redux: state, actions, reducers</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch" title="JavaScript: switch">JavaScript: switch</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters" title="JavaScript: function">JavaScript: function - default parameters</a></li>
+<li><a href="https://redux.js.org/api/store#dispatchaction" title="Redux: dispatchaction">Redux: dispatchaction</a></li>
+<li><a href="https://redux.js.org/api/store#getstate" title="Redux: getstate">Redux: getstate</a></li>
+<li><a href="https://redux.js.org/api/store#subscribelistener" title="Redux: subscribe (listener)">Redux: subscribe (listener)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push" title="JavaScript: Array - push">JavaScript: Array - push</a></li>
+<li><a href="https://redux.js.org/tutorials/essentials/part-1-overview-concepts#reducers" title="Redux: reducers">Redux: reducers</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Pure_function" title="Pure function">Pure function</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat" title="JavaScript: Array - concat">JavaScript: Array - concat</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Immutable_object" title="Immutable object">Immutable object</a></li>
+<li><a href="https://www.npmjs.com/package/deep-freeze" title="Deep freeze library">Deep freeze library</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" title="JavaScript: Spread syntax">JavaScript: Spread syntax</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" title="JavaScript: Destructuring assignment">JavaScript: Destructuring assignment</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 
@@ -2938,12 +2952,106 @@ Create an application according to the requirements described in [exercises 5.1-
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+install redux
 
->
+> npm install redux
+
+install deep-freeze for testing
+
+> npm install --save-dev deep-freeze
+
+create reducers
+
+> src/reducers/noteReducer.js
 
 ```js
+import { createStore } from 'redux'
 
+const noteReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'NEW_NOTE':
+      return [...state, action.payload]
+    case 'TOGGLE_IMPORTANCE': {
+      const id = action.payload.id
+      const noteToChange = state.find((n) => n.id === id)
+      const changedNote = {
+        ...noteToChange,
+        important: !noteToChange.important,
+      }
+      return state.map((note) => (note.id !== id ? note : changedNote))
+    }
+    default:
+      return state
+  }
+}
+
+const store = createStore(noteReducer)
+
+export default noteReducer
+```
+
+create test for reduser
+
+> noteReducer.test.js
+
+```js
+import noteReducer from './noteReducer'
+import deepFreeze from 'deep-freeze'
+
+describe('noteReducer', () => {
+  test('returns new state with action NEW_NOTE', () => {
+    const state = []
+    const action = {
+      type: 'NEW_NOTE',
+      payload: {
+        content: 'the app state is in redux store',
+        important: true,
+        id: 1,
+      },
+    }
+
+    deepFreeze(state)
+    const newState = noteReducer(state, action)
+
+    expect(newState).toHaveLength(1)
+    expect(newState).toContainEqual(action.payload)
+  })
+
+  test('returns new state with action TOGGLE_IMPORTANCE', () => {
+    const state = [
+      {
+        content: 'the app state is in redux store',
+        important: true,
+        id: 1,
+      },
+      {
+        content: 'state changes are made with actions',
+        important: false,
+        id: 2,
+      },
+    ]
+
+    const action = {
+      type: 'TOGGLE_IMPORTANCE',
+      payload: {
+        id: 2,
+      },
+    }
+
+    deepFreeze(state)
+    const newState = noteReducer(state, action)
+
+    expect(newState).toHaveLength(2)
+
+    expect(newState).toContainEqual(state[0])
+
+    expect(newState).toContainEqual({
+      content: 'state changes are made with actions',
+      important: true,
+      id: 2,
+    })
+  })
+})
 ```
 
 </details>
