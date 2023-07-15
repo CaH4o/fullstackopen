@@ -2960,7 +2960,7 @@ install deep-freeze for testing
 
 > npm install --save-dev deep-freeze
 
-create reducers
+create reducer
 
 > src/reducers/noteReducer.js
 
@@ -3166,10 +3166,10 @@ Text
 
 ### Exercises:
 
-#### 6.1-6.2: Xsd application
+#### 6.1-6.2: Unicafe
 
 Description: to update
 
-Create an application according to the requirements described in [exercises 6.1-6.2](),
+Create an application according to the requirements described in [exercises 6.1-6.2](https://fullstackopen.com/en/part6/flux_architecture_and_redux#exercises-6-1-6-2),
 
 - [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/)
