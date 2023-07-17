@@ -2944,7 +2944,16 @@ Create an application according to the requirements described in [exercises 5.1-
 <li><a href="https://www.npmjs.com/package/deep-freeze" title="Deep freeze library">Deep freeze library</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" title="JavaScript: Spread syntax">JavaScript: Spread syntax</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" title="JavaScript: Destructuring assignment">JavaScript: Destructuring assignment</a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://legacy.reactjs.org/docs/uncontrolled-components.html" title="React: Uncontrolled Components">React: Uncontrolled Components</a></li>
+<li><a href="https://goshacmd.com/controlled-vs-uncontrolled-inputs-react/" title="React: controlled vs uncontrolled inputs">React: controlled vs uncontrolled inputs</a></li>
+<li><a href="https://redux.js.org/tutorials/fundamentals/part-6-async-logic#synchronous-action-creators" title="Redux: Action creators">Redux: Action creators</a></li>
+<li><a href="https://react-redux.js.org/api/hooks" title="React-Redux: hook">React-redux: hook</a></li>
+<li><a href="https://react-redux.js.org/" title="The react-redux library">The react-redux library</a></li>
+<li><a href="https://react-redux.js.org/api/provider" title="React-Redux: Provider">React-Redux: Provider</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export" title="JavaScript: multiple export commands">JavaScript: multiple export commands</a></li>
+<li><a href="https://react-redux.js.org/api/hooks#usedispatch" title="React-Redux: useDispatch">React-Redux: useDispatch</a></li>
+<li><a href="https://react-redux.js.org/api/hooks#useselector" title="React-Redux: useSelector">React-Redux: useSelector</a></li>
+<li><a href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0" title="Presentational and Container Components">Presentational and Container Components</a></li>
 <li><a href="" title=""></a></li>
 
 </details>
@@ -2952,21 +2961,17 @@ Create an application according to the requirements described in [exercises 5.1-
 <details>
 <summary>Сommands and fragments:</summary>
 
+#### redux
+
 install redux
 
 > npm install redux
 
-install deep-freeze for testing
-
-> npm install --save-dev deep-freeze
-
-create reducer
+Create reducer for note
 
 > src/reducers/noteReducer.js
 
 ```js
-import { createStore } from 'redux'
-
 const noteReducer = (state = [], action) => {
   switch (action.type) {
     case 'NEW_NOTE':
@@ -2985,14 +2990,36 @@ const noteReducer = (state = [], action) => {
   }
 }
 
-const store = createStore(noteReducer)
+const generateId = () => Number((Math.random() * 1000000).toFixed(0))
+
+export const createNote = (content) => {
+  return {
+    type: 'NEW_NOTE',
+    payload: {
+      content,
+      important: false,
+      id: generateId(),
+    },
+  }
+}
+
+export const toggleImportanceOf = (id) => {
+  return {
+    type: 'TOGGLE_IMPORTANCE',
+    payload: { id },
+  }
+}
 
 export default noteReducer
 ```
 
+install deep-freeze for testing state is unmutable
+
+> npm install --save-dev deep-freeze
+
 create test for reduser
 
-> noteReducer.test.js
+> src/reducers/noteReducer.test.js
 
 ```js
 import noteReducer from './noteReducer'
@@ -3052,6 +3079,117 @@ describe('noteReducer', () => {
     })
   })
 })
+```
+
+#### react-redux
+
+install react-redux
+
+> npm install react-redux
+
+update index.js and create components with using react-redux
+
+> src/index.js
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+import App from './App'
+import noteReducer from './reducers/noteReducer'
+
+const store = createStore(noteReducer)
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
+```
+
+> src/App.js
+
+```js
+import NewNote from './components/NewNote'
+import Notes from './components/Notes'
+
+const App = () => {
+  return (
+    <div>
+      <NewNote />
+      <Notes />
+    </div>
+  )
+}
+
+export default App
+```
+
+> src/Notes.js
+
+```js
+import { useDispatch, useSelector } from 'react-redux'
+
+import { toggleImportanceOf } from '../reducers/noteReducer'
+
+const Note = ({ note, handleClick }) => {
+  return (
+    <li onClick={handleClick}>
+      {note.content}
+      <strong> {note.important ? 'important' : ''}</strong>
+    </li>
+  )
+}
+
+const Notes = () => {
+  const dispatch = useDispatch()
+  const notes = useSelector((state) => state)
+
+  return (
+    <ul>
+      {notes.map((note) => (
+        <Note
+          key={note.id}
+          note={note}
+          handleClick={() => dispatch(toggleImportanceOf(note.id))}
+        />
+      ))}
+    </ul>
+  )
+}
+
+export default Notes
+```
+
+> src/NewNote.js
+
+```js
+import { useDispatch } from 'react-redux'
+
+import { createNote } from '../reducers/noteReducer'
+
+const NewNote = () => {
+  const dispatch = useDispatch()
+
+  const addNote = (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+
+    dispatch(createNote(content))
+  }
+
+  return (
+    <form onSubmit={addNote}>
+      <input name='note' />
+      <button type='submit'>add</button>
+    </form>
+  )
+}
+
+export default NewNote
 ```
 
 </details>
