@@ -6,4 +6,4 @@ unicafe - the project for the first exercise #6.1-6.2 "Unicafe"
 
 anecdotes - the project for the first exercise #6.3-6.8 "Anecdotes"
 
-time: 7
+time: 8

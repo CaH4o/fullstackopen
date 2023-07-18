@@ -3199,8 +3199,8 @@ export default NewNote
 <details>
 <summary>Links:</summary>
 
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio" title="HTML: input-radio">HTML: input-radio</a></li>
+<li><a href="https://redux.js.org/api/combinereducers" title="Redux: combineReducers">Redux: combineReducers</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -3211,12 +3211,133 @@ export default NewNote
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Create reducer for filtering notes
 
->
+> scr/reducers/filterReducer.js
 
 ```js
+const filterReducer = (state = 'ALL', action) => {
+  switch (action.type) {
+    case 'SET_FILTER':
+      return action.payload
+    default:
+      return state
+  }
+}
 
+export const filterChange = (filter) => {
+  return {
+    type: 'SET_FILTER',
+    payload: filter,
+  }
+}
+
+export default filterReducer
+```
+
+Create component for filtering notes with input radio by importants
+
+> src/components/VisibilityFilter.js
+
+```js
+import { useDispatch } from 'react-redux'
+
+import { filterChange } from '../reducers/filterReducer'
+
+const VisibilityFilter = (/* props */) => {
+  const dispatch = useDispatch()
+
+  return (
+    <div>
+      all
+      <input
+        type='radio'
+        name='filter'
+        onChange={() => dispatch(filterChange('ALL'))}
+      />
+      important
+      <input
+        type='radio'
+        name='filter'
+        onChange={() => dispatch(filterChange('IMPORTANT'))}
+      />
+      nonimportant
+      <input
+        type='radio'
+        name='filter'
+        onChange={() => dispatch(filterChange('NONIMPORTANT'))}
+      />
+    </div>
+  )
+}
+
+export default VisibilityFilter
+```
+
+Update index.js to use two reducers
+
+> src/index.js
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { createStore, combineReducers } from 'redux'
+//...
+import filterReducer from './reducers/filterReducer'
+
+const reducer = combineReducers({
+  notes: noteReducer,
+  filter: filterReducer,
+})
+
+const store = createStore(reducer)
+//...
+```
+
+Update the Notes component to rander filtered notes.
+
+> src/Notes.js
+
+```js
+//...
+const Notes = () => {
+  const dispatch = useDispatch()
+
+  const notes = useSelector(({ filter, notes }) => {
+    if (filter === 'ALL') {
+      return notes
+    }
+    return filter === 'IMPORTANT'
+      ? notes.filter((note) => note.important)
+      : notes.filter((note) => !note.important)
+  })
+
+  return (
+    //...
+  )
+}
+//...
+```
+
+Update the App component to rander the component with filter.
+
+> src/Notes.js
+
+```js
+//...
+import VisibilityFilter from './components/VisibilityFilter'
+
+const App = () => {
+  return (
+    <div>
+      <NewNote />
+      <VisibilityFilter />
+      <Notes />
+    </div>
+  )
+}
+
+export default App
 ```
 
 </details>
