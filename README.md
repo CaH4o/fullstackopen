@@ -2954,7 +2954,7 @@ Create an application according to the requirements described in [exercises 5.1-
 <li><a href="https://react-redux.js.org/api/hooks#usedispatch" title="React-Redux: useDispatch">React-Redux: useDispatch</a></li>
 <li><a href="https://react-redux.js.org/api/hooks#useselector" title="React-Redux: useSelector">React-Redux: useSelector</a></li>
 <li><a href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0" title="Presentational and Container Components">Presentational and Container Components</a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://read.reduxbook.com/markdown/part1/04-action-creators.html" title="Redux: Action Creaters">Redux: Action Creaters</a></li>
 
 </details>
 
@@ -3306,8 +3306,16 @@ Text
 
 #### 6.1-6.2: Unicafe
 
-Description: to update
+Description: Let's make a simplified version of the unicafe. Let's handle the state management with Redux.
 
 Create an application according to the requirements described in [exercises 6.1-6.2](https://fullstackopen.com/en/part6/flux_architecture_and_redux#exercises-6-1-6-2),
 
-- [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/unicafe)
+
+#### 6.3-6.8: Anecdotes
+
+Description: Let's make a new version of the anecdote voting application. Let's handle the state management with React-Redux.
+
+Create an application according to the requirements described in [exercises 6.3-6.8](https://fullstackopen.com/en/part6/flux_architecture_and_redux#exercises-6-3-6-8),
+
+- [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/anecdotes)
