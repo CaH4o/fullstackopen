@@ -3435,8 +3435,8 @@ Create an application according to the requirements described in [exercises 6.1-
 
 #### 6.3-6.8: Anecdotes
 
-Description: Let's make a new version of the anecdote voting application. Let's handle the state management with React-Redux.
+Description: Let's make a new version of the anecdote voting application. Let's handle the state management with React-Redux. And then Implement filtering for the anecdotes that are displayed to the user.
 
-Create an application according to the requirements described in [exercises 6.3-6.8](https://fullstackopen.com/en/part6/flux_architecture_and_redux#exercises-6-3-6-8),
+Create an application according to the requirements described in [exercises 6.3-6.8](https://fullstackopen.com/en/part6/flux_architecture_and_redux#exercises-6-3-6-8), [exercise 6.9](https://fullstackopen.com/en/part6/many_reducers#exercise-6-9).
 
 - [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/anecdotes)
