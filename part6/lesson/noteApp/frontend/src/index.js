@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createStore, combineReducers } from 'redux'
+//import { createStore, combineReducers } from 'redux'
+//4
+import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 
 import App from './App'
@@ -8,17 +10,28 @@ import './index.css'
 import noteReducer from './reducers/noteReducer'
 import filterReducer from './reducers/filterReducer'
 
+//2
 //const store = createStore(noteReducer)
 
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer,
+//3
+//const reducer = combineReducers({
+//  notes: noteReducer,
+//  filter: filterReducer,
+//})
+
+//const store = createStore(reducer)
+
+//4
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer,
+  },
 })
 
-const store = createStore(reducer)
+console.log(store.getState())
 
-//console.log(store.getState())
-
+/*
 store.dispatch({
   type: 'NEW_NOTE',
   payload: {
@@ -43,7 +56,7 @@ store.dispatch({
     id: 2,
   },
 })
-
+ */
 //1 - from part 5
 //ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 

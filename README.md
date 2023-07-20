@@ -3201,10 +3201,10 @@ export default NewNote
 
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio" title="HTML: input-radio">HTML: input-radio</a></li>
 <li><a href="https://redux.js.org/api/combinereducers" title="Redux: combineReducers">Redux: combineReducers</a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://redux-toolkit.js.org/api/configureStore" title="Redux-toolkit: configureStore">Redux-toolkit: configureStore</a></li>
+<li><a href="https://redux-toolkit.js.org/api/createSlice" title="Redux-toolkit: createSlice">Redux-toolkit: createSlice</a></li>
+<li><a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd" title="Chrome: redux-devtools">Chrome: redux-devtools</a></li>
+<li><a href="https://redux-toolkit.js.org/api/createSlice#reducers" title="Redux-toolkit: reducers">Redux-toolkit: reducers</a></li>
 
 </details>
 
@@ -3339,6 +3339,126 @@ const App = () => {
 
 export default App
 ```
+
+#### Redux Toolkit
+
+install the library: Redux Toolkit
+
+> npm install @reduxjs/toolkit
+
+Update index.js to use two reducers
+
+> src/index.js
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
+import { configureStore } from '@reduxjs/toolkit'
+import App from './App'
+
+import noteReducer from './reducers/noteReducer'
+import filterReducer from './reducers/filterReducer'
+
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer,
+  },
+})
+
+console.log(store.getState())
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
+```
+
+Update noteReducer.js to use createSlice from reduxjs toolkit
+
+> src/reducers/noteReducer.js
+
+```js
+import { createSlice } from '@reduxjs/toolkit'
+
+const initialState = [
+  {
+    content: 'reducer defines how redux store works',
+    important: true,
+    id: 1,
+  },
+  {
+    content: 'state of store can contain any data',
+    important: false,
+    id: 2,
+  },
+]
+
+const generateId = () => Number((Math.random() * 1000000).toFixed(0))
+
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState,
+  reducers: {
+    createNote(state, action) {
+      const content = action.payload
+      state.push({
+        content,
+        important: false,
+        id: generateId(),
+      })
+    },
+    toggleImportanceOf(state, action) {
+      const id = action.payload
+      const noteToChange = state.find((n) => n.id === id)
+      const changedNote = {
+        ...noteToChange,
+        important: !noteToChange.important,
+      }
+      return state.map((note) => (note.id !== id ? note : changedNote))
+    },
+  },
+})
+
+export const { createNote, toggleImportanceOf } = noteSlice.actions
+export default noteSlice.reducer
+```
+
+Update index.js to use two reducers
+
+> src/reducers/noteReducer.test.js
+
+```js
+import noteReducer from './noteReducer'
+import deepFreeze from 'deep-freeze'
+
+describe('noteReducer', () => {
+  test('returns new state with action notes/createNote', () => {
+    //...
+    const action = {
+      type: 'notes/createNote',
+      payload: 'the app state is in redux store',
+    }
+    //...
+    expect(newState.map((s) => s.content)).toContainEqual(action.payload)
+  })
+
+  test('returns new state with action notes/toggleImportanceOf', () => {
+    //...
+    const action = {
+      type: 'notes/toggleImportanceOf',
+      payload: 2,
+    }
+    //...
+  })
+})
+```
+
+Use console log with JSON in reduser function in slicer to see the object in console
+
+> console.log(JSON.parse(JSON.stringify(state)))
 
 </details>
 
