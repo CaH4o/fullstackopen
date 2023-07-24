@@ -3467,8 +3467,8 @@ Use console log with JSON in reduser function in slicer to see the object in con
 <details>
 <summary>Links:</summary>
 
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://github.com/facebook/create-react-app/issues/6880" title="ESlint How to disable the rule react-hooks/exhaustive-deps">ESlint How to disable the rule react-hooks/exhaustive-deps</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies" title="React: hooks dependencies in the react documentation">React: hooks dependencies in the react documentation</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -3479,12 +3479,159 @@ Use console log with JSON in reduser function in slicer to see the object in con
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Install json-server for the project
 
->
+> npm install json-server --save-dev
+
+Added json file-database in root of the project
+
+> db.json
 
 ```js
+{
+  "notes": [
+    {
+      "content": "the app state is in redux store",
+      "important": true,
+      "id": 1
+    },
+    {
+      "content": "state changes are made with actions",
+      "important": false,
+      "id": 2
+    }
+  ]
+}
+```
 
+Added scripts to start the server in the file package.json
+
+> package.json
+
+```js
+"scripts": {
+  "server": "json-server -p3001 --watch db.json",
+  // ...
+}
+```
+
+Create services to use axios to fetch data from the backend
+
+> services/notes.js
+
+```js
+import axios from 'axios'
+
+const baseUrl = 'http://localhost:3001/notes'
+
+const getAll = async () => {
+  const response = await axios.get(baseUrl)
+  return response.data
+}
+
+const createNew = async (content) => {
+  const object = { content, important: false }
+  const response = await axios.post(baseUrl, object)
+  return response.data
+}
+
+export default { getAll, createNew }
+```
+
+Update reducer for working with the new services
+
+> reducers/noteReducer.js
+
+```js
+import { createSlice } from '@reduxjs/toolkit'
+
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState: [],
+  reducers: {
+    createNote(state, action) {
+      state.push(action.payload)
+    },
+    toggleImportanceOf(state, action) {
+      //...
+    },
+    appendNote(state, action) {
+      state.push(action.payload)
+    },
+    setNotes(state, action) {
+      return action.payload
+    },
+  },
+})
+
+export const { createNote, toggleImportanceOf, appendNote, setNotes } =
+  noteSlice.actions
+export default noteSlice.reducer
+```
+
+Update App component to fetch data from server
+
+> src/App.js
+
+```js
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { setNotes } from './reducers/noteReducer'
+import noteService from './services/notes'
+import NewNote from './components/NewNote'
+import Notes from './components/Notes'
+import VisibilityFilter from './components/VisibilityFilter'
+
+const App = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    noteService.getAll().then((notes) => dispatch(setNotes(notes)))
+  }, [])
+
+  return (
+    <div>
+      <NewNote />
+      <VisibilityFilter />
+      <Notes />
+    </div>
+  )
+}
+
+export default App
+```
+
+Update NewNote component to fetch data from server
+
+> src/components/NewNote.js
+
+```js
+import { useDispatch } from 'react-redux'
+
+import { createNote } from '../reducers/noteReducer'
+import noteService from '../services/notes'
+
+const NewNote = () => {
+  const dispatch = useDispatch()
+
+  const addNote = async (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+
+    const newNote = await noteService.createNew(content)
+    dispatch(createNote(newNote))
+  }
+
+  return (
+    <form onSubmit={addNote}>
+      <input name='note' />
+      <button type='submit'>add</button>
+    </form>
+  )
+}
+
+export default NewNote
 ```
 
 </details>
