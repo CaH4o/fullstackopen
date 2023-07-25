@@ -4,6 +4,6 @@ lesson - the project for exercises and practice while studying the course
 
 unicafe - the project for the first exercise #6.1-6.2 "Unicafe"
 
-anecdotes - the project for the first exercise #6.3-6.9 "Anecdotes"
+anecdotes - the project for the first exercise #6.3-6.15 "Anecdotes"
 
-time: 12
+time: 13.5

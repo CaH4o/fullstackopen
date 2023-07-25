@@ -3479,6 +3479,8 @@ Use console log with JSON in reduser function in slicer to see the object in con
 <details>
 <summary>Сommands and fragments:</summary>
 
+#### json-server
+
 Install json-server for the project
 
 > npm install json-server --save-dev
@@ -3515,9 +3517,11 @@ Added scripts to start the server in the file package.json
 }
 ```
 
+#### front-end connect to backend using axios
+
 Create services to use axios to fetch data from the backend
 
-> services/notes.js
+> src/services/notes.js
 
 ```js
 import axios from 'axios'
@@ -3540,7 +3544,7 @@ export default { getAll, createNew }
 
 Update reducer for working with the new services
 
-> reducers/noteReducer.js
+> src/reducers/noteReducer.js
 
 ```js
 import { createSlice } from '@reduxjs/toolkit'
@@ -3700,10 +3704,10 @@ Create an application according to the requirements described in [exercises 6.1-
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/unicafe)
 
-#### 6.3-6.8: Anecdotes
+#### 6.3-6.15: Anecdotes
 
-Description: Let's make a new version of the anecdote voting application. Let's handle the state management with React-Redux. And then Implement filtering for the anecdotes that are displayed to the user. Finnaly install Redux Toolkit and use it with separating by fiels.
+Description: Let's make a new version of the anecdote voting application. Let's handle the state management with React-Redux. And then Implement filtering for the anecdotes that are displayed to the user. Finnaly install Redux Toolkit and use it with separating by fiels. After it install json-server and implement fetching from the server and creating new anecdote in the server. All anecdotes are stored in the backend.
 
-Create an application according to the requirements described in [exercises 6.3-6.8](https://fullstackopen.com/en/part6/flux_architecture_and_redux#exercises-6-3-6-8), [exercise 6.9](https://fullstackopen.com/en/part6/many_reducers#exercise-6-9), [exercises 6.10-6.13](https://fullstackopen.com/en/part6/many_reducers#exercises-6-10-6-13).
+Create an application according to the requirements described in [exercises 6.3-6.8](https://fullstackopen.com/en/part6/flux_architecture_and_redux#exercises-6-3-6-8), [exercise 6.9](https://fullstackopen.com/en/part6/many_reducers#exercise-6-9), [exercises 6.10-6.13](https://fullstackopen.com/en/part6/many_reducers#exercises-6-10-6-13), [exercises 6.14-6.15](https://fullstackopen.com/en/part6/communicating_with_server_in_a_redux_application#exercises-6-14-6-15).
 
 - [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/anecdotes)
