@@ -1,3 +1,7 @@
+// ======================================================== //
+// ========================= 2 ============================ //
+// ======================================================== //
+
 import { useDispatch, useSelector } from 'react-redux'
 
 import { toggleImportanceOf } from '../reducers/noteReducer'
@@ -13,11 +17,13 @@ const Note = ({ note, handleClick }) => {
 
 const Notes = () => {
   const dispatch = useDispatch()
-  // 1
-  // const notes = useSelector((state) => state)
   // 2
-  // const notes = useSelector((state) => state.notes)
-  // 3
+  //const notes = useSelector((state) => state)
+
+  // 3-1
+  //const notes = useSelector((state) => state.notes)
+
+  // 3-2
   // const notes = useSelector((state) => {
   //  if (state.filter === 'ALL') {
   //    return state.notes
@@ -26,7 +32,8 @@ const Notes = () => {
   //    ? state.notes.filter((note) => note.important)
   //    : state.notes.filter((note) => !note.important)
   //})
-  // 4
+
+  // 3-3
   const notes = useSelector(({ filter, notes }) => {
     if (filter === 'ALL') {
       return notes

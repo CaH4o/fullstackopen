@@ -3469,10 +3469,9 @@ Use console log with JSON in reduser function in slicer to see the object in con
 
 <li><a href="https://github.com/facebook/create-react-app/issues/6880" title="ESlint How to disable the rule react-hooks/exhaustive-deps">ESlint How to disable the rule react-hooks/exhaustive-deps</a></li>
 <li><a href="https://legacy.reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies" title="React: hooks dependencies in the react documentation">React: hooks dependencies in the react documentation</a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://github.com/reduxjs/redux-thunk" title="Redux Thunk library">Redux Thunk library</a></li>
+<li><a href="https://redux-toolkit.js.org/api/createAsyncThunk" title="Redux Toolkit: createAsyncThunk">Redux Toolkit: createAsyncThunk</a></li>
+<li><a href="https://redux-toolkit.js.org/rtk-query/overview" title="Redux Toolkit: RTK Query Overview">Redux Toolkit: RTK Query Overview</a></li>
 
 </details>
 
@@ -3636,6 +3635,148 @@ const NewNote = () => {
 }
 
 export default NewNote
+```
+
+#### Asynchronous actions and Redux thunk
+
+Update note services with asynchronous action and hide implimantation in services
+
+> src/reducers/noteReducer.js
+
+```js
+import { createSlice } from '@reduxjs/toolkit'
+
+import noteService from '../services/notes'
+
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState: [],
+  reducers: {
+    toggleImportanceOf(state, action) {
+      //..
+    },
+    appendNote(state, action) {
+      state.push(action.payload)
+    },
+    setNotes(state, action) {
+      return action.payload
+    },
+  },
+})
+
+export const { toggleImportanceOf, appendNote, setNotes } = noteSlice.actions
+
+export const initializeNotes = () => {
+  return async (dispatch) => {
+    const notes = await noteService.getAll()
+    dispatch(setNotes(notes))
+  }
+}
+
+export const createNote = (content) => {
+  return async (dispatch) => {
+    const newNote = await noteService.createNew(content)
+    dispatch(appendNote(newNote))
+  }
+}
+
+export default noteSlice.reducer
+```
+
+Update App component to use new funcialnality with fetching data
+
+> src/App.js
+
+```js
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { initializeNotes } from './reducers/noteReducer'
+import NewNote from './components/NewNote'
+import Notes from './components/Notes'
+import VisibilityFilter from './components/VisibilityFilter'
+
+const App = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(initializeNotes())
+  }, [dispatch])
+
+  return (
+    //...
+  )
+}
+
+export default App
+```
+
+Update NewNote component to use new funcialnality with fetching data
+
+> src/components/NewNote.js
+
+```js
+import { useDispatch } from 'react-redux'
+
+import { createNote } from '../reducers/noteReducer'
+
+const NewNote = () => {
+  const dispatch = useDispatch()
+
+  const addNote = async (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+    dispatch(createNote(content))
+  }
+
+  return (
+    //...
+  )
+}
+
+export default NewNote
+```
+
+#### Store
+
+Create a separate store file
+
+> src/store.js
+
+```js
+import { configureStore } from '@reduxjs/toolkit'
+
+import noteReducer from './reducers/noteReducer'
+import filterReducer from './reducers/filterReducer'
+
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer,
+  },
+})
+
+export default store
+```
+
+Update index to use the new sotre file
+
+> src/index.js
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
+
+import store from './store'
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
 ```
 
 </details>

@@ -1,8 +1,12 @@
+// ======================================================== //
+// ========================= 3 ============================ //
+// ======================================================== //
+
 import { useDispatch } from 'react-redux'
 
 import { filterChange } from '../reducers/filterReducer'
 
-const VisibilityFilter = (/* props */) => {
+const VisibilityFilter = () => {
   const dispatch = useDispatch()
 
   return (
