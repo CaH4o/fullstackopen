@@ -13,8 +13,8 @@ const AnecdoteList = () => {
   }).sort(sortByVoteDesc)
 
   const vote = (anecdote) => {
-    dispatch(votingAnecdote(anecdote.id))
-    dispatch(setNotification(`you voted '${anecdote.content}'`))
+    dispatch(votingAnecdote(anecdote))
+    dispatch(setNotification(`you voted '${anecdote.content}'`, 10000))
   }
 
   return (
