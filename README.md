@@ -3786,7 +3786,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 <details>
 <summary>Links:</summary>
 
-<li><a href="" title=""></a></li>
+<li><a href="https://tanstack.com/query/v3/" title="React Query library">React Query library</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -3798,9 +3798,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Install React Query library
 
->
+> npm install react-query
 
 ```js
 
