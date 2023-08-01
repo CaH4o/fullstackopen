@@ -329,7 +329,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 // ======================================================== //
 // ========================= 6 ============================ //
 // ======================================================== //
-
+/*
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
@@ -341,4 +341,22 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
   </Provider>
+) */
+
+// ======================================================== //
+// ========================= 7-8 ========================== //
+// ======================================================== //
+
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+import App from './App'
+
+const queryClient = new QueryClient()
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <QueryClientProvider client={queryClient}>
+    <App />
+  </QueryClientProvider>
 )

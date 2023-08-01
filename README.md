@@ -3787,7 +3787,15 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 <summary>Links:</summary>
 
 <li><a href="https://tanstack.com/query/v3/" title="React Query library">React Query library</a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://tanstack.com/query/latest/docs/react/guides/queries" title="React Query library: Queries">React Query library: Queries</a></li>
+<li><a href="https://tanstack.com/query/latest/docs/react/reference/useQuery" title="React Query library: useQuery">React Query library: useQuery</a></li>
+<li><a href="https://tanstack.com/query/latest/docs/react/guides/query-keys" title="React Query library: Query Keys">React Query library: Query Keys</a></li>
+<li><a href="https://tanstack.com/query/latest/docs/react/guides/mutations" title="React Query library: Mutations">React Query library: Mutations</a></li>
+<li><a href="https://tanstack.com/query/latest/docs/react/reference/useMutation" title="React Query library: useMutation">React Query library: useMutation</a></li>
+<li><a href="https://tanstack.com/query/latest/docs/react/guides/invalidations-from-mutations" title="React Query library: Invalidations from Mutations">React Query library: Invalidations from Mutations</a></li>
+<li><a href="https://tanstack.com/query/latest/docs/react/guides/updates-from-mutation-responses" title="React Query library: Updates from Mutation Responses">React Query library: Updates from Mutation Responses</a></li>
+<li><a href="https://tkdodo.eu/blog/react-query-render-optimizations" title="React Query Render Optimizations">React Query Render Optimizations</a></li>
+<li><a href="https://tanstack.com/query/latest/docs/react/guides/does-this-replace-client-state" title="Does TanStack Query replace Redux, MobX or other global state managers?">Does TanStack Query replace Redux, MobX or other global state managers?</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -3802,8 +3810,112 @@ Install React Query library
 
 > npm install react-query
 
-```js
+Create index and add elements to use React Query library
 
+> src/index.js
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+import App from './App'
+
+const queryClient = new QueryClient()
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <QueryClientProvider client={queryClient}>
+    <App />
+  </QueryClientProvider>
+)
+```
+
+Create file requests.js to work with server using axios
+
+> src/requests.js
+
+```js
+import axios from 'axios'
+
+const baseUrl = 'http://localhost:3001/notes'
+
+export const getNotes = () => axios.get(baseUrl).then((res) => res.data)
+
+export const createNote = (newNote) =>
+  axios.post(baseUrl, newNote).then((res) => res.data)
+
+export const updateNote = (updatedNote) =>
+  axios.put(`${baseUrl}/${updatedNote.id}`, updatedNote).then((res) => res.data)
+```
+
+Create App with elements to use React Query library and requests
+
+> src/App.js
+
+```js
+import { useQuery, useMutation, useQueryClient } from 'react-query'
+import { getNotes, createNote, updateNote } from './requests'
+
+const App = () => {
+  const queryClient = useQueryClient()
+  const newNoteMutation = useMutation(createNote, {
+    onSuccess: (newNote) => {
+      const notes = queryClient.getQueryData('notes')
+      queryClient.setQueryData('notes', notes.concat(newNote))
+    },
+  })
+
+  const addNote = async (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+    newNoteMutation.mutate({ content, important: true })
+  }
+
+  const updateNoteMutation = useMutation(updateNote, {
+    onSuccess: (updatedNote) => {
+      const notes = queryClient.getQueryData('notes')
+      queryClient.setQueryData(
+        'notes',
+        notes.map((n) => (n.id !== updatedNote.id ? n : updatedNote))
+      )
+    },
+  })
+
+  const toggleImportance = (note) => {
+    updateNoteMutation.mutate({ ...note, important: !note.important })
+  }
+
+  const result = useQuery('notes', getNotes, {
+    refetchOnWindowFocus: false,
+  })
+
+  console.log(result)
+
+  if (result.isLoading) {
+    return <div>loading data...</div>
+  }
+
+  const notes = result.data
+
+  return (
+    <div>
+      <h2>Notes app</h2>
+      <form onSubmit={addNote}>
+        <input name='note' />
+        <button type='submit'>add</button>
+      </form>
+      {notes.map((note) => (
+        <li key={note.id} onClick={() => toggleImportance(note)}>
+          {note.content}
+          <strong> {note.important ? 'important' : ''}</strong>
+        </li>
+      ))}
+    </div>
+  )
+}
+
+export default App
 ```
 
 </details>

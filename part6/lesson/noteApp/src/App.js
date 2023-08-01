@@ -143,7 +143,7 @@ export default App */
 // ======================================================== //
 // ========================= 6 ============================ //
 // ======================================================== //
-
+/*
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -164,6 +164,153 @@ const App = () => {
       <NewNote />
       <VisibilityFilter />
       <Notes />
+    </div>
+  )
+}
+
+export default App
+*/
+// ======================================================== //
+// ========================= 7 ============================ //
+// ======================================================== //
+/*
+//7_2
+//import { useQuery } from 'react-query'
+//import axios from 'axios'
+
+//7_3
+import { useQuery } from 'react-query'
+import { getNotes } from './requests'
+
+const App = () => {
+  const addNote = async (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+    console.log(content)
+  }
+
+  const toggleImportance = (note) => {
+    console.log('toggle importance of', note.id)
+  }
+
+  //7_1
+  //const notes = []
+
+  //7_2
+  //const result = useQuery('notes', () =>
+  //  axios.get('http://localhost:3001/notes').then((res) => res.data)
+  //)
+
+  //7_3
+  const result = useQuery('notes', getNotes)
+
+  //7_2
+  console.log(result)
+
+  if (result.isLoading) {
+    return <div>loading data...</div>
+  }
+
+  //7_2
+  const notes = result.data
+
+  return (
+    <div>
+      <h2>Notes app</h2>
+      <form onSubmit={addNote}>
+        <input name='note' />
+        <button type='submit'>add</button>
+      </form>
+      {notes.map((note) => (
+        <li key={note.id} onClick={() => toggleImportance(note)}>
+          {note.content}
+          <strong> {note.important ? 'important' : ''}</strong>
+        </li>
+      ))}
+    </div>
+  )
+}
+
+export default App */
+
+// ======================================================== //
+// ========================= 8 ============================ //
+// ======================================================== //
+
+import { useQuery, useMutation, useQueryClient } from 'react-query'
+import { getNotes, createNote, updateNote } from './requests'
+
+const App = () => {
+  const queryClient = useQueryClient()
+  const newNoteMutation = useMutation(createNote, {
+    //8_1
+    //onSuccess: () => {
+    //  queryClient.invalidateQueries('notes')
+    //},
+    //8_2
+    onSuccess: (newNote) => {
+      const notes = queryClient.getQueryData('notes')
+      queryClient.setQueryData('notes', notes.concat(newNote))
+    },
+  })
+
+  const addNote = async (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+    newNoteMutation.mutate({ content, important: true })
+  }
+
+  const updateNoteMutation = useMutation(updateNote, {
+    //8_1
+    //onSuccess: () => {
+    //  queryClient.invalidateQueries('notes')
+    //},
+    //8_2
+    onSuccess: (updatedNote) => {
+      const notes = queryClient.getQueryData('notes')
+      queryClient.setQueryData(
+        'notes',
+        notes.map((n) => (n.id !== updatedNote.id ? n : updatedNote))
+      )
+    },
+  })
+
+  const toggleImportance = (note) => {
+    updateNoteMutation.mutate({ ...note, important: !note.important })
+  }
+
+  const result = useQuery(
+    'notes',
+    getNotes,
+    //8_3
+    {
+      refetchOnWindowFocus: false,
+    }
+  )
+
+  console.log(result)
+
+  if (result.isLoading) {
+    return <div>loading data...</div>
+  }
+
+  const notes = result.data
+
+  return (
+    <div>
+      <h2>Notes app</h2>
+      <form onSubmit={addNote}>
+        <input name='note' />
+        <button type='submit'>add</button>
+      </form>
+      {notes.map((note) => (
+        <li key={note.id} onClick={() => toggleImportance(note)}>
+          {note.content}
+          <strong> {note.important ? 'important' : ''}</strong>
+        </li>
+      ))}
     </div>
   )
 }
