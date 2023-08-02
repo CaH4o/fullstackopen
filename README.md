@@ -7,7 +7,7 @@ This repositoroy for assignements of the course Full Stack Web Development, Open
 Parts:
 
 - Parts 0-5 (core course) - Full Stack Web Development (5 cr, CSM141081)
-- ~~Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)~~
+- Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)
 - ~~Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)~~
 - ~~Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)~~
 - ~~Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)~~
@@ -3962,5 +3962,13 @@ Create an application according to the requirements described in [exercises 6.1-
 Description: Let's make a new version of the anecdote voting application. Let's handle the state management with React-Redux. And then Implement filtering for the anecdotes that are displayed to the user. Finnaly install Redux Toolkit and use it with separating by fiels. After it install json-server and implement fetching from the server and creating new anecdote in the server. All anecdotes are stored in the backend. After connection to backend make refactoring code to use Redux Thunk library.
 
 Create an application according to the requirements described in [exercises 6.3-6.8](https://fullstackopen.com/en/part6/flux_architecture_and_redux#exercises-6-3-6-8), [exercise 6.9](https://fullstackopen.com/en/part6/many_reducers#exercise-6-9), [exercises 6.10-6.13](https://fullstackopen.com/en/part6/many_reducers#exercises-6-10-6-13), [exercises 6.14-6.15](https://fullstackopen.com/en/part6/communicating_with_server_in_a_redux_application#exercises-6-14-6-15), [exercises 6.16-6.19](https://fullstackopen.com/en/part6/communicating_with_server_in_a_redux_application#exercises-6-16-6-19).
+
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/anecdotes)
+
+#### 6.20-6.22: Anecdotes use React Query library
+
+Description: Now let's make a new version of the anecdote application that uses the React Query library.
+
+Create an application according to the requirements described in [exercises 6.20-6.22](https://fullstackopen.com/en/part6/react_query_use_reducer_and_the_context#exercises-6-20-6-22).
 
 - [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/anecdotes)
