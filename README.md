@@ -3796,7 +3796,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 <li><a href="https://tanstack.com/query/latest/docs/react/guides/updates-from-mutation-responses" title="React Query library: Updates from Mutation Responses">React Query library: Updates from Mutation Responses</a></li>
 <li><a href="https://tkdodo.eu/blog/react-query-render-optimizations" title="React Query Render Optimizations">React Query Render Optimizations</a></li>
 <li><a href="https://tanstack.com/query/latest/docs/react/guides/does-this-replace-client-state" title="Does TanStack Query replace Redux, MobX or other global state managers?">Does TanStack Query replace Redux, MobX or other global state managers?</a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://react.dev/reference/react/useReducer" title="React: useReducer hook">React: useReducer hook</a></li>
+<li><a href="https://react.dev/learn/passing-data-deeply-with-context" title="React: Context API provides">React: Context API provides</a></li>
+<li><a href="https://react.dev/reference/react/createContext" title="React: hook createContext">React: hook createContext</a></li>
+<li><a href="https://react.dev/reference/react/useContext" title="React: hook useContext">React: hook useContext</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-custom.html" title="React: custom hook">React: custom hook</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -3805,6 +3809,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 <details>
 <summary>Сommands and fragments:</summary>
+
+#### React Query library
 
 Install React Query library
 
@@ -3911,6 +3917,124 @@ const App = () => {
           <strong> {note.important ? 'important' : ''}</strong>
         </li>
       ))}
+    </div>
+  )
+}
+
+export default App
+```
+
+#### React useState
+
+Create CounterContext for providing it in index.
+
+> src/CounterContext.js
+
+```js
+import { createContext, useReducer, useContext } from 'react'
+
+const counterReducer = (state, action) => {
+  switch (action.type) {
+    case 'INC':
+      return state + 1
+    case 'DEC':
+      return state - 1
+    case 'ZERO':
+      return 0
+    default:
+      return state
+  }
+}
+
+const CounterContext = createContext()
+
+export const CounterContextProvider = (props) => {
+  const [counter, counterDispatch] = useReducer(counterReducer, 0)
+
+  return (
+    <CounterContext.Provider value={[counter, counterDispatch]}>
+      {props.children}
+    </CounterContext.Provider>
+  )
+}
+
+export const useCounterValue = () => {
+  const counterAndDispatch = useContext(CounterContext)
+  return counterAndDispatch[0]
+}
+
+export const useCounterDispatch = () => {
+  const counterAndDispatch = useContext(CounterContext)
+  return counterAndDispatch[1]
+}
+
+export default CounterContext
+```
+
+Update index to use CounterContext
+
+> src/index.js
+
+```js
+import ReactDOM from 'react-dom/client'
+
+import App from './App'
+import { CounterContextProvider } from './CounterContext'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <CounterContextProvider>
+    <App />
+  </CounterContextProvider>
+)
+```
+
+Create the component for buttons with using useCounterDispatch
+
+> src/components/Button.js
+
+```js
+import { useCounterDispatch } from '../CounterContext'
+
+const Button = ({ type, label }) => {
+  const dispatch = useCounterDispatch()
+  return <button onClick={() => dispatch({ type })}>{label}</button>
+}
+
+export default Button
+```
+
+Create the component for Display counter with using useCounterValue
+
+> src/components/Display.js
+
+```js
+import { useCounterValue } from '../CounterContext'
+
+const Display = () => {
+  const counter = useCounterValue()
+  return <div>{counter}</div>
+}
+
+export default Display
+```
+
+Create App with the components
+
+> src/App.js
+
+```js
+import Display from './components/Display'
+import Button from './components/Button'
+
+const App = () => {
+  return (
+    <div>
+      <Display />
+      <div>
+        <Button type='INC' label='+' />
+        <Button type='DEC' label='-' />
+        <Button type='ZERO' label='0' />
+      </div>
     </div>
   )
 }

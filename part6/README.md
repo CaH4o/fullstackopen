@@ -4,6 +4,8 @@ lesson - the project for exercises and practice while studying the course
 
 unicafe - the project for the first exercise #6.1-6.2 "Unicafe"
 
-anecdotes - the project for the first exercise #6.3-6.19 "Anecdotes"
+anecdotes - the project for the first exercise #6.3-6.19 "Anecdotes" by using React Redux library
 
-time: 17
+query-anecdotes - the project for the first exercise #6.20-6.22 "Anecdotes" by using React Query library
+
+time: 19
