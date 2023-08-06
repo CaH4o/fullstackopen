@@ -3924,7 +3924,7 @@ const App = () => {
 export default App
 ```
 
-#### React useState
+#### React state management using the useReducer hook and context.
 
 Create CounterContext for providing it in index.
 
@@ -4091,8 +4091,8 @@ Create an application according to the requirements described in [exercises 6.3-
 
 #### 6.20-6.22: Anecdotes use React Query library
 
-Description: Now let's make a new version of the anecdote application that uses the React Query library.
+Description: Now let's make a new version of the anecdote application that uses the React Query library. Implement the application's notification state management using the useReducer hook and context. The notification should tell the user when a new anecdote is created or an anecdote is voted on. Implement error handling for the insertion. In practice, it is sufficient to display a notification to the user in case of a failed POST request.
 
-Create an application according to the requirements described in [exercises 6.20-6.22](https://fullstackopen.com/en/part6/react_query_use_reducer_and_the_context#exercises-6-20-6-22).
+Create an application according to the requirements described in [exercises 6.20-6.22](https://fullstackopen.com/en/part6/react_query_use_reducer_and_the_context#exercises-6-20-6-22) and [exercises 6.3-6.24](https://fullstackopen.com/en/part6/react_query_use_reducer_and_the_context#exercises-6-23-6-24).
 
-- [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/anecdotes)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/anecdotes)

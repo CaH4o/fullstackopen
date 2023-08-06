@@ -1,11 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { getAnecdotes, updateAnecdote } from './requests'
 
+import { useSetNotification } from './NotificationContext'
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 
 const App = () => {
   const queryClient = useQueryClient()
+  const setNotification = useSetNotification()
 
   const updateNoteMutation = useMutation(updateAnecdote, {
     onSuccess: (updatedAnecdote) => {
@@ -17,10 +19,15 @@ const App = () => {
         )
       )
     },
+    onError: ({ response }) => {
+      const notification = response.data.error || 'unexpected error'
+      setNotification(notification)
+    },
   })
 
-  const handleVote = (anecdote) => {
-    updateNoteMutation.mutate({ ...anecdote, votes: anecdote.votes + 1 })
+  const handleVote = async (anecdote) => {
+    await updateNoteMutation.mutate({ ...anecdote, votes: anecdote.votes + 1 })
+    setNotification(`anecdote '${anecdote.content}' voted`)
   }
 
   const result = useQuery('anecdotes', getAnecdotes, {

@@ -6,6 +6,6 @@ unicafe - the project for the first exercise #6.1-6.2 "Unicafe"
 
 anecdotes - the project for the first exercise #6.3-6.19 "Anecdotes" by using React Redux library
 
-query-anecdotes - the project for the first exercise #6.20-6.22 "Anecdotes" by using React Query library
+query-anecdotes - the project for the first exercise #6.20-6.24 "Anecdotes" by using React Query library
 
-time: 19
+time: 23
