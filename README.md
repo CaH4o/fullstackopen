@@ -3801,10 +3801,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 <li><a href="https://react.dev/reference/react/createContext" title="React: hook createContext">React: hook createContext</a></li>
 <li><a href="https://react.dev/reference/react/useContext" title="React: hook useContext">React: hook useContext</a></li>
 <li><a href="https://legacy.reactjs.org/docs/hooks-custom.html" title="React: custom hook">React: custom hook</a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-
+<li><a href="https://facebookarchive.github.io/flux/" title="Flux architecture">Flux architecture</a></li>
+<li><a href="https://redux-toolkit.js.org/" title="Redux Toolkit">Redux Toolkit</a></li>
+<li><a href="https://recoiljs.org/" title="Recoil">Recoil</a></li>
+<li><a href="https://mobx.js.org/README.html" title="MobX">MobX</a></li>
+<li><a href="https://npmtrends.com/mobx-vs-recoil-vs-redux" title="Npm trends">Npm trends</a></li>
 </details>
 
 <details>
@@ -4089,7 +4090,7 @@ Create an application according to the requirements described in [exercises 6.3-
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/anecdotes)
 
-#### 6.20-6.22: Anecdotes use React Query library
+#### 6.20-6.24: Anecdotes use React Query library
 
 Description: Now let's make a new version of the anecdote application that uses the React Query library. Implement the application's notification state management using the useReducer hook and context. The notification should tell the user when a new anecdote is created or an anecdote is voted on. Implement error handling for the insertion. In practice, it is sufficient to display a notification to the user in case of a failed POST request.
 
