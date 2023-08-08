@@ -4050,25 +4050,130 @@ export default App
 <details>
 <summary>Links:</summary>
 
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://react-redux.js.org/api/hooks" title="React Redux: Hooks">React Redux: Hooks</a></li>
+<li><a href="https://react-redux.js.org/api/hooks#useselector" title="React Redux: useSelector">React Redux: useSelector</a></li>
+<li><a href="https://react-redux.js.org/api/hooks#usedispatch" title="React Redux: ">React Redux: </a></li>
+<li><a href="https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md" title="connect">connect</a></li>
+<li><a href="https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object" title="connect: mapStateToProps">connect: mapStateToProps</a></li>
+<li><a href="https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object" title="connect: mapDispatchToProps">connect: mapDispatchToProps</a></li>
+<li><a href="https://egghead.io/courses/fundamentals-of-redux-course-from-dan-abramov-bd5cc867" title="Fundamentals of Redux Course from Dan Abramov">Fundamentals of Redux Course from Dan Abramov</a></li>
+<li><a href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0" title="Presentational and Container Components">Presentational and Container Components by Dan Abramov</a></li>
+<li><a href="https://legacy.reactjs.org/docs/higher-order-components.html" title="React: Higher-Order Components">React: Higher-Order Components</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Higher-order_function" title="Higher-order function">Wiki: Higher-order function</a></li>
+<li><a href="https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367" title="You Might Not Need Redux">You Might Not Need Redux by Dan Abramov</a></li>
+<li><a href="https://legacy.reactjs.org/docs/context.html" title="React: Context">React: Context</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#usereducer" title="React: useReducer">React: useReducer</a></li>
 
 </details>
 
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Update Notes component to use connect
 
->
+> src/components/Notes.js
 
 ```js
+import { connect } from 'react-redux'
+import { toggleImportanceOf } from '../reducers/noteReducer'
 
+const Notes = (props) => {
+  const dispatch = useDispatch()
+
+  return (
+    <ul>
+      {props.notes.map((note) => (
+        <Note
+          key={note.id}
+          note={note}
+          handleClick={() => props.toggleImportanceOf(note.id)}
+        />
+      ))}
+    </ul>
+  )
+}
+
+const mapStateToProps = (state) => {
+  if (state.filter === 'ALL') {
+    return {
+      notes: state.notes,
+    }
+  }
+
+  return {
+    notes:
+      state.filter === 'IMPORTANT'
+        ? state.notes.filter((note) => note.important)
+        : state.notes.filter((note) => !note.important),
+  }
+}
+
+const mapDispatchToProps = {
+  toggleImportanceOf,
+}
+
+const ConnectedNotes = connect(mapStateToProps, mapDispatchToProps)(Notes)
+export default ConnectedNotes
 ```
+
+Update NewNote component to use connect
+
+> src/components/NewNote.js
+
+```js
+import { connect } from 'react-redux'
+import { createNote } from '../reducers/noteReducer'
+
+const NewNote = (props) => {
+  const addNote = (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+
+    props.createNote(content)
+  }
+
+  return (
+    <form onSubmit={addNote}>
+      <input name='note' />
+      <button type='submit'>add</button>
+    </form>
+  )
+}
+
+export default connect(null, { createNote })(NewNote)
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+**Ppresentational component:**
+
+- Are concerned with how things look.
+- May contain both presentational and container components inside, and usually have some DOM markup and styles of their own.
+- Often allow containment via props.children.
+- Have no dependencies on the rest of the app, such as Redux actions or stores.
+- Don’t specify how the data is loaded or mutated.
+- Receive data and callbacks exclusively via props.
+- Rarely have their own state (when they do, it’s UI state rather than data).
+- Are written as functional components unless they need state, lifecycle hooks, or performance optimizations.
+
+**Container component:**
+
+- Are concerned with how things work.
+- May contain both presentational and container components inside but usually don’t have any DOM markup of their own except for some wrapping divs, and never have any styles.
+- Provide the data and behavior to presentational or other container components.
+- Call Redux actions and provide these as callbacks to the presentational components.
+- Are often stateful, as they tend to serve as data sources.
+- Are usually generated using higher-order components such as connect from React Redux, rather than written by hand.
+
+**Abramov attributes the following benefits to the division:**
+
+- Better separation of concerns. You understand your app and your UI better by writing components this way.
+- Better reusability. You can use the same presentational component with completely different state sources, and turn those into separate container components that can be further reused.
+- Presentational components are essentially your app’s “palette”. You can put them on a single page and let the designer tweak all their variations without touching the app’s logic. You can run screenshot regression tests on that page.
 
 </details>
 
