@@ -8,7 +8,7 @@ Parts:
 
 - Parts 0-5 (core course) - Full Stack Web Development (5 cr, CSM141081)
 - Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)
-- ~~Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)~~
+- Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
 - ~~Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)~~
 - ~~Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)~~
 - ~~Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)~~
@@ -4202,3 +4202,195 @@ Description: Now let's make a new version of the anecdote application that uses 
 Create an application according to the requirements described in [exercises 6.20-6.22](https://fullstackopen.com/en/part6/react_query_use_reducer_and_the_context#exercises-6-20-6-22) and [exercises 6.3-6.24](https://fullstackopen.com/en/part6/react_query_use_reducer_and_the_context#exercises-6-23-6-24).
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part6/anecdotes)
+
+## Part 7: [React router, custom hooks, styling app with CSS and webpack](https://fullstackopen.com/en/part7)
+
+### Sub-part A: [React Router](https://fullstackopen.com/en/part7/react_router)
+
+<details>
+<summary>Links:</summary>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part B: [Custom hooks](https://fullstackopen.com/en/part7/custom_hooks)
+
+<details>
+<summary>Links:</summary>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part C: [More about styles](https://fullstackopen.com/en/part7/more_about_styles)
+
+<details>
+<summary>Links:</summary>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part D: [Webpack](https://fullstackopen.com/en/part7/webpack)
+
+<details>
+<summary>Links:</summary>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part E: [Class components, Miscellaneous](https://fullstackopen.com/en/part7/class_components_miscellaneous)
+
+<details>
+<summary>Links:</summary>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part F: [Exercises: extending the bloglist](https://fullstackopen.com/en/part7/exercises_extending_the_bloglist)
+
+<details>
+<summary>Links:</summary>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Exercises:
+
+#### 7.1-x.x: project
+
+Description:
+
+Create an application according to the requirements described in [exercises 7.1-x.x](),
+
+- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/)
