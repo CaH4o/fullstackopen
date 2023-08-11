@@ -2,4 +2,6 @@
 
 lesson - the project for exercises and practice while studying the course
 
-time: 1.5
+routed-anecdotes - the project for the exercise #7.1-7.3 "Routed anecdotes"
+
+time: 3.5

@@ -4642,10 +4642,10 @@ Text
 
 ### Exercises:
 
-#### 7.1-x.x: project
+#### 7.1-7.3: Routed anecdotes
 
-Description:
+Description: Use the previouse redux-free anecdote app as the starting point for the exercises. Add React Router to the application so that by clicking links in the Menu component the view can be changed.
 
-Create an application according to the requirements described in [exercises 7.1-x.x](),
+Create an application according to the requirements described in [exercises 7.1-7.3](https://fullstackopen.com/en/part7/react_router#exercises-7-1-7-3),
 
-- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/)
+- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/routed-anecdotes)
