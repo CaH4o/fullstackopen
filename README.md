@@ -4220,7 +4220,6 @@ Create an application according to the requirements described in [exercises 6.20
 <li><a href="https://reactrouter.com/en/main/hooks/use-navigate" title="React Router: useNavigate">React Router: useNavigate</a></li>
 <li><a href="https://reactrouter.com/en/main/components/navigate" title="React Router: Navigate">React Router: Navigate</a></li>
 <li><a href="https://reactrouter.com/en/v6.3.0/api#usematch" title="React Router: useMatch">React Router: useMatch</a></li>
-<li><a href="" title=""></a></li>
 
 </details>
 
@@ -4494,29 +4493,113 @@ BrowserRouter is a Router that uses the HTML5 history API (pushState, replaceSta
 
 <details>
 <summary>Links:</summary>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html" title="React: Hooks API Reference">React: Hooks API Reference</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#usestate" title="React: useState hook">React: useState hook</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#useeffect" title="React: useEffect hook">React: useEffect hook</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#useimperativehandle" title="React: useImperativeHandle hook">React: useImperativeHandle hook</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#usereducer" title="React: useReducer hook">React: useReducer hook</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#usecontext" title="React: useContext hook">React: useContext hook</a></li>
+<li><a href="https://react-redux.js.org/api/hooks#useselector" title="React Redux: useSelector hook">React Redux: useSelector hook</a></li>
+<li><a href="https://react-redux.js.org/api/hooks#usedispatch" title="React Redux: useDispatch hook">React Redux: useDispatch hook</a></li>
+<li><a href="https://reactrouter.com/en/main/start/tutorial" title="React Router Tutorial">React Router Tutorial</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-rules.html" title="React: Rules of Hooks">React: Rules of Hooks</a></li>
+<li><a href="https://www.npmjs.com/package/eslint-plugin-react-hooks" title="This ESLint plugin enforces the Rules of Hooks">This ESLint plugin enforces the Rules of Hooks</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-rules.html#eslint-plugin" title="React: ESLint plugin">React: ESLint plugin</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-custom.html" title="React: custom hooks">React: custom hooks</a></li>
+<li><a href="https://legacy.reactjs.org/docs/jsx-in-depth.html#spread-attributes" title="React: spread syntax">React: spread syntax</a></li>
+<li><a href="https://github.com/rehooks/awesome-react-hooks" title="Awesome React Hooks Resources">Awesome React Hooks Resources</a></li>
+<li><a href="https://usehooks.com/" title="Easy to understand React Hook recipes by Gabe Ragland">Easy to understand React Hook recipes by Gabe Ragland</a></li>
+<li><a href="https://overreacted.io/why-do-hooks-rely-on-call-order/" title="Why Do React Hooks Rely on Call Order?">Why Do React Hooks Rely on Call Order?</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#description" title="Web: named export">Web: named export</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" title="Web: import">Web: import</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect" title="React: useEffect's second parameter">React: useEffect's second parameter</a></li>
 
 </details>
 
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Create new React appliaction.
 
->
+> src/index.js
 
 ```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
 
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+```
+
+Create hook for form
+
+> src/hooks/index.js
+
+```js
+import { useState } from 'react'
+
+export const useField = (type) => {
+  const [value, setValue] = useState('')
+
+  const onChange = (event) => {
+    setValue(event.target.value)
+  }
+
+  return {
+    type,
+    value,
+    onChange,
+  }
+}
+```
+
+Use the custom hook in App component with the form
+
+> src/App.js
+
+```js
+import { useField } from './hooks'
+
+const App = () => {
+  const name = useField('text')
+  const born = useField('date')
+  const height = useField('number')
+
+  return (
+    <div>
+      <form>
+        name:
+        <input {...name} />
+        <br />
+        birthdate:
+        <input {...born} />
+        <br />
+        height:
+        <input {...height} />
+      </form>
+      <div>
+        {name.value} {born.value} {height.value}
+      </div>
+    </div>
+  )
+}
+
+export default App
 ```
 
 </details>
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+**Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function.
+
+**Don’t call Hooks from regular JavaScript functions.** Instead, you can:
+
+- Call Hooks from React function components.
+- Call Hooks from custom Hooks
+
+Building your own Hooks lets you extract component logic into reusable functions.
 
 </details>
 
