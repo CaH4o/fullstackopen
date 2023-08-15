@@ -4531,7 +4531,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-Create hook for form
+Create a custom hook for using in a form as field managment
 
 > src/hooks/index.js
 
@@ -4725,10 +4725,27 @@ Text
 
 ### Exercises:
 
-#### 7.1-7.3: Routed anecdotes
+#### 7.1-7.6: Routed anecdotes
 
-Description: Use the previouse redux-free anecdote app as the starting point for the exercises. Add React Router to the application so that by clicking links in the Menu component the view can be changed.
+Description: Use the previouse redux-free anecdote app as the starting point for the exercises. Add React Router to the application so that by clicking links in the Menu component the view can be changed. Simplify the anecdote creation form of your application with the useField custom hook we defined earlier.
 
-Create an application according to the requirements described in [exercises 7.1-7.3](https://fullstackopen.com/en/part7/react_router#exercises-7-1-7-3),
+Create an application according to the requirements described in [exercises 7.1-7.3](https://fullstackopen.com/en/part7/react_router#exercises-7-1-7-3), [exercises 7.4-7.6](https://fullstackopen.com/en/part7/custom_hooks#exercises-7-4-7-8)
 
-- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/routed-anecdotes)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/routed-anecdotes)
+
+#### 7.7: Country hook
+
+Description: The application can be used to search for a country's details from the service. To implement a custom hook useCountry, which can be used to search for the details of the country given to the hook as a parameter.
+
+Create an application according to the requirements described in [exercises 7.4-7.6](https://fullstackopen.com/en/part7/custom_hooks#exercises-7-4-7-8)
+
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/country-hook)
+
+#### 7.8: Ultimate hooks
+
+Description: The code of the application responsible for communicating with the backend of the note application of the previous parts. We notice that the code is in no way specific to the fact that our application deals with notes. Excluding the value of the baseUrl variable, the same code could be reused in the blog post application for dealing with the communication with the backend.
+Extract the code for communicating with the backend into its own useResource hook. It is sufficient to implement fetching all resources and creating a new resource.
+
+Create an application according to the requirements described in [exercises 7.4-7.6](https://fullstackopen.com/en/part7/custom_hooks#exercises-7-4-7-8)
+
+- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/ultimate-hooks)

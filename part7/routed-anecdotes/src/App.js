@@ -1,5 +1,11 @@
 import { useState } from 'react'
-import { Routes, Route, useNavigate, useMatch } from 'react-router-dom'
+import {
+  Routes,
+  Route,
+  useNavigate,
+  useMatch,
+  Navigate,
+} from 'react-router-dom'
 
 import Menu from './components/Menu'
 import AnecdoteList from './components/AnecdoteList'
@@ -8,6 +14,7 @@ import CreateNew from './components/CreateNew'
 import About from './components/About'
 import Footer from './components/Footer'
 import Notification from './components/Notification'
+import NoMatch from './components/NoMatch'
 
 const App = () => {
   const [notification, setNotification] = useState('')
@@ -64,11 +71,18 @@ const App = () => {
       <Routes>
         <Route
           path='/anecdotes/:id'
-          element={<Anecdote anecdote={anecdote} />}
+          element={
+            anecdote ? (
+              <Anecdote anecdote={anecdote} />
+            ) : (
+              <Navigate replace to='/' />
+            )
+          }
         />
         <Route path='/create' element={<CreateNew addNew={addNew} />} />
         <Route path='/about' element={<About />} />
         <Route path='/' element={<AnecdoteList anecdotes={anecdotes} />} />
+        <Route path='/*' element={<NoMatch />} />
       </Routes>
       <Footer />
     </div>
