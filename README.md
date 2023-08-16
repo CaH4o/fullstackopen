@@ -4607,6 +4607,18 @@ Building your own Hooks lets you extract component logic into reusable functions
 
 <details>
 <summary>Links:</summary>
+<li><a href="https://getbootstrap.com/" title="Bootstrap toolkit">Bootstrap toolkit</a></li>
+<li><a href="http://reactstrap.github.io/?path=/story/home-installation--page" title="React versions of Bootstrap: reactstrap">React versions of Bootstrap: reactstrap</a></li>
+<li><a href="https://react-bootstrap.github.io/" title="React versions of Bootstrap: react-bootstrap">React versions of Bootstrap: react-bootstrap</a></li>
+<li><a href="https://mui.com/" title="UI framework: MaterialUI">UI framework: MaterialUI</a></li>
+<li><a href="https://react-bootstrap.github.io/" title="UI framework: Bootstrap">UI framework: Bootstrap</a></li>
+<li><a href="https://react-bootstrap.github.io/docs/getting-started/introduction#css" title="Bootstrap: link for loading the CSS stylesheet">Bootstrap: link for loading the CSS stylesheet</a></li>
+<li><a href="https://getbootstrap.com/docs/4.1/layout/overview/#containers" title="Bootstrap: containers">Bootstrap: containers</a></li>
+<li><a href="https://getbootstrap.com/docs/4.1/content/tables/" title="Bootstrap: tables">Bootstrap: tables</a></li>
+<li><a href="https://getbootstrap.com/docs/4.1/components/forms/" title="Bootstrap: forms">Bootstrap: forms</a></li>
+<li><a href="https://getbootstrap.com/docs/4.1/components/alerts/" title="Bootstrap: Alerts">Bootstrap: Alerts</a></li>
+<li><a href="https://getbootstrap.com/docs/4.1/components/navbar/" title="Bootstrap: Navbar">Bootstrap: Navbar</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Responsive_web_design" title="Responsive web design">Responsive web design</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -4617,6 +4629,173 @@ Building your own Hooks lets you extract component logic into reusable functions
 
 <details>
 <summary>Сommands and fragments:</summary>
+
+#### React Bootstrap
+
+Install Bootstrap library
+
+> npm install react-bootstrap
+
+Add link to bootstrap in head tag
+
+> public/index.html
+
+```js
+<head>
+  <link
+    rel='stylesheet'
+    href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css'
+    integrity='sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM'
+    crossorigin='anonymous'
+  />
+  // ...
+</head>
+```
+
+Add class to root div in App component
+
+> src/App.js
+
+```js
+const App = () => {
+  // ...
+
+  return <div className='container'>// ...</div>
+}
+```
+
+Add a table instad unordered list tag
+
+> src/components/Notes.js
+
+```js
+import { Table } from 'react-bootstrap'
+
+export const Notes = ({ notes }) => (
+  <div>
+    <h2>Notes</h2>
+
+    <Table striped>
+      <tbody>
+        {notes.map((note) => (
+          <tr key={note.id}>
+            <td>
+              <Link to={`/notes/${note.id}`}>{note.content}</Link>
+            </td>
+            <td>{note.user}</td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
+  </div>
+)
+```
+
+Update form to use Bootstrap elements
+
+> src/components/Login.js
+
+```js
+import { useNavigate } from 'react-router-dom'
+import { Form, Button } from 'react-bootstrap'
+
+const Login = (props) => {
+  // ...
+  return (
+    <div>
+      <h2>login</h2>
+      <Form onSubmit={onSubmit}>
+        <Form.Group>
+          <Form.Label>username:</Form.Label>
+          <Form.Control type='text' name='username' />
+          <Form.Label>password:</Form.Label>
+          <Form.Control type='password' />
+          <Button variant='primary' type='submit'>
+            login
+          </Button>
+        </Form.Group>
+      </Form>
+    </div>
+  )
+}
+
+export default Login
+```
+
+Update App component with adding notifications functionality and changing NavBar to use bootstrap
+
+> src/App.js
+
+```js
+import { useState } from 'react'
+import { Routes, Route, Link, Navigate, useMatch } from 'react-router-dom'
+import { Alert, Navbar, Nav } from 'react-bootstrap'
+//...
+
+const App = () => {
+  //...
+  const [user, setUser] = useState(null)
+  const [message, setMessage] = useState(null)
+  //...
+  const login = (user) => {
+    setUser(user)
+    setMessage(`welcome ${user}`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 10000)
+  }
+  //...
+  return (
+    <div className='container'>
+      {message && <Alert variant='success'>{message}</Alert>}
+
+      <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <Navbar.Collapse id='responsive-navbar-nav'>
+          <Nav className='me-auto'>
+            <Nav.Link href='#' as='span'>
+              <Link style={padding} to='/'>
+                home
+              </Link>
+            </Nav.Link>
+            <Nav.Link href='#' as='span'>
+              <Link style={padding} to='/notes'>
+                notes
+              </Link>
+            </Nav.Link>
+            <Nav.Link href='#' as='span'>
+              <Link style={padding} to='/users'>
+                users
+              </Link>
+            </Nav.Link>
+            <Nav.Link href='#' as='span'>
+              {user ? (
+                <em style={padding}>{user} logged in</em>
+              ) : (
+                <Link style={padding} to='/login'>
+                  login
+                </Link>
+              )}
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+
+      {/* ... */}
+    </div>
+  )
+}
+
+export default App
+```
+
+Text
+
+>
+
+```js
+
+```
 
 Text
 
@@ -4748,4 +4927,4 @@ Extract the code for communicating with the backend into its own useResource hoo
 
 Create an application according to the requirements described in [exercises 7.4-7.6](https://fullstackopen.com/en/part7/custom_hooks#exercises-7-4-7-8)
 
-- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/ultimate-hooks)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/ultimate-hooks)

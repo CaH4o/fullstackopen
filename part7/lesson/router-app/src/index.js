@@ -1,3 +1,5 @@
+// ======================= 1 ======================= //
+/* 
 import ReactDOM from 'react-dom/client'
 import { useState } from 'react'
 
@@ -7,9 +9,8 @@ import {
   Route,
   Link,
   Navigate,
-  //useParams,
+  useParams,
   useNavigate,
-  useMatch,
 } from 'react-router-dom'
 
 const Home = () => (
@@ -29,23 +30,9 @@ const Home = () => (
   </div>
 )
 
-/*
 const Note = ({ notes }) => {
   const id = useParams().id
   const note = notes.find((n) => n.id === Number(id))
-  return (
-    <div>
-      <h2>{note.content}</h2>
-      <div>{note.user}</div>
-      <div>
-        <strong>{note.important ? 'important' : ''}</strong>
-      </div>
-    </div>
-  )
-} 
-*/
-
-const Note = ({ note }) => {
   return (
     <div>
       <h2>{note.content}</h2>
@@ -106,7 +93,6 @@ const Login = (props) => {
   )
 }
 
-/* 
 const App = () => {
   const [notes] = useState([
     {
@@ -181,83 +167,13 @@ const App = () => {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
-*/
+ */
+// ======================= 2 ======================= //
 
-const App = () => {
-  const [notes] = useState([
-    {
-      id: 1,
-      content: 'HTML is easy',
-      important: true,
-      user: 'Matti Luukkainen',
-    },
-    {
-      id: 2,
-      content: 'Browser can execute only JavaScript',
-      important: false,
-      user: 'Matti Luukkainen',
-    },
-    {
-      id: 3,
-      content: 'Most important methods of HTTP-protocol are GET and POST',
-      important: true,
-      user: 'Arto Hellas',
-    },
-  ])
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter as Router } from 'react-router-dom'
 
-  const [user, setUser] = useState(null)
-
-  const match = useMatch('/notes/:id')
-
-  const note = match
-    ? notes.find((note) => note.id === Number(match.params.id))
-    : null
-
-  const login = (user) => {
-    setUser(user)
-  }
-
-  const padding = {
-    padding: 5,
-  }
-
-  return (
-    <div>
-      <div>
-        <Link style={padding} to='/'>
-          home
-        </Link>
-        <Link style={padding} to='/notes'>
-          notes
-        </Link>
-        <Link style={padding} to='/users'>
-          users
-        </Link>
-        {user ? (
-          <em>{user} logged in</em>
-        ) : (
-          <Link style={padding} to='/login'>
-            login
-          </Link>
-        )}
-      </div>
-      <Routes>
-        <Route path='/notes/:id' element={<Note note={note} />} />
-        <Route path='/notes' element={<Notes notes={notes} />} />
-        <Route
-          path='/users'
-          element={user ? <Users /> : <Navigate replace to='/login' />}
-        />
-        <Route path='/login' element={<Login onLogin={login} />} />
-        <Route path='/' element={<Home />} />
-      </Routes>
-      <div>
-        <br />
-        <em>Note app, Department of Computer Science 2022</em>
-      </div>
-    </div>
-  )
-}
+import App from './App'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Router>
