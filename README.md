@@ -4607,7 +4607,7 @@ Building your own Hooks lets you extract component logic into reusable functions
 
 <details>
 <summary>Links:</summary>
-<li><a href="https://getbootstrap.com/" title="Bootstrap toolkit">Bootstrap toolkit</a></li>
+<li><a href="https://getbootstrap.com/" title="UI framework: Bootstrap">UI framework: Bootstrap</a></li>
 <li><a href="http://reactstrap.github.io/?path=/story/home-installation--page" title="React versions of Bootstrap: reactstrap">React versions of Bootstrap: reactstrap</a></li>
 <li><a href="https://react-bootstrap.github.io/" title="React versions of Bootstrap: react-bootstrap">React versions of Bootstrap: react-bootstrap</a></li>
 <li><a href="https://mui.com/" title="UI framework: MaterialUI">UI framework: MaterialUI</a></li>
@@ -4619,7 +4619,40 @@ Building your own Hooks lets you extract component logic into reusable functions
 <li><a href="https://getbootstrap.com/docs/4.1/components/alerts/" title="Bootstrap: Alerts">Bootstrap: Alerts</a></li>
 <li><a href="https://getbootstrap.com/docs/4.1/components/navbar/" title="Bootstrap: Navbar">Bootstrap: Navbar</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Responsive_web_design" title="Responsive web design">Responsive web design</a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://mui.com/" title="MaterialUI React library">MaterialUI React library</a></li>
+<li><a href="https://m3.material.io/" title="Material Design: Google’s open-source design system">Material Design</a></li>
+<li><a href="https://mui.com/material-ui/react-container/" title="MaterialUI: Container">MaterialUI: Container</a></li>
+<li><a href="https://mui.com/material-ui/react-table/#simple-table" title="MaterialUI: Table">MaterialUI: Table</a></li>
+<li><a href="https://mui.com/material-ui/react-text-field/" title="MaterialUI: Text Field">MaterialUI: Text Field</a></li>
+<li><a href="https://mui.com/material-ui/api/button/" title="MaterialUI: Button">MaterialUI: Button</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form" title="HTML: form tag">HTML: form tag</a></li>
+<li><a href="https://mui.com/material-ui/react-alert/" title="MaterialUI: Alert">MaterialUI: Alert</a></li>
+<li><a href="https://mui.com/material-ui/react-app-bar/" title="MaterialUI: App Bar">MaterialUI: App Bar</a></li>
+<li><a href="https://mui.com/material-ui/guides/composition/#routing-libraries" title="MaterialUI: composition - routing-libraries">MaterialUI: composition - routing-libraries</a></li>
+<li><a href="https://mui.com/material-ui/guides/composition/#component-prop" title="MaterialUI: composition - component-prop">MaterialUI: composition - component-prop</a></li>
+<li><a href="https://getbootstrap.com/docs/4.1/getting-started/introduction/#js" title="Bootstrap: JavaScript dependencies">Bootstrap: JavaScript dependencies</a></li>
+<li><a href="https://react.semantic-ui.com/" title="Semantic UI React">Semantic UI React</a></li>
+<li><a href="https://mantine.dev/" title="UI framework: Mantine">UI framework: Mantine</a></li>
+<li><a href="https://react.fluentui.dev/?path=/docs/concepts-introduction--page" title="UI framework: Fluent UI React">UI framework: Fluent UI React</a></li>
+<li><a href="https://storybook.js.org/" title="UI framework: Storybook">UI framework: Storybook</a></li>
+<li><a href="https://primereact.org/" title="UI framework: PrimeReact">UI framework: PrimeReact</a></li>
+<li><a href="https://v2.grommet.io/" title="UI framework: grommet">UI framework: grommet</a></li>
+<li><a href="https://blueprintjs.com/" title="UI framework: Blueprint">UI framework: Blueprint</a></li>
+<li><a href="https://evergreen.segment.com/" title="UI framework: Evergreen">UI framework: Evergreen</a></li>
+<li><a href="https://www.radix-ui.com/" title="UI framework: Radix">UI framework: Radix</a></li>
+<li><a href="https://react-spectrum.adobe.com/react-aria/index.html" title="UI framework: React Aria">UI framework: React Aria</a></li>
+<li><a href="https://master.co/" title="UI framework: master">UI framework: master</a></li>
+<li><a href="https://nextui.org/" title="UI framework: NextUI">UI framework: NextUI</a></li>
+<li><a href="https://daisyui.com/" title="UI framework: daisyUI">UI framework: daisyUI</a></li>
+<li><a href="https://bulma.io/" title="UI framework: Bulma">UI framework: Bulma</a></li>
+<li><a href="https://ant.design/" title="UI framework: Ant Design">UI framework: Ant Design</a></li>
+<li><a href="https://get.foundation/" title="UI framework: Foundation">UI framework: Foundation</a></li>
+<li><a href="https://chakra-ui.com/" title="UI framework: Chakra UI">UI framework: Chakra UI</a></li>
+<li><a href="https://tailwindcss.com/" title="UI framework: tailwindcss">UI framework: tailwindcss</a></li>
+<li><a href="https://semantic-ui.com/" title="UI framework: Semantic UI">UI framework: Semantic UI</a></li>
+<li><a href="https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b" title="5 Ways to Style React Components in 2020">5 Ways to Style React Components in 2020</a></li>
+<li><a href="https://styled-components.com/" title="Styled components library">Styled components library</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates" title="Template literals (Template strings)">Template literals (Template strings)</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -4652,26 +4685,47 @@ Add link to bootstrap in head tag
 </head>
 ```
 
-Add class to root div in App component
+Update App with adding container in root div tag and to use the Bootstrap alart element with notification
 
 > src/App.js
 
 ```js
-const App = () => {
-  // ...
+//...
+import { Alert } from 'react-bootstrap'
+//...
 
-  return <div className='container'>// ...</div>
+const App = () => {
+  //...
+  const [message, setMessage] = useState(null)
+  //...
+  const login = (user) => {
+    setUser(user)
+    setMessage(`welcome ${user}`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 10000)
+  }
+  //...
+
+  return (
+    <div className='container'>
+      {message && <Alert variant='success'>{message}</Alert>}
+      {/* ... */}
+    </div>
+  )
 }
+
+export default App
 ```
 
-Add a table instad unordered list tag
+Update Notes component to use the Bootstrap element table
 
 > src/components/Notes.js
 
 ```js
 import { Table } from 'react-bootstrap'
 
-export const Notes = ({ notes }) => (
+const Notes = ({ notes }) => (
   <div>
     <h2>Notes</h2>
 
@@ -4689,9 +4743,11 @@ export const Notes = ({ notes }) => (
     </Table>
   </div>
 )
+
+export default Notes
 ```
 
-Update form to use Bootstrap elements
+Update Login component to use Bootstrap elements form and button
 
 > src/components/Login.js
 
@@ -4722,19 +4778,73 @@ const Login = (props) => {
 export default Login
 ```
 
-Update App component with adding notifications functionality and changing NavBar to use bootstrap
+Update NavBar component to use bootstrap elements navbar and nav
+
+> src/components/NavBar.js
+
+```js
+import { Link } from 'react-router-dom'
+import { Navbar, Nav } from 'react-bootstrap'
+
+const NavBar = ({ user }) => {
+  const padding = {
+    padding: 5,
+  }
+
+  return (
+    <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
+      <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+      <Navbar.Collapse id='responsive-navbar-nav'>
+        <Nav className='me-auto'>
+          <Nav.Link href='#' as='span'>
+            <Link style={padding} to='/'>
+              home
+            </Link>
+          </Nav.Link>
+          <Nav.Link href='#' as='span'>
+            <Link style={padding} to='/notes'>
+              notes
+            </Link>
+          </Nav.Link>
+          <Nav.Link href='#' as='span'>
+            <Link style={padding} to='/users'>
+              users
+            </Link>
+          </Nav.Link>
+          <Nav.Link href='#' as='span'>
+            {user ? (
+              <em style={padding}>{user} logged in</em>
+            ) : (
+              <Link style={padding} to='/login'>
+                login
+              </Link>
+            )}
+          </Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  )
+}
+
+export default NavBar
+```
+
+#### Material UI
+
+Install MaterialUI React library
+
+> npm install @mui/material @emotion/react @emotion/styled
+
+Update App component to use the MaterialUA Container and add alart element with notification
 
 > src/App.js
 
 ```js
-import { useState } from 'react'
-import { Routes, Route, Link, Navigate, useMatch } from 'react-router-dom'
-import { Alert, Navbar, Nav } from 'react-bootstrap'
 //...
-
+import { Container, Alert } from '@mui/material'
+//...
 const App = () => {
   //...
-  const [user, setUser] = useState(null)
   const [message, setMessage] = useState(null)
   //...
   const login = (user) => {
@@ -4744,71 +4854,288 @@ const App = () => {
       setMessage(null)
     }, 10000)
   }
-  //...
+
   return (
-    <div className='container'>
-      {message && <Alert variant='success'>{message}</Alert>}
-
-      <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
-        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-        <Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav className='me-auto'>
-            <Nav.Link href='#' as='span'>
-              <Link style={padding} to='/'>
-                home
-              </Link>
-            </Nav.Link>
-            <Nav.Link href='#' as='span'>
-              <Link style={padding} to='/notes'>
-                notes
-              </Link>
-            </Nav.Link>
-            <Nav.Link href='#' as='span'>
-              <Link style={padding} to='/users'>
-                users
-              </Link>
-            </Nav.Link>
-            <Nav.Link href='#' as='span'>
-              {user ? (
-                <em style={padding}>{user} logged in</em>
-              ) : (
-                <Link style={padding} to='/login'>
-                  login
-                </Link>
-              )}
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-
+    <Container>
+      {message && <Alert severity='success'>{message}</Alert>}
       {/* ... */}
-    </div>
+    </Container>
   )
 }
 
 export default App
 ```
 
-Text
+Update Notes component to use the MaterialUA elements Table, TableBody, TableCell, TableContainer, TableRow, Paper.
 
->
+> src/components/Notes.js
 
 ```js
+import { Link } from 'react-router-dom'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Paper,
+} from '@mui/material'
 
+const Notes = ({ notes }) => (
+  <div>
+    <h2>Notes</h2>
+    <TableContainer component={Paper}>
+      <Table>
+        <TableBody>
+          {notes.map((note) => (
+            <TableRow key={note.id}>
+              <TableCell>
+                <Link to={`/notes/${note.id}`}>{note.content}</Link>
+              </TableCell>
+              <TableCell>{note.user}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  </div>
+)
+
+export default Notes
 ```
 
-Text
+Update Login component to use MaterialUA elements TextField and Button
 
->
+> src/components/Login.js
 
 ```js
+import { useNavigate } from 'react-router-dom'
+import { TextField, Button } from '@mui/material'
 
+const Login = (props) => {
+  //...
+  return (
+    <div>
+      <h2>login</h2>
+      <form onSubmit={onSubmit}>
+        <div>
+          <TextField label='username' />
+        </div>
+        <div>
+          <TextField label='password' type='password' />
+        </div>
+        <div>
+          <Button variant='contained' color='primary' type='submit'>
+            login
+          </Button>
+        </div>
+      </form>
+    </div>
+  )
+}
+
+export default Login
+```
+
+Update NavBar component to use MaterialUA elements AppBar, Toolbar and Button (with link component inside)
+
+> src/components/NavBar.js
+
+```js
+import { Link } from 'react-router-dom'
+import { AppBar, Toolbar, Button } from '@mui/material'
+
+const NavBar = ({ user }) => {
+  return (
+    <AppBar position='static'>
+      <Toolbar>
+        <Button color='inherit' component={Link} to='/'>
+          home
+        </Button>
+        <Button color='inherit' component={Link} to='/notes'>
+          notes
+        </Button>
+        <Button color='inherit' component={Link} to='/users'>
+          users
+        </Button>
+        {user ? (
+          <em>{user} logged in</em>
+        ) : (
+          <Button color='inherit' component={Link} to='/login'>
+            login
+          </Button>
+        )}
+      </Toolbar>
+    </AppBar>
+  )
+}
+
+export default NavBar
+```
+
+#### Styled components
+
+Install styled components library
+
+> npm install styled-components
+
+Update App component to use Styled components
+
+> src/App.js
+
+```js
+//...
+import styled from 'styled-components'
+//...
+
+const Page = styled.div`
+  padding: 1em;
+  background: papayawhip;
+`
+
+const Footer = styled.div`
+  background: Chocolate;
+  padding: 1em;
+  margin-top: 1em;
+`
+
+const App = () => {
+  //...
+  return (
+    <Page>
+      <NavBar user={user} />
+      {/* ... */}
+      <Footer>
+        <br />
+        <em>Note app, Department of Computer Science 2022</em>
+      </Footer>
+    </Page>
+  )
+}
+
+export default App
+```
+
+Update Login component to use Styled components
+
+> src/components/Login.js
+
+```js
+import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+
+const Button = styled.button`
+  background: Bisque;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid Chocolate;
+  border-radius: 3px;
+`
+
+const Input = styled.input`
+  margin: 0.25em;
+`
+
+const Login = (props) => {
+  const navigate = useNavigate()
+
+  const onSubmit = (event) => {
+    event.preventDefault()
+    props.onLogin('mluukkai')
+    navigate('/')
+  }
+
+  return (
+    <div>
+      <h2>login</h2>
+      <form onSubmit={onSubmit}>
+        <div>
+          username: <Input />
+        </div>
+        <div>
+          password: <Input type='password' />
+        </div>
+        <Button type='submit'>login</Button>
+      </form>
+    </div>
+  )
+}
+
+export default Login
+```
+
+Update NavBar component to use Styled components
+
+> src/components/NavBar.js
+
+```js
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+const Navigation = styled.div`
+  background: BurlyWood;
+  padding: 1em;
+`
+
+const NavBar = ({ user }) => {
+  const padding = {
+    padding: 5,
+  }
+
+  return (
+    <Navigation>
+      <Link style={padding} to='/'>
+        home
+      </Link>
+      <Link style={padding} to='/notes'>
+        notes
+      </Link>
+      <Link style={padding} to='/users'>
+        users
+      </Link>
+      {user ? (
+        <em>{user} logged in</em>
+      ) : (
+        <Link style={padding} to='/login'>
+          login
+        </Link>
+      )}
+    </Navigation>
+  )
+}
+
+export default NavBar
 ```
 
 </details>
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+One approach to defining styles for an application is to use a ready-made "UI framework"
+UI frameworks:
+
+- Bootstrap
+- MaterialUI
+- Bulma
+- Semantic UI React
+- Mantine
+- Fluent UI React
+- Storybook
+- PrimeReact
+- grommet
+- Blueprint
+- Evergreen
+- Radix
+- React Aria
+- master
+- NextUI
+- daisyUI
+- Ant Design
+- Foundation
+- Chakra UI
+- tailwindcss
 
 </details>
 
