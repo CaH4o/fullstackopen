@@ -5143,11 +5143,39 @@ UI frameworks:
 
 <details>
 <summary>Links:</summary>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://github.com/facebook/create-react-app" title="Create React App">Create React App</a></li>
+<li><a href="https://webpack.js.org/" title="Webpack">Webpack</a></li>
+<li><a href="https://webpack.js.org/concepts/#entry" title="Webpack: Entry">Webpack: Entry</a></li>
+<li><a href="https://webpack.js.org/concepts/#output" title="Webpack: Output">Webpack: Output</a></li>
+<li><a href="https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths" title="NodeJS: path.resolve()">NodeJS: path.resolve()</a></li>
+<li><a href="https://nodejs.org/docs/latest/api/globals.html#globals_dirname" title="NodeJS: __dirname">NodeJS: __dirname</a></li>
+<li><a href="https://facebook.github.io/jsx/" title="JSX">JSX</a></li>
+<li><a href="https://webpack.js.org/concepts/loaders/" title="Webpack: Loaders">Webpack: Loaders</a></li>
+<li><a href="https://github.com/babel/babel-loader" title="Babel Loader">Babel Loader</a></li>
+<li><a href="https://legacy.reactjs.org/docs/react-without-jsx.html" title="React: React Without JSX">React: React Without JSX</a></li>
+<li><a href="https://babeljs.io/docs/babel-polyfill/" title="babel/polyfill">babel/polyfill</a></li>
+<li><a href="https://www.npmjs.com/package/core-js" title="NPM: core JS">NPM: core JS</a></li>
+<li><a href="https://www.npmjs.com/package/regenerator-runtime" title="NPM: regenerator-runtime">NPM: regenerator-runtime</a></li>
+<li><a href="https://babeljs.io/" title="Bable">Bable</a></li>
+<li><a href="https://babeljs.io/docs/plugins/" title="Bable: Plugins">Bable: Plugins</a></li>
+<li><a href="https://babeljs.io/docs/babel-preset-react/" title="Bable: Preset React">Bable: Preset React</a></li>
+<li><a href="https://babeljs.io/docs/babel-preset-env/" title="Bable: Preset env">Bable: Preset env</a></li>
+<li><a href="https://webpack.js.org/loaders/css-loader/" title="Webpack: css-loader">Webpack: css-loader</a></li>
+<li><a href="https://webpack.js.org/loaders/style-loader/" title="Webpack: style-loader">Webpack: style-loader</a></li>
+<li><a href="https://github.com/webpack-contrib/mini-css-extract-plugin" title="mini-css-extract-plugin">mini-css-extract-plugin</a></li>
+<li><a href="https://webpack.js.org/guides/development/#using-webpack-dev-server" title="Webpack: webpack-dev-server">Webpack: webpack-dev-server</a></li>
+<li><a href="https://webpack.js.org/configuration/devtool/" title="Webpack: source map">Webpack: source map</a></li>
+<li><a href="https://lisperator.net/uglifyjs/" title=" UglifyJS"> UglifyJS</a></li>
+<li><a href="https://webpack.js.org/plugins/define-plugin/" title="Webpack: DefinePlugin">Webpack: DefinePlugin</a></li>
+<li><a href="https://webpack.js.org/guides/production/" title="Webpack: Production">Webpack: Production</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" title="JavaScript: Promise"></a>JavaScript: Promise</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find" title="JavaScript: Array .find()">JavaScript: Array .find()</a></li>
+<li><a href="https://remysharp.com/2010/10/08/what-is-a-polyfill" title="What is a Polyfill?">What is a Polyfill?</a></li>
+<li><a href="https://www.npmjs.com/package/promise-polyfill" title="NPM: promise-polyfill">NPM: promise-polyfill</a></li>
+<li><a href="https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills" title="HTML5 Cross Browser Polyfills">HTML5 Cross Browser Polyfills</a></li>
+<li><a href="https://caniuse.com/" title="Can I use ______ ?">Can I use ______ ?</a></li>
+<li><a href="https://developer.mozilla.org/en-US/" title="Resources for Developers, by Developers">Resources for Developers, by Developers</a></li>
+<li><a href="https://create-react-app.dev/docs/available-scripts/#npm-run-eject" title="Raect: npm run eject">Raect: npm run eject</a></li>
 
 </details>
 
@@ -5162,6 +5190,101 @@ Text
 
 ```
 
+Text
+
+>
+
+```js
+
+```
+
+Text
+
+>
+
+```js
+
+```
+
+Text
+
+>
+
+```js
+
+```
+
+Text
+
+>
+
+```js
+
+```
+
+Text
+
+>
+
+```js
+
+```
+
+Text
+
+>
+
+```js
+
+```
+
+Text
+
+>
+
+```js
+
+```
+
+Text
+
+>
+
+```js
+
+```
+
+Text
+
+>
+
+```js
+
+```
+
+Text
+
+>
+
+```js
+
+```
+
+Text
+
+>
+
+```js
+
+```
+
+Text
+
+>
+
+```js
+
+```
 </details>
 
 <details>
