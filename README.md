@@ -5182,113 +5182,401 @@ UI frameworks:
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+#### Create webpack
 
->
-
-```js
-
-```
-
-Text
-
->
+Create a suitable webpack configuration for a React application. Create a new directory for the project with the following subdirectories
 
 ```js
-
+├── build
+├── package.json
+├── src
+│   └── index.js
+└── webpack.config.js
 ```
 
-Text
+Install webpack with the command
 
->
+> npm install --save-dev webpack webpack-cli
+
+Create config for webpack
+
+> webpack.config.js
 
 ```js
+const path = require('path')
 
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js',
+    },
+  }
+}
+
+module.exports = config
 ```
 
-Text
+Create package for aplication
 
->
+> package.json
 
 ```js
-
+{
+  "name": "webpack-part7",
+  "version": "0.0.1",
+  "description": "practising webpack",
+"scripts": {
+  "build": "webpack --mode=development"
+},
+  "license": "MIT"
+}
 ```
 
-Text
+Create simple js 
 
->
+> src/index.js
 
 ```js
-
+const hello = name => {
+  console.log(`hello ${name}`)
+}
 ```
 
-Text
+To build webpack with next command
 
->
+> npm run build
+
+#### Webpack for React
 
 ```js
-
+├── build
+├── package.json
+├── src
+│   ├── index.js
+│   ├── index.css
+│   └── App.js
+└── webpack.config.js
 ```
 
-Text
+Install the libraries to transform the application into a minimal React application.
 
->
+> npm install react react-dom
+
+Install the loader and its required packages as a development dependency
+
+> npm install @babel/core babel-loader @babel/preset-react --save-dev
+
+Update webpack.config to use loader
+
+> webpack.config
 
 ```js
+const path = require('path')
 
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js',
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react'],
+          },
+        },
+      ],
+    },
+  }
+}
+
+module.exports = config
 ```
 
-Text
+Install two more missing dependencies, that is core-js and regenerator-runtime to bundled application's source code uses async/await, because the previous solution being deprecated
 
->
+> npm install core-js regenerator-runtime
+
+Install the preset with the command
+
+> npm install @babel/preset-env --save-dev
+
+And update the webpack config
+
+> webpack.config.js
 
 ```js
+{
+  test: /\.js$/,
+  loader: 'babel-loader',
+  options: {
 
+    presets: ['@babel/preset-env', '@babel/preset-react']
+  }
+}
 ```
 
-Text
+Create App component
 
->
+> src/App.js
 
 ```js
+import React from 'react'
 
+const App = () => {
+  return (
+    <div>
+      hello webpack
+    </div>
+  )
+}
+
+export default App
 ```
 
-Text
+Update index component to use App and dependencies
 
->
+> src/index.js
 
 ```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import 'core-js/stable/index.js'
+import 'regenerator-runtime/runtime.js'
 
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-Text
+#### CSS
 
->
+Install the loader for css
+
+> npm install style-loader css-loader --save-dev
+
+And update webpack to add loader for css
+
+> webpack.config.js
 
 ```js
-
+// ...
+   rules: [
+        // ...
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
+        },
+      ],
+  // ...
 ```
 
-Text
+Create index css file
 
->
+> src/index.css
+
+```css
+.container {
+  margin: 10px;
+  background-color: #dee8e4;
+}
+```
+
+Update App to use the css file
+
+> src/App.js
 
 ```js
+import React from 'react'
 
+import './index.css'
+
+const App = () => {
+  return <div className='container'>hello webpack</div>
+}
+
+export default App
 ```
 
-Text
+#### webpack-dev-server
 
->
+Install webpack-dev-server to auto bundle the code and refresh the browser every time we make a change to the code.
+
+> npm install --save-dev webpack-dev-server
+
+Update webpack config to add devServer
+
+> webpack.config.js
 
 ```js
-
+const config = {
+  entry: './src/index.js',
+  output: {
+    //...
+  },
+  devServer: {
+    static: path.resolve(__dirname, 'build'),
+    compress: true,
+    port: 3000,
+  },
+  // ...
+}
 ```
+
+Update npm script to use it
+
+> package.json
+
+```js
+{
+  // ...
+  "scripts": {
+    "build": "webpack --mode=development",
+    "start": "webpack serve --mode=development"
+  },
+  // ...
+}
+```
+
+#### Source map
+
+Update webpack to generate a so-called source map for the bundle, which makes it possible to map errors that occur during the execution of the bundle to the corresponding part in the original source code
+
+> webpack.config.js
+
+```js
+const config = {
+  entry: './src/index.js',
+  output: {
+    // ...
+  },
+  devServer: {
+    // ...
+  },
+  devtool: 'source-map',
+  // ..
+};
+```
+
+#### Minifying the code
+
+Update package.json to specify that webpack will execute the bundling of the code in production mode to do minification.
+
+> package.json
+
+```js
+{
+  // ...
+"scripts": {
+    "build": "webpack --mode=production",
+    "start": "webpack serve --mode=development"
+  },
+  // ...
+}
+```
+
+#### Development and production configuration
+
+Update webpack to gets a different value depending on the environment
+
+> webpack.config.js
+
+```js
+const path = require('path')
+const webpack = require('webpack')
+
+const config = (env, argv) => {
+  console.log('argv', argv.mode)
+  const backend_url = argv.mode === 'production'
+    ? 'https://notes2023.fly.dev/api/notes'
+    : 'http://localhost:3001/notes'
+
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    },
+    devServer: {
+      static: path.resolve(__dirname, 'build'),
+      compress: true,
+      port: 3000,
+    },
+    devtool: 'source-map',
+    module: {
+      // ...
+    },
+
+    plugins: [
+      new webpack.DefinePlugin({
+        BACKEND_URL: JSON.stringify(backend_url)
+      })
+    ]
+  }
+}
+
+module.exports = config
+```
+
+Install axios library to application use it
+
+> npm install axios
+
+Update App component with adding anxios
+
+> src/App.js
+
+```js
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+
+import './index.css'
+
+const useNotes = (url) => {
+  const [notes, setNotes] = useState([])
+  useEffect(() => {
+    axios.get(url).then((response) => {
+      setNotes(response.data)
+    })
+  }, [url])
+  return notes
+}
+
+const App = () => {
+  const [counter, setCounter] = useState(0)
+  const [values, setValues] = useState([])
+
+  const notes = useNotes(BACKEND_URL)
+ 
+  const handleClick = () => {
+    setCounter(counter + 1)
+    setValues(values.concat(counter))
+  }
+
+  return (
+    <div className='container'>
+      hello webpack {counter} clicks
+      <button onClick={handleClick}>press</button>
+      <div>{notes.length} notes on server {BACKEND_URL}</div>
+    </div>
+  )
+}
+
+export default App
+```
+
 </details>
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+The process of transforming code from one form of JavaScript to another is called transpiling.
 
 </details>
 
