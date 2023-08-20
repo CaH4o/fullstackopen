@@ -5234,12 +5234,12 @@ Create package for aplication
 }
 ```
 
-Create simple js 
+Create simple js
 
 > src/index.js
 
 ```js
-const hello = name => {
+const hello = (name) => {
   console.log(`hello ${name}`)
 }
 ```
@@ -5330,11 +5330,7 @@ Create App component
 import React from 'react'
 
 const App = () => {
-  return (
-    <div>
-      hello webpack
-    </div>
-  )
+  return <div>hello webpack</div>
 }
 
 export default App
@@ -5461,7 +5457,7 @@ const config = {
   },
   devtool: 'source-map',
   // ..
-};
+}
 ```
 
 #### Minifying the code
@@ -5493,15 +5489,16 @@ const webpack = require('webpack')
 
 const config = (env, argv) => {
   console.log('argv', argv.mode)
-  const backend_url = argv.mode === 'production'
-    ? 'https://notes2023.fly.dev/api/notes'
-    : 'http://localhost:3001/notes'
+  const backend_url =
+    argv.mode === 'production'
+      ? 'https://notes2023.fly.dev/api/notes'
+      : 'http://localhost:3001/notes'
 
   return {
     entry: './src/index.js',
     output: {
       path: path.resolve(__dirname, 'build'),
-      filename: 'main.js'
+      filename: 'main.js',
     },
     devServer: {
       static: path.resolve(__dirname, 'build'),
@@ -5515,9 +5512,9 @@ const config = (env, argv) => {
 
     plugins: [
       new webpack.DefinePlugin({
-        BACKEND_URL: JSON.stringify(backend_url)
-      })
-    ]
+        BACKEND_URL: JSON.stringify(backend_url),
+      }),
+    ],
   }
 }
 
@@ -5553,7 +5550,7 @@ const App = () => {
   const [values, setValues] = useState([])
 
   const notes = useNotes(BACKEND_URL)
- 
+
   const handleClick = () => {
     setCounter(counter + 1)
     setValues(values.concat(counter))
@@ -5563,7 +5560,9 @@ const App = () => {
     <div className='container'>
       hello webpack {counter} clicks
       <button onClick={handleClick}>press</button>
-      <div>{notes.length} notes on server {BACKEND_URL}</div>
+      <div>
+        {notes.length} notes on server {BACKEND_URL}
+      </div>
     </div>
   )
 }
@@ -5584,9 +5583,89 @@ The process of transforming code from one form of JavaScript to another is calle
 
 <details>
 <summary>Links:</summary>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-intro.html" title="React: Hooks">React: Hooks</a></li>
+<li><a href="https://legacy.reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class" title="React: Class syntax">React: Class syntax</a></li>
+<li><a href="https://legacy.reactjs.org/docs/react-component.html#constructor" title="React: Class-constructor">React: Class-constructor</a></li>
+<li><a href="https://legacy.reactjs.org/docs/react-component.html#render" title="React: Class-render method">React: Class-render method</a></li>
+<li><a href="https://legacy.reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class" title="React: lifecycle methods of Class Components">React: lifecycle methods of Class Components</a></li>
+<li><a href="https://legacy.reactjs.org/docs/react-component.html#setstate" title="React: Class-setState">React: Class-setState</a></li>
+<li><a href="https://legacy.reactjs.org/docs/error-boundaries.html" title="React: Class- error boundary mechanism">React: Class- error boundary mechanism</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both" title="Should I use Hooks, classes, or a mix of both?">Should I use Hooks, classes, or a mix of both?</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components" title="Do I need to rewrite all my class components?">Do I need to rewrite all my class components?</a></li>
+<li><a href="https://github.com/mars/create-react-app-buildpack" title="Heroku Buildpack for create-react-app">Heroku Buildpack for create-react-app</a></li>
+<li><a href="https://github.com/fullstack-hy2020/create-app" title="One possible starting point for the organization of 'single repository code'">One possible starting point for the organization of 'single repository code'</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Polling_(computer_science)" title="Polling">Polling</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/setInterval" title="Web: setInterval">Web: setInterval</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API" title="Web: WebSockets API">Web: WebSockets API</a></li>
+<li><a href="https://socket.io/" title="Socket.io library">Socket.io library</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model" title="Document Object Model (DOM)">Document Object Model (DOM)</a></li>
+<li><a href="https://legacy.reactjs.org/docs/glossary.html#elements" title="React: Elements">React: Elements</a></li>
+<li><a href="https://legacy.reactjs.org/docs/faq-internals.html#what-is-the-virtual-dom" title="What is the Virtual DOM">What is the Virtual DOM</a></li>
+<li><a href="https://legacy.reactjs.org/docs/react-dom.html" title="React: ReactDOM library">React: ReactDOM library</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller" title="Model View Controller">Model View Controller</a></li>
+<li><a href="https://angular.io/" title="Angular">Angular</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Overengineering" title="over-engineering">over-engineering</a></li>
+<li><a href="https://cybersecuritybase.mooc.fi/module-2.1" title="Helsinki Open University: Cyber Security Base 2023">Helsinki Open University: Cyber Security Base 2023</a></li>
+<li><a href="https://owasp.org/" title="The Open Web Application Security Project (OWASP)">The Open Web Application Security Project (OWASP)</a></li>
+<li><a href="https://owasp.org/www-project-top-ten/" title="OWASP: top 10 risks">OWASP: top 10 risks</a></li>
+<li><a href="https://security.stackexchange.com/questions/230211/why-are-stored-procedures-and-prepared-statements-the-preferred-modern-methods-f" title="SQL injections are prevented using parameterized queries">SQL injections are prevented using parameterized queries</a></li>
+<li><a href="https://zanon.io/posts/nosql-injection-in-mongodb/" title="NoSQL Injection in MongoDB">NoSQL Injection in MongoDB</a></li>
+<li><a href="https://legacy.reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks" title="React takes care of sanitizing data in variables">React takes care of sanitizing data in variables</a></li>
+<li><a href="https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1" title="Exploiting script injection flaws in ReactJS apps">Exploiting script injection flaws in ReactJS apps</a></li>
+<li><a href="https://expressjs.com/en/advanced/security-updates.html" title="Express: Security updates">Express: Security updates</a></li>
+<li><a href="https://nodejs.org/en/blog" title="NodeJS: Security updates">NodeJS: Security updates</a></li>
+<li><a href="https://docs.npmjs.com/cli/v9/commands/npm-audit" title="npm audit command">npm audit command</a></li>
+<li><a href="https://github.com/immerjs/immer" title="Immer library">Immer library</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security" title="Website security guide">Website security guide</a></li>
+<li><a href="https://expressjs.com/en/advanced/best-practice-security.html" title="Express: Production Best Practices: Security">Express: Production Best Practices: Security</a></li>
+<li><a href="https://helmetjs.github.io/" title="Helmet library">Helmet library</a></li>
+<li><a href="https://github.com/eslint-community/eslint-plugin-security" title="ESlint security-plugin">ESlint security-plugin</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing" title="Dynamic typing">Dynamic typing</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Type_system#Static_type_checking" title="Static type checking">Static type checking</a></li>
+<li><a href="https://www.typescriptlang.org/" title="TypeScript">TypeScript</a></li>
+<li><a href="https://legacy.reactjs.org/docs/react-dom-server.html" title="ReactDOMServer">ReactDOMServer</a></li>
+<li><a href="https://www.javascriptstuff.com/react-seo/" title="Will Google find your React content?">Will Google find your React content?</a></li>
+<li><a href="https://www.freecodecamp.org/news/seo-vs-react-is-it-neccessary-to-render-react-pages-in-the-backend-74ce5015c0c9" title="SEO vs. React: Web Crawlers are Smarter Than You Think">SEO vs. React: Web Crawlers are Smarter Than You Think</a></li>
+<li><a href="https://medium.com/@ghengeveld/isomorphism-vs-universal-javascript-4b47fb481beb" title="Isomorphism vs Universal JavaScript">Isomorphism vs Universal JavaScript</a></li>
+<li><a href="https://github.com/vercel/next.js" title="Next.js">Next.js</a></li>
+<li><a href="https://web.dev/progressive-web-apps/" title="progressive web app (PWA)">progressive web app (PWA)</a></li>
+<li><a href="https://create-react-app.dev/docs/making-a-progressive-web-app/" title="React: Making a Progressive Web App">React: Making a Progressive Web App</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API" title="Service Worker API">Service Worker API</a></li>
+<li><a href="https://martinfowler.com/articles/microservices.html" title="A microservice architecture (microservices)">A microservice architecture (microservices)</a></li>
+<li><a href="https://microservices.io/patterns/apigateway" title="Pattern: API Gateway / Backends for Frontends">Pattern: API Gateway / Backends for Frontends</a></li>
+<li><a href="https://www.infoq.com/presentations/netflix-chaos-microservices/" title="Mastering Chaos - A Netflix Guide to Microservices">Mastering Chaos - A Netflix Guide to Microservices</a></li>
+<li><a href="https://en.wikipedia.org/wiki/No_Silver_Bullet" title="No Silver Bullet">No Silver Bullet</a></li>
+<li><a href="https://martinfowler.com/bliki/MonolithFirst.html" title="MonolithFirst">MonolithFirst</a></li>
+<li><a href="https://martinfowler.com/articles/dont-start-monolith.html" title="Don’t start with a monolith">Don’t start with a monolith</a></li>
+<li><a href="https://aws.amazon.com/lambda/" title="AWS Lambda">AWS Lambda</a></li>
+<li><a href="https://www.serverless.com/" title="Serverless Apps">Serverless Apps</a></li>
+<li><a href="https://cloud.google.com/functions/" title="Google's Cloud functions">Google's Cloud functions</a></li> 
+<li><a href="https://azure.microsoft.com/en-us/products/functions/" title="functionality in Azure">functionality in Azure</a></li>
+<li><a href="https://aws.amazon.com/api-gateway/" title="Amazon API Gateway">Amazon API Gateway</a></li>
+<li><a href="https://www.npmjs.com/package/lodash" title="The Lodash library exported as Node.js modules.">The Lodash library exported as Node.js modules.</a></li>
+<li><a href="https://ramdajs.com/" title="Ramda: A practical functional library for JavaScript programmers.">Ramda: A practical functional library for JavaScript programmers.</a></li>
+<li><a href="https://github.com/date-fns/date-fns" title="date-fns provides the most comprehensive, yet simple and consistent toolset
+for manipulating JavaScript dates in a browser & Node.js.">date-fns provides the most comprehensive, yet simple and consistent toolset
+for manipulating JavaScript dates in a browser & Node.js.</a></li>
+<li><a href="https://react-hook-form.com/" title="React Hook Form: Performant, flexible and extensible forms with easy-to-use validation.">React Hook Form: Performant, flexible and extensible forms with easy-to-use validation.</a></li>
+<li><a href="https://recharts.org/en-US/" title="Recharts: A composable charting library built on React components">Recharts: A composable charting library built on React components</a></li>
+<li><a href="https://github.com/highcharts/highcharts-react" title="Highcharts React: Official minimal Highcharts wrapper for React.">Highcharts React: Official minimal Highcharts wrapper for React.</a></li>
+<li><a href="https://github.com/immerjs/immer" title="Immer: Create the next immutable state tree by simply modifying the current tree">Immer: Create the next immutable state tree by simply modifying the current tree</a></li>
+<li><a href="https://redux-saga.js.org/" title="Redux-Saga: An intuitive Redux side effect manager.">Redux-Saga: An intuitive Redux side effect manager.</a></li>
+<li><a href="https://github.com/react-ga/react-ga" title="React Google Analytics Module">React Google Analytics Module</a></li>
+<li><a href="https://developers.google.com/analytics/devguides/collection/gtagjs/single-page-applications" title="Single page application measurement with gtag.js">Single page application measurement with gtag.js</a></li>
+<li><a href="https://reactnative.dev/" title="React Native">React Native</a></li>
+<li><a href="https://www.npmjs.com/package/bower" title="2011 Bower - A package manager for the web">2011 Bower - A package manager for the web</a></li>
+<li><a href="https://www.npmjs.com/package/grunt" title="2012 Grunt: The JavaScript Task Runner">2012 Grunt: The JavaScript Task Runner</a></li>
+<li><a href="https://www.npmjs.com/package/gulp" title="2013-14 Gulp: Automation, Platform-agnostic, Strong Ecosystem, Simple toolkit">2013-14 Gulp: Automation, Platform-agnostic, Strong Ecosystem, Simple toolkit</a></li>
+<li><a href="https://www.npmjs.com/package/browserify" title="2012-14 Browserify: to organize your browser code and load modules installed by npm.">2012-14 Browserify: to organize your browser code and load modules installed by npm.</a></li>
+<li><a href="https://www.npmjs.com/package/webpack" title="2015 - Webpack is a module bundler.">2015 - Webpack is a module bundler.</a></li>
+<li><a href="https://parceljs.org/" title="Parcel: The zero configuration build tool">Parcel: The zero configuration build tool</a></li>
+<li><a href="https://vitejs.dev/" title="Vite: Next Generation Frontend Tooling">Vite: Next Generation Frontend Tooling</a></li>
+<li><a href="https://rome.tools/" title="Rome library,">Rome library,</a></li>
+<li><a href="https://reactpatterns.com/" title="Get the latest React patterns, tips, and tricks right to your inbox">Get the latest React patterns, tips, and tricks right to your inbox</a></li>
+<li><a href="https://vasanthk.gitbooks.io/react-bits/content/" title="A compilation of React Patterns, techniques, tips and tricks.">A compilation of React Patterns, techniques, tips and tricks.</a></li>
+<li><a href="https://www.reactiflux.com/" title="big chat community of React developers on Discord">big chat community of React developers on Discord</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 
@@ -5595,18 +5674,251 @@ The process of transforming code from one form of JavaScript to another is calle
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+#### Class components React app
 
->
+Create React app
+
+> npx create-react-app class-react-app
+
+Install JSON server to connect with backend
+
+> cd class-react-app
+> npm install json-server
+
+Update scrypt to start server on port 3001
+
+> package.json
 
 ```js
-
+{
+   "scripts": {
+    "start": "react-scripts start",
+    "server": "json-server --watch db.json --port 3001",
+   // ...
+  },
+}
 ```
+
+Create a db file
+
+> db.json
+
+```js
+{
+  "anecdotes":[
+    {
+      "content": "If it hurts, do it more often",
+      "id": "47145",
+      "votes": 0
+    },
+    {
+      "content": "Adding manpower to a late software project makes it later!",
+      "id": "21149",
+      "votes": 0
+    },
+    {
+      "content": "The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.",
+      "id": "69581",
+      "votes": 0
+    },
+    {
+      "content": "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+      "id": "36975",
+      "votes": 0
+    },
+    {
+      "content": "Premature optimization is the root of all evil.",
+      "id": "25170",
+      "votes": 0
+    },
+    {
+      "content": "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
+      "id": "98312",
+      "votes": 0
+    }
+  ]
+}
+```
+
+Install axios for usinf in future to fetch datafrom json server.
+
+> npm install axios
+
+Delete all unnecessary files and references to them in src folder, keep only index.js and App.js.
+
+> src/index.js
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+```
+
+> src/App.js
+
+```js
+import React from 'react'
+import axios from 'axios'
+
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      anecdotes: [],
+      current: 0,
+    }
+  }
+
+  componentDidMount = () => {
+    axios.get('http://localhost:3001/anecdotes').then((response) => {
+      this.setState({ anecdotes: response.data })
+    })
+  }
+
+  handleClick = () => {
+    const current = Math.floor(Math.random() * this.state.anecdotes.length)
+    this.setState({ current })
+  }
+
+  render() {
+    if (this.state.anecdotes.length === 0) {
+      return <div>no anecdotes...</div>
+    }
+
+    return (
+      <div>
+        <h1>anecdote of the day</h1>
+        <div>{this.state.anecdotes[this.state.current].content}</div>
+        <button onClick={this.handleClick}>next</button>
+      </div>
+    )
+  }
+}
+
+export default App
+```
+
+Start json server and app use the next commands in 2 different consoles
+
+> npm run server
+> npm start
+
+#### One of structure of appplication
+
+The folder structure is as follows:
+
+<pre>
+.
+├──client (frontend)
+|  ├── assets
+|  |   ├── custom.scss
+|  |   ├── favicon
+|  |   └── other-imporant-pictures.svg
+|  ├── components
+|  |   ├── FrontPage
+|  |   |   ├── index.js
+|  |   |   └── FrontPageSpecificComponent.js
+|  |   └── App.js
+|  ├── util
+|  |   ├── services
+|  |   |   └── messages.js
+|  |   └── common.js
+|  └── index.js
+|
+├──server (backend)
+|  ├── controllers
+|  |   └── messagesController.js
+|  ├── middleware
+|  |   └── errorMiddleware.js
+|  ├── util
+|  |   ├── common.js
+|  |   ├── customErrors.js
+|  |   └── routes.js
+|  └── index.js
+|
+├── .eslintignore
+├── .eslintrc
+├── .gitignore
+├── README.md
+├── index.html
+├── index.js
+├── package-lock.json
+├── package.json
+└── webpack.config.js
+</pre>
+
+#### Security
+
+Check how up-to-date your dependencies are using the command
+
+> npm outdated --depth 0
+
+The dependencies can be brought up to date by updating the file package.json. The best way to do that is by using a tool called npm-check-updates. It can be installed globally by running the command
+
+> npm install -g npm-check-updates
+
+<pre>
+$ npm-check-updates
+Checking ...\ultimate-hooks\package.json
+[====================] 9/9 100%
+
+ @testing-library/react       ^13.0.0  →  ^13.1.1
+ @testing-library/user-event  ^14.0.4  →  ^14.1.1
+ react-scripts                  5.0.0  →    5.0.1
+
+Run ncu -u to upgrade package.json
+</pre>
+
+> ncu -u
+
+<pre>
+$ ncu -u
+Upgrading ...\ultimate-hooks\package.json
+[====================] 9/9 100%
+
+ @testing-library/react       ^13.0.0  →  ^13.1.1
+ @testing-library/user-event  ^14.0.4  →  ^14.1.1
+ react-scripts                  5.0.0  →    5.0.1
+
+Run npm install to install new versions.
+</pre>
+
+To install new versions
+
+> npm install
+
+To audit to check the security of dependencies
+
+> npm audit
+
+To fix found dependencies after audit
+
+> npm audit fix
+
+Would upgrade the library version but would also upgrade the library react-scripts and that would potentially break down the development environment
+
+> npm audit fix --force
+
+to create a new project using a PWA custom template
+
+> npx create-react-app my-app --template cra-template-pwa
 
 </details>
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+- Class Components only contain one state. The state is initialized in the constructor.
+- Calling the method setState always triggers the rerender of the Class Component, i.e. calling the method render.
+- The correct place to trigger the fetching of data from a server is inside the lifecycle method **componentDidMount**, which is executed once right after the first time a component renders.
+
+- When writing fresh code, there is no rational reason to use Class Components if the project is using React with a version number 16.8 or greater. On the other hand, there is currently no need to rewrite all old React code as Functional components.
+
+- When the state of the application changes, a new virtual DOM gets defined by the components. React has the previous version of the virtual DOM in memory and instead of directly rendering the new virtual DOM using the DOM API, React computes the optimal way to update the DOM (remove, add or modify elements in the DOM) such that the DOM reflects the new virtual DOM.
 
 </details>
 

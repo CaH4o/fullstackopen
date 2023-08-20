@@ -9,4 +9,4 @@ country-hook - the project for the exercise #7.7 "Country hook"
 ultimate-hooks - the project for the exercise #7.8 "Ultimate hook"
 
 
-time: 14
+time: 15
