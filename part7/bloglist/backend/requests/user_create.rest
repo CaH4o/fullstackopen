@@ -1,0 +1,27 @@
+@baseUrl = http://localhost:{{$dotenv PORT}}/api/users
+
+### get all users
+
+GET {{baseUrl}}
+
+### post 1st user
+
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "username": "root",
+    "name": "Superuser",
+    "password": "salainen"
+}
+
+### post 2nd user
+
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "username": "mluukkai",
+    "name": "Matti Luukkainen",
+    "password": "salainen"
+}

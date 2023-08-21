@@ -1,0 +1,32 @@
+#message {
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.error {
+  color: red;
+  background: lightgrey;
+}
+
+.create {
+  color: green;
+  background: lightgrey;
+}
+
+.login {
+  color: blue;
+  background: lightgrey;
+}
+
+.update {
+  color: rgb(23, 101, 8);
+  background: lightgrey;
+}
+
+.remove {
+  color: brown;
+  background: lightgrey;
+}

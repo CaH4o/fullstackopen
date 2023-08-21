@@ -5926,7 +5926,7 @@ to create a new project using a PWA custom template
 
 <details>
 <summary>Links:</summary>
-<li><a href="" title=""></a></li>
+<li><a href="https://prettier.io/" title="Prettier">Prettier</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -5949,6 +5949,8 @@ Text
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+Prettier is an opinionated code formatter, that is, Prettier not only controls the code style but also formats the code according to the definition.
 
 </details>
 
@@ -5978,3 +5980,12 @@ Extract the code for communicating with the backend into its own useResource hoo
 Create an application according to the requirements described in [exercises 7.4-7.6](https://fullstackopen.com/en/part7/custom_hooks#exercises-7-4-7-8)
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/ultimate-hooks)
+
+#### 7.9 - 7.21: Blog list
+
+Description: 
+
+Create an application according to the requirements described in [exercises 7.4-7.6](https://fullstackopen.com/en/part7/exercises_extending_the_bloglist#exercises-7-9-7-21)
+
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/bloglist)
+
