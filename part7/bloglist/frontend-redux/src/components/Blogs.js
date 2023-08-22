@@ -1,92 +1,59 @@
-import { useState, useEffect, useRef } from 'react'
-import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
+import { useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { setNotification } from '../reducers/notificationReducer'
-import blogService from '../services/blogs'
+import {
+  initializeBlogs,
+  createBlog,
+  updateBlog,
+  removeBlog,
+} from '../reducers/blogReducer'
 import Blog from './Blog'
 import BlogForm from './BlogForm'
 import Togglable from './Togglable'
 
-const Blogs = ({ user }) => {
-  const [blogs, setBlogs] = useState([])
+const Blogs = () => {
   const blogFormRef = useRef()
   const dispatch = useDispatch()
 
-  const showBlogs = blogs.sort((a, b) => b.likes - a.likes)
+  const user = useSelector((state) => state.user)
+
+  const blogs = useSelector((state) => state.blogs)
+    .slice()
+    .sort((a, b) => b.likes - a.likes)
 
   useEffect(() => {
-    blogService
-      .getAll()
-      .then((blogs) => setBlogs(blogs))
-      .catch((error) => {
-        const message = error.response.data.error || 'Unexpected error'
-        dispatch(setNotification({ type: 'error', message }))
-      })
+    dispatch(initializeBlogs())
   }, [])
 
-  const addBlog = async (newBlog) => {
-    try {
-      const returnedBlog = await blogService.create(newBlog)
-      setBlogs(blogs.concat({ ...returnedBlog, user }))
-
-      blogFormRef.current.toggleVisibility()
-
-      const message = `a new blog '${returnedBlog.title}' by ${returnedBlog.author} added`
-      dispatch(setNotification({ type: 'create', message }))
-    } catch (exception) {
-      const message = exception.response.data.error || 'Unexpected error'
-      dispatch(setNotification({ type: 'error', message }))
-    }
+  const handleCreateBlog = async (blog) => {
+    dispatch(createBlog({ blog, user }))
+    blogFormRef.current.toggleVisibility()
   }
 
-  const updateBlog = async (updateBlog) => {
-    try {
-      const returnedBlog = await blogService.update(updateBlog)
-      setBlogs(blogs.map((b) => (b.id === returnedBlog.id ? returnedBlog : b)))
-
-      const message = `the blog '${returnedBlog.title}' by ${returnedBlog.author} is updated`
-      dispatch(setNotification({ type: 'update', message }))
-    } catch (exception) {
-      const message = exception.response.data.error || 'Unexpected error'
-      dispatch(setNotification({ type: 'error', message }))
-    }
+  const handleUpdateBlog = async (blog) => {
+    dispatch(updateBlog(blog))
   }
 
-  const removeBlog = async (removeBlog) => {
-    try {
-      await blogService.remove(removeBlog.id)
-      setBlogs(blogs.filter((b) => b.id !== removeBlog.id))
-
-      const message = `the blog '${removeBlog.title}' by ${removeBlog.author} is removed`
-      dispatch(setNotification({ type: 'remove', message }))
-    } catch (exception) {
-      const message = exception.response.data.error || 'Unexpected error'
-      dispatch(setNotification({ type: 'error', message }))
-    }
+  const handleRemoveBlog = async (blog) => {
+    dispatch(removeBlog(blog))
   }
 
   return (
     <div>
       <Togglable buttonLabel='Create a new blog' ref={blogFormRef}>
-        <BlogForm createBlog={addBlog} />
+        <BlogForm createBlog={handleCreateBlog} />
       </Togglable>
-      {showBlogs.map((blog) => (
+      {blogs.map((blog) => (
         <Blog
           key={blog.id}
           blog={blog}
-          updateBlog={updateBlog}
-          removeBlog={removeBlog}
+          updateBlog={handleUpdateBlog}
+          removeBlog={handleRemoveBlog}
           user={user}
         />
       ))}
     </div>
   )
-}
-
-Blogs.propTypes = {
-  user: PropTypes.object.isRequired,
-  setMessage: PropTypes.func.isRequired,
 }
 
 export default Blogs

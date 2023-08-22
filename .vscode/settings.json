@@ -15,5 +15,5 @@
     "prettier.jsxSingleQuote": true,
     "prettier.endOfLine": "lf",
     "prettier.quoteProps": "preserve",
-    "eslint.workingDirectories": [{ "mode": "auto" }]
+    "eslint.workingDirectories": [{ "mode": "auto" }],
 }

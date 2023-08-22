@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 
-const Blog = ({ user, blog, updateBlog, removeBlog }) => {
+const Blog = ({ blog, updateBlog, removeBlog }) => {
   const [isCollapsed, setIsCollapsed] = useState(true)
+
+  const user = useSelector((state) => state.user)
 
   const blogStyle = {
     marginTop: 2,
@@ -23,7 +26,7 @@ const Blog = ({ user, blog, updateBlog, removeBlog }) => {
   }
 
   const handleRemoveBlog = () => {
-    if (window.confirm('Do you really want to leave?')) {
+    if (window.confirm('Do you really want to remove?')) {
       removeBlog(blog)
     }
   }

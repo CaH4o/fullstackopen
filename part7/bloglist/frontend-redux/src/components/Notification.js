@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux'
 
 const Notification = () => {
-  const { type, message } = useSelector((state) => state.notifications)
+  const { message, type } = useSelector((state) => state.notification)
 
-  return message ? (
+  return type ? (
     <div className={type} id='message'>
       {message}
     </div>

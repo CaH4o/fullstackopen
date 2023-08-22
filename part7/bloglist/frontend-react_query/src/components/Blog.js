@@ -23,7 +23,7 @@ const Blog = ({ user, blog, updateBlog, removeBlog }) => {
   }
 
   const handleRemoveBlog = () => {
-    if (window.confirm('Do you really want to leave?')) {
+    if (window.confirm('Do you really want to remove it?')) {
       removeBlog(blog)
     }
   }

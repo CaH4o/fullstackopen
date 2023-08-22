@@ -1,12 +1,15 @@
 import { useState } from 'react'
-import PropTypes from 'prop-types'
 
+import { useSetNotification, types } from '../NotificationContext'
+import { useUserDispatch, localStorageAppUser } from '../UserContext'
 import loginService from '../services/login'
 import blogService from '../services/blogs'
 
-const Login = ({ setUser, setMessage }) => {
+const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const setNotification = useSetNotification()
+  const userDispatch = useUserDispatch()
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -15,19 +18,18 @@ const Login = ({ setUser, setMessage }) => {
       const credentials = { username, password }
       const user = await loginService.login(credentials)
 
-      setUser(user)
-      window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
+      userDispatch({ type: 'SET', payload: user })
+      window.localStorage.setItem(localStorageAppUser, JSON.stringify(user))
       blogService.setToken(user.token)
 
-      setMessage({
-        type: 'login',
-        text: `succesful login as ${user.name}`,
-      })
+      const message = `succesful login as ${user.name}`
+      setNotification(message, types.login)
+
       setUsername('')
       setPassword('')
     } catch (exception) {
-      const text = exception.response.data.error || 'Unexpected error'
-      setMessage({ type: 'error', text })
+      const message = exception.response.data.error || 'Unexpected error'
+      setNotification(message)
     }
   }
 
@@ -58,11 +60,6 @@ const Login = ({ setUser, setMessage }) => {
       </button>
     </form>
   )
-}
-
-Login.propTypes = {
-  setUser: PropTypes.func.isRequired,
-  setMessage: PropTypes.func.isRequired,
 }
 
 export default Login

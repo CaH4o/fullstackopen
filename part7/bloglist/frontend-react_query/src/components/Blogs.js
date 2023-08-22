@@ -1,77 +1,104 @@
-import { useState, useEffect, useRef } from 'react'
-import PropTypes from 'prop-types'
+import { useRef } from 'react'
+import { useQuery, useMutation, useQueryClient } from 'react-query'
 
+import { useSetNotification, types } from '../NotificationContext'
+import { useUserValue } from '../UserContext'
 import blogService from '../services/blogs'
 import Blog from './Blog'
 import BlogForm from './BlogForm'
 import Togglable from './Togglable'
 
-const Blogs = ({ user, setMessage }) => {
-  const [blogs, setBlogs] = useState([])
+const Blogs = () => {
   const blogFormRef = useRef()
+  const setNotification = useSetNotification()
+  const queryClient = useQueryClient()
+  const user = useUserValue()
 
-  const showBlogs = blogs.sort((a, b) => b.likes - a.likes)
+  const newBlogMutation = useMutation(blogService.create, {
+    onSuccess: (newBlog) => {
+      const blogs = queryClient.getQueryData('blogs')
+      queryClient.setQueryData('blogs', blogs.concat({ ...newBlog, user }))
 
-  useEffect(() => {
-    blogService
-      .getAll()
-      .then((blogs) => setBlogs(blogs))
-      .catch((error) => {
-        const text = error.response.data.error || 'Unexpected error'
-        setMessage({ type: 'error', text })
-      })
-  }, [])
+      const message = `a new blog '${newBlog.title}' by ${newBlog.author} added`
+      setNotification(message, types.create)
+    },
+    onError: ({ response }) => {
+      const message = response.data.error || 'Unexpected error'
+      setNotification(message)
+    },
+  })
 
   const addBlog = async (newBlog) => {
-    try {
-      const returnedBlog = await blogService.create(newBlog)
-      setBlogs(blogs.concat({ ...returnedBlog, user }))
-
-      blogFormRef.current.toggleVisibility()
-      setMessage({
-        type: 'create',
-        text: `a new blog '${returnedBlog.title}' by ${returnedBlog.author} added`,
-      })
-    } catch (exception) {
-      const text = exception.response.data.error || 'Unexpected error'
-      setMessage({ type: 'error', text })
-    }
+    await newBlogMutation.mutate(newBlog)
+    blogFormRef.current.toggleVisibility()
   }
+
+  const updateBlogMutation = useMutation(blogService.update, {
+    onSuccess: (updatedBlog) => {
+      const blogs = queryClient.getQueryData('blogs')
+      queryClient.setQueryData(
+        'blogs',
+        blogs.map((blog) => (blog.id !== updatedBlog.id ? blog : updatedBlog))
+      )
+
+      const message = `the blog '${updatedBlog.title}' by ${updatedBlog.author} is updated`
+      setNotification(message, types.update)
+    },
+    onError: ({ response }) => {
+      const message = response.data.error || 'Unexpected error'
+      setNotification(message)
+    },
+  })
 
   const updateBlog = async (updateBlog) => {
-    try {
-      const returnedBlog = await blogService.update(updateBlog)
-      setBlogs(blogs.map((b) => (b.id === returnedBlog.id ? returnedBlog : b)))
-
-      setMessage({
-        type: 'update',
-        text: `the blog '${returnedBlog.title}' by ${returnedBlog.author} is updated`,
-      })
-    } catch (exception) {
-      const text = exception.response.data.error || 'Unexpected error'
-      setMessage({ type: 'error', text })
-    }
+    await updateBlogMutation.mutate(updateBlog)
   }
 
-  const removeBlog = async (removeBlog) => {
-    try {
-      await blogService.remove(removeBlog.id)
-      setBlogs(blogs.filter((b) => b.id !== removeBlog.id))
+  const removeBlogMutation = useMutation(blogService.remove, {
+    onSuccess: (response, removeBlogId) => {
+      const blogs = queryClient.getQueryData('blogs')
+      const removeBlog = blogs.find((b) => b.id === removeBlogId)
+      queryClient.setQueryData(
+        'blogs',
+        blogs.filter((blog) => blog.id !== removeBlogId)
+      )
 
-      setMessage({
-        type: 'remove',
-        text: `the blog '${removeBlog.title}' by ${removeBlog.author} is removed`,
-      })
-    } catch (exception) {
-      const text = exception.response.data.error || 'Unexpected error'
-      setMessage({ type: 'error', text })
-    }
+      const message = `the blog '${removeBlog.title}' by ${removeBlog.author} is removed`
+      setNotification(message, types.remove)
+    },
+    onError: ({ response }) => {
+      const message = response.data.error || 'Unexpected error'
+      setNotification(message)
+    },
+  })
+
+  const removeBlog = async (removeBlog) => {
+    await removeBlogMutation.mutate(removeBlog.id)
+  }
+
+  const result = useQuery('blogs', blogService.getAll, {
+    retry: false,
+    refetchOnWindowFocus: false,
+  })
+
+  const showBlogs = result.isSuccess
+    ? result.data.sort((a, b) => b.likes - a.likes)
+    : []
+
+  if (result.isLoading) {
+    return <div>loading data...</div>
+  }
+
+  if (result.isError) {
+    const message = result.error.response.data.error || 'Unexpected error'
+    setNotification(message)
+    return <div>anecdote service not available due to problem in server</div>
   }
 
   return (
     <div>
       <Togglable buttonLabel='Create a new blog' ref={blogFormRef}>
-        <BlogForm createBlog={addBlog} setMessage={setMessage} />
+        <BlogForm createBlog={addBlog} />
       </Togglable>
       {showBlogs.map((blog) => (
         <Blog
@@ -84,11 +111,6 @@ const Blogs = ({ user, setMessage }) => {
       ))}
     </div>
   )
-}
-
-Blogs.propTypes = {
-  user: PropTypes.object.isRequired,
-  setMessage: PropTypes.func.isRequired,
 }
 
 export default Blogs

@@ -1,27 +1,39 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const notificationsSlice = createSlice({
+const initialState = { message: '', type: null }
+
+const notificationSlice = createSlice({
   name: 'notifications',
-  initialState: { type: null, message: null },
+  initialState,
   reducers: {
-    setMessage(state, { type, message }) {
-      return { type, message }
+    setNotification(state, action) {
+      const { message, type } = action.payload
+      const newNotification = { message, type }
+      return newNotification
     },
     clearNotification() {
-      return { type: null, message: null }
+      return initialState
     },
   },
 })
 
-export const { setMessage, clearNotification } = notificationsSlice.actions
+export const { setNotification, clearNotification } = notificationSlice.actions
 
-export const setNotification = (message, time = 5000) => {
+export const types = {
+  error: 'error',
+  create: 'create',
+  login: 'login',
+  update: 'update',
+  remove: 'remove',
+}
+
+export const setMessage = (message, type = types.error, time = 5000) => {
   return async (dispatch) => {
-    dispatch(setMessage(message))
+    dispatch(setNotification({ message, type }))
     setTimeout(() => {
       dispatch(clearNotification())
     }, time)
   }
 }
 
-export default notificationsSlice.reducer
+export default notificationSlice.reducer

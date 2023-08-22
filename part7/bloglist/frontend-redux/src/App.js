@@ -1,55 +1,50 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import blogService from './services/blogs'
+import { autoLogin, logout } from './reducers/userReducer'
 import Login from './components/Login'
 import Blogs from './components/Blogs'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 
 const App = () => {
-  const [user, setUser] = useState(null)
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.user)
+  const notification = useSelector((state) => state.notification)
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      blogService.setToken(user.token)
-    }
+    dispatch(autoLogin())
   }, [])
 
-  /*   useEffect(() => {
-      if (message.text === 'token expired') {
-        logout()
-      }
+  useEffect(() => {
+    if (notification.message === 'token expired') {
+      dispatch(logout())
     }
-  }, [message]) */
+  }, [notification])
 
-  const logout = () => {
-    window.localStorage.removeItem('loggedBlogAppUser')
-    setUser(null)
-    blogService.setToken(null)
+  const handleLogout = () => {
+    dispatch(logout())
   }
 
   return (
     <div>
-      <h2>{user ? 'blogs' : 'log in to application'}</h2>
+      <h2>{user.token ? 'blogs' : 'log in to application'}</h2>
 
       <Notification />
 
-      {user && (
+      {user.token && (
         <div>
           <div>
             {`${user.name} logged in `}
-            <button onClick={logout}>logout</button>
+            <button onClick={handleLogout}>logout</button>
           </div>
-          <Blogs user={user} />
+          <Blogs />
         </div>
       )}
 
-      {!user && (
+      {!user.token && (
         <Togglable buttonLabel='to login'>
-          <Login setUser={setUser} />
+          <Login />
         </Togglable>
       )}
     </div>

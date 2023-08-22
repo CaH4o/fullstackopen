@@ -5,9 +5,11 @@ const User = require('../models/user')
 const authorization = require('../utils/middleware').authorization
 
 blogsRouter.get('/', async (request, response) => {
-/*   const user = request.body.user */
+  /*   const user = request.body.user */
 
-  const blogs = await Blog.find({ /* user: user._id */ }).populate('user', {
+  const blogs = await Blog.find({
+    /* user: user._id */
+  }).populate('user', {
     username: 1,
     name: 1,
     _id: 1,
@@ -49,20 +51,23 @@ blogsRouter.delete('/:id', authorization, async (request, response) => {
   response.status(204).end()
 })
 
-blogsRouter.put('/:id', /* authorization, */ async (request, response) => {
-  const { title, author, url, likes } = request.body
+blogsRouter.put(
+  '/:id',
+  /* authorization, */ async (request, response) => {
+    const { title, author, url, likes } = request.body
 
-  const result = await Blog.findByIdAndUpdate(
-    request.params.id,
-    { title, author, url, likes },
-    { new: true, runValidators: true, context: 'query' }
-  ).populate('user', {
-    username: 1,
-    name: 1,
-    _id: 1,
-  })
+    const result = await Blog.findByIdAndUpdate(
+      request.params.id,
+      { title, author, url, likes },
+      { new: true, runValidators: true, context: 'query' }
+    ).populate('user', {
+      username: 1,
+      name: 1,
+      _id: 1,
+    })
 
-  response.json(result)
-})
+    response.json(result)
+  }
+)
 
 module.exports = blogsRouter

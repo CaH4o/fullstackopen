@@ -1,4 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
+
+import { useNotificationValue } from './NotificationContext'
+import UserContext, { localStorageAppUser } from './UserContext'
 
 import blogService from './services/blogs'
 import Login from './components/Login'
@@ -7,53 +10,50 @@ import Notification from './components/Notification'
 import Togglable from './components/Togglable'
 
 const App = () => {
-  const [user, setUser] = useState(null)
-  const [message, setMessage] = useState(null)
+  const [user, userDispatch] = useContext(UserContext)
+  const { message } = useNotificationValue()
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
+    const loggedUserJSON = window.localStorage.getItem(localStorageAppUser)
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      setUser(user)
+      userDispatch({ type: 'SET', payload: user })
       blogService.setToken(user.token)
     }
   }, [])
 
   useEffect(() => {
-    if (message) {
-      setTimeout(() => setMessage(null), 3000)
-
-      if (message.text === 'token expired') {
-        logout()
-      }
+    if (message === 'token expired') {
+      logout()
     }
   }, [message])
 
   const logout = () => {
-    window.localStorage.removeItem('loggedBlogAppUser')
-    setUser(null)
+    window.localStorage.removeItem(localStorageAppUser)
+    userDispatch({ type: 'RESET' })
+
     blogService.setToken(null)
   }
 
   return (
     <div>
-      <h2>{user ? 'blogs' : 'log in to application'}</h2>
+      <h2>{user.token ? 'blogs' : 'log in to application'}</h2>
 
-      <Notification message={message} />
+      <Notification />
 
-      {user && (
+      {user.token && (
         <div>
           <div>
             {`${user.name} logged in `}
             <button onClick={logout}>logout</button>
           </div>
-          <Blogs user={user} setMessage={setMessage} />{' '}
+          <Blogs />
         </div>
       )}
 
-      {!user && (
+      {!user.token && (
         <Togglable buttonLabel='to login'>
-          <Login setUser={setUser} setMessage={setMessage} />
+          <Login />
         </Togglable>
       )}
     </div>
