@@ -17,5 +17,3 @@ bloglist - the project for the exercises #7.9 - 7.21 "Blog list"
     frontend-redux - the project for the exercises #7.10 - 7.13 with State management: Redux
 
     frontend-redux-view - the project for the exercises #7.10 - 7.21 with State management: Redux, View, Comments and Style
-
-time: 29

@@ -5927,22 +5927,36 @@ to create a new project using a PWA custom template
 <details>
 <summary>Links:</summary>
 <li><a href="https://prettier.io/" title="Prettier">Prettier</a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
 
 </details>
 
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Setting up Prettier
 
->
+> .vscode/settings.json
 
 ```js
-
+{
+    "typescript.validate.enable": true,
+    "javascript.validate.enable": true,
+    "js/ts.implicitProjectConfig.checkJs": false,
+    "files.associations": {
+        "*.tsx": "typescriptreact",
+        "*.ts": "typescript",
+        "*.jsx": "javascriptreact",
+        "*.js": "javascript",
+        "*test.js": "javascript"
+    },
+    "prettier.semi": false,
+    "prettier.singleQuote": true,
+    "prettier.singleAttributePerLine": false,
+    "prettier.jsxSingleQuote": true,
+    "prettier.endOfLine": "lf",
+    "prettier.quoteProps": "preserve",
+    "eslint.workingDirectories": [{ "mode": "auto" }],
+}
 ```
 
 </details>
@@ -5983,9 +5997,8 @@ Create an application according to the requirements described in [exercises 7.4-
 
 #### 7.9 - 7.21: Blog list
 
-Description: 
+Description: Take Blog application from previouse part and refactor it to use Redux and/or React Query and Context. Manage the notification data, blogs and users. Expand the solution so that it is again possible to fetch blogs, create a new blog, like and delete a blog. Crate views: Users, Individual user, Individual blog, Blogs and create Navigation. Implement the functionality for commenting on blog. Improve the appearanc by applying one of the styling methods shown in the course material.
 
 Create an application according to the requirements described in [exercises 7.4-7.6](https://fullstackopen.com/en/part7/exercises_extending_the_bloglist#exercises-7-9-7-21)
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/bloglist)
-
