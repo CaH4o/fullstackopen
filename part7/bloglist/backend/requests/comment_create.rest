@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:{{$dotenv PORT}}/api
+
+
+### create a single comment
+
+POST {{baseUrl}}/comments
+Content-Type: application/json
+
+{
+  "title": "New Comment 4",
+  "blogId": "64931c4bf2c9caa915452e9c"
+}
+
+### get all comments
+
+GET {{baseUrl}}/comments

@@ -9,11 +9,13 @@ blogsRouter.get('/', async (request, response) => {
 
   const blogs = await Blog.find({
     /* user: user._id */
-  }).populate('user', {
-    username: 1,
-    name: 1,
-    _id: 1,
   })
+    .populate('user', {
+      username: 1,
+      name: 1,
+      _id: 1,
+    })
+    .populate('comments', {})
   response.json(blogs)
 })
 
@@ -60,11 +62,13 @@ blogsRouter.put(
       request.params.id,
       { title, author, url, likes },
       { new: true, runValidators: true, context: 'query' }
-    ).populate('user', {
-      username: 1,
-      name: 1,
-      _id: 1,
-    })
+    )
+      .populate('user', {
+        username: 1,
+        name: 1,
+        _id: 1,
+      })
+      .populate('comments', {})
 
     response.json(result)
   }
