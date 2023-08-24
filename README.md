@@ -6002,3 +6002,165 @@ Description: Take Blog application from previouse part and refactor it to use Re
 Create an application according to the requirements described in [exercises 7.4-7.6](https://fullstackopen.com/en/part7/exercises_extending_the_bloglist#exercises-7-9-7-21)
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/bloglist)
+
+## Part 7: [GraphQL](https://fullstackopen.com/en/part8)
+
+### Sub-part A: [GraphQL-server](https://fullstackopen.com/en/part8/graph_ql_server)
+
+<details>
+<summary>Links:</summary>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part B: [React and GraphQL](https://fullstackopen.com/en/part8/react_and_graph_ql)
+
+<details>
+<summary>Links:</summary>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part C: [Database and user administration](https://fullstackopen.com/en/part8/database_and_user_administration)
+
+<details>
+<summary>Links:</summary>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part D: [Login and updating the cache](https://fullstackopen.com/en/part8/login_and_updating_the_cache)
+
+<details>
+<summary>Links:</summary>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part E: [Fragments and subscriptions](https://fullstackopen.com/en/part8/fragments_and_subscriptions)
+
+<details>
+<summary>Links:</summary>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Exercises:
+
+#### 8.1-8.x: Name
+
+Description:
+
+Create an application according to the requirements described in [exercises 8.1-8.x]()
+
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/)
