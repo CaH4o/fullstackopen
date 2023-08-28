@@ -6009,6 +6009,16 @@ Create an application according to the requirements described in [exercises 7.4-
 
 <details>
 <summary>Links:</summary>
+<li><a href="https://graphql.org/" title="GraphQL">GraphQL</a></li>
+<li><a href="https://graphql.org/learn/schema/" title="GraphQL: Schemas and Types">GraphQL: Schemas and Types</a></li>
+<li><a href="https://graphql.org/learn/schema/#type-system" title="GraphQL: type-system">GraphQL: type-system</a></li>
+<li><a href="https://graphql.org/learn/schema/#scalar-types" title="GraphQL: scalar-types">GraphQL: scalar-types</a></li>
+<li><a href="https://graphql.org/learn/schema/#the-query-and-mutation-types" title="GraphQL: The Query and Mutation types">GraphQL: The Query and Mutation types</a></li>
+<li><a href="https://graphql.org/learn/queries/#fields" title="GraphQL: queries fields">GraphQL: queries fields</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/" title="Apollo Server">Apollo Server</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/api/apollo-server/" title="Apollo Server: API Reference">Apollo Server: API Reference</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/data/resolvers/" title="Apollo Server: Resolvers">Apollo Server: Resolvers</a></li>
+<li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -6020,7 +6030,13 @@ Create an application according to the requirements described in [exercises 7.4-
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Create a new npm project with npm init and install the required dependencies.
+
+> npm install @apollo/server graphql
+
+```js
+
+```
 
 >
 
