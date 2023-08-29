@@ -6018,12 +6018,16 @@ Create an application according to the requirements described in [exercises 7.4-
 <li><a href="https://www.apollographql.com/docs/apollo-server/" title="Apollo Server">Apollo Server</a></li>
 <li><a href="https://www.apollographql.com/docs/apollo-server/api/apollo-server/" title="Apollo Server: API Reference">Apollo Server: API Reference</a></li>
 <li><a href="https://www.apollographql.com/docs/apollo-server/data/resolvers/" title="Apollo Server: Resolvers">Apollo Server: Resolvers</a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://www.apollographql.com/docs/graphos/explorer/" title="Apollo Server: The GraphOS Studio Explorer">Apollo Server: The GraphOS Studio Explorer</a></li>
+<li><a href="https://the-guild.dev/graphql/tools/docs/resolvers#resolver-function-signature" title="Apollo Server: Resolver Function Signature">Apollo Server: Resolver Function Signature</a></li>
+<li><a href="https://the-guild.dev/graphql/tools/docs/resolvers#default-resolver" title="GraphQL: Default Resolver">GraphQL: Default Resolver</a></li>
+<li><a href="https://graphql.org/learn/queries/#mutations" title="GraphQL: Mutations">GraphQL: Mutations</a></li>
+<li><a href="https://github.com/uuidjs/uuid#readme" title="uuid library">uuid library</a></li>
+<li><a href="https://graphql.org/learn/validation/" title="GraphQL: Validation">GraphQL: Validation</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors" title="Apollo Server: Custom errors">Apollo Server: Custom errors</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes" title="Apollo Server: Built-in error codes">Apollo Server: Built-in error codes</a></li>
+<li><a href="https://graphql.org/learn/schema/#enumeration-types" title="GraphQL: Enumeration types">GraphQL: Enumeration types</a></li>
+<li><a href="https://graphql.org/learn/queries/#variables" title="GraphQL: Variables">GraphQL: Variables</a></li>
 
 </details>
 
@@ -6034,20 +6038,305 @@ Create a new npm project with npm init and install the required dependencies.
 
 > npm install @apollo/server graphql
 
-```js
+Install uuid to get random UUID
 
+> npm install uuid
+
+Istal nodemon to autorestart server
+
+> npm install nodemon
+
+> package.json
+
+```js
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@apollo/server": "^4.3.2",
+        "graphql": "^16.6.0",
+        "nodemon": "^2.0.20",
+        "uuid": "^9.0.0"
+    }
+}
 ```
 
->
+Create Apollo Server with persons as the data.
+
+> index.js
 
 ```js
+const { ApolloServer } = require('@apollo/server')
+const { startStandaloneServer } = require('@apollo/server/standalone')
 
+let persons = [
+  {
+    name: 'Arto Hellas',
+    phone: '040-123543',
+    street: 'Tapiolankatu 5 A',
+    city: 'Espoo',
+    id: '3d594650-3436-11e9-bc57-8b80ba54c431',
+  },
+  {
+    name: 'Matti Luukkainen',
+    phone: '040-432342',
+    street: 'Malminkaari 10 A',
+    city: 'Helsinki',
+    id: '3d599470-3436-11e9-bc57-8b80ba54c431',
+  },
+  {
+    name: 'Venla Ruuska',
+    street: 'Nallemäentie 22 C',
+    city: 'Helsinki',
+    id: '3d599471-3436-11e9-bc57-8b80ba54c431',
+  },
+]
+
+const typeDefs = `
+  type Person {
+    name: String!
+    phone: String
+    street: String!
+    city: String! 
+    id: ID!
+  }
+
+  type Query {
+    personCount: Int!
+    allPersons: [Person!]!
+    findPerson(name: String!): Person
+  }
+`
+
+const resolvers = {
+  Query: {
+    personCount: () => persons.length,
+    allPersons: () => persons,
+    findPerson: (root, args) => persons.find((p) => p.name === args.name),
+  },
+  Person: {
+    name: (root) => root.name,
+    phone: (root) => root.phone,
+    street: (root) => root.street,
+    city: (root) => root.city,
+    id: (root) => root.id,
+  },
+}
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+})
+
+startStandaloneServer(server, {
+  listen: { port: 4000 },
+}).then(({ url }) => {
+  console.log(`Server ready at ${url}`)
+})
+```
+
+Change typeDefs to use adress object in queries and enums with filtering
+
+> index.js
+
+```js
+// ...
+const typeDefs = `
+  type Address {
+    street: String!
+    city: String! 
+  }
+
+  enum YesNo {
+    YES
+    NO
+  }
+
+  type Person {
+    name: String!
+    phone: String
+    address: Address!
+    id: ID!
+  }
+
+  type Query {
+    personCount: Int!
+    allPersons(phone: YesNo): [Person!]!
+    findPerson(name: String!): Person
+  }
+`
+
+const resolvers = {
+  Query: {
+    personCount: () => persons.length,
+    allPersons: (root, args) => {
+      if (!args.phone) {
+        return persons
+      }
+      const byPhone = (person) =>
+        args.phone === 'YES' ? person.phone : !person.phone
+      return persons.filter(byPhone)
+    },
+    findPerson: (root, args) => persons.find((p) => p.name === args.name),
+  },
+  Person: {
+    address: ({ street, city }) => {
+      return {
+        street,
+        city,
+      }
+    },
+  },
+}
+// ...
+```
+
+Add mutation to create and change data with handeling errors
+
+> index.js
+
+```js
+const { ApolloServer } = require('@apollo/server')
+const { startStandaloneServer } = require('@apollo/server/standalone')
+const { v1: uuid } = require('uuid')
+const { GraphQLError } = require('graphql')
+
+// ...
+
+const typeDefs = `
+  ${/* ... */}
+
+  type Mutation {
+    addPerson(
+      name: String!
+      phone: String
+      street: String!
+      city: String!
+    ): Person
+
+    editNumber(
+      name: String!
+      phone: String!
+    ): Person
+  }
+`
+
+const resolvers = {
+  Query: {
+   // ...
+  },
+  Person: {
+    // ...
+  },
+  Mutation: {
+    addPerson: (root, args) => {
+      if (persons.find(p => p.name === args.name)) {
+        throw new GraphQLError('Name must be unique', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name
+          }
+        })
+      }
+      const person = { ...args, id: uuid() }
+      persons = persons.concat(person)
+      return person
+    },
+    editNumber: (root, args) => {
+      const person = persons.find(p => p.name === args.name)
+      if (!person) {
+        return null
+      }
+
+      const updatedPerson = { ...person, phone: args.phone }
+      persons = persons.map(p => p.name === args.name ? updatedPerson : p)
+      return updatedPerson
+    }
+  }
+}
+// ...
+```
+
+We can use Apollo Studeo Explorer by address http://localhost:4000/. We can use different queries to check the results.
+
+```js
+query {
+  findPerson(name: "Arto Hellas") {
+    phone
+    address {
+      city
+      street
+    }
+  }
+}
+
+{
+  "data": {
+    "findPerson": {
+      "phone": "040-123543",
+      "address": {
+        "city": "Espoo",
+        "street": "Tapiolankatu 5 A"
+      }
+    }
+  }
+}
+```
+
+```js
+query {
+  personCount
+  havePhone: allPersons(phone: YES){
+    name
+  }
+  phoneless: allPersons(phone: NO){
+    name
+  }
+}
+
+{
+  "data": {
+    "personCount": 3,
+    "havePhone": [
+      {
+        "name": "Arto Hellas"
+      },
+      {
+        "name": "Matti Luukkainen"
+      }
+    ],
+    "phoneless": [
+      {
+        "name": "Venla Ruuska"
+      }
+    ]
+  }
+}
 ```
 
 </details>
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+The main principle of GraphQL is that the code on the browser forms a query describing the data wanted, and sends it to the API with an HTTP POST request. Unlike REST, all GraphQL queries are sent to the same address, and their type is POST.
+
+There is a direct link between a GraphQL query and the returned JSON object.
+
+GraphQL query describes only the data moving between a server and the client. On the server, the data can be organized and saved any way we like.
+
+Despite its name, GraphQL does not actually have anything to do with databases. It does not care how the data is saved. The data a GraphQL API uses can be saved into a relational database, document database, or to other servers which a GraphQL server can access with for example REST.
+
+When Apollo server is run in development mode the page http://localhost:4000 has a button Query your server that takes us to Apollo Studio Explorer. This is very useful for a developer, and can be used to make queries to the server.
+
+With GraphQL, it is possible to combine multiple fields of type Query, or "separate queries" into one query.
 
 </details>
 
@@ -6179,4 +6468,4 @@ Description:
 
 Create an application according to the requirements described in [exercises 8.1-8.x]()
 
-- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/)
+- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/)
