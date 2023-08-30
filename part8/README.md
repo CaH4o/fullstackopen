@@ -2,7 +2,6 @@
 
 lesson - the project for exercises and practice while studying the course
 
-exercise - the project for the exercises #8.1-8.x "Name"
+library-backend - the project for the exercises #8.1-8.7 "Library backend"
 
-
-time: 2.5
+time: 4

@@ -1,0 +1,17 @@
+{
+  "name": "library-backend",
+  "version": "1.0.0",
+  "description": "The Library backend project for the exercises #8.1-8.7",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "author": "Oleksandr Tertyshnyk",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.9.2",
+    "graphql": "^16.8.0",
+    "nodemon": "^3.0.1",
+    "uuid": "^9.0.0"
+  }
+}

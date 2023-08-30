@@ -6462,10 +6462,10 @@ Text
 
 ### Exercises:
 
-#### 8.1-8.x: Name
+#### 8.1-8.7: Library backend
 
-Description:
+Description: We will implement a GraphQL backend for a small library. Implement queries allBooks, allAuthors, allBooks by genre and/or by auther. Implement mutation addBook and editAuthor.
 
-Create an application according to the requirements described in [exercises 8.1-8.x]()
+Create an application according to the requirements described in [exercises 8.1-8.7](https://fullstackopen.com/en/part8/graph_ql_server#exercises-8-1-8-7)
 
-- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/library-backend)
