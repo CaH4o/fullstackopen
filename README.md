@@ -9,7 +9,7 @@ Parts:
 - Parts 0-5 (core course) - Full Stack Web Development (5 cr, CSM141081)
 - Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)
 - Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
-- ~~Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)~~
+- Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
 - ~~Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)~~
 - ~~Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)~~
 - ~~Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)~~
@@ -6344,8 +6344,17 @@ With GraphQL, it is possible to combine multiple fields of type Query, or "separ
 
 <details>
 <summary>Links:</summary>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://relay.dev/" title="Relay: The GraphQL client that scales with you.">Relay: The GraphQL client that scales with you.</a></li>
+<li><a href="https://www.apollographql.com/docs/react/" title="Apollo Client is a comprehensive state management library for JavaScript that enables you to manage both local and remote data with GraphQL.">Apollo Client to manage both local and remote data with GraphQL</a></li>
+<li><a href="https://www.apollographql.com/docs/react/get-started/" title="Apollo Client: get-started">Apollo Client: get-started</a></li>
+<li><a href="https://www.apollographql.com/docs/react/get-started/#step-4-connect-your-client-to-react" title="Apollo Client: connect your client to react">Apollo Client: ApolloProvider</a></li>
+<li><a href="https://www.apollographql.com/docs/react/data/queries/" title="Apollo Client: Queries">Apollo Client: Queries</a></li>
+<li><a href="https://www.apollographql.com/docs/react/api/react/hooks/#usequery" title="Apollo Client: useQuery">Apollo Client: useQuery hook</a></li>
+<li><a href="https://www.apollographql.com/docs/react/api/react/hooks/#result" title="Apollo Client: useQuery - result">Apollo Client: useQuery - result</a></li>
+<li><a href="https://graphql.org/learn/queries/#variables" title="GraphQL: Variables">GraphQL: Variables</a></li>
+<li><a href="https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery" title="Apollo Client: useLazyQuery hook">Apollo Client: useLazyQuery hook</a></li>
+<li><a href="https://www.apollographql.com/docs/react/caching/overview/" title="Apollo Client: Caching in Apollo Client">Apollo Client: Caching in Apollo Client</a></li>
+<li><a href="https://chrome.google.com/webstore/detail/apollo-client-devtools/jdkknkkbebbapilgoeccciglkfbmbnfm" title="Chrome extantion: Apollo Client Devtools">Chrome extantion: Apollo Client Devtools</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -6357,7 +6366,7 @@ With GraphQL, it is possible to combine multiple fields of type Query, or "separ
 
 Text
 
->
+> npm install @apollo/client graphql
 
 ```js
 
@@ -6367,6 +6376,8 @@ Text
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+We could take care of the communication between the React app and GraphQL by using Axios. However, most of the time, it is not very sensible to do so. It is a better idea to use a higher-order library capable of abstracting the unnecessary details of the communication. There are two good options: Relay and Apollo Client
 
 </details>
 
