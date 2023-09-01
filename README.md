@@ -6355,21 +6355,368 @@ With GraphQL, it is possible to combine multiple fields of type Query, or "separ
 <li><a href="https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery" title="Apollo Client: useLazyQuery hook">Apollo Client: useLazyQuery hook</a></li>
 <li><a href="https://www.apollographql.com/docs/react/caching/overview/" title="Apollo Client: Caching in Apollo Client">Apollo Client: Caching in Apollo Client</a></li>
 <li><a href="https://chrome.google.com/webstore/detail/apollo-client-devtools/jdkknkkbebbapilgoeccciglkfbmbnfm" title="Chrome extantion: Apollo Client Devtools">Chrome extantion: Apollo Client Devtools</a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://www.apollographql.com/docs/react/api/react/hooks/#usemutation" title="Apollo Client: useMutation hook">Apollo Client: useMutation hook</a></li>
+<li><a href="https://www.apollographql.com/docs/react/data/queries/#polling" title="Apollo Client: Polling">Apollo Client: Polling</a></li>
+<li><a href="https://www.apollographql.com/docs/react/data/refetching/" title="Apollo Client: Refetching queries">Apollo Client: Refetching queries</a></li>
+<li><a href="https://www.apollographql.com/docs/react/api/react/hooks/#params-2" title="Apollo Client: useMutation hook - onError option">Apollo Client: useMutation hook - onError option</a></li>
+<li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#usecallback" title="React: useCallback">React: useCallback</a></li>
+<li><a href="https://www.apollographql.com/docs/react/local-state/local-state-management/" title="Apollo Client: Managing local state">Apollo Client: Managing local state</a></li>
 
 </details>
 
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Create new react app and delete all filese in 'src' folder exclude index.js, App.js
+
+> npx create-react-app phonebook-frontend
+
+Add apollo client graphql library to manage querice and data in the server
 
 > npm install @apollo/client graphql
 
-```js
+Update index to use apollo client graphql library and remove all not used code
 
+> src/index.js
+
+```js
+import ReactDOM from 'react-dom/client'
+import App from './App'
+
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000',
+  cache: new InMemoryCache(),
+})
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
+)
+```
+
+Create a file to keep all querices from Apollo client to server
+
+> src/queries.js
+
+```js
+import { gql } from '@apollo/client'
+
+export const ALL_PERSONS = gql`
+  query {
+    allPersons {
+      name
+      phone
+      id
+    }
+  }
+`
+
+export const FIND_PERSON = gql`
+  query findPersonByName($nameToSearch: String!) {
+    findPerson(name: $nameToSearch) {
+      name
+      phone
+      id
+      address {
+        street
+        city
+      }
+    }
+  }
+`
+
+export const CREATE_PERSON = gql`
+  mutation createPerson(
+    $name: String!
+    $street: String!
+    $city: String!
+    $phone: String
+  ) {
+    addPerson(name: $name, street: $street, city: $city, phone: $phone) {
+      name
+      phone
+      id
+      address {
+        street
+        city
+      }
+    }
+  }
+`
+
+export const EDIT_NUMBER = gql`
+  mutation editNumber($name: String!, $phone: String!) {
+    editNumber(name: $name, phone: $phone) {
+      name
+      phone
+      address {
+        street
+        city
+      }
+      id
+    }
+  }
+`
+```
+
+Create component to display error message.
+
+> src/component/Notify.js
+
+```js
+const Notify = ({ errorMessage }) => {
+  if (!errorMessage) {
+    return null
+  }
+  return <div style={{ color: 'red' }}>{errorMessage}</div>
+}
+
+export default Notify
+```
+
+Update App to use new components with removing unnecessary code and adding notification for error handeling and fetching data from the server. Add components for display and update persons.
+
+> src/App.js
+
+```js
+import { useState } from 'react'
+import { useQuery } from '@apollo/client'
+
+import { ALL_PERSONS } from './queries'
+import Notify from './components/Notify'
+import Persons from './components/Persons'
+import PersonForm from './components/PersonForm'
+import PhoneForm from './components/PersonForm'
+
+const App = () => {
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  const result = useQuery(ALL_PERSONS)
+
+  if (result.loading) {
+    return <div>loading...</div>
+  }
+
+  const notify = (message) => {
+    setErrorMessage(message)
+    setTimeout(() => {
+      setErrorMessage(null)
+    }, 10000)
+  }
+
+  return (
+    <div>
+      <Notify errorMessage={errorMessage} />
+      <Persons persons={result.data.allPersons} />
+      <PersonForm setError={notify} />
+      <PhoneForm setError={notify} />
+    </div>
+  )
+}
+
+export default App
+```
+
+Create component for display all persons or a single person with fetching this person data and using Person component to display
+
+> src/component/Persons.js
+
+```js
+import { useState } from 'react'
+import { useQuery } from '@apollo/client'
+
+import Person from './Person'
+import { FIND_PERSON } from '../queries'
+
+const Persons = ({ persons }) => {
+  const [nameToSearch, setNameToSearch] = useState(null)
+  const result = useQuery(FIND_PERSON, {
+    variables: { nameToSearch },
+    skip: !nameToSearch,
+  })
+
+  if (nameToSearch && result.data) {
+    return (
+      <Person
+        person={result.data.findPerson}
+        onClose={() => setNameToSearch(null)}
+      />
+    )
+  }
+
+  return (
+    <div>
+      <h2>Persons</h2>
+      {persons.map((p) => (
+        <div key={p.name}>
+          {p.name} {p.phone}
+          <button onClick={() => setNameToSearch(p.name)}>show address</button>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default Persons
+```
+
+Create component to display a cirtan person.
+
+> src/component/Person.js
+
+```js
+const Person = ({ person, onClose }) => {
+  return (
+    <div>
+      <h2>{person.name}</h2>
+      <div>
+        {person.address.street} {person.address.city}
+      </div>
+      <div>{person.phone}</div>
+      <button onClick={onClose}>close</button>
+    </div>
+  )
+}
+
+export default Person
+```
+
+Create form to add a person to server and update queries and frontend with error handeling
+
+> src/component/PersonForm.js
+
+```js
+import { useState } from 'react'
+import { useMutation } from '@apollo/client'
+
+import { CREATE_PERSON, ALL_PERSONS } from '../queries'
+
+const PersonForm = ({ setError }) => {
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [street, setStreet] = useState('')
+  const [city, setCity] = useState('')
+
+  const [createPerson] = useMutation(CREATE_PERSON, {
+    refetchQueries: [{ query: ALL_PERSONS }],
+    onError: (error) => {
+      const messages = error.graphQLErrors[0].message
+      setError(messages)
+    },
+  })
+
+  const submit = (event) => {
+    event.preventDefault()
+
+    createPerson({ variables: { name, phone, street, city } })
+
+    setName('')
+    setPhone('')
+    setStreet('')
+    setCity('')
+  }
+
+  return (
+    <div>
+      <h2>create new</h2>
+      <form onSubmit={submit}>
+        <div>
+          name{' '}
+          <input
+            value={name}
+            onChange={({ target }) => setName(target.value)}
+          />
+        </div>
+        <div>
+          phone{' '}
+          <input
+            value={phone}
+            onChange={({ target }) => setPhone(target.value)}
+          />
+        </div>
+        <div>
+          street{' '}
+          <input
+            value={street}
+            onChange={({ target }) => setStreet(target.value)}
+          />
+        </div>
+        <div>
+          city{' '}
+          <input
+            value={city}
+            onChange={({ target }) => setCity(target.value)}
+          />
+        </div>
+        <button type='submit'>add!</button>
+      </form>
+    </div>
+  )
+}
+
+export default PersonForm
+```
+
+Create component to change phone number of person on the server with error handleling.
+
+> src/component/PhoneForm.js
+
+```js
+import { useState, useEffect } from 'react'
+import { useMutation } from '@apollo/client'
+
+import { EDIT_NUMBER } from '../queries'
+
+const PhoneForm = ({ setError }) => {
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
+
+  const [changeNumber, result] = useMutation(EDIT_NUMBER)
+
+  useEffect(() => {
+    if (result.data && result.data.editNumber === null) {
+      setError('person not found')
+    }
+  }, [result.data]) // eslint-disable-line
+
+  const submit = (event) => {
+    event.preventDefault()
+
+    changeNumber({ variables: { name, phone } })
+
+    setName('')
+    setPhone('')
+  }
+
+  return (
+    <div>
+      <h2>change number</h2>
+
+      <form onSubmit={submit}>
+        <div>
+          name{' '}
+          <input
+            value={name}
+            onChange={({ target }) => setName(target.value)}
+          />
+        </div>
+        <div>
+          phone{' '}
+          <input
+            value={phone}
+            onChange={({ target }) => setPhone(target.value)}
+          />
+        </div>
+        <button type='submit'>change number</button>
+      </form>
+    </div>
+  )
+}
+
+export default PhoneForm
 ```
 
 </details>
