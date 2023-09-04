@@ -6003,7 +6003,7 @@ Create an application according to the requirements described in [exercises 7.4-
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part7/bloglist)
 
-## Part 7: [GraphQL](https://fullstackopen.com/en/part8)
+## Part 8: [GraphQL](https://fullstackopen.com/en/part8)
 
 ### Sub-part A: [GraphQL-server](https://fullstackopen.com/en/part8/graph_ql_server)
 
@@ -6361,6 +6361,8 @@ With GraphQL, it is possible to combine multiple fields of type Query, or "separ
 <li><a href="https://www.apollographql.com/docs/react/api/react/hooks/#params-2" title="Apollo Client: useMutation hook - onError option">Apollo Client: useMutation hook - onError option</a></li>
 <li><a href="https://legacy.reactjs.org/docs/hooks-reference.html#usecallback" title="React: useCallback">React: useCallback</a></li>
 <li><a href="https://www.apollographql.com/docs/react/local-state/local-state-management/" title="Apollo Client: Managing local state">Apollo Client: Managing local state</a></li>
+<li><a href="https://legacy.reactjs.org/docs/forms.html#the-select-tag" title="React: The select Tag">React: The select Tag</a></li>
+<li><a href="https://github.com/JedWatson/react-select" title="React-select library">React-select library</a></li>
 
 </details>
 
@@ -6719,6 +6721,35 @@ const PhoneForm = ({ setError }) => {
 export default PhoneForm
 ```
 
+#### react-select library
+
+> npm install react-select
+
+```js
+import React, { useState } from 'react'
+import Select from 'react-select'
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+]
+
+export default function App() {
+  const [selectedOption, setSelectedOption] = useState(null)
+
+  return (
+    <div className='App'>
+      <Select
+        defaultValue={selectedOption}
+        onChange={setSelectedOption}
+        options={options}
+      />
+    </div>
+  )
+}
+```
+
 </details>
 
 <details>
@@ -6827,3 +6858,11 @@ Description: We will implement a GraphQL backend for a small library. Implement 
 Create an application according to the requirements described in [exercises 8.1-8.7](https://fullstackopen.com/en/part8/graph_ql_server#exercises-8-1-8-7)
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/library-backend)
+
+#### 8.2-8.12: Library frontend
+
+Description: We'll implement a frontend for the GraphQL library to the backend library project. Implement an Authors view to show the details of all authors on a page. Implement a Books view to show on a page all other details of all books except their genres. Implement a possibility to add new books to your application. Implement a possibility to set authors birth year and change the birth year form so that a birth year can be set only for an existing author.
+
+Create an application according to the requirements described in [exercises 8.8-8.12](https://fullstackopen.com/en/part8/react_and_graph_ql#exercises-8-8-8-12)
+
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/library-frontend)
