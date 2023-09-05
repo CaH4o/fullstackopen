@@ -6763,29 +6763,512 @@ We could take care of the communication between the React app and GraphQL by usi
 
 <details>
 <summary>Links:</summary>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-results" title="Apollo Server: Resolvers">Apollo Server: Resolvers</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors" title="Apollo Server: Custom errors">Apollo Server: Custom errors</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/api/standalone/" title="Apollo Server: startStandaloneServer">Apollo Server: startStandaloneServer</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/data/context/" title="Apollo Server: Context and contextValue">Apollo Server: Context and contextValue</a></li>
+<li><a href="https://www.apollographql.com/blog/backend/auth/authorization-in-graphql/?_ga=2.45656161.474875091.1550613879-1581139173.1549828167" title="Authorization in GraphQL">Authorization in GraphQL</a></li>
 
 </details>
 
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+#### Connect the backend to MongoDB
 
->
+Install Mongoose and dotenv :
+
+> npm install mongoose dotenv
+
+Create model for persons
+
+> /models/person.js
 
 ```js
+const mongoose = require('mongoose')
 
+const schema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    minlength: 5,
+  },
+  phone: {
+    type: String,
+    minlength: 5,
+  },
+  street: {
+    type: String,
+    required: true,
+    minlength: 5,
+  },
+  city: {
+    type: String,
+    required: true,
+    minlength: 3,
+  },
+})
+
+module.exports = mongoose.model('Person', schema)
+```
+
+Create dotenv file with setting for database
+
+> .env
+
+```js
+MONGODB_URI=mongodb+srv://{username}:{password}@{cluster url}/{db name/app name}
+PORT=4000
+```
+
+Udpdate github ignor file to skip adding .env file
+
+> .gitignore
+
+```js
+/node_modules
+.env
+```
+
+Update application to use database and dotenv
+
+> index.js
+
+```js
+// ...
+const mongoose = require('mongoose')
+mongoose.set('strictQuery', false)
+const Person = require('./models/person')
+
+require('dotenv').config()
+
+const MONGODB_URI = process.env.MONGODB_URI
+
+console.log('connecting to', MONGODB_URI)
+
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
+
+const typeDefs = `
+// ...
+`
+
+const resolvers = {
+  Query: {
+    personCount: async () => Person.collection.countDocuments(),
+    allPersons: async (root, args) => {
+      if (!args.phone) {
+        return Person.find({})
+      }
+      return Person.find({ phone: { $exists: args.phone === 'YES' } })
+    },
+    findPerson: async (root, args) => Person.findOne({ name: args.name }),
+  },
+  Person: {
+    address: (root) => {
+      return {
+        street: root.street,
+        city: root.city,
+      }
+    },
+  },
+  Mutation: {
+    addPerson: async (root, args) => {
+      const person = new Person({ ...args })
+
+      try {
+        await person.save()
+      } catch (error) {
+        throw new GraphQLError('Saving person failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error,
+          },
+        })
+      }
+
+      return person
+    },
+    editNumber: async (root, args) => {
+      const person = await Person.findOne({ name: args.name })
+      person.phone = args.phone
+
+      try {
+        await person.save()
+      } catch (error) {
+        throw new GraphQLError('Saving number failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error,
+          },
+        })
+      }
+
+      return person
+    },
+  },
+}
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+})
+
+startStandaloneServer(server, {
+  listen: { port: process.env.PORT },
+}).then(({ url }) => {
+  console.log(`Server ready at ${url}`)
+})
+```
+
+#### Add authorization to the backend
+
+Install the jsonwebtoken library, which allows us to generate JSON web tokens.
+
+> npm install jsonwebtoken
+
+Add JWT_SECRET to dotenv file
+
+> .env
+
+```js
+//...
+JWT_SECRET = your_secret_word
+```
+
+Create model for user
+
+> /models/user.js
+
+```js
+const mongoose = require('mongoose')
+
+const schema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    minlength: 3,
+  },
+  friends: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Person',
+    },
+  ],
+})
+
+module.exports = mongoose.model('User', schema)
+```
+
+Update application to use Authorization
+
+> index.js
+
+```js
+const { ApolloServer } = require('@apollo/server')
+const { startStandaloneServer } = require('@apollo/server/standalone')
+const { v1: uuid } = require('uuid')
+const { GraphQLError } = require('graphql')
+const jwt = require('jsonwebtoken')
+
+const mongoose = require('mongoose')
+mongoose.set('strictQuery', false)
+
+const User = require('./models/user')
+const Person = require('./models/person')
+
+require('dotenv').config()
+
+const MONGODB_URI = process.env.MONGODB_URI
+
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
+
+const typeDefs = `
+  type Address {
+    street: String!
+    city: String! 
+  }
+
+  enum YesNo {
+    YES
+    NO
+  }
+
+  type Person {
+    name: String!
+    phone: String
+    address: Address!
+    id: ID!
+  }
+
+  type User {
+    username: String!
+    friends: [Person!]!
+    id: ID!
+  }
+  
+  type Token {
+    value: String!
+  }
+
+  type Query {
+    personCount: Int!
+    allPersons(phone: YesNo): [Person!]!
+    findPerson(name: String!): Person
+    me: User
+  }
+
+  type Mutation {
+    addPerson(
+      name: String!
+      phone: String
+      street: String!
+      city: String!
+    ): Person
+
+    editNumber(
+      name: String!
+      phone: String!
+    ): Person
+
+    createUser(
+      username: String!
+    ): User
+    
+    login(
+      username: String!
+      password: String!
+    ): Token
+
+    addAsFriend(
+      name: String!
+    ): User
+  }
+`
+
+const resolvers = {
+  Query: {
+    personCount: async () => Person.collection.countDocuments(),
+    allPersons: async (root, args) => {
+      if (!args.phone) {
+        return Person.find({})
+      }
+      return Person.find({ phone: { $exists: args.phone === 'YES' } })
+    },
+    findPerson: async (root, args) => Person.findOne({ name: args.name }),
+    me: (root, args, context) => {
+      return context.currentUser
+    },
+  },
+  Person: {
+    address: (root) => {
+      return {
+        street: root.street,
+        city: root.city,
+      }
+    },
+  },
+  Mutation: {
+    addPerson: async (root, args, context) => {
+      const person = new Person({ ...args })
+      const currentUser = context.currentUser
+
+      if (!currentUser) {
+        throw new GraphQLError('not authenticated', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+          },
+        })
+      }
+
+      try {
+        await person.save()
+        currentUser.friends = currentUser.friends.concat(person)
+        await currentUser.save()
+      } catch (error) {
+        throw new GraphQLError('Saving user failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error,
+          },
+        })
+      }
+
+      return person
+    },
+    editNumber: async (root, args) => {
+      const person = await Person.findOne({ name: args.name })
+      person.phone = args.phone
+
+      try {
+        await person.save()
+      } catch (error) {
+        throw new GraphQLError('Saving number failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error,
+          },
+        })
+      }
+
+      return person
+    },
+
+    createUser: async (root, args) => {
+      const user = new User({ username: args.username })
+
+      return user.save().catch((error) => {
+        throw new GraphQLError('Creating the user failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error,
+          },
+        })
+      })
+    },
+    login: async (root, args) => {
+      const user = await User.findOne({ username: args.username })
+
+      if (!user || args.password !== 'secret') {
+        throw new GraphQLError('wrong credentials', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+          },
+        })
+      }
+
+      const userForToken = {
+        username: user.username,
+        id: user._id,
+      }
+
+      return { value: jwt.sign(userForToken, process.env.JWT_SECRET) }
+    },
+    addAsFriend: async (root, args, { currentUser }) => {
+      const isFriend = (person) =>
+        currentUser.friends
+          .map((f) => f._id.toString())
+          .includes(person._id.toString())
+
+      if (!currentUser) {
+        throw new GraphQLError('wrong credentials', {
+          extensions: { code: 'BAD_USER_INPUT' },
+        })
+      }
+
+      const person = await Person.findOne({ name: args.name })
+      if (!isFriend(person)) {
+        currentUser.friends = currentUser.friends.concat(person)
+      }
+
+      await currentUser.save()
+
+      return currentUser
+    },
+  },
+}
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+})
+
+startStandaloneServer(server, {
+  listen: { port: process.env.PORT },
+  context: async ({ req, res }) => {
+    const auth = req ? req.headers.authorization : null
+    if (auth && auth.startsWith('Bearer ')) {
+      const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_SECRET)
+      const currentUser = await User.findById(decodedToken.id).populate(
+        'friends'
+      )
+      return { currentUser }
+    }
+  },
+}).then(({ url }) => {
+  console.log(`Server ready at ${url}`)
+})
+```
+
+#### Test Authorization through Apollo Studio Explorer
+
+1. Create user
+
+```js
+mutation {
+  createUser (
+    username: "mluukkai"
+  ) {
+    username
+    id
+  }
+}
+```
+
+2. Get token
+
+```js
+mutation {
+  login (
+    username: "mluukkai"
+    password: "secret"
+  ) {
+    value
+  }
+}
+```
+
+3. Set up a query and get data
+
+> Variables: { "nameToSearch": "Arto Hellas" }
+
+> Headers: Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.xxxx
+
+```js
+query findPersonByName ($nameToSearch: String!)  {
+  findPerson(name: $nameToSearch) {
+     name
+     phone
+     address {
+       street
+       city
+     }
+  }
+}
 ```
 
 </details>
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+It is good to also keep validation in the database.
+
+As we remember, in Mongo, the identifying field of an object is called \_id and we previously had to parse the name of the field to id ourselves. Now GraphQL can do this automatically.
+
+The resolver functions now return a promise, when they previously returned normal objects.
+
+As well as in GraphQL, the input is now validated using the validations defined in the mongoose schema. For handling possible validation errors in the schema, we must add an error-handling try/catch block to the save method. When we end up in the catch, we throw a exception GraphQLError.
+
+Context is the right place to do things which are shared by multiple resolvers, like user identification.
 
 </details>
 
