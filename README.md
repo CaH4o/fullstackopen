@@ -7334,15 +7334,15 @@ Text
 
 ### Exercises:
 
-#### 8.1-8.7: Library backend
+#### 8.1-8.7, 8.13-8.16: Library backend
 
-Description: We will implement a GraphQL backend for a small library. Implement queries allBooks, allAuthors, allBooks by genre and/or by auther. Implement mutation addBook and editAuthor.
+Description: We will implement a GraphQL backend for a small library. Implement queries allBooks, allAuthors, allBooks by genre and/or by auther. Implement mutation addBook and editAuthor. Change the library application so that it saves the data to a database.
 
-Create an application according to the requirements described in [exercises 8.1-8.7](https://fullstackopen.com/en/part8/graph_ql_server#exercises-8-1-8-7)
+Create an application according to the requirements described in [exercises 8.1-8.7](https://fullstackopen.com/en/part8/graph_ql_server#exercises-8-1-8-7), [exercises 8.13-8.16](https://fullstackopen.com/en/part8/database_and_user_administration#exercises-8-13-8-16)
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/library-backend)
 
-#### 8.2-8.12: Library frontend
+#### 8.8-8.12: Library frontend
 
 Description: We'll implement a frontend for the GraphQL library to the backend library project. Implement an Authors view to show the details of all authors on a page. Implement a Books view to show on a page all other details of all books except their genres. Implement a possibility to add new books to your application. Implement a possibility to set authors birth year and change the birth year form so that a birth year can be set only for an existing author.
 
