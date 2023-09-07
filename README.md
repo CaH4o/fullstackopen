@@ -6768,6 +6768,7 @@ We could take care of the communication between the React app and GraphQL by usi
 <li><a href="https://www.apollographql.com/docs/apollo-server/api/standalone/" title="Apollo Server: startStandaloneServer">Apollo Server: startStandaloneServer</a></li>
 <li><a href="https://www.apollographql.com/docs/apollo-server/data/context/" title="Apollo Server: Context and contextValue">Apollo Server: Context and contextValue</a></li>
 <li><a href="https://www.apollographql.com/blog/backend/auth/authorization-in-graphql/?_ga=2.45656161.474875091.1550613879-1581139173.1549828167" title="Authorization in GraphQL">Authorization in GraphQL</a></li>
+<li><a href="https://www.mongodb.com/docs/manual/tutorial/query-array-of-documents/" title="MobgoDB: Query an Array of Embedded Documents">MobgoDB: Query an Array of Embedded Documents</a></li>
 
 </details>
 
