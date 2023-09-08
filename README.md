@@ -6976,7 +6976,6 @@ Update application to use Authorization
 ```js
 const { ApolloServer } = require('@apollo/server')
 const { startStandaloneServer } = require('@apollo/server/standalone')
-const { v1: uuid } = require('uuid')
 const { GraphQLError } = require('graphql')
 const jwt = require('jsonwebtoken')
 
@@ -7337,7 +7336,7 @@ Text
 
 #### 8.1-8.7, 8.13-8.16: Library backend
 
-Description: We will implement a GraphQL backend for a small library. Implement queries allBooks, allAuthors, allBooks by genre and/or by auther. Implement mutation addBook and editAuthor. Change the library application so that it saves the data to a database.
+Description: We will implement a GraphQL backend for a small library. Implement queries allBooks, allAuthors, allBooks by genre and/or by auther. Implement mutation addBook and editAuthor. Change the library application so that it saves the data to a database. Complete the program so that database validation errors (e.g. book title or author name being too short) are handled sensibly. Add user management to your application with updating typeDefs, сreating/updating querys and mutations for it and to work with token.
 
 Create an application according to the requirements described in [exercises 8.1-8.7](https://fullstackopen.com/en/part8/graph_ql_server#exercises-8-1-8-7), [exercises 8.13-8.16](https://fullstackopen.com/en/part8/database_and_user_administration#exercises-8-13-8-16)
 
