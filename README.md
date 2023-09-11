@@ -7276,11 +7276,17 @@ Context is the right place to do things which are shared by multiple resolvers, 
 
 <details>
 <summary>Links:</summary>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout" title="Apollo Server: Reset store on logout">Apollo Server: Reset store on logout</a></li>
+<li><a href="https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore" title="Apollo Server: class ApolloClient">Apollo Server: class ApolloClient</a></li>
+<li><a href="https://www.apollographql.com/docs/react/api/react/hooks/#useapolloclient" title="Apollo Server: useApolloClient hook">Apollo Server: useApolloClient hook</a></li>
+<li><a href="https://www.apollographql.com/docs/react/api/link/introduction/" title="Apollo Server: function createHttpLink">Apollo Server: function createHttpLink</a></li>
+<li><a href="https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview" title="Apollo Server: setContext">Apollo Server: setContext</a></li>
+<li><a href="https://www.apollographql.com/docs/react/networking/authentication/#header" title="Apollo Server: set to Header">Apollo Server: set to Header</a></li>
+<li><a href="https://www.apollographql.com/docs/react/data/mutations/#the-update-function" title="Apollo Server: The update function">Apollo Server: The update function</a></li>
+<li><a href="https://www.apollographql.com/docs/react/caching/cache-interaction/#using-updatequery-and-updatefragment" title="Apollo Server: Using updateQuery and updateFragment">Apollo Server: Using updateQuery and updateFragment</a></li>
+<li><a href="https://www.apollographql.com/docs/react/api/react/hooks/#options" title="Apollo Server: single queries">Apollo Server: single queries</a></li>
+<li><a href="https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic" title="Apollo Server: fetchPolicy">Apollo Server: fetchPolicy</a></li>
+<li><a href="https://martinfowler.com/bliki/TwoHardThings.html" title="There are only two hard things in Computer Science: cache invalidation and naming things.">There are only two hard things in Computer Science: cache invalidation and naming things.</a></li>
 
 </details>
 
