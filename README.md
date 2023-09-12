@@ -7293,18 +7293,241 @@ Context is the right place to do things which are shared by multiple resolvers, 
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Update queries file with adding a quary to login
 
->
+> src/queries/js
 
 ```js
+//...
+export const LOGIN = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      value
+    }
+  }
+`
+```
 
+Create form component to loggin
+
+> src/components/LoginForm.js
+
+```js
+import { useState, useEffect } from 'react'
+import { useMutation } from '@apollo/client'
+import { LOGIN } from '../queries'
+
+const LoginForm = ({ setError, setToken }) => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const [login, result] = useMutation(LOGIN, {
+    onError: (error) => {
+      setError(error.graphQLErrors[0].message)
+    },
+  })
+
+  useEffect(() => {
+    if (result.data) {
+      const token = result.data.login.value
+      setToken(token)
+      localStorage.setItem('phonenumbers-user-token', token)
+    }
+  }, [result.data]) // eslint-disable-line
+
+  const submit = async (event) => {
+    event.preventDefault()
+
+    login({ variables: { username, password } })
+  }
+
+  return (
+    <div>
+      <form onSubmit={submit}>
+        <div>
+          username{' '}
+          <input
+            value={username}
+            onChange={({ target }) => setUsername(target.value)}
+          />
+        </div>
+        <div>
+          password{' '}
+          <input
+            type='password'
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+          />
+        </div>
+        <button type='submit'>login</button>
+      </form>
+    </div>
+  )
+}
+
+export default LoginForm
+```
+
+Update App component to use LoginForm component and token
+
+> src/App.cs
+
+```js
+import { useState } from 'react'
+import { useQuery, useApolloClient } from '@apollo/client'
+
+import Notify from './components/Notify'
+import LoginForm from './components/LoginForm'
+import Persons from './components/Persons'
+import PersonForm from './components/PersonForm'
+import PhoneForm from './components/PhoneForm'
+import { ALL_PERSONS } from './queries'
+
+const App = () => {
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [token, setToken] = useState(null)
+
+  const result = useQuery(ALL_PERSONS)
+  const client = useApolloClient()
+
+  if (result.loading) {
+    return <div>loading...</div>
+  }
+
+  const notify = (message) => {
+    setErrorMessage(message)
+    setTimeout(() => {
+      setErrorMessage(null)
+    }, 10000)
+  }
+
+  const logout = () => {
+    setToken(null)
+    localStorage.clear()
+    client.resetStore()
+  }
+
+  if (!token) {
+    return (
+      <>
+        <Notify errorMessage={errorMessage} />
+        <LoginForm setToken={setToken} setError={notify} />
+      </>
+    )
+  }
+
+  return (
+    <>
+      <Notify errorMessage={errorMessage} />
+      <button onClick={logout}>logout</button>
+      <Persons persons={result.data.allPersons} />
+      <PersonForm setError={notify} />
+      <PhoneForm setError={notify} />
+    </>
+  )
+}
+
+export default App
+```
+
+Update index.ls file to use create link and context to set token in header
+
+> src/index.js
+
+```js
+import ReactDOM from 'react-dom/client'
+
+import App from './App'
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('phonenumbers-user-token')
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : null,
+    },
+  }
+})
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000',
+})
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: authLink.concat(httpLink),
+})
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
+)
+```
+
+Update Person form
+
+> src/components/PersonForm.js
+
+```js
+// ...
+const PersonForm = ({ setError }) => {
+ // ...
+
+  const [createPerson] = useMutation(CREATE_PERSON, {
+    onError: (error) => {
+      const messages = error.graphQLErrors[0].message
+      setError(messages)
+    },
+
+    update: (cache, response) => {
+      cache.updateQuery({ query: ALL_PERSONS }, ({ allPersons }) => {
+        return {
+          allPersons: allPersons.concat(response.data.addPerson),
+        }
+      })
+    },
+  })
+
+  const submit = (event) => {
+    event.preventDefault()
+
+    createPerson({
+      variables: {
+        name,
+        street,
+        city,
+        phone: phone.length > 0 ? phone : undefined,
+      },
+    })
+
+    setName('')
+    setPhone('')
+    setStreet('')
+    setCity('')
+  }
+
+  return (
+    // ...
+  )
+}
+
+export default PersonForm
 ```
 
 </details>
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+There are only two hard things in Computer Science: cache invalidation and naming things.
 
 </details>
 

@@ -259,17 +259,39 @@ const PersonForm = ({ setError }) => {
   const [city, setCity] = useState('')
 
   const [createPerson] = useMutation(CREATE_PERSON, {
-    refetchQueries: [{ query: ALL_PERSONS }],
     onError: (error) => {
       const messages = error.graphQLErrors[0].message
       setError(messages)
     },
+
+    //refetchQueries: [{ query: ALL_PERSONS }],
+    // ================================== 6 ================================== //
+    update: (cache, response) => {
+      cache.updateQuery({ query: ALL_PERSONS }, ({ allPersons }) => {
+        return {
+          allPersons: allPersons.concat(response.data.addPerson),
+        }
+      })
+    },
+    // ================================== 4 ================================== //
   })
 
   const submit = (event) => {
     event.preventDefault()
 
-    createPerson({ variables: { name, phone, street, city } })
+    //createPerson({ variables: { name, phone, street, city } })
+    // ================================== 6 ================================== //
+
+    createPerson({
+      variables: {
+        name,
+        street,
+        city,
+        phone: phone.length > 0 ? phone : undefined,
+      },
+    })
+
+    // ================================== 4 ================================== //
 
     setName('')
     setPhone('')
