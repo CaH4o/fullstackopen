@@ -7571,10 +7571,10 @@ Create an application according to the requirements described in [exercises 8.1-
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/library-backend)
 
-#### 8.8-8.12: Library frontend
+#### 8.8-8.12, 8.17-8.22: Library frontend
 
-Description: We'll implement a frontend for the GraphQL library to the backend library project. Implement an Authors view to show the details of all authors on a page. Implement a Books view to show on a page all other details of all books except their genres. Implement a possibility to add new books to your application. Implement a possibility to set authors birth year and change the birth year form so that a birth year can be set only for an existing author.
+Description: We'll implement a frontend for the GraphQL library to the backend library project. Implement an Authors view to show the details of all authors on a page. Implement a Books view to show on a page all other details of all books except their genres. Implement a possibility to add new books to your application. Implement a possibility to set authors birth year and change the birth year form so that a birth year can be set only for an existing author. Implement login functionality. Implement a view which shows all the books based on the logged-in user's favourite genre.
 
-Create an application according to the requirements described in [exercises 8.8-8.12](https://fullstackopen.com/en/part8/react_and_graph_ql#exercises-8-8-8-12)
+Create an application according to the requirements described in [exercises 8.8-8.12](https://fullstackopen.com/en/part8/react_and_graph_ql#exercises-8-8-8-12), [exercises 8.17-8.22](https://fullstackopen.com/en/part8/login_and_updating_the_cache#exercises-8-17-8-22)
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/library-frontend)

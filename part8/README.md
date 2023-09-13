@@ -6,4 +6,4 @@ library-backend - the project for the exercises #8.1-8.7 "Library backend"
 
 library-frontend - the project for the exercises #8.8-8.12 "Library frontend"
 
-time: 16
+time: 17

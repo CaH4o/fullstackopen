@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-const NavBar = () => {
+const NavBar = ({ logout, token }) => {
   const padding = {
     padding: 5,
   }
@@ -13,9 +13,18 @@ const NavBar = () => {
       <Link style={padding} to='/books'>
         Books
       </Link>
-      <Link style={padding} to='/add'>
-        Add book
-      </Link>
+      {token ? (
+        <>
+          <Link style={padding} to='/add'>
+            Add book
+          </Link>
+          <button onClick={logout}>Logout</button>
+        </>
+      ) : (
+        <Link style={padding} to='/login'>
+          Login
+        </Link>
+      )}
     </div>
   )
 }
