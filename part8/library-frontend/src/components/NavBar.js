@@ -18,6 +18,9 @@ const NavBar = ({ logout, token }) => {
           <Link style={padding} to='/add'>
             Add book
           </Link>
+          <Link style={padding} to='/recommended'>
+            Recommended
+          </Link>
           <button onClick={logout}>Logout</button>
         </>
       ) : (

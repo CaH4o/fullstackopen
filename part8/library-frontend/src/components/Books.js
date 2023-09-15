@@ -26,7 +26,9 @@ const Books = () => {
   return (
     <div>
       <h2>books</h2>
-
+      <div>
+        in genre <b>{genre}</b>
+      </div>
       <table>
         <tbody>
           <tr>
