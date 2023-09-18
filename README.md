@@ -7535,11 +7535,29 @@ There are only two hard things in Computer Science: cache invalidation and namin
 
 <details>
 <summary>Links:</summary>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://graphql.org/learn/queries/#fragments" title="GraphQL: Fragments">GraphQL: Fragments</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" title="Web: Template literals (Template strings)">Web: Template literals (Template strings)</a></li>
+<li><a href="https://www.apollographql.com/docs/react/data/subscriptions/" title="GraphQL: Subscriptions">GraphQL: Subscriptions</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API" title="Web: The WebSocket API (WebSockets)">Web: The WebSocket API (WebSockets)</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/api/standalone/#startstandaloneserver" title="Apollo Server: function startStandaloneServer">Apollo Server: function startStandaloneServer</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/api/express-middleware/" title="Apollo Server: API Reference: expressMiddleware">Apollo Server: API Reference: expressMiddleware</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/api/plugin/drain-http-server/" title="Apollo Server: API Reference: Drain HTTP server plugin">Apollo Server: API Reference: Drain HTTP server plugin</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/data/subscriptions/" title="Apollo Server: Subscriptions">Apollo Server: Subscriptions</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern" title="Publish–subscribe pattern">Publish–subscribe pattern</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/data/subscriptions/#the-pubsub-class" title="Apollo Server: The PubSub class">Apollo Server: The PubSub class</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/data/subscriptions/#listening-for-events" title="Apollo Server: Listening for events">Apollo Server: Listening for events</a></li>
+<li><a href="https://www.apollographql.com/docs/react/api/react/hooks/#usesubscription" title="Apollo Server: useSubscription hook">Apollo Server: useSubscription hook</a></li>
+<li><a href="https://www.google.com/search?q=n%2B1+problem" title="The N+1 problem">The N+1 problem</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-arguments" title="Apollo Server: Resolver arguments">Apollo Server: Resolver arguments</a></li>
+<li><a href="https://en.wikiquote.org/wiki/Donald_Knuth" title="Donald Knuth">Donald Knuth</a></li>
+<li><a href="https://github.com/graphql/dataloader" title="GraphQL Foundation's DataLoader library">GraphQL Foundation's DataLoader library</a></li>
+<li><a href="https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching" title="GraphQL Server Tutorial with Apollo Server and Express">GraphQL Server Tutorial with Apollo Server and Express</a></li>
+<li><a href="http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/" title="Batching GraphQL Queries with DataLoader">Batching GraphQL Queries with DataLoader</a></li>
+<li><a href="https://www.apollographql.com/blog/backend/schema-design/modularizing-your-graphql-schema-code/" title="Modularizing your GraphQL schema code">Modularizing your GraphQL schema code</a></li>
+<li><a href="https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8" title="Thoughts on Structuring your Apollo Queries & Mutations">Thoughts on Structuring your Apollo Queries & Mutations</a></li>
+<li><a href="https://www.radiofreerabbit.com/podcast/52-is-2018-the-year-graphql-kills-rest" title="52. Is 2018 the year GraphQL kills REST?">52. Is 2018 the year GraphQL kills REST?</a></li>
+<li><a href="https://graphqleditor.com/blog/javascript-predictions-for-2019-by-npm/" title="JavaScript predictions for 2019 by npm">JavaScript predictions for 2019 by npm</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/alert" title="Web: alert">Web: alert</a></li>
 
 </details>
 
