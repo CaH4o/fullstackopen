@@ -11,7 +11,7 @@ export const ALL_PERSONS = gql`
     }
   }
 `
-
+/*
 export const FIND_PERSON = gql`
   query findPersonByName($nameToSearch: String!) {
     findPerson(name: $nameToSearch) {
@@ -24,6 +24,48 @@ export const FIND_PERSON = gql`
       }
     }
   }
+`
+ */
+// ================================ 7-1 ================================ //
+/* 
+export const FIND_PERSON = gql`
+  query findPersonByName($nameToSearch: String!) {
+    findPerson(name: $nameToSearch) {
+      ...PersonDetails
+    }
+  }
+
+  fragment PersonDetails on Person {
+    name
+    phone 
+    address {
+      street 
+      city
+    }
+  }
+`
+ */
+// ================================ 7-2 ================================ //
+
+const PERSON_DETAILS = gql`
+  fragment PersonDetails on Person {
+    id
+    name
+    phone
+    address {
+      street
+      city
+    }
+  }
+`
+
+export const FIND_PERSON = gql`
+  query findPersonByName($nameToSearch: String!) {
+    findPerson(name: $nameToSearch) {
+      ...PersonDetails
+    }
+  }
+  ${PERSON_DETAILS}
 `
 
 // ================================= 4 ================================= //

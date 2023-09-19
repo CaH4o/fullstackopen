@@ -7564,18 +7564,317 @@ There are only two hard things in Computer Science: cache invalidation and namin
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+#### Backend Refatoring and subscription
 
->
+> schema.js
 
 ```js
+const typeDefs = `
+  type User {
+    username: String!
+    friends: [Person!]!
+    id: ID!
+  }
 
+  type Token {
+    value: String!
+  }
+
+  type Address {
+    street: String!
+    city: String!
+  }
+
+  type Person {
+    name: String!
+    phone: String
+    address: Address!
+    id: ID!
+  }
+
+  enum YesNo {
+    YES
+    NO
+  }
+
+  type Query {
+    personCount: Int!
+    allPersons(phone: YesNo): [Person!]!
+    findPerson(name: String!): Person
+    me: User
+  }
+
+  type Mutation {
+    addPerson(
+      name: String!
+      phone: String
+      street: String!
+      city: String!
+    ): Person
+    editNumber(name: String!, phone: String!): Person
+    createUser(username: String!): User
+    login(username: String!, password: String!): Token
+    addAsFriend(name: String!): User
+  }
+`
+module.exports = typeDefs
+```
+
+> resolvers.js
+
+```js
+const { GraphQLError } = require('graphql')
+const jwt = require('jsonwebtoken')
+const Person = require('./models/person')
+const User = require('./models/user')
+
+const resolvers = {
+  Query: {
+    personCount: async () => Person.collection.countDocuments(),
+    allPersons: async (root, args, context) => {
+      if (!args.phone) {
+        return Person.find({})
+      }
+
+      return Person.find({ phone: { $exists: args.phone === 'YES' } })
+    },
+    findPerson: async (root, args) => Person.findOne({ name: args.name }),
+    me: (root, args, context) => {
+      return context.currentUser
+    },
+  },
+  Person: {
+    address: ({ street, city }) => {
+      return {
+        street,
+        city,
+      }
+    },
+  },
+  Mutation: {
+    addPerson: async (root, args, context) => {
+      const person = new Person({ ...args })
+      const currentUser = context.currentUser
+
+      if (!currentUser) {
+        throw new GraphQLError('not authenticated', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+          },
+        })
+      }
+
+      try {
+        await person.save()
+        currentUser.friends = currentUser.friends.concat(person)
+        await currentUser.save()
+      } catch (error) {
+        throw new GraphQLError('Saving user failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error,
+          },
+        })
+      }
+
+      return person
+    },
+    editNumber: async (root, args) => {
+      const person = await Person.findOne({ name: args.name })
+      person.phone = args.phone
+
+      try {
+        await person.save()
+      } catch (error) {
+        throw new GraphQLError('Editing number failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error,
+          },
+        })
+      }
+
+      return person
+    },
+    createUser: async (root, args) => {
+      const user = new User({ username: args.username })
+
+      return user.save().catch((error) => {
+        throw new GraphQLError('Creating the user failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.username,
+            error,
+          },
+        })
+      })
+    },
+    login: async (root, args) => {
+      const user = await User.findOne({ username: args.username })
+
+      if (!user || args.password !== 'secret') {
+        throw new GraphQLError('wrong credentials', {
+          extensions: { code: 'BAD_USER_INPUT' },
+        })
+      }
+
+      const userForToken = {
+        username: user.username,
+        id: user._id,
+      }
+
+      return { value: jwt.sign(userForToken, process.env.JWT_SECRET) }
+    },
+    addAsFriend: async (root, args, { currentUser }) => {
+      const nonFriendAlready = (person) =>
+        !currentUser.friends
+          .map((f) => f._id.toString())
+          .includes(person._id.toString())
+
+      if (!currentUser) {
+        throw new GraphQLError('wrong credentials', {
+          extensions: { code: 'BAD_USER_INPUT' },
+        })
+      }
+
+      const person = await Person.findOne({ name: args.name })
+      if (nonFriendAlready(person)) {
+        currentUser.friends = currentUser.friends.concat(person)
+      }
+
+      await currentUser.save()
+
+      return currentUser
+    },
+  },
+}
+
+module.exports = resolvers
+```
+
+Install Express
+
+> npm install express cors
+
+> index.js
+
+```js
+const { ApolloServer } = require('@apollo/server')
+
+const { expressMiddleware } = require('@apollo/server/express4')
+const {
+  ApolloServerPluginDrainHttpServer,
+} = require('@apollo/server/plugin/drainHttpServer')
+const { makeExecutableSchema } = require('@graphql-tools/schema')
+
+const express = require('express')
+const cors = require('cors')
+const http = require('http')
+
+const jwt = require('jsonwebtoken')
+
+const mongoose = require('mongoose')
+
+const User = require('./models/user')
+
+const typeDefs = require('./schema')
+const resolvers = require('./resolvers')
+
+const MONGODB_URI = 'mongodb+srv://databaseurlhere'
+
+console.log('connecting to', MONGODB_URI)
+
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
+
+// setup is now within a function
+const start = async () => {
+  const app = express()
+  const httpServer = http.createServer(app)
+
+  const server = new ApolloServer({
+    schema: makeExecutableSchema({ typeDefs, resolvers }),
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  })
+
+  await server.start()
+
+  app.use(
+    '/',
+    cors(),
+    express.json(),
+    expressMiddleware(server, {
+      context: async ({ req }) => {
+        const auth = req ? req.headers.authorization : null
+        if (auth && auth.startsWith('Bearer ')) {
+          const decodedToken = jwt.verify(
+            auth.substring(7),
+            process.env.JWT_SECRET
+          )
+          const currentUser = await User.findById(decodedToken.id).populate(
+            'friends'
+          )
+          return { currentUser }
+        }
+      },
+    })
+  )
+
+  const PORT = 4000
+
+  httpServer.listen(PORT, () =>
+    console.log(`Server is now running on http://localhost:${PORT}`)
+  )
+}
+
+start()
+```
+
+#### Frontend
+
+Update queries
+
+> src/queries.js
+
+```js
+const PERSON_DETAILS = gql`
+  fragment PersonDetails on Person {
+    id
+    name
+    phone
+    address {
+      street
+      city
+    }
+  }
+`
+
+export const FIND_PERSON = gql`
+  query findPersonByName($nameToSearch: String!) {
+    findPerson(name: $nameToSearch) {
+      ...PersonDetails
+    }
+  }
+  ${PERSON_DETAILS}
+`
 ```
 
 </details>
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+It is pretty common in GraphQL that multiple queries return similar results.
+
+Subscriptions are radically different from anything we have seen in this course so far. Until now, all interaction between browser and server was due to a React application in the browser making HTTP requests to the server. GraphQL queries and mutations have also been done this way. With subscriptions, the situation is the opposite. After an application has made a subscription, it starts to listen to the server. When changes occur on the server, it sends a notification to all of its subscribers. Apollo uses WebSockets for server subscriber communication.
 
 </details>
 
