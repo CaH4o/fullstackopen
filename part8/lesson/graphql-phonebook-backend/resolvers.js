@@ -1,5 +1,10 @@
+// ======================== 6 ======================== //
 const { GraphQLError } = require('graphql')
 const jwt = require('jsonwebtoken')
+// ======================== 7 ======================== //
+const { PubSub } = require('graphql-subscriptions')
+const pubsub = new PubSub()
+// ======================== 6 ======================== //
 const Person = require('./models/person')
 const User = require('./models/user')
 
@@ -53,6 +58,9 @@ const resolvers = {
         })
       }
 
+      // ======================== 7 ======================== //
+      pubsub.publish('PERSON_ADDED', { personAdded: person })
+      // ======================== 6 ======================== //
       return person
     },
     editNumber: async (root, args) => {
@@ -124,6 +132,13 @@ const resolvers = {
       return currentUser
     },
   },
+  // ======================== 7 ======================== //
+  Subscription: {
+    personAdded: {
+      subscribe: () => pubsub.asyncIterator('PERSON_ADDED'),
+    },
+  },
+  // ======================== 6 ======================== //
 }
 
 module.exports = resolvers

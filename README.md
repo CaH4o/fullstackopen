@@ -7566,6 +7566,18 @@ There are only two hard things in Computer Science: cache invalidation and namin
 
 #### Backend Refatoring and subscription
 
+Install Express and cors
+
+> npm install express cors
+
+Install two packages for adding subscriptions to GraphQL and a Node.js WebSocket library
+
+> npm install graphql-ws ws @graphql-tools/schema
+
+Install graphql-subscriptions library
+
+> npm install graphql-subscriptions
+
 > schema.js
 
 ```js
@@ -7616,6 +7628,10 @@ const typeDefs = `
     login(username: String!, password: String!): Token
     addAsFriend(name: String!): User
   }
+
+  type Subscription {
+    personAdded: Person!
+  } 
 `
 module.exports = typeDefs
 ```
@@ -7625,6 +7641,9 @@ module.exports = typeDefs
 ```js
 const { GraphQLError } = require('graphql')
 const jwt = require('jsonwebtoken')
+const { PubSub } = require('graphql-subscriptions')
+const pubsub = new PubSub()
+
 const Person = require('./models/person')
 const User = require('./models/user')
 
@@ -7677,6 +7696,8 @@ const resolvers = {
           },
         })
       }
+
+      pubsub.publish('PERSON_ADDED', { personAdded: person })
 
       return person
     },
@@ -7749,43 +7770,45 @@ const resolvers = {
       return currentUser
     },
   },
+  Subscription: {
+    personAdded: {
+      subscribe: () => pubsub.asyncIterator('PERSON_ADDED'),
+    },
+  },
 }
 
 module.exports = resolvers
 ```
 
-Install Express
-
-> npm install express cors
-
 > index.js
 
 ```js
 const { ApolloServer } = require('@apollo/server')
-
 const { expressMiddleware } = require('@apollo/server/express4')
 const {
   ApolloServerPluginDrainHttpServer,
 } = require('@apollo/server/plugin/drainHttpServer')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
+const { WebSocketServer } = require('ws')
+const { useServer } = require('graphql-ws/lib/use/ws')
 
+const http = require('http')
 const express = require('express')
 const cors = require('cors')
-const http = require('http')
-
 const jwt = require('jsonwebtoken')
-
-const mongoose = require('mongoose')
-
-const User = require('./models/user')
 
 const typeDefs = require('./schema')
 const resolvers = require('./resolvers')
+const User = require('./models/user')
 
-const MONGODB_URI = 'mongodb+srv://databaseurlhere'
+require('dotenv').config()
+const MONGODB_URI = process.env.MONGODB_URI
+const PORT = process.env.PORT
 
 console.log('connecting to', MONGODB_URI)
 
+const mongoose = require('mongoose')
+mongoose.set('strictQuery', false)
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
@@ -7795,14 +7818,32 @@ mongoose
     console.log('error connection to MongoDB:', error.message)
   })
 
-// setup is now within a function
 const start = async () => {
   const app = express()
   const httpServer = http.createServer(app)
 
+  const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: '/',
+  })
+
+  const schema = makeExecutableSchema({ typeDefs, resolvers })
+  const serverCleanup = useServer({ schema }, wsServer)
+
   const server = new ApolloServer({
-    schema: makeExecutableSchema({ typeDefs, resolvers }),
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    schema,
+    plugins: [
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      {
+        async serverWillStart() {
+          return {
+            async drainServer() {
+              await serverCleanup.dispose()
+            },
+          }
+        },
+      },
+    ],
   })
 
   await server.start()
@@ -7828,8 +7869,6 @@ const start = async () => {
     })
   )
 
-  const PORT = 4000
-
   httpServer.listen(PORT, () =>
     console.log(`Server is now running on http://localhost:${PORT}`)
   )
@@ -7840,11 +7879,16 @@ start()
 
 #### Frontend
 
+Install graphql-ws
+
+> npm install graphql-ws
+
 Update queries
 
 > src/queries.js
 
 ```js
+// ...
 const PERSON_DETAILS = gql`
   fragment PersonDetails on Person {
     id
@@ -7865,6 +7909,144 @@ export const FIND_PERSON = gql`
   }
   ${PERSON_DETAILS}
 `
+
+export const PERSON_ADDED = gql`
+  subscription {
+    personAdded {
+      ...PersonDetails
+    }
+  }
+  ${PERSON_DETAILS}
+`
+// ...
+```
+
+> src/index.js
+
+```js
+import ReactDOM from 'react-dom/client'
+
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+  split,
+} from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
+import { getMainDefinition } from '@apollo/client/utilities'
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
+import { createClient } from 'graphql-ws'
+
+import App from './App'
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('phonenumbers-user-token')
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : null,
+    },
+  }
+})
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000',
+})
+
+const wsLink = new GraphQLWsLink(createClient({ url: 'ws://localhost:4000' }))
+
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query)
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    )
+  },
+  wsLink,
+  authLink.concat(httpLink)
+)
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: splitLink,
+})
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
+)
+```
+
+> src/App.js
+
+```js
+import { useState } from 'react'
+import { useQuery, useApolloClient, useSubscription } from '@apollo/client'
+// ...
+import { ALL_PERSONS, PERSON_ADDED } from './queries'
+
+export const updateCache = (cache, query, addedPerson) => {
+  const uniqByName = (a) => {
+    let seen = new Set()
+    return a.filter((item) => {
+      let k = item.name
+      return seen.has(k) ? false : seen.add(k)
+    })
+  }
+
+  cache.updateQuery(query, ({ allPersons }) => {
+    return {
+      allPersons: uniqByName(allPersons.concat(addedPerson)),
+    }
+  })
+}
+
+const App = () => {
+  // ...
+
+  useSubscription(PERSON_ADDED, {
+    onData: ({ data }) => {
+      console.log(data)
+    },
+  })
+
+  useSubscription(PERSON_ADDED, {
+    onData: ({ data }) => {
+      const addedPerson = data.data.personAdded
+      notify(`${addedPerson.name} added`)
+
+      updateCache(client.cache, { query: ALL_PERSONS }, addedPerson)
+    },
+  })
+
+  // ...
+}
+
+export default App
+```
+
+> src/components/PersonForm.js
+
+```js
+// ...
+import { updateCache } from '../App'
+
+const PersonForm = ({ setError }) => {
+  // ...
+  const [createPerson] = useMutation(CREATE_PERSON, {
+    // ...
+    update: (cache, response) => {
+      updateCache(cache, { query: ALL_PERSONS }, response.data.addPerson)
+    },
+  })
+
+  // ...
+}
+
+export default PersonForm
 ```
 
 </details>
@@ -7875,6 +8057,10 @@ export const FIND_PERSON = gql`
 It is pretty common in GraphQL that multiple queries return similar results.
 
 Subscriptions are radically different from anything we have seen in this course so far. Until now, all interaction between browser and server was due to a React application in the browser making HTTP requests to the server. GraphQL queries and mutations have also been done this way. With subscriptions, the situation is the opposite. After an application has made a subscription, it starts to listen to the server. When changes occur on the server, it sends a notification to all of its subscribers. Apollo uses WebSockets for server subscriber communication.
+
+When queries and mutations are used, GraphQL uses the HTTP protocol in the communication. In case of subscriptions, the communication between client and server happens with WebSockets.
+
+WebSockets are a perfect match for communication in the case of GraphQL subscriptions since when WebSockets are used, also the server can initiate the communication.
 
 </details>
 

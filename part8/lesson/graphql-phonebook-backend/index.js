@@ -6,6 +6,12 @@ const {
 } = require('@apollo/server/plugin/drainHttpServer')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
 
+// ======================== 7 ======================== //
+const { WebSocketServer } = require('ws')
+const { useServer } = require('graphql-ws/lib/use/ws')
+
+// ======================== 6 ======================== //
+
 const http = require('http')
 const express = require('express')
 const cors = require('cors')
@@ -37,10 +43,38 @@ const start = async () => {
   const app = express()
   const httpServer = http.createServer(app)
 
-  const server = new ApolloServer({
-    schema: makeExecutableSchema({ typeDefs, resolvers }),
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  //const server = new ApolloServer({
+  //schema: makeExecutableSchema({ typeDefs, resolvers }),
+  //plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  //})
+
+  // ======================== 7 ======================== //
+
+  const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: '/',
   })
+
+  const schema = makeExecutableSchema({ typeDefs, resolvers })
+  const serverCleanup = useServer({ schema }, wsServer)
+
+  const server = new ApolloServer({
+    schema,
+    plugins: [
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      {
+        async serverWillStart() {
+          return {
+            async drainServer() {
+              await serverCleanup.dispose()
+            },
+          }
+        },
+      },
+    ],
+  })
+
+  // ======================== 6 ======================== //
 
   await server.start()
 

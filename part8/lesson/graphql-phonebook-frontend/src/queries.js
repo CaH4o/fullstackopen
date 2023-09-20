@@ -68,6 +68,17 @@ export const FIND_PERSON = gql`
   ${PERSON_DETAILS}
 `
 
+// ================================= 7 ================================= //
+
+export const PERSON_ADDED = gql`
+  subscription {
+    personAdded {
+      ...PersonDetails
+    }
+  }
+  ${PERSON_DETAILS}
+`
+
 // ================================= 4 ================================= //
 
 export const CREATE_PERSON = gql`
