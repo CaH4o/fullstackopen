@@ -49,7 +49,7 @@ const typeDefs = `
   }
 `
  */
-// ======================== 7 ======================== //
+// ======================== 7-8 ======================== //
 
 const typeDefs = `
   type User {
@@ -71,6 +71,7 @@ const typeDefs = `
     name: String!
     phone: String
     address: Address!
+    friendOf: [User!]!
     id: ID!
   }
 

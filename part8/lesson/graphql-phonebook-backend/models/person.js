@@ -22,6 +22,14 @@ const schema = new mongoose.Schema({
     required: true,
     minlength: 3,
   },
+  // ======================== 9 ======================== //
+  friendOf: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+  // ======================== 3 ======================== //
 })
 
 module.exports = mongoose.model('Person', schema)

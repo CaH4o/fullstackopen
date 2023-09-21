@@ -8049,6 +8049,85 @@ const PersonForm = ({ setError }) => {
 export default PersonForm
 ```
 
+#### Backend n+1 problem
+
+> index.js
+
+```js
+// ...
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
+
+mongoose.set('debug', true)
+// ...
+```
+
+> schema.js
+
+```js
+const typeDefs = `
+//...
+type Person {
+  name: String!
+  phone: String
+  address: Address!
+  friendOf: [User!]!
+  id: ID!
+}
+//...
+`
+```
+
+> models/person.js
+
+```js
+const schema = new mongoose.Schema({
+  // ...
+  friendOf: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+})
+```
+
+> resolvers.js
+
+```js
+const resolvers = {
+  Query: {
+    // ...
+    allPersons: async (root, args, context) => {
+      if (!args.phone) {
+        return Person.find({}).populate('friendOf')
+      }
+
+      return Person.find({ phone: { $exists: args.phone === 'YES' } }).populate(
+        'friendOf'
+      )
+    },
+    // ...
+  },
+  Person: {
+  // ...
+    friendOf: async (root) => {
+      return friends await User.find({ friends: { $in: [root._id] } })
+    },
+  },
+  Mutation: {
+    // ...
+  },
+ // ...
+}
+```
+
 </details>
 
 <details>
@@ -8062,22 +8141,24 @@ When queries and mutations are used, GraphQL uses the HTTP protocol in the commu
 
 WebSockets are a perfect match for communication in the case of GraphQL subscriptions since when WebSockets are used, also the server can initiate the communication.
 
+Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil.
+
 </details>
 
 ### Exercises:
 
-#### 8.1-8.7, 8.13-8.16: Library backend
+#### 8.1-8.7, 8.13-8.16, 8.23, 8.26: Library backend
 
-Description: We will implement a GraphQL backend for a small library. Implement queries allBooks, allAuthors, allBooks by genre and/or by auther. Implement mutation addBook and editAuthor. Change the library application so that it saves the data to a database. Complete the program so that database validation errors (e.g. book title or author name being too short) are handled sensibly. Add user management to your application with updating typeDefs, сreating/updating querys and mutations for it and to work with token.
+Description: We will implement a GraphQL backend for a small library. Implement queries allBooks, allAuthors, allBooks by genre and/or by auther. Implement mutation addBook and editAuthor. Change the library application so that it saves the data to a database. Complete the program so that database validation errors (e.g. book title or author name being too short) are handled sensibly. Add user management to your application with updating typeDefs, сreating/updating querys and mutations for it and to work with token. Implementation for subscription.
 
-Create an application according to the requirements described in [exercises 8.1-8.7](https://fullstackopen.com/en/part8/graph_ql_server#exercises-8-1-8-7), [exercises 8.13-8.16](https://fullstackopen.com/en/part8/database_and_user_administration#exercises-8-13-8-16)
+Create an application according to the requirements described in [exercises 8.1-8.7](https://fullstackopen.com/en/part8/graph_ql_server#exercises-8-1-8-7), [exercises 8.13-8.16](https://fullstackopen.com/en/part8/database_and_user_administration#exercises-8-13-8-16), [exercises 8.23-8.26](https://fullstackopen.com/en/part8/fragments_and_subscriptions#exercises-8-23-8-26).
 
-- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/library-backend)
+- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/library-backend)
 
-#### 8.8-8.12, 8.17-8.22: Library frontend
+#### 8.8-8.12, 8.17-8.22, 8.24-8.25: Library frontend
 
-Description: We'll implement a frontend for the GraphQL library to the backend library project. Implement an Authors view to show the details of all authors on a page. Implement a Books view to show on a page all other details of all books except their genres. Implement a possibility to add new books to your application. Implement a possibility to set authors birth year and change the birth year form so that a birth year can be set only for an existing author. Implement login functionality. Implement a view which shows all the books based on the logged-in user's favourite genre.
+Description: We'll implement a frontend for the GraphQL library to the backend library project. Implement an Authors view to show the details of all authors on a page. Implement a Books view to show on a page all other details of all books except their genres. Implement a possibility to add new books to your application. Implement a possibility to set authors birth year and change the birth year form so that a birth year can be set only for an existing author. Implement login functionality. Implement a view which shows all the books based on the logged-in user's favourite genre. Implementation for subscription.
 
-Create an application according to the requirements described in [exercises 8.8-8.12](https://fullstackopen.com/en/part8/react_and_graph_ql#exercises-8-8-8-12), [exercises 8.17-8.22](https://fullstackopen.com/en/part8/login_and_updating_the_cache#exercises-8-17-8-22)
+Create an application according to the requirements described in [exercises 8.8-8.12](https://fullstackopen.com/en/part8/react_and_graph_ql#exercises-8-8-8-12), [exercises 8.17-8.22](https://fullstackopen.com/en/part8/login_and_updating_the_cache#exercises-8-17-8-22), [exercises 8.23-8.26](https://fullstackopen.com/en/part8/fragments_and_subscriptions#exercises-8-23-8-26).
 
-- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/library-frontend)
+- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/library-frontend)
