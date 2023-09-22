@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { useApolloClient } from '@apollo/client'
+import { useApolloClient, useSubscription } from '@apollo/client'
 
 import NavBar from './components/NavBar'
 import Authors from './components/Authors'
@@ -9,6 +9,8 @@ import NewBook from './components/NewBook'
 import RecommendedBook from './components/RecommendedBook'
 import LoginForm from './components/LoginForm'
 import Authorized from './components/Authorized'
+import { BOOK_ADDED, ALL_BOOKS, ALL_BOOKS_BY_GENER } from './queries'
+import { uniqByTitle } from './utils/index'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -17,6 +19,37 @@ const App = () => {
   )
 
   const client = useApolloClient()
+
+  useSubscription(BOOK_ADDED, {
+    onData: ({ data }) => {
+      const addedBook = data.data.bookAdded
+      console.log(data)
+      alert(`${addedBook.title} added`)
+
+      client.cache.updateQuery({ query: ALL_BOOKS }, ({ allBooks }) => {
+        return {
+          allBooks: uniqByTitle(allBooks.concat(addedBook)),
+        }
+      })
+
+      if (user && addedBook.genres.some((g) => g === user.favoriteGenre)) {
+        client.cache.updateQuery(
+          {
+            query: ALL_BOOKS_BY_GENER,
+            variables: { genre: user.favoriteGenre },
+          },
+          (props) => {
+            const allBooks = { ...props } || []
+            return {
+              allBooks: uniqByTitle(allBooks.allBooks.concat(addedBook)),
+            }
+          }
+        )
+      }
+
+      //updateCache(client.cache, { query: ALL_BOOKS }, addedBook)
+    },
+  })
 
   const logout = () => {
     setToken(null)
@@ -43,6 +76,7 @@ const App = () => {
         >
           <Route path='add' element={<NewBook user={user} />} />
           <Route path='recommended' element={<RecommendedBook user={user} />} />
+          <Route path='' element={<Navigate replace to='/authors' />} />
           <Route path='*' element={<Navigate replace to='/authors' />} />
         </Route>
       </Routes>

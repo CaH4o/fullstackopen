@@ -10,7 +10,7 @@ const RecommendedBook = ({ user }) => {
     return <div>loading...</div>
   }
 
-  const books = result.data.allBooks
+  const books = result.data.allBooks || []
 
   return (
     <div>
