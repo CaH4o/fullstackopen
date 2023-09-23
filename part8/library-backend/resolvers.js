@@ -24,11 +24,11 @@ const resolvers = {
 
       return Book.find(filterBy).populate('author')
     },
-    allAuthors: async () => Author.find({}),
+    allAuthors: async () => Author.find({}).populate('books'),
     me: (root, args, context) => context.currentUser,
   },
   Author: {
-    bookCount: async (author) => Book.count({ author: author.id }),
+    bookCount: async (author) => author.books.length,
   },
   Mutation: {
     addBook: async (root, args, { currentUser }) => {
@@ -47,10 +47,15 @@ const resolvers = {
         }
 
         const book = new Book({ ...args, author })
+        book.save()
+
+        await Author.updateOne(
+          { _id: author._id },
+          { $set: { books: author.books.concat(book._id) } }
+        )
 
         pubsub.publish('BOOK_ADDED', { bookAdded: book })
-
-        return book.save()
+        return book
       } catch (error) {
         throw new GraphQLError('Saving book failed', {
           extensions: {
