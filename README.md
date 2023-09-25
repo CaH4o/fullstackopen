@@ -10,7 +10,7 @@ Parts:
 - Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)
 - Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
 - Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
-- ~~Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)~~
+- Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)
 - ~~Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)~~
 - ~~Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)~~
 - ~~Part 12 - Full Stack Web Development: Containers (1 cr, CSM141084)~~
@@ -8156,3 +8156,201 @@ Description: We'll implement a frontend for the GraphQL library to the backend l
 Create an application according to the requirements described in [exercises 8.8-8.12](https://fullstackopen.com/en/part8/react_and_graph_ql#exercises-8-8-8-12), [exercises 8.17-8.22](https://fullstackopen.com/en/part8/login_and_updating_the_cache#exercises-8-17-8-22), [exercises 8.23-8.26](https://fullstackopen.com/en/part8/fragments_and_subscriptions#exercises-8-23-8-26).
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part8/library-frontend)
+
+## Part 9: [TypeScript](https://fullstackopen.com/en/part9)
+
+### Sub-part A: [Background and introduction](https://fullstackopen.com/en/part9/background_and_introduction)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part B: [First steps with TypeScript](https://fullstackopen.com/en/part9/first_steps_with_type_script)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part C: [Typing an Express app](https://fullstackopen.com/en/part9/typing_an_express_app)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part D: [React with types](https://fullstackopen.com/en/part9/react_with_types)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part E: [Grande finale: Patientor](https://fullstackopen.com/en/part9/grande_finale_patientor)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part F: [Legacy patientor (the old material)](https://fullstackopen.com/en/part9/legacy_patientor_the_old_material)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Text
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Exercises:
+
+#### 9.1-9.x: Name
+
+Description:
+
+Create an application according to the requirements described in [exercises 9.1-9.x]()
+
+- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/)
