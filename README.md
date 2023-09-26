@@ -8164,11 +8164,12 @@ Create an application according to the requirements described in [exercises 8.8-
 <details>
 <summary>Links:</summary>
 
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://www.typescriptlang.org/" title="TypeScript">TypeScript</a></li>
+<li><a href="https://jsdoc.app/about-getting-started.html" title="JSDoc">JSDoc</a></li>
+<li><a href="https://github.com/DefinitelyTyped/DefinitelyTyped" title="DefinitelyTyped">DefinitelyTyped</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html" title="TypeScript: Documantation">TypeScript: Documantation</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions" title="TypeScript: Type Assertions"></a>TypeScript: Type Assertions</li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html" title="TypeScript: Narrowing">TypeScript: Narrowing</a></li>
 
 </details>
 
@@ -8187,6 +8188,8 @@ Text
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+TypeScript is a programming language designed for large-scale JavaScript development created by Microsoft. To support building large-scale JavaScript applications, TypeScript offers features such as better development-time tooling, static code analysis, compile-time type checking and code-level documentation.
 
 </details>
 
