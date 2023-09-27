@@ -8176,12 +8176,17 @@ Create an application according to the requirements described in [exercises 8.8-
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Example of code with TypeScript
 
->
+```ts
+const birthdayGreeter = (name: string, age: number): string => {
+  return `Happy birthday ${name}, you are now ${age} years old!`
+}
 
-```js
+const birthdayHero: string = 'Jane User'
+const age: number = 22
 
+console.log(birthdayGreeter(birthdayHero, age))
 ```
 
 </details>
@@ -8190,6 +8195,27 @@ Text
 <summary>Сoncepts and definitions:</summary>
 
 TypeScript is a programming language designed for large-scale JavaScript development created by Microsoft. To support building large-scale JavaScript applications, TypeScript offers features such as better development-time tooling, static code analysis, compile-time type checking and code-level documentation.
+
+TypeScript consists of three separate, but mutually fulfilling parts:
+
+- The language
+- The compiler
+- The language service
+
+TypeScript key language features:
+
+- Type annotations
+- Structural typing
+- Type inference
+- Type erasure
+
+TypeScript may have some advantages:
+
+1. TypeScript offers type checking and static code analysis. We can require values to be of a certain type, and have the compiler warn about using them incorrectly. This can reduce runtime errors, and you might even be able to reduce the number of required unit tests in a project, at least concerning pure-type tests.
+2. TypeScript is that the type annotations in the code can function as a type of code-level documentation. It's easy to check from a function signature what kind of arguments the function can consume and what type of data it will return. This form of type annotation-bound documentation will always be up to date and it makes it easier for new programmers to start working on an existing project.
+3. TypeScript is that IDEs can provide more specific and smarter IntelliSense when they know exactly what types of data you are processing
+
+All of these features are extremely helpful when you need to refactor your code
 
 </details>
 
