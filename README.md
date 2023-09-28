@@ -8224,6 +8224,13 @@ All of these features are extremely helpful when you need to refactor your code
 <details>
 <summary>Links:</summary>
 
+<li><a href="https://code.visualstudio.com/" title="Visual Studio Code">Visual Studio Code</a></li>
+<li><a href="https://github.com/TypeStrong/ts-node" title="Using the npm package ts-node">Using the npm package ts-node</a></li>
+<li><a href="https://www.typescriptlang.org/play/index.html" title="TypeScript's official playground">TypeScript's official playground</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html" title="TypeScript: What is a tsconfig.json">TypeScript: What is a tsconfig.json</a></li>
+<li><a href="https://www.typescriptlang.org/tsconfig#noImplicitAny" title="TypeScript: No Implicit Any">TypeScript: No Implicit Any</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html" title="TypeScript: Everyday Types">TypeScript: Everyday Types</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean" title="TypeScript: The primitives">TypeScript: The primitives</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -8235,18 +8242,62 @@ All of these features are extremely helpful when you need to refactor your code
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Install both ts-node and the official typescript package globally
 
->
+> npm install -g ts-node typescript
+
+Install the dependencies in project after init (if ts is npt installed globally)
+
+> npm init
+
+> npm install --save-dev ts-node typescript
+
+Setting up scripts
+
+> package.json
 
 ```js
-
+{
+  // ..
+  "scripts": {
+    "ts-node": "ts-node"
+  },
+  // ..
+}
 ```
+
+configuration file for typescript
+
+> tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "noImplicitAny": false
+  }
+}
+```
+
+> multiplier.ts
+
+```ts
+const multiplicator = (a, b, printText) => {
+  console.log(printText, a * b)
+}
+
+multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:')
+```
+
+If you want to run file.ts with ts-node
+
+> npm run ts-node -- multiplier.ts
 
 </details>
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+The tsconfig.json file is used to define how the TypeScript compiler should interpret the code, how strictly the compiler should work, which files to watch or ignore, and much more
 
 </details>
 
