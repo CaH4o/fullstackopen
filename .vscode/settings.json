@@ -9,7 +9,10 @@
         "*.js": "javascript",
         "*test.js": "javascript"
     },
-    "prettier.semi": false,
+    /* JS */
+    //"prettier.semi": false,
+    /* tS */
+    "prettier.semi": true,
     "prettier.singleQuote": true,
     "prettier.singleAttributePerLine": false,
     "prettier.jsxSingleQuote": true,

@@ -8231,6 +8231,10 @@ All of these features are extremely helpful when you need to refactor your code
 <li><a href="https://www.typescriptlang.org/tsconfig#noImplicitAny" title="TypeScript: No Implicit Any">TypeScript: No Implicit Any</a></li>
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html" title="TypeScript: Everyday Types">TypeScript: Everyday Types</a></li>
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean" title="TypeScript: The primitives">TypeScript: The primitives</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types" title="TypeScript: Union Types">TypeScript: Union Types</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types" title="TypeScript: Literal Types">TypeScript: Literal Types</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases" title="TypeScript: Type Aliases">TypeScript: Type Aliases</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch" title="JavaScript: switch">JavaScript: switch</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
