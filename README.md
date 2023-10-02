@@ -126,27 +126,27 @@ output on the console
 http request
 
 ```javascript
-var xhttp = new XMLHttpRequest()
+var xhttp = new XMLHttpRequest();
 
 xhttp.onreadystatechange = function () {
   // code that takes care of the server response
-}
+};
 
-xhttp.open('GET', '/data.json', true)
-xhttp.send()
+xhttp.open('GET', '/data.json', true);
+xhttp.send();
 ```
 
 teg manipulation
 
 ```javascript
-var ul = document.createElement('ul')
-ul.setAttribute('class', 'notes')
-var li = document.createElement('li')
-li.appendChild(document.createTextNode('some text'))
-ul.appendChild(li)
-document.getElementById('root').appendChild(ul)
+var ul = document.createElement('ul');
+ul.setAttribute('class', 'notes');
+var li = document.createElement('li');
+li.appendChild(document.createTextNode('some text'));
+ul.appendChild(li);
+document.getElementById('root').appendChild(ul);
 
-list = document.getElementsByTagName('ul')[0]
+list = document.getElementsByTagName('ul')[0];
 ```
 
 JSON parsing
@@ -681,7 +681,7 @@ module.exports = {
     'arrow-spacing': ['error', { before: true, after: true }],
     'no-console': 0,
   },
-}
+};
 ```
 
 </details>
@@ -770,13 +770,13 @@ The enterpoint with configing and starting a server
 > index.js
 
 ```javascript
-const app = require('./app')
-const PORT = require('./utils/config').PORT
-const logger = require('./utils/logger')
+const app = require('./app');
+const PORT = require('./utils/config').PORT;
+const logger = require('./utils/logger');
 
 app.listen(config.PORT, () => {
-  logger.info(`Server running on port ${PORT}`)
-})
+  logger.info(`Server running on port ${PORT}`);
+});
 ```
 
 The main app with configing, all settings and connections
@@ -784,37 +784,37 @@ The main app with configing, all settings and connections
 > app.js
 
 ```javascript
-const { MONGODB_URI } = require('./utils/config')
-const express = require('express')
-const app = express()
-const cors = require('cors')
-const notesRouter = require('./controllers/notes')
-const middleware = require('./utils/middleware')
-const logger = require('./utils/logger')
-const mongoose = require('mongoose')
+const { MONGODB_URI } = require('./utils/config');
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const notesRouter = require('./controllers/notes');
+const middleware = require('./utils/middleware');
+const logger = require('./utils/logger');
+const mongoose = require('mongoose');
 
-mongoose.set('strictQuery', false)
+mongoose.set('strictQuery', false);
 
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    logger.info('connected to MongoDB')
+    logger.info('connected to MongoDB');
   })
   .catch((error) => {
-    logger.error('error connecting to MongoDB:', error.message)
-  })
+    logger.error('error connecting to MongoDB:', error.message);
+  });
 
-app.use(cors())
-app.use(express.static('build'))
-app.use(express.json())
-app.use(middleware.requestLogger)
+app.use(cors());
+app.use(express.static('build'));
+app.use(express.json());
+app.use(middleware.requestLogger);
 
-app.use('/api/notes', notesRouter)
+app.use('/api/notes', notesRouter);
 
-app.use(middleware.unknownEndpoint)
-app.use(middleware.errorHandler)
+app.use(middleware.unknownEndpoint);
+app.use(middleware.errorHandler);
 
-module.exports = app
+module.exports = app;
 ```
 
 Controllers folder for control requests on certain API with response on it
@@ -822,67 +822,67 @@ Controllers folder for control requests on certain API with response on it
 > controllers/notes.js
 
 ```javascript
-const notesRouter = require('express').Router()
-const Note = require('../models/note')
+const notesRouter = require('express').Router();
+const Note = require('../models/note');
 
 notesRouter.get('/', (request, response) => {
   Note.find({}).then((notes) => {
-    response.json(notes)
-  })
-})
+    response.json(notes);
+  });
+});
 
 notesRouter.get('/:id', (request, response, next) => {
   Note.findById(request.params.id)
     .then((note) => {
       if (note) {
-        response.json(note)
+        response.json(note);
       } else {
-        response.status(404).end()
+        response.status(404).end();
       }
     })
-    .catch((error) => next(error))
-})
+    .catch((error) => next(error));
+});
 
 notesRouter.post('/', (request, response, next) => {
-  const body = request.body
+  const body = request.body;
 
   const note = new Note({
     content: body.content,
     important: body.important || false,
-  })
+  });
 
   note
     .save()
     .then((savedNote) => {
-      response.json(savedNote)
+      response.json(savedNote);
     })
-    .catch((error) => next(error))
-})
+    .catch((error) => next(error));
+});
 
 notesRouter.delete('/:id', (request, response, next) => {
   Note.findByIdAndRemove(request.params.id)
     .then(() => {
-      response.status(204).end()
+      response.status(204).end();
     })
-    .catch((error) => next(error))
-})
+    .catch((error) => next(error));
+});
 
 notesRouter.put('/:id', (request, response, next) => {
-  const body = request.body
+  const body = request.body;
 
   const note = {
     content: body.content,
     important: body.important,
-  }
+  };
 
   Note.findByIdAndUpdate(request.params.id, note, { new: true })
     .then((updatedNote) => {
-      response.json(updatedNote)
+      response.json(updatedNote);
     })
-    .catch((error) => next(error))
-})
+    .catch((error) => next(error));
+});
 
-module.exports = notesRouter
+module.exports = notesRouter;
 ```
 
 Module folder for keeping all modules of data structure
@@ -890,7 +890,7 @@ Module folder for keeping all modules of data structure
 > module/note.js
 
 ```javascript
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const noteSchema = new mongoose.Schema({
   content: {
@@ -899,17 +899,17 @@ const noteSchema = new mongoose.Schema({
     minlength: 5,
   },
   important: Boolean,
-})
+});
 
 noteSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
   },
-})
+});
 
-module.exports = mongoose.model('Note', noteSchema)
+module.exports = mongoose.model('Note', noteSchema);
 ```
 
 Utils folder for keeping all nessesery functions and data
@@ -918,67 +918,67 @@ Utils folder for keeping all nessesery functions and data
 
 ```javascript
 const info = (...params) => {
-  console.log(...params)
-}
+  console.log(...params);
+};
 
 const error = (...params) => {
-  console.error(...params)
-}
+  console.error(...params);
+};
 
 module.exports = {
   info,
   error,
-}
+};
 ```
 
 > utils/config.js
 
 ```javascript
-require('dotenv').config()
+require('dotenv').config();
 
-const PORT = process.env.PORT
-const MONGODB_URI = process.env.MONGODB_URI
+const PORT = process.env.PORT;
+const MONGODB_URI = process.env.MONGODB_URI;
 
 module.exports = {
   MONGODB_URI,
   PORT,
-}
+};
 ```
 
 > utils/middleware.js
 
 ```javascript
-const logger = require('./logger')
+const logger = require('./logger');
 
 const requestLogger = (request, response, next) => {
-  logger.info('Method:', request.method)
-  logger.info('Path:  ', request.path)
-  logger.info('Body:  ', request.body)
-  logger.info('---')
-  next()
-}
+  logger.info('Method:', request.method);
+  logger.info('Path:  ', request.path);
+  logger.info('Body:  ', request.body);
+  logger.info('---');
+  next();
+};
 
 const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
-}
+  response.status(404).send({ error: 'unknown endpoint' });
+};
 
 const errorHandler = (error, request, response, next) => {
-  logger.error(error.message)
+  logger.error(error.message);
 
   if (error.name === 'CastError') {
-    return response.status(400).send({ error: 'malformatted id' })
+    return response.status(400).send({ error: 'malformatted id' });
   } else if (error.name === 'ValidationError') {
-    return response.status(400).json({ error: error.message })
+    return response.status(400).json({ error: error.message });
   }
 
-  next(error)
-}
+  next(error);
+};
 
 module.exports = {
   requestLogger,
   unknownEndpoint,
   errorHandler,
-}
+};
 ```
 
 #### Testing
@@ -1038,13 +1038,13 @@ Tests and descriptions
 ```javascript
 describe('description of the block with tests', () => {
   // tests
-})
+});
 ```
 
 ```javascript
 test('description of the single test', () => {
-  expect(true === true).toBe(true)
-})
+  expect(true === true).toBe(true);
+});
 ```
 
 #### Lodash library
@@ -1058,17 +1058,17 @@ install Lodash
 > npm i --save-dev lodash
 
 ```javascript
-const _ = require('lodash')
-const blogs = require('dummy_data').blogs
+const _ = require('lodash');
+const blogs = require('dummy_data').blogs;
 
 const result = _.chain(blogs)
   .groupBy('author')
   .mapValues((blogs) => blogs.length)
   .transform((result, value, key) => {
-    return result.push({ 'author': key, 'blogs': value })
+    return result.push({ 'author': key, 'blogs': value });
   }, [])
   .maxBy('blogs')
-  .value()
+  .value();
 ```
 
 </details>
@@ -1144,7 +1144,7 @@ Update confivg and env to use separate database for testing
 const MONGODB_URI =
   process.env.NODE_ENV === 'test'
     ? process.env.TEST_MONGODB_URI
-    : process.env.MONGODB_URI
+    : process.env.MONGODB_URI;
 ```
 
 > .env
@@ -1159,9 +1159,9 @@ TEST_MONGODB_URI=mongodb+srv://user:<password>@cluster0.o1opl.mongodb.net/testAp
 ```javascript
 const info = (...params) => {
   if (process.env.NODE_ENV !== 'test') {
-    console.log(...params)
+    console.log(...params);
   }
-}
+};
 ```
 
 #### SuperTest
@@ -1175,10 +1175,10 @@ Cod for testing
 > tests/note_api.test.js
 
 ```javascript
-const mongoose = require('mongoose')
-const supertest = require('supertest')
-const app = require('../app')
-const api = supertest(app)
+const mongoose = require('mongoose');
+const supertest = require('supertest');
+const app = require('../app');
+const api = supertest(app);
 
 //...
 
@@ -1187,19 +1187,19 @@ describe('get blogs after dummy_blogs saved', () => {
     await api
       .get('/api/blogs')
       .expect(200)
-      .expect('Content-Type', /application\/json/)
-  })
+      .expect('Content-Type', /application\/json/);
+  });
 
   test('returned the same length of blogs', async () => {
-    const response = await api.get('/api/blogs')
-    expect(response.body).toHaveLength(init.listWithManyBlog.length)
-  })
+    const response = await api.get('/api/blogs');
+    expect(response.body).toHaveLength(init.listWithManyBlog.length);
+  });
 
   test('there are defined "id" property', async () => {
-    const blogsInDb = await helper.blogsInDb()
-    expect(blogsInDb[0].id).toBeDefined()
-  })
-})
+    const blogsInDb = await helper.blogsInDb();
+    expect(blogsInDb[0].id).toBeDefined();
+  });
+});
 
 describe('post a single blog after dummy_blogs saved', () => {
   //...
@@ -1209,53 +1209,53 @@ describe('post a single blog after dummy_blogs saved', () => {
       title: 'Blog',
       author: 'Member of Wikipedia',
       url: 'https://en.wikipedia.org/wiki/Blog',
-    }
+    };
 
-    const response = await api.post('/api/blogs').send(postBlog)
-    expect(response.body.likes).toBe(0)
-  })
+    const response = await api.post('/api/blogs').send(postBlog);
+    expect(response.body.likes).toBe(0);
+  });
 
   //...
-})
+});
 
 describe('delete a blog after dummy_blogs saved', () => {
   //...
 
   test('fails with status code 400 if id is invalid', async () => {
-    let idBlogToDelete
-    await api.delete(`/api/blogs/${idBlogToDelete}`).expect(400)
+    let idBlogToDelete;
+    await api.delete(`/api/blogs/${idBlogToDelete}`).expect(400);
 
-    idBlogToDelete = '0000'
-    await api.delete(`/api/blogs/${idBlogToDelete}`).expect(400)
+    idBlogToDelete = '0000';
+    await api.delete(`/api/blogs/${idBlogToDelete}`).expect(400);
 
-    const blogsInDb = await helper.blogsInDb()
-    expect(blogsInDb).toHaveLength(init.listWithManyBlog.length)
-  })
-})
+    const blogsInDb = await helper.blogsInDb();
+    expect(blogsInDb).toHaveLength(init.listWithManyBlog.length);
+  });
+});
 
 describe('put a blog after dummy_blogs saved', () => {
   //...
 
   test('successful the put blog still in the DB', async () => {
-    const blogsInDb = await helper.blogsInDb()
+    const blogsInDb = await helper.blogsInDb();
     const putBlog = {
       title: 'Blog',
       author: 'Member of Wikipedia',
       url: 'https://en.wikipedia.org/wiki/Blog',
       likes: 5,
-    }
+    };
 
-    await api.put(`/api/blogs/${blogsInDb[0].id}`).send(putBlog)
+    await api.put(`/api/blogs/${blogsInDb[0].id}`).send(putBlog);
 
-    const blogsInDbAfterPut = await helper.blogsInDb()
-    expect(blogsInDbAfterPut).toHaveLength(init.listWithManyBlog.length)
+    const blogsInDbAfterPut = await helper.blogsInDb();
+    expect(blogsInDbAfterPut).toHaveLength(init.listWithManyBlog.length);
 
-    const ids = blogsInDbAfterPut.map((b) => b.id)
-    expect(ids).toContain(blogsInDb[0].id)
-  })
+    const ids = blogsInDbAfterPut.map((b) => b.id);
+    expect(ids).toContain(blogsInDb[0].id);
+  });
 
   //...
-})
+});
 
 //...
 ```
@@ -1264,8 +1264,8 @@ add close db connection after all tests
 
 ```javascript
 afterAll(async () => {
-  await mongoose.connection.close()
-})
+  await mongoose.connection.close();
+});
 ```
 
 JS file with functions to test
@@ -1273,7 +1273,7 @@ JS file with functions to test
 > tests/test_helper.js
 
 ```javascript
-const Note = require('../models/note')
+const Note = require('../models/note');
 
 const initialNotes = [
   {
@@ -1281,17 +1281,17 @@ const initialNotes = [
     important: false,
   },
   //...
-]
+];
 
 const notesInDb = async () => {
-  const notes = await Note.find({})
-  return notes.map((note) => note.toJSON())
-}
+  const notes = await Note.find({});
+  return notes.map((note) => note.toJSON());
+};
 
 module.exports = {
   initialNotes,
   notesInDb,
-}
+};
 ```
 
 Update before Ench tests function with Promise.all (can use map for init aray)
@@ -1300,12 +1300,12 @@ Update before Ench tests function with Promise.all (can use map for init aray)
 
 ```javascript
 beforeEach(async () => {
-  await Note.deleteMany({})
+  await Note.deleteMany({});
 
-  const noteObjects = helper.initialNotes.map((note) => new Note(note))
-  const promiseArray = noteObjects.map((note) => note.save())
-  await Promise.all(promiseArray)
-})
+  const noteObjects = helper.initialNotes.map((note) => new Note(note));
+  const promiseArray = noteObjects.map((note) => note.save());
+  await Promise.all(promiseArray);
+});
 ```
 
 or
@@ -1343,7 +1343,7 @@ Try catch block
 try {
   // do the async operations here
 } catch (exception) {
-  next(exception)
+  next(exception);
 }
 ```
 
@@ -1356,9 +1356,9 @@ update app not to use try catch in routers. No need more use next() and catch er
 > app.js
 
 ```javascript
-const express = require('express')
-require('express-async-errors')
-const app = express()
+const express = require('express');
+require('express-async-errors');
+const app = express();
 //...
 ```
 
@@ -1422,7 +1422,7 @@ const app = express()
 Add user document schema to models
 
 ```javascript
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   username: String,
@@ -1434,21 +1434,21 @@ const userSchema = new mongoose.Schema({
       ref: 'Note',
     },
   ],
-})
+});
 
 userSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
     // the passwordHash should not be revealed
-    delete returnedObject.passwordHash
+    delete returnedObject.passwordHash;
   },
-})
+});
 
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model('User', userSchema);
 
-module.exports = User
+module.exports = User;
 ```
 
 Change schema of the note defined in the models/note.js file
@@ -1475,33 +1475,33 @@ Create controller for users routs in file
 > controllers/users.js
 
 ```javascript
-const bcrypt = require('bcrypt')
-const usersRouter = require('express').Router()
-const User = require('../models/user')
+const bcrypt = require('bcrypt');
+const usersRouter = require('express').Router();
+const User = require('../models/user');
 
 usersRouter.get('/', async (request, response) => {
-  const users = await User.find({})
-  response.json(users)
-})
+  const users = await User.find({});
+  response.json(users);
+});
 
 usersRouter.post('/', async (request, response) => {
-  const { username, name, password } = request.body
+  const { username, name, password } = request.body;
 
-  const saltRounds = 10
-  const passwordHash = await bcrypt.hash(password, saltRounds)
+  const saltRounds = 10;
+  const passwordHash = await bcrypt.hash(password, saltRounds);
 
   const user = new User({
     username,
     name,
     passwordHash,
-  })
+  });
 
-  const savedUser = await user.save()
+  const savedUser = await user.save();
 
-  response.status(201).json(savedUser)
-})
+  response.status(201).json(savedUser);
+});
 
-module.exports = usersRouter
+module.exports = usersRouter;
 ```
 
 Add users rout in app.js
@@ -1509,11 +1509,11 @@ Add users rout in app.js
 > app.js
 
 ```javascript
-const usersRouter = require('./controllers/users')
+const usersRouter = require('./controllers/users');
 
 // ...
 
-app.use('/api/users', usersRouter)
+app.use('/api/users', usersRouter);
 ```
 
 #### mongoose unique validator
@@ -1527,8 +1527,8 @@ Update user schema
 > models/user.js
 
 ```javascript
-const mongoose = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator')
+const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = mongoose.Schema({
   username: {
@@ -1537,9 +1537,9 @@ const userSchema = mongoose.Schema({
     unique: true,
   },
   //...
-})
+});
 
-userSchema.plugin(uniqueValidator)
+userSchema.plugin(uniqueValidator);
 
 //...
 ```
@@ -1549,27 +1549,27 @@ Update note controller to post note with user
 > controllers/notes.js
 
 ```javascript
-const User = require('../models/user')
+const User = require('../models/user');
 
 //...
 
 notesRouter.post('/', async (request, response) => {
-  const body = request.body
+  const body = request.body;
 
-  const user = await User.findById(body.userId)
+  const user = await User.findById(body.userId);
 
   const note = new Note({
     content: body.content,
     important: body.important === undefined ? false : body.important,
     user: user.id,
-  })
+  });
 
-  const savedNote = await note.save()
-  user.notes = user.notes.concat(savedNote._id)
-  await user.save()
+  const savedNote = await note.save();
+  user.notes = user.notes.concat(savedNote._id);
+  await user.save();
 
-  response.json(savedNote)
-})
+  response.json(savedNote);
+});
 ```
 
 Update user controller to get all users with full notes array (not only ids) with content only
@@ -1580,10 +1580,10 @@ Update user controller to get all users with full notes array (not only ids) wit
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({}).populate('notes', {
     content: 1,
-  })
+  });
 
-  response.json(users)
-})
+  response.json(users);
+});
 ```
 
 </details>
@@ -1620,37 +1620,39 @@ The code for login functionality goes to the file controllers/login.js.
 > controllers/login.js
 
 ```javascript
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
-const loginRouter = require('express').Router()
-const User = require('../models/user')
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const loginRouter = require('express').Router();
+const User = require('../models/user');
 
 loginRouter.post('/', async (request, response) => {
-  const { username, password } = request.body
+  const { username, password } = request.body;
 
-  const user = await User.findOne({ username })
+  const user = await User.findOne({ username });
   const passwordCorrect =
-    user === null ? false : await bcrypt.compare(password, user.passwordHash)
+    user === null ? false : await bcrypt.compare(password, user.passwordHash);
 
   if (!(user && passwordCorrect)) {
     return response.status(401).json({
       error: 'invalid username or password',
-    })
+    });
   }
 
   const userForToken = {
     username: user.username,
     id: user._id,
-  }
+  };
 
   const token = jwt.sign(userForToken, process.env.SECRET, {
     expiresIn: 60 * 60,
-  })
+  });
 
-  response.status(200).send({ token, username: user.username, name: user.name })
-})
+  response
+    .status(200)
+    .send({ token, username: user.username, name: user.name });
+});
 
-module.exports = loginRouter
+module.exports = loginRouter;
 ```
 
 Update app
@@ -1658,11 +1660,11 @@ Update app
 > app.js
 
 ```javascript
-const loginRouter = require('./controllers/login')
+const loginRouter = require('./controllers/login');
 
 //...
 
-app.use('/api/login', loginRouter)
+app.use('/api/login', loginRouter);
 ```
 
 Update note router
@@ -1670,39 +1672,39 @@ Update note router
 > controllers/notes.js
 
 ```javascript
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 // ...
 
 const getTokenFrom = (request) => {
-  const authorization = request.get('authorization')
+  const authorization = request.get('authorization');
   if (authorization && authorization.startsWith('Bearer ')) {
-    return authorization.replace('Bearer ', '')
+    return authorization.replace('Bearer ', '');
   }
-  return null
-}
+  return null;
+};
 
 notesRouter.post('/', async (request, response) => {
-  const body = request.body
+  const body = request.body;
 
-  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
   if (!decodedToken.id) {
-    return response.status(401).json({ error: 'token invalid' })
+    return response.status(401).json({ error: 'token invalid' });
   }
-  const user = await User.findById(decodedToken.id)
+  const user = await User.findById(decodedToken.id);
 
   const note = new Note({
     content: body.content,
     important: body.important === undefined ? false : body.important,
     user: user._id,
-  })
+  });
 
-  const savedNote = await note.save()
-  user.notes = user.notes.concat(savedNote._id)
-  await user.save()
+  const savedNote = await note.save();
+  user.notes = user.notes.concat(savedNote._id);
+  await user.save();
 
-  response.json(savedNote)
-})
+  response.json(savedNote);
+});
 ```
 
 Update middleware
@@ -1711,20 +1713,20 @@ Update middleware
 
 ```javascript
 const errorHandler = (error, request, response, next) => {
-  logger.error(error.message)
+  logger.error(error.message);
 
   if (error.name === 'CastError') {
-    return response.status(400).send({ error: 'malformatted id' })
+    return response.status(400).send({ error: 'malformatted id' });
   } else if (error.name === 'ValidationError') {
-    return response.status(400).json({ error: error.message })
+    return response.status(400).json({ error: error.message });
   } else if (error.name === 'JsonWebTokenError') {
-    return response.status(401).json({ error: 'invalid token' })
+    return response.status(401).json({ error: 'invalid token' });
   } else if (error.name === 'TokenExpiredError') {
-    return response.status(401).json({ error: 'token expired' })
+    return response.status(401).json({ error: 'token expired' });
   }
 
-  next(error)
-}
+  next(error);
+};
 ```
 
 Some Windows users have had problems with bcrypt. If you run into problems, remove the library with command and install bcryptjs instead.
@@ -1736,50 +1738,50 @@ We can create middlewares for extracting token and user
 > utils/middleware.js
 
 ```js
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
-const config = require('./config')
-const User = require('../models/user')
+const config = require('./config');
+const User = require('../models/user');
 
 const tokenExtractor = (request, response, next) => {
-  const authorization = request.get('authorization')
+  const authorization = request.get('authorization');
 
   const token =
     authorization && authorization.startsWith('Bearer ')
       ? authorization.replace('Bearer ', '')
-      : null
+      : null;
 
-  request.body.token = token
+  request.body.token = token;
 
-  next()
-}
+  next();
+};
 
 const userExtractor = async (request, response, next) => {
-  const decodedToken = jwt.verify(request.body.token, config.SECRET)
+  const decodedToken = jwt.verify(request.body.token, config.SECRET);
 
   if (!decodedToken.id) {
-    return response.status(401).json({ error: 'token invalid' })
+    return response.status(401).json({ error: 'token invalid' });
   }
 
-  const user = await User.findById(decodedToken.id)
+  const user = await User.findById(decodedToken.id);
 
-  request.body.token = undefined
-  request.body.user = user
+  request.body.token = undefined;
+  request.body.user = user;
 
-  next()
-}
+  next();
+};
 ```
 
 middleware we can add in app, in router or in rout
 
 ```js
-app.use(userExtractor)
+app.use(userExtractor);
 
-app.use('/api/blogs', userExtractor, blogsRouter)
+app.use('/api/blogs', userExtractor, blogsRouter);
 
 router.post('/', userExtractor, async (request, response) => {
   // ...
-})
+});
 ```
 
 </details>
@@ -1905,15 +1907,15 @@ create servoce for wotjing with login
 > services/login.js.
 
 ```js
-import axios from 'axios'
-const baseUrl = '/api/login'
+import axios from 'axios';
+const baseUrl = '/api/login';
 
 const login = async (credentials) => {
-  const response = await axios.post(baseUrl, credentials)
-  return response.data
-}
+  const response = await axios.post(baseUrl, credentials);
+  return response.data;
+};
 
-export default { login }
+export default { login };
 ```
 
 add functionality to work with roken in note service
@@ -1922,24 +1924,24 @@ add functionality to work with roken in note service
 
 ```js
 //...
-let token = null
+let token = null;
 
 const setToken = (newToken) => {
-  token = `Bearer ${newToken}`
-}
+  token = `Bearer ${newToken}`;
+};
 //...
 const create = async (newObject) => {
   const config = {
     headers: { Authorization: token },
-  }
+  };
 
-  const response = await axios.post(baseUrl, newObject, config)
-  return response.data
-}
+  const response = await axios.post(baseUrl, newObject, config);
+  return response.data;
+};
 //...
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { /* ... */ setToken }
+export default { /* ... */ setToken };
 ```
 
 We can change cod to use function for returning a component
@@ -1998,7 +2000,7 @@ return (
     /* Or */
     {user === null ? loginForm() : noteForm()}
   </div>
-)
+);
 ```
 
 Clone the application from GitHub with the command:
@@ -2050,16 +2052,16 @@ Create a separated NoteForm component to create Note with all functionality insi
 > NoteForm.js
 
 ```js
-import { useState } from 'react'
+import { useState } from 'react';
 
 const NoteForm = ({ createNote }) => {
-  const [newNote, setNewNote] = useState('')
+  const [newNote, setNewNote] = useState('');
 
   const addNote = (event) => {
-    event.preventDefault()
-    createNote({ content: newNote, important: true })
-    setNewNote('')
-  }
+    event.preventDefault();
+    createNote({ content: newNote, important: true });
+    setNewNote('');
+  };
 
   return (
     <div>
@@ -2073,10 +2075,10 @@ const NoteForm = ({ createNote }) => {
         <button type='submit'>save</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default NoteForm
+export default NoteForm;
 ```
 
 Create a togglable component to wrapped other components to hide or unhide them.
@@ -2084,21 +2086,21 @@ Create a togglable component to wrapped other components to hide or unhide them.
 > Togglable.js
 
 ```js
-import { useState, forwardRef, useImperativeHandle } from 'react'
+import { useState, forwardRef, useImperativeHandle } from 'react';
 
 const Togglable = forwardRef((props, refs) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
 
-  const hideWhenVisible = { display: visible ? 'none' : '' }
-  const showWhenVisible = { display: visible ? '' : 'none' }
+  const hideWhenVisible = { display: visible ? 'none' : '' };
+  const showWhenVisible = { display: visible ? '' : 'none' };
 
   const toggleVisibility = () => {
-    setVisible(!visible)
-  }
+    setVisible(!visible);
+  };
 
   useImperativeHandle(refs, () => {
-    return { toggleVisibility }
-  })
+    return { toggleVisibility };
+  });
 
   return (
     <div>
@@ -2110,12 +2112,12 @@ const Togglable = forwardRef((props, refs) => {
         <button onClick={toggleVisibility}>cancel</button>
       </div>
     </div>
-  )
-})
+  );
+});
 
-Togglable.displayName = 'Togglable'
+Togglable.displayName = 'Togglable';
 
-export default Togglable
+export default Togglable;
 ```
 
 Add NoteForm in App with changing logic in creating a note function and use Togglable component.
@@ -2123,24 +2125,24 @@ Add NoteForm in App with changing logic in creating a note function and use Togg
 > App.js
 
 ```js
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
 //...
-import Togglable from './components/Togglable'
-import LoginForm from './components/LoginForm'
-import NoteForm from './components/NoteForm'
+import Togglable from './components/Togglable';
+import LoginForm from './components/LoginForm';
+import NoteForm from './components/NoteForm';
 
 const App = () => {
   //...
-  const noteFormRef = useRef()
+  const noteFormRef = useRef();
 
   //...
 
   const addNote = (noteObject) => {
-    noteFormRef.current.toggleVisibility()
+    noteFormRef.current.toggleVisibility();
     noteService.create(noteObject).then((returnedNote) => {
-      setNotes(notes.concat(returnedNote))
-    })
-  }
+      setNotes(notes.concat(returnedNote));
+    });
+  };
   //...
 
   return (
@@ -2161,8 +2163,8 @@ const App = () => {
       </Togglable>
       {/* ...  */}
     </div>
-  )
-}
+  );
+};
 ```
 
 Runtime type checking for React props and similar objects.
@@ -2172,15 +2174,15 @@ Runtime type checking for React props and similar objects.
 We can define the buttonLabel prop as a mandatory or required string-type prop as shown below:
 
 ```js
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const Togglable = React.forwardRef((props, ref) => {
   // ..
-})
+});
 
 Togglable.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
-}
+};
 ```
 
 #### The ESlint code style tool to the Frontend.
@@ -2230,7 +2232,7 @@ module.exports = {
       'version': 'detect',
     },
   },
-}
+};
 ```
 
 Create ELlint ignore file
@@ -2315,45 +2317,45 @@ Create a test for Note in the sqme folder as the next code:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
-  const label = note.important ? 'make not important' : 'make important'
+  const label = note.important ? 'make not important' : 'make important';
 
   return (
     <li className='note'>
       {note.content}
       <button onClick={toggleImportance}>{label}</button>
     </li>
-  )
-}
+  );
+};
 
-export default Note
+export default Note;
 ```
 
 > src/components/Note.test.js
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
-import { render, screen } from '@testing-library/react'
-import Note from './Note'
+import React from 'react';
+import '@testing-library/jest-dom/extend-expect';
+import { render, screen } from '@testing-library/react';
+import Note from './Note';
 
 test('renders content', () => {
   const note = {
     content: 'Component testing is done with react-testing-library',
     important: true,
-  }
+  };
 
-  render(<Note note={note} />)
+  render(<Note note={note} />);
 
-  screen.debug()
+  screen.debug();
 
   const element = screen.getByText(
     'Component testing is done with react-testing-library'
-  )
+  );
 
-  screen.debug(element)
+  screen.debug(element);
 
-  expect(element).toBeDefined()
-})
+  expect(element).toBeDefined();
+});
 ```
 
 There are console.log of debuging
@@ -2420,11 +2422,11 @@ We can use it in test file as:
 > src/components/Note.test.js
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import Note from './Note'
+import React from 'react';
+import '@testing-library/jest-dom/extend-expect';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import Note from './Note';
 
 // ...
 
@@ -2432,18 +2434,18 @@ test('clicking the button calls event handler once', async () => {
   const note = {
     content: 'Component testing is done with react-testing-library',
     important: true,
-  }
+  };
 
-  const mockHandler = jest.fn()
+  const mockHandler = jest.fn();
 
-  render(<Note note={note} toggleImportance={mockHandler} />)
+  render(<Note note={note} toggleImportance={mockHandler} />);
 
-  const user = userEvent.setup()
-  const button = screen.getByText('make not important')
-  await user.click(button)
+  const user = userEvent.setup();
+  const button = screen.getByText('make not important');
+  await user.click(button);
 
-  expect(mockHandler.mock.calls).toHaveLength(1)
-})
+  expect(mockHandler.mock.calls).toHaveLength(1);
+});
 ```
 
 > src/components/Togglable.js
@@ -2462,41 +2464,41 @@ const Togglable = forwardRef((props, ref) => {
 > src/components/Togglable.test.js
 
 ```js
-import React from 'react'
-import '@testing-library/jest-dom/extend-expect'
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import Togglable from './Togglable'
+import React from 'react';
+import '@testing-library/jest-dom/extend-expect';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import Togglable from './Togglable';
 
 describe('<Togglable />', () => {
-  let container
+  let container;
 
   beforeEach(() => {
     container = render(
       <Togglable buttonLabel='show...'>
         <div className='testDiv'>togglable content</div>
       </Togglable>
-    ).container
-  })
+    ).container;
+  });
 
   test('renders its children', async () => {
-    await screen.findAllByText('togglable content')
-  })
+    await screen.findAllByText('togglable content');
+  });
 
   test('at start the children are not displayed', () => {
-    const div = container.querySelector('.togglableContent')
-    expect(div).toHaveStyle('display: none')
-  })
+    const div = container.querySelector('.togglableContent');
+    expect(div).toHaveStyle('display: none');
+  });
 
   test('after clicking the button, children are displayed', async () => {
-    const user = userEvent.setup()
-    const button = screen.getByText('show...')
-    await user.click(button)
+    const user = userEvent.setup();
+    const button = screen.getByText('show...');
+    await user.click(button);
 
-    const div = container.querySelector('.togglableContent')
-    expect(div).not.toHaveStyle('display: none')
-  })
-})
+    const div = container.querySelector('.togglableContent');
+    expect(div).not.toHaveStyle('display: none');
+  });
+});
 ```
 
 Testing forms
@@ -2504,7 +2506,7 @@ Testing forms
 > src/components/NoteForm.js
 
 ```js
-import { useState } from 'react'
+import { useState } from 'react';
 
 const NoteForm = ({ createNote } /* { onSubmit, handleChange, value } */) => {
   //...
@@ -2519,26 +2521,26 @@ const NoteForm = ({ createNote } /* { onSubmit, handleChange, value } */) => {
       />
       {/* ... */}
     </div>
-  )
-}
+  );
+};
 
-export default NoteForm
+export default NoteForm;
 ```
 
 > src/components/NoteForm.js
 
 ```js
-import React from 'react'
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
-import NoteForm from './NoteForm'
-import userEvent from '@testing-library/user-event'
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import NoteForm from './NoteForm';
+import userEvent from '@testing-library/user-event';
 
 test('<NoteForm /> updates parent state and calls onSubmit', async () => {
-  const createNote = jest.fn()
-  const user = userEvent.setup()
+  const createNote = jest.fn();
+  const user = userEvent.setup();
 
-  render(<NoteForm createNote={createNote} />)
+  render(<NoteForm createNote={createNote} />);
 
   //const inputs = screen.getAllByRole('textbox') //if input teg with textbox type more then 1
   // or by Placeholder
@@ -2547,17 +2549,17 @@ test('<NoteForm /> updates parent state and calls onSubmit', async () => {
   // const { container } = render(<NoteForm createNote={createNote} />)
   // const input = container.querySelector('#note-input')
 
-  const input = screen.getByRole('textbox')
-  const sendButton = screen.getByText('save')
+  const input = screen.getByRole('textbox');
+  const sendButton = screen.getByText('save');
 
-  await user.type(input, 'testing a form...')
+  await user.type(input, 'testing a form...');
   // await user.type(inputs[0], 'testing a form...') //if input teg with textbox type more then 1
 
-  await user.click(sendButton)
+  await user.click(sendButton);
 
-  expect(createNote.mock.calls).toHaveLength(1)
-  expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
-})
+  expect(createNote.mock.calls).toHaveLength(1);
+  expect(createNote.mock.calls[0][0].content).toBe('testing a form...');
+});
 ```
 
 #### coverage
@@ -2653,18 +2655,18 @@ Add a new controller for testing app. This will clean test DB.
 > controllers/testing.js
 
 ```js
-const testingRouter = require('express').Router()
-const Note = require('../models/note')
-const User = require('../models/user')
+const testingRouter = require('express').Router();
+const Note = require('../models/note');
+const User = require('../models/user');
 
 testingRouter.post('/reset', async (request, response) => {
-  await Note.deleteMany({})
-  await User.deleteMany({})
+  await Note.deleteMany({});
+  await User.deleteMany({});
 
-  response.status(204).end()
-})
+  response.status(204).end();
+});
 
-module.exports = testingRouter
+module.exports = testingRouter;
 ```
 
 Add the controller to the app for routing
@@ -2673,14 +2675,14 @@ Add the controller to the app for routing
 
 ```js
 // ...
-app.use('/api/notes', notesRouter)
+app.use('/api/notes', notesRouter);
 
 if (process.env.NODE_ENV === 'test') {
-  const testingRouter = require('./controllers/testing')
-  app.use('/api/testing', testingRouter)
+  const testingRouter = require('./controllers/testing');
+  app.use('/api/testing', testingRouter);
 }
 
-app.use(middleware.unknownEndpoint)
+app.use(middleware.unknownEndpoint);
 // ...
 ```
 
@@ -2732,7 +2734,7 @@ module.exports = {
   'rules': {
     // ...
   },
-}
+};
 ```
 
 Create/update confige for cypress
@@ -2740,7 +2742,7 @@ Create/update confige for cypress
 > cypress.config.js
 
 ```js
-const { defineConfig } = require('cypress')
+const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   e2e: {
@@ -2751,7 +2753,7 @@ module.exports = defineConfig({
     BACKEND: 'http://localhost:3001/api',
   },
   'video': false,
-})
+});
 ```
 
 Create custom commands to post data in database
@@ -2764,11 +2766,11 @@ Cypress.Commands.add('login', ({ username, password }) => {
     username,
     password,
   }).then(({ body }) => {
-    localStorage.setItem('loggedNoteappUser', JSON.stringify(body))
+    localStorage.setItem('loggedNoteappUser', JSON.stringify(body));
 
-    cy.visit('')
-  })
-})
+    cy.visit('');
+  });
+});
 
 Cypress.Commands.add('createNote', ({ content, important }) => {
   cy.request({
@@ -2780,10 +2782,10 @@ Cypress.Commands.add('createNote', ({ content, important }) => {
         JSON.parse(localStorage.getItem('loggedNoteappUser')).token
       }`,
     },
-  })
+  });
 
-  cy.visit('')
-})
+  cy.visit('');
+});
 ```
 
 Update components with id css selectors (LoginForm as an example)
@@ -2830,81 +2832,81 @@ Create file with e2e tests for applicaton
 ```js
 describe('Note app', function () {
   beforeEach(function () {
-    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`)
+    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`);
     const user = {
       name: 'Matti Luukkainen',
       username: 'mluukkai',
       password: 'salainen',
-    }
-    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user)
-    cy.visit('')
-  })
+    };
+    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user);
+    cy.visit('');
+  });
 
   it('front page can be opened', function () {
-    cy.contains('Notes')
+    cy.contains('Notes');
     cy.contains(
       'Note app, Department of Computer Science, University of Helsinki 2023'
-    )
-  })
+    );
+  });
 
   //it.only()
   it('user can login', function () {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('salainen')
-    cy.get('#login-button').click()
+    cy.contains('log in').click();
+    cy.get('#username').type('mluukkai');
+    cy.get('#password').type('salainen');
+    cy.get('#login-button').click();
 
-    cy.contains('Matti Luukkainen logged in')
-  })
+    cy.contains('Matti Luukkainen logged in');
+  });
 
   it('login fails with wrong password', function () {
-    cy.contains('log in').click()
-    cy.get('#username').type('mluukkai')
-    cy.get('#password').type('wrong')
-    cy.get('#login-button').click()
+    cy.contains('log in').click();
+    cy.get('#username').type('mluukkai');
+    cy.get('#password').type('wrong');
+    cy.get('#login-button').click();
 
     cy.get('.error')
       .should('contain', 'Wrong credentials')
       .and('have.css', 'color', 'rgb(255, 0, 0)')
-      .and('have.css', 'border-style', 'solid')
+      .and('have.css', 'border-style', 'solid');
 
-    cy.contains('Matti Luukkainen logged in').should('not.exist')
-  })
+    cy.contains('Matti Luukkainen logged in').should('not.exist');
+  });
 
   describe('when logged in', function () {
     beforeEach(function () {
-      cy.login({ username: 'mluukkai', password: 'salainen' })
-    })
+      cy.login({ username: 'mluukkai', password: 'salainen' });
+    });
 
     it('a new note can be created', function () {
-      cy.contains('new note').click()
-      cy.get('input').type('a note created by cypress')
-      cy.contains('save').click()
-      cy.contains('a note created by cypress')
-    })
+      cy.contains('new note').click();
+      cy.get('input').type('a note created by cypress');
+      cy.contains('save').click();
+      cy.contains('a note created by cypress');
+    });
 
     describe('and several notes exist', function () {
       beforeEach(function () {
-        cy.createNote({ content: 'first note', important: false })
-        cy.createNote({ content: 'second note', important: false })
-        cy.createNote({ content: 'third note', important: false })
-      })
+        cy.createNote({ content: 'first note', important: false });
+        cy.createNote({ content: 'second note', important: false });
+        cy.createNote({ content: 'third note', important: false });
+      });
 
       it('one of those can be made important', function () {
-        cy.contains('second note').parent().find('button').as('theButton')
-        cy.get('@theButton').click()
-        cy.get('@theButton').should('contain', 'make not important')
-      })
+        cy.contains('second note').parent().find('button').as('theButton');
+        cy.get('@theButton').click();
+        cy.get('@theButton').should('contain', 'make not important');
+      });
 
       it('then example', function () {
         cy.get('button').then((buttons) => {
-          console.log('number of buttons', buttons.length)
-          cy.wrap(buttons[0]).click()
-        })
-      })
-    })
-  })
-})
+          console.log('number of buttons', buttons.length);
+          cy.wrap(buttons[0]).click();
+        });
+      });
+    });
+  });
+});
 ```
 
 </details>
@@ -2975,22 +2977,22 @@ Create reducer for note
 const noteReducer = (state = [], action) => {
   switch (action.type) {
     case 'NEW_NOTE':
-      return [...state, action.payload]
+      return [...state, action.payload];
     case 'TOGGLE_IMPORTANCE': {
-      const id = action.payload.id
-      const noteToChange = state.find((n) => n.id === id)
+      const id = action.payload.id;
+      const noteToChange = state.find((n) => n.id === id);
       const changedNote = {
         ...noteToChange,
         important: !noteToChange.important,
-      }
-      return state.map((note) => (note.id !== id ? note : changedNote))
+      };
+      return state.map((note) => (note.id !== id ? note : changedNote));
     }
     default:
-      return state
+      return state;
   }
-}
+};
 
-const generateId = () => Number((Math.random() * 1000000).toFixed(0))
+const generateId = () => Number((Math.random() * 1000000).toFixed(0));
 
 export const createNote = (content) => {
   return {
@@ -3000,17 +3002,17 @@ export const createNote = (content) => {
       important: false,
       id: generateId(),
     },
-  }
-}
+  };
+};
 
 export const toggleImportanceOf = (id) => {
   return {
     type: 'TOGGLE_IMPORTANCE',
     payload: { id },
-  }
-}
+  };
+};
 
-export default noteReducer
+export default noteReducer;
 ```
 
 install deep-freeze for testing state is unmutable
@@ -3022,12 +3024,12 @@ create test for reduser
 > src/reducers/noteReducer.test.js
 
 ```js
-import noteReducer from './noteReducer'
-import deepFreeze from 'deep-freeze'
+import noteReducer from './noteReducer';
+import deepFreeze from 'deep-freeze';
 
 describe('noteReducer', () => {
   test('returns new state with action NEW_NOTE', () => {
-    const state = []
+    const state = [];
     const action = {
       type: 'NEW_NOTE',
       payload: {
@@ -3035,14 +3037,14 @@ describe('noteReducer', () => {
         important: true,
         id: 1,
       },
-    }
+    };
 
-    deepFreeze(state)
-    const newState = noteReducer(state, action)
+    deepFreeze(state);
+    const newState = noteReducer(state, action);
 
-    expect(newState).toHaveLength(1)
-    expect(newState).toContainEqual(action.payload)
-  })
+    expect(newState).toHaveLength(1);
+    expect(newState).toContainEqual(action.payload);
+  });
 
   test('returns new state with action TOGGLE_IMPORTANCE', () => {
     const state = [
@@ -3056,29 +3058,29 @@ describe('noteReducer', () => {
         important: false,
         id: 2,
       },
-    ]
+    ];
 
     const action = {
       type: 'TOGGLE_IMPORTANCE',
       payload: {
         id: 2,
       },
-    }
+    };
 
-    deepFreeze(state)
-    const newState = noteReducer(state, action)
+    deepFreeze(state);
+    const newState = noteReducer(state, action);
 
-    expect(newState).toHaveLength(2)
+    expect(newState).toHaveLength(2);
 
-    expect(newState).toContainEqual(state[0])
+    expect(newState).toContainEqual(state[0]);
 
     expect(newState).toContainEqual({
       content: 'state changes are made with actions',
       important: true,
       id: 2,
-    })
-  })
-})
+    });
+  });
+});
 ```
 
 #### react-redux
@@ -3092,28 +3094,28 @@ update index.js and create components with using react-redux
 > src/index.js
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-import App from './App'
-import noteReducer from './reducers/noteReducer'
+import App from './App';
+import noteReducer from './reducers/noteReducer';
 
-const store = createStore(noteReducer)
+const store = createStore(noteReducer);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
   </Provider>
-)
+);
 ```
 
 > src/App.js
 
 ```js
-import NewNote from './components/NewNote'
-import Notes from './components/Notes'
+import NewNote from './components/NewNote';
+import Notes from './components/Notes';
 
 const App = () => {
   return (
@@ -3121,18 +3123,18 @@ const App = () => {
       <NewNote />
       <Notes />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 > src/Notes.js
 
 ```js
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 
-import { toggleImportanceOf } from '../reducers/noteReducer'
+import { toggleImportanceOf } from '../reducers/noteReducer';
 
 const Note = ({ note, handleClick }) => {
   return (
@@ -3140,12 +3142,12 @@ const Note = ({ note, handleClick }) => {
       {note.content}
       <strong> {note.important ? 'important' : ''}</strong>
     </li>
-  )
-}
+  );
+};
 
 const Notes = () => {
-  const dispatch = useDispatch()
-  const notes = useSelector((state) => state)
+  const dispatch = useDispatch();
+  const notes = useSelector((state) => state);
 
   return (
     <ul>
@@ -3157,39 +3159,39 @@ const Notes = () => {
         />
       ))}
     </ul>
-  )
-}
+  );
+};
 
-export default Notes
+export default Notes;
 ```
 
 > src/NewNote.js
 
 ```js
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 
-import { createNote } from '../reducers/noteReducer'
+import { createNote } from '../reducers/noteReducer';
 
 const NewNote = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const addNote = (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
+    event.preventDefault();
+    const content = event.target.note.value;
+    event.target.note.value = '';
 
-    dispatch(createNote(content))
-  }
+    dispatch(createNote(content));
+  };
 
   return (
     <form onSubmit={addNote}>
       <input name='note' />
       <button type='submit'>add</button>
     </form>
-  )
-}
+  );
+};
 
-export default NewNote
+export default NewNote;
 ```
 
 </details>
@@ -3219,20 +3221,20 @@ Create reducer for filtering notes
 const filterReducer = (state = 'ALL', action) => {
   switch (action.type) {
     case 'SET_FILTER':
-      return action.payload
+      return action.payload;
     default:
-      return state
+      return state;
   }
-}
+};
 
 export const filterChange = (filter) => {
   return {
     type: 'SET_FILTER',
     payload: filter,
-  }
-}
+  };
+};
 
-export default filterReducer
+export default filterReducer;
 ```
 
 Create component for filtering notes with input radio by importants
@@ -3240,12 +3242,12 @@ Create component for filtering notes with input radio by importants
 > src/components/VisibilityFilter.js
 
 ```js
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 
-import { filterChange } from '../reducers/filterReducer'
+import { filterChange } from '../reducers/filterReducer';
 
 const VisibilityFilter = (/* props */) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -3268,10 +3270,10 @@ const VisibilityFilter = (/* props */) => {
         onChange={() => dispatch(filterChange('NONIMPORTANT'))}
       />
     </div>
-  )
-}
+  );
+};
 
-export default VisibilityFilter
+export default VisibilityFilter;
 ```
 
 Update index.js to use two reducers
@@ -3279,18 +3281,18 @@ Update index.js to use two reducers
 > src/index.js
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createStore, combineReducers } from 'redux'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { createStore, combineReducers } from 'redux';
 //...
-import filterReducer from './reducers/filterReducer'
+import filterReducer from './reducers/filterReducer';
 
 const reducer = combineReducers({
   notes: noteReducer,
   filter: filterReducer,
-})
+});
 
-const store = createStore(reducer)
+const store = createStore(reducer);
 //...
 ```
 
@@ -3325,7 +3327,7 @@ Update the App component to rander the component with filter.
 
 ```js
 //...
-import VisibilityFilter from './components/VisibilityFilter'
+import VisibilityFilter from './components/VisibilityFilter';
 
 const App = () => {
   return (
@@ -3334,10 +3336,10 @@ const App = () => {
       <VisibilityFilter />
       <Notes />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 #### Redux Toolkit
@@ -3351,29 +3353,29 @@ Update index.js to use two reducers
 > src/index.js
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
-import { configureStore } from '@reduxjs/toolkit'
-import App from './App'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import App from './App';
 
-import noteReducer from './reducers/noteReducer'
-import filterReducer from './reducers/filterReducer'
+import noteReducer from './reducers/noteReducer';
+import filterReducer from './reducers/filterReducer';
 
 const store = configureStore({
   reducer: {
     notes: noteReducer,
     filter: filterReducer,
   },
-})
+});
 
-console.log(store.getState())
+console.log(store.getState());
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
   </Provider>
-)
+);
 ```
 
 Update noteReducer.js to use createSlice from reduxjs toolkit
@@ -3381,7 +3383,7 @@ Update noteReducer.js to use createSlice from reduxjs toolkit
 > src/reducers/noteReducer.js
 
 ```js
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = [
   {
@@ -3394,36 +3396,36 @@ const initialState = [
     important: false,
     id: 2,
   },
-]
+];
 
-const generateId = () => Number((Math.random() * 1000000).toFixed(0))
+const generateId = () => Number((Math.random() * 1000000).toFixed(0));
 
 const noteSlice = createSlice({
   name: 'notes',
   initialState,
   reducers: {
     createNote(state, action) {
-      const content = action.payload
+      const content = action.payload;
       state.push({
         content,
         important: false,
         id: generateId(),
-      })
+      });
     },
     toggleImportanceOf(state, action) {
-      const id = action.payload
-      const noteToChange = state.find((n) => n.id === id)
+      const id = action.payload;
+      const noteToChange = state.find((n) => n.id === id);
       const changedNote = {
         ...noteToChange,
         important: !noteToChange.important,
-      }
-      return state.map((note) => (note.id !== id ? note : changedNote))
+      };
+      return state.map((note) => (note.id !== id ? note : changedNote));
     },
   },
-})
+});
 
-export const { createNote, toggleImportanceOf } = noteSlice.actions
-export default noteSlice.reducer
+export const { createNote, toggleImportanceOf } = noteSlice.actions;
+export default noteSlice.reducer;
 ```
 
 Update index.js to use two reducers
@@ -3431,8 +3433,8 @@ Update index.js to use two reducers
 > src/reducers/noteReducer.test.js
 
 ```js
-import noteReducer from './noteReducer'
-import deepFreeze from 'deep-freeze'
+import noteReducer from './noteReducer';
+import deepFreeze from 'deep-freeze';
 
 describe('noteReducer', () => {
   test('returns new state with action notes/createNote', () => {
@@ -3440,20 +3442,20 @@ describe('noteReducer', () => {
     const action = {
       type: 'notes/createNote',
       payload: 'the app state is in redux store',
-    }
+    };
     //...
-    expect(newState.map((s) => s.content)).toContainEqual(action.payload)
-  })
+    expect(newState.map((s) => s.content)).toContainEqual(action.payload);
+  });
 
   test('returns new state with action notes/toggleImportanceOf', () => {
     //...
     const action = {
       type: 'notes/toggleImportanceOf',
       payload: 2,
-    }
+    };
     //...
-  })
-})
+  });
+});
 ```
 
 Use console log with JSON in reduser function in slicer to see the object in console
@@ -3523,22 +3525,22 @@ Create services to use axios to fetch data from the backend
 > src/services/notes.js
 
 ```js
-import axios from 'axios'
+import axios from 'axios';
 
-const baseUrl = 'http://localhost:3001/notes'
+const baseUrl = 'http://localhost:3001/notes';
 
 const getAll = async () => {
-  const response = await axios.get(baseUrl)
-  return response.data
-}
+  const response = await axios.get(baseUrl);
+  return response.data;
+};
 
 const createNew = async (content) => {
-  const object = { content, important: false }
-  const response = await axios.post(baseUrl, object)
-  return response.data
-}
+  const object = { content, important: false };
+  const response = await axios.post(baseUrl, object);
+  return response.data;
+};
 
-export default { getAll, createNew }
+export default { getAll, createNew };
 ```
 
 Update reducer for working with the new services
@@ -3546,30 +3548,30 @@ Update reducer for working with the new services
 > src/reducers/noteReducer.js
 
 ```js
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const noteSlice = createSlice({
   name: 'notes',
   initialState: [],
   reducers: {
     createNote(state, action) {
-      state.push(action.payload)
+      state.push(action.payload);
     },
     toggleImportanceOf(state, action) {
       //...
     },
     appendNote(state, action) {
-      state.push(action.payload)
+      state.push(action.payload);
     },
     setNotes(state, action) {
-      return action.payload
+      return action.payload;
     },
   },
-})
+});
 
 export const { createNote, toggleImportanceOf, appendNote, setNotes } =
-  noteSlice.actions
-export default noteSlice.reducer
+  noteSlice.actions;
+export default noteSlice.reducer;
 ```
 
 Update App component to fetch data from server
@@ -3577,20 +3579,20 @@ Update App component to fetch data from server
 > src/App.js
 
 ```js
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { setNotes } from './reducers/noteReducer'
-import noteService from './services/notes'
-import NewNote from './components/NewNote'
-import Notes from './components/Notes'
-import VisibilityFilter from './components/VisibilityFilter'
+import { setNotes } from './reducers/noteReducer';
+import noteService from './services/notes';
+import NewNote from './components/NewNote';
+import Notes from './components/Notes';
+import VisibilityFilter from './components/VisibilityFilter';
 
 const App = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
-    noteService.getAll().then((notes) => dispatch(setNotes(notes)))
-  }, [])
+    noteService.getAll().then((notes) => dispatch(setNotes(notes)));
+  }, []);
 
   return (
     <div>
@@ -3598,10 +3600,10 @@ const App = () => {
       <VisibilityFilter />
       <Notes />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 Update NewNote component to fetch data from server
@@ -3609,32 +3611,32 @@ Update NewNote component to fetch data from server
 > src/components/NewNote.js
 
 ```js
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 
-import { createNote } from '../reducers/noteReducer'
-import noteService from '../services/notes'
+import { createNote } from '../reducers/noteReducer';
+import noteService from '../services/notes';
 
 const NewNote = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const addNote = async (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
+    event.preventDefault();
+    const content = event.target.note.value;
+    event.target.note.value = '';
 
-    const newNote = await noteService.createNew(content)
-    dispatch(createNote(newNote))
-  }
+    const newNote = await noteService.createNew(content);
+    dispatch(createNote(newNote));
+  };
 
   return (
     <form onSubmit={addNote}>
       <input name='note' />
       <button type='submit'>add</button>
     </form>
-  )
-}
+  );
+};
 
-export default NewNote
+export default NewNote;
 ```
 
 #### Asynchronous actions and Redux thunk
@@ -3644,9 +3646,9 @@ Update note services with asynchronous action and hide implimantation in service
 > src/reducers/noteReducer.js
 
 ```js
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
-import noteService from '../services/notes'
+import noteService from '../services/notes';
 
 const noteSlice = createSlice({
   name: 'notes',
@@ -3656,31 +3658,31 @@ const noteSlice = createSlice({
       //..
     },
     appendNote(state, action) {
-      state.push(action.payload)
+      state.push(action.payload);
     },
     setNotes(state, action) {
-      return action.payload
+      return action.payload;
     },
   },
-})
+});
 
-export const { toggleImportanceOf, appendNote, setNotes } = noteSlice.actions
+export const { toggleImportanceOf, appendNote, setNotes } = noteSlice.actions;
 
 export const initializeNotes = () => {
   return async (dispatch) => {
-    const notes = await noteService.getAll()
-    dispatch(setNotes(notes))
-  }
-}
+    const notes = await noteService.getAll();
+    dispatch(setNotes(notes));
+  };
+};
 
 export const createNote = (content) => {
   return async (dispatch) => {
-    const newNote = await noteService.createNew(content)
-    dispatch(appendNote(newNote))
-  }
-}
+    const newNote = await noteService.createNew(content);
+    dispatch(appendNote(newNote));
+  };
+};
 
-export default noteSlice.reducer
+export default noteSlice.reducer;
 ```
 
 Update App component to use new funcialnality with fetching data
@@ -3745,19 +3747,19 @@ Create a separate store file
 > src/store.js
 
 ```js
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
 
-import noteReducer from './reducers/noteReducer'
-import filterReducer from './reducers/filterReducer'
+import noteReducer from './reducers/noteReducer';
+import filterReducer from './reducers/filterReducer';
 
 const store = configureStore({
   reducer: {
     notes: noteReducer,
     filter: filterReducer,
   },
-})
+});
 
-export default store
+export default store;
 ```
 
 Update index to use the new sotre file
@@ -3765,18 +3767,18 @@ Update index to use the new sotre file
 > src/index.js
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 
-import store from './store'
-import App from './App'
+import store from './store';
+import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
   </Provider>
-)
+);
 ```
 
 </details>
@@ -3822,19 +3824,19 @@ Create index and add elements to use React Query library
 > src/index.js
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
-import App from './App'
+import App from './App';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>
     <App />
   </QueryClientProvider>
-)
+);
 ```
 
 Create file requests.js to work with server using axios
@@ -3842,17 +3844,19 @@ Create file requests.js to work with server using axios
 > src/requests.js
 
 ```js
-import axios from 'axios'
+import axios from 'axios';
 
-const baseUrl = 'http://localhost:3001/notes'
+const baseUrl = 'http://localhost:3001/notes';
 
-export const getNotes = () => axios.get(baseUrl).then((res) => res.data)
+export const getNotes = () => axios.get(baseUrl).then((res) => res.data);
 
 export const createNote = (newNote) =>
-  axios.post(baseUrl, newNote).then((res) => res.data)
+  axios.post(baseUrl, newNote).then((res) => res.data);
 
 export const updateNote = (updatedNote) =>
-  axios.put(`${baseUrl}/${updatedNote.id}`, updatedNote).then((res) => res.data)
+  axios
+    .put(`${baseUrl}/${updatedNote.id}`, updatedNote)
+    .then((res) => res.data);
 ```
 
 Create App with elements to use React Query library and requests
@@ -3860,50 +3864,50 @@ Create App with elements to use React Query library and requests
 > src/App.js
 
 ```js
-import { useQuery, useMutation, useQueryClient } from 'react-query'
-import { getNotes, createNote, updateNote } from './requests'
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { getNotes, createNote, updateNote } from './requests';
 
 const App = () => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const newNoteMutation = useMutation(createNote, {
     onSuccess: (newNote) => {
-      const notes = queryClient.getQueryData('notes')
-      queryClient.setQueryData('notes', notes.concat(newNote))
+      const notes = queryClient.getQueryData('notes');
+      queryClient.setQueryData('notes', notes.concat(newNote));
     },
-  })
+  });
 
   const addNote = async (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    newNoteMutation.mutate({ content, important: true })
-  }
+    event.preventDefault();
+    const content = event.target.note.value;
+    event.target.note.value = '';
+    newNoteMutation.mutate({ content, important: true });
+  };
 
   const updateNoteMutation = useMutation(updateNote, {
     onSuccess: (updatedNote) => {
-      const notes = queryClient.getQueryData('notes')
+      const notes = queryClient.getQueryData('notes');
       queryClient.setQueryData(
         'notes',
         notes.map((n) => (n.id !== updatedNote.id ? n : updatedNote))
-      )
+      );
     },
-  })
+  });
 
   const toggleImportance = (note) => {
-    updateNoteMutation.mutate({ ...note, important: !note.important })
-  }
+    updateNoteMutation.mutate({ ...note, important: !note.important });
+  };
 
   const result = useQuery('notes', getNotes, {
     refetchOnWindowFocus: false,
-  })
+  });
 
-  console.log(result)
+  console.log(result);
 
   if (result.isLoading) {
-    return <div>loading data...</div>
+    return <div>loading data...</div>;
   }
 
-  const notes = result.data
+  const notes = result.data;
 
   return (
     <div>
@@ -3919,10 +3923,10 @@ const App = () => {
         </li>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 #### React state management using the useReducer hook and context.
@@ -3932,44 +3936,44 @@ Create CounterContext for providing it in index.
 > src/CounterContext.js
 
 ```js
-import { createContext, useReducer, useContext } from 'react'
+import { createContext, useReducer, useContext } from 'react';
 
 const counterReducer = (state, action) => {
   switch (action.type) {
     case 'INC':
-      return state + 1
+      return state + 1;
     case 'DEC':
-      return state - 1
+      return state - 1;
     case 'ZERO':
-      return 0
+      return 0;
     default:
-      return state
+      return state;
   }
-}
+};
 
-const CounterContext = createContext()
+const CounterContext = createContext();
 
 export const CounterContextProvider = (props) => {
-  const [counter, counterDispatch] = useReducer(counterReducer, 0)
+  const [counter, counterDispatch] = useReducer(counterReducer, 0);
 
   return (
     <CounterContext.Provider value={[counter, counterDispatch]}>
       {props.children}
     </CounterContext.Provider>
-  )
-}
+  );
+};
 
 export const useCounterValue = () => {
-  const counterAndDispatch = useContext(CounterContext)
-  return counterAndDispatch[0]
-}
+  const counterAndDispatch = useContext(CounterContext);
+  return counterAndDispatch[0];
+};
 
 export const useCounterDispatch = () => {
-  const counterAndDispatch = useContext(CounterContext)
-  return counterAndDispatch[1]
-}
+  const counterAndDispatch = useContext(CounterContext);
+  return counterAndDispatch[1];
+};
 
-export default CounterContext
+export default CounterContext;
 ```
 
 Update index to use CounterContext
@@ -3977,16 +3981,16 @@ Update index to use CounterContext
 > src/index.js
 
 ```js
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom/client';
 
-import App from './App'
-import { CounterContextProvider } from './CounterContext'
+import App from './App';
+import { CounterContextProvider } from './CounterContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <CounterContextProvider>
     <App />
   </CounterContextProvider>
-)
+);
 ```
 
 Create the component for buttons with using useCounterDispatch
@@ -3994,14 +3998,14 @@ Create the component for buttons with using useCounterDispatch
 > src/components/Button.js
 
 ```js
-import { useCounterDispatch } from '../CounterContext'
+import { useCounterDispatch } from '../CounterContext';
 
 const Button = ({ type, label }) => {
-  const dispatch = useCounterDispatch()
-  return <button onClick={() => dispatch({ type })}>{label}</button>
-}
+  const dispatch = useCounterDispatch();
+  return <button onClick={() => dispatch({ type })}>{label}</button>;
+};
 
-export default Button
+export default Button;
 ```
 
 Create the component for Display counter with using useCounterValue
@@ -4009,14 +4013,14 @@ Create the component for Display counter with using useCounterValue
 > src/components/Display.js
 
 ```js
-import { useCounterValue } from '../CounterContext'
+import { useCounterValue } from '../CounterContext';
 
 const Display = () => {
-  const counter = useCounterValue()
-  return <div>{counter}</div>
-}
+  const counter = useCounterValue();
+  return <div>{counter}</div>;
+};
 
-export default Display
+export default Display;
 ```
 
 Create App with the components
@@ -4024,8 +4028,8 @@ Create App with the components
 > src/App.js
 
 ```js
-import Display from './components/Display'
-import Button from './components/Button'
+import Display from './components/Display';
+import Button from './components/Button';
 
 const App = () => {
   return (
@@ -4037,10 +4041,10 @@ const App = () => {
         <Button type='ZERO' label='0' />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 </details>
@@ -4074,11 +4078,11 @@ Update Notes component to use connect
 > src/components/Notes.js
 
 ```js
-import { connect } from 'react-redux'
-import { toggleImportanceOf } from '../reducers/noteReducer'
+import { connect } from 'react-redux';
+import { toggleImportanceOf } from '../reducers/noteReducer';
 
 const Notes = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <ul>
@@ -4090,14 +4094,14 @@ const Notes = (props) => {
         />
       ))}
     </ul>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => {
   if (state.filter === 'ALL') {
     return {
       notes: state.notes,
-    }
+    };
   }
 
   return {
@@ -4105,15 +4109,15 @@ const mapStateToProps = (state) => {
       state.filter === 'IMPORTANT'
         ? state.notes.filter((note) => note.important)
         : state.notes.filter((note) => !note.important),
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   toggleImportanceOf,
-}
+};
 
-const ConnectedNotes = connect(mapStateToProps, mapDispatchToProps)(Notes)
-export default ConnectedNotes
+const ConnectedNotes = connect(mapStateToProps, mapDispatchToProps)(Notes);
+export default ConnectedNotes;
 ```
 
 Update NewNote component to use connect
@@ -4121,27 +4125,27 @@ Update NewNote component to use connect
 > src/components/NewNote.js
 
 ```js
-import { connect } from 'react-redux'
-import { createNote } from '../reducers/noteReducer'
+import { connect } from 'react-redux';
+import { createNote } from '../reducers/noteReducer';
 
 const NewNote = (props) => {
   const addNote = (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
+    event.preventDefault();
+    const content = event.target.note.value;
+    event.target.note.value = '';
 
-    props.createNote(content)
-  }
+    props.createNote(content);
+  };
 
   return (
     <form onSubmit={addNote}>
       <input name='note' />
       <button type='submit'>add</button>
     </form>
-  )
-}
+  );
+};
 
-export default connect(null, { createNote })(NewNote)
+export default connect(null, { createNote })(NewNote);
 ```
 
 </details>
@@ -4231,46 +4235,46 @@ Very simple and easy implementation a navigation bar and an application using Re
 > src/index.js
 
 ```js
-import { useState } from 'react'
-import ReactDOM from 'react-dom/client'
+import { useState } from 'react';
+import ReactDOM from 'react-dom/client';
 
 const Home = () => (
   <div>
     <h2>TKTL notes app</h2>
   </div>
-)
+);
 
 const Notes = () => (
   <div>
     <h2>Notes</h2>
   </div>
-)
+);
 
 const Users = () => (
   <div>
     <h2>Users</h2>
   </div>
-)
+);
 
 const App = () => {
-  const [page, setPage] = useState('home')
+  const [page, setPage] = useState('home');
 
   const toPage = (page) => (event) => {
-    event.preventDefault()
-    setPage(page)
-  }
+    event.preventDefault();
+    setPage(page);
+  };
 
   const content = () => {
     if (page === 'home') {
-      return <Home />
+      return <Home />;
     } else if (page === 'notes') {
-      return <Notes />
+      return <Notes />;
     } else if (page === 'users') {
-      return <Users />
+      return <Users />;
     }
-  }
+  };
 
-  const padding = { padding: 5 }
+  const padding = { padding: 5 };
 
   return (
     <div>
@@ -4288,10 +4292,10 @@ const App = () => {
 
       {content()}
     </div>
-  )
-}
+  );
+};
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 ```
 
 Install React Router library
@@ -4303,8 +4307,8 @@ A navigation bar and an application using React.
 > src/index.js
 
 ```js
-import ReactDOM from 'react-dom/client'
-import { useState } from 'react'
+import ReactDOM from 'react-dom/client';
+import { useState } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -4315,7 +4319,7 @@ import {
   useParams,
   useNavigate,
   useMatch,
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 const Home = () => (
   <div>
@@ -4332,7 +4336,7 @@ const Home = () => (
       Ipsum.
     </p>
   </div>
-)
+);
 
 const Note = ({ note }) => {
   return (
@@ -4343,8 +4347,8 @@ const Note = ({ note }) => {
         <strong>{note.important ? 'important' : ''}</strong>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const Notes = ({ notes }) => (
   <div>
@@ -4357,7 +4361,7 @@ const Notes = ({ notes }) => (
       ))}
     </ul>
   </div>
-)
+);
 
 const Users = () => (
   <div>
@@ -4368,16 +4372,16 @@ const Users = () => (
       <li>Arto Hellas</li>
     </ul>
   </div>
-)
+);
 
 const Login = (props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onSubmit = (event) => {
-    event.preventDefault()
-    props.onLogin('mluukkai')
-    navigate('/')
-  }
+    event.preventDefault();
+    props.onLogin('mluukkai');
+    navigate('/');
+  };
 
   return (
     <div>
@@ -4392,8 +4396,8 @@ const Login = (props) => {
         <button type='submit'>login</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
 const App = () => {
   const [notes, setNotes] = useState([
@@ -4415,23 +4419,23 @@ const App = () => {
       important: true,
       user: 'Arto Hellas',
     },
-  ])
+  ]);
 
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
-  const match = useMatch('/notes/:id')
+  const match = useMatch('/notes/:id');
 
   const note = match
     ? notes.find((note) => note.id === Number(match.params.id))
-    : null
+    : null;
 
   const login = (user) => {
-    setUser(user)
-  }
+    setUser(user);
+  };
 
   const padding = {
     padding: 5,
-  }
+  };
 
   return (
     <div>
@@ -4468,14 +4472,14 @@ const App = () => {
         <em>Note app, Department of Computer Science 2022</em>
       </div>
     </div>
-  )
-}
+  );
+};
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Router>
     <App />
   </Router>
-)
+);
 ```
 
 </details>
@@ -4524,11 +4528,11 @@ Create new React appliaction.
 > src/index.js
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 ```
 
 Create a custom hook for using in a form as field managment
@@ -4536,21 +4540,21 @@ Create a custom hook for using in a form as field managment
 > src/hooks/index.js
 
 ```js
-import { useState } from 'react'
+import { useState } from 'react';
 
 export const useField = (type) => {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('');
 
   const onChange = (event) => {
-    setValue(event.target.value)
-  }
+    setValue(event.target.value);
+  };
 
   return {
     type,
     value,
     onChange,
-  }
-}
+  };
+};
 ```
 
 Use the custom hook in App component with the form
@@ -4558,12 +4562,12 @@ Use the custom hook in App component with the form
 > src/App.js
 
 ```js
-import { useField } from './hooks'
+import { useField } from './hooks';
 
 const App = () => {
-  const name = useField('text')
-  const born = useField('date')
-  const height = useField('number')
+  const name = useField('text');
+  const born = useField('date');
+  const height = useField('number');
 
   return (
     <div>
@@ -4581,10 +4585,10 @@ const App = () => {
         {name.value} {born.value} {height.value}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 </details>
@@ -4691,20 +4695,20 @@ Update App with adding container in root div tag and to use the Bootstrap alart 
 
 ```js
 //...
-import { Alert } from 'react-bootstrap'
+import { Alert } from 'react-bootstrap';
 //...
 
 const App = () => {
   //...
-  const [message, setMessage] = useState(null)
+  const [message, setMessage] = useState(null);
   //...
   const login = (user) => {
-    setUser(user)
-    setMessage(`welcome ${user}`)
+    setUser(user);
+    setMessage(`welcome ${user}`);
     setTimeout(() => {
-      setMessage(null)
-    }, 10000)
-  }
+      setMessage(null);
+    }, 10000);
+  };
   //...
 
   return (
@@ -4712,10 +4716,10 @@ const App = () => {
       {message && <Alert variant='success'>{message}</Alert>}
       {/* ... */}
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 Update Notes component to use the Bootstrap element table
@@ -4723,7 +4727,7 @@ Update Notes component to use the Bootstrap element table
 > src/components/Notes.js
 
 ```js
-import { Table } from 'react-bootstrap'
+import { Table } from 'react-bootstrap';
 
 const Notes = ({ notes }) => (
   <div>
@@ -4742,9 +4746,9 @@ const Notes = ({ notes }) => (
       </tbody>
     </Table>
   </div>
-)
+);
 
-export default Notes
+export default Notes;
 ```
 
 Update Login component to use Bootstrap elements form and button
@@ -4752,8 +4756,8 @@ Update Login component to use Bootstrap elements form and button
 > src/components/Login.js
 
 ```js
-import { useNavigate } from 'react-router-dom'
-import { Form, Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
 
 const Login = (props) => {
   // ...
@@ -4772,10 +4776,10 @@ const Login = (props) => {
         </Form.Group>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
 ```
 
 Update NavBar component to use bootstrap elements navbar and nav
@@ -4783,13 +4787,13 @@ Update NavBar component to use bootstrap elements navbar and nav
 > src/components/NavBar.js
 
 ```js
-import { Link } from 'react-router-dom'
-import { Navbar, Nav } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
+import { Navbar, Nav } from 'react-bootstrap';
 
 const NavBar = ({ user }) => {
   const padding = {
     padding: 5,
-  }
+  };
 
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
@@ -4823,10 +4827,10 @@ const NavBar = ({ user }) => {
         </Nav>
       </Navbar.Collapse>
     </Navbar>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;
 ```
 
 #### Material UI
@@ -4841,29 +4845,29 @@ Update App component to use the MaterialUA Container and add alart element with 
 
 ```js
 //...
-import { Container, Alert } from '@mui/material'
+import { Container, Alert } from '@mui/material';
 //...
 const App = () => {
   //...
-  const [message, setMessage] = useState(null)
+  const [message, setMessage] = useState(null);
   //...
   const login = (user) => {
-    setUser(user)
-    setMessage(`welcome ${user}`)
+    setUser(user);
+    setMessage(`welcome ${user}`);
     setTimeout(() => {
-      setMessage(null)
-    }, 10000)
-  }
+      setMessage(null);
+    }, 10000);
+  };
 
   return (
     <Container>
       {message && <Alert severity='success'>{message}</Alert>}
       {/* ... */}
     </Container>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 Update Notes component to use the MaterialUA elements Table, TableBody, TableCell, TableContainer, TableRow, Paper.
@@ -4871,7 +4875,7 @@ Update Notes component to use the MaterialUA elements Table, TableBody, TableCel
 > src/components/Notes.js
 
 ```js
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import {
   Table,
   TableBody,
@@ -4879,7 +4883,7 @@ import {
   TableContainer,
   TableRow,
   Paper,
-} from '@mui/material'
+} from '@mui/material';
 
 const Notes = ({ notes }) => (
   <div>
@@ -4899,9 +4903,9 @@ const Notes = ({ notes }) => (
       </Table>
     </TableContainer>
   </div>
-)
+);
 
-export default Notes
+export default Notes;
 ```
 
 Update Login component to use MaterialUA elements TextField and Button
@@ -4909,8 +4913,8 @@ Update Login component to use MaterialUA elements TextField and Button
 > src/components/Login.js
 
 ```js
-import { useNavigate } from 'react-router-dom'
-import { TextField, Button } from '@mui/material'
+import { useNavigate } from 'react-router-dom';
+import { TextField, Button } from '@mui/material';
 
 const Login = (props) => {
   //...
@@ -4931,10 +4935,10 @@ const Login = (props) => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
 ```
 
 Update NavBar component to use MaterialUA elements AppBar, Toolbar and Button (with link component inside)
@@ -4942,8 +4946,8 @@ Update NavBar component to use MaterialUA elements AppBar, Toolbar and Button (w
 > src/components/NavBar.js
 
 ```js
-import { Link } from 'react-router-dom'
-import { AppBar, Toolbar, Button } from '@mui/material'
+import { Link } from 'react-router-dom';
+import { AppBar, Toolbar, Button } from '@mui/material';
 
 const NavBar = ({ user }) => {
   return (
@@ -4967,10 +4971,10 @@ const NavBar = ({ user }) => {
         )}
       </Toolbar>
     </AppBar>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;
 ```
 
 #### Styled components
@@ -4985,19 +4989,19 @@ Update App component to use Styled components
 
 ```js
 //...
-import styled from 'styled-components'
+import styled from 'styled-components';
 //...
 
 const Page = styled.div`
   padding: 1em;
   background: papayawhip;
-`
+`;
 
 const Footer = styled.div`
   background: Chocolate;
   padding: 1em;
   margin-top: 1em;
-`
+`;
 
 const App = () => {
   //...
@@ -5010,10 +5014,10 @@ const App = () => {
         <em>Note app, Department of Computer Science 2022</em>
       </Footer>
     </Page>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 Update Login component to use Styled components
@@ -5021,8 +5025,8 @@ Update Login component to use Styled components
 > src/components/Login.js
 
 ```js
-import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Button = styled.button`
   background: Bisque;
@@ -5031,20 +5035,20 @@ const Button = styled.button`
   padding: 0.25em 1em;
   border: 2px solid Chocolate;
   border-radius: 3px;
-`
+`;
 
 const Input = styled.input`
   margin: 0.25em;
-`
+`;
 
 const Login = (props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onSubmit = (event) => {
-    event.preventDefault()
-    props.onLogin('mluukkai')
-    navigate('/')
-  }
+    event.preventDefault();
+    props.onLogin('mluukkai');
+    navigate('/');
+  };
 
   return (
     <div>
@@ -5059,10 +5063,10 @@ const Login = (props) => {
         <Button type='submit'>login</Button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
 ```
 
 Update NavBar component to use Styled components
@@ -5070,18 +5074,18 @@ Update NavBar component to use Styled components
 > src/components/NavBar.js
 
 ```js
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Navigation = styled.div`
   background: BurlyWood;
   padding: 1em;
-`
+`;
 
 const NavBar = ({ user }) => {
   const padding = {
     padding: 5,
-  }
+  };
 
   return (
     <Navigation>
@@ -5102,10 +5106,10 @@ const NavBar = ({ user }) => {
         </Link>
       )}
     </Navigation>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;
 ```
 
 </details>
@@ -5203,7 +5207,7 @@ Create config for webpack
 > webpack.config.js
 
 ```js
-const path = require('path')
+const path = require('path');
 
 const config = () => {
   return {
@@ -5212,10 +5216,10 @@ const config = () => {
       path: path.resolve(__dirname, 'build'),
       filename: 'main.js',
     },
-  }
-}
+  };
+};
 
-module.exports = config
+module.exports = config;
 ```
 
 Create package for aplication
@@ -5240,8 +5244,8 @@ Create simple js
 
 ```js
 const hello = (name) => {
-  console.log(`hello ${name}`)
-}
+  console.log(`hello ${name}`);
+};
 ```
 
 To build webpack with next command
@@ -5273,7 +5277,7 @@ Update webpack.config to use loader
 > webpack.config
 
 ```js
-const path = require('path')
+const path = require('path');
 
 const config = () => {
   return {
@@ -5293,10 +5297,10 @@ const config = () => {
         },
       ],
     },
-  }
-}
+  };
+};
 
-module.exports = config
+module.exports = config;
 ```
 
 Install two more missing dependencies, that is core-js and regenerator-runtime to bundled application's source code uses async/await, because the previous solution being deprecated
@@ -5327,13 +5331,13 @@ Create App component
 > src/App.js
 
 ```js
-import React from 'react'
+import React from 'react';
 
 const App = () => {
-  return <div>hello webpack</div>
-}
+  return <div>hello webpack</div>;
+};
 
-export default App
+export default App;
 ```
 
 Update index component to use App and dependencies
@@ -5341,14 +5345,14 @@ Update index component to use App and dependencies
 > src/index.js
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import 'core-js/stable/index.js'
-import 'regenerator-runtime/runtime.js'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import 'core-js/stable/index.js';
+import 'regenerator-runtime/runtime.js';
 
-import App from './App'
+import App from './App';
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 ```
 
 #### CSS
@@ -5389,15 +5393,15 @@ Update App to use the css file
 > src/App.js
 
 ```js
-import React from 'react'
+import React from 'react';
 
-import './index.css'
+import './index.css';
 
 const App = () => {
-  return <div className='container'>hello webpack</div>
-}
+  return <div className='container'>hello webpack</div>;
+};
 
-export default App
+export default App;
 ```
 
 #### webpack-dev-server
@@ -5422,7 +5426,7 @@ const config = {
     port: 3000,
   },
   // ...
-}
+};
 ```
 
 Update npm script to use it
@@ -5457,7 +5461,7 @@ const config = {
   },
   devtool: 'source-map',
   // ..
-}
+};
 ```
 
 #### Minifying the code
@@ -5484,15 +5488,15 @@ Update webpack to gets a different value depending on the environment
 > webpack.config.js
 
 ```js
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 
 const config = (env, argv) => {
-  console.log('argv', argv.mode)
+  console.log('argv', argv.mode);
   const backend_url =
     argv.mode === 'production'
       ? 'https://notes2023.fly.dev/api/notes'
-      : 'http://localhost:3001/notes'
+      : 'http://localhost:3001/notes';
 
   return {
     entry: './src/index.js',
@@ -5515,10 +5519,10 @@ const config = (env, argv) => {
         BACKEND_URL: JSON.stringify(backend_url),
       }),
     ],
-  }
-}
+  };
+};
 
-module.exports = config
+module.exports = config;
 ```
 
 Install axios library to application use it
@@ -5530,31 +5534,31 @@ Update App component with adding anxios
 > src/App.js
 
 ```js
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-import './index.css'
+import './index.css';
 
 const useNotes = (url) => {
-  const [notes, setNotes] = useState([])
+  const [notes, setNotes] = useState([]);
   useEffect(() => {
     axios.get(url).then((response) => {
-      setNotes(response.data)
-    })
-  }, [url])
-  return notes
-}
+      setNotes(response.data);
+    });
+  }, [url]);
+  return notes;
+};
 
 const App = () => {
-  const [counter, setCounter] = useState(0)
-  const [values, setValues] = useState([])
+  const [counter, setCounter] = useState(0);
+  const [values, setValues] = useState([]);
 
-  const notes = useNotes(BACKEND_URL)
+  const notes = useNotes(BACKEND_URL);
 
   const handleClick = () => {
-    setCounter(counter + 1)
-    setValues(values.concat(counter))
-  }
+    setCounter(counter + 1);
+    setValues(values.concat(counter));
+  };
 
   return (
     <div className='container'>
@@ -5564,10 +5568,10 @@ const App = () => {
         {notes.length} notes on server {BACKEND_URL}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 </details>
@@ -5749,44 +5753,44 @@ Delete all unnecessary files and references to them in src folder, keep only ind
 > src/index.js
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
-import App from './App'
+import App from './App';
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 ```
 
 > src/App.js
 
 ```js
-import React from 'react'
-import axios from 'axios'
+import React from 'react';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       anecdotes: [],
       current: 0,
-    }
+    };
   }
 
   componentDidMount = () => {
     axios.get('http://localhost:3001/anecdotes').then((response) => {
-      this.setState({ anecdotes: response.data })
-    })
-  }
+      this.setState({ anecdotes: response.data });
+    });
+  };
 
   handleClick = () => {
-    const current = Math.floor(Math.random() * this.state.anecdotes.length)
-    this.setState({ current })
-  }
+    const current = Math.floor(Math.random() * this.state.anecdotes.length);
+    this.setState({ current });
+  };
 
   render() {
     if (this.state.anecdotes.length === 0) {
-      return <div>no anecdotes...</div>
+      return <div>no anecdotes...</div>;
     }
 
     return (
@@ -5795,11 +5799,11 @@ class App extends React.Component {
         <div>{this.state.anecdotes[this.state.current].content}</div>
         <button onClick={this.handleClick}>next</button>
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
 ```
 
 Start json server and app use the next commands in 2 different consoles
@@ -6073,8 +6077,8 @@ Create Apollo Server with persons as the data.
 > index.js
 
 ```js
-const { ApolloServer } = require('@apollo/server')
-const { startStandaloneServer } = require('@apollo/server/standalone')
+const { ApolloServer } = require('@apollo/server');
+const { startStandaloneServer } = require('@apollo/server/standalone');
 
 let persons = [
   {
@@ -6097,7 +6101,7 @@ let persons = [
     city: 'Helsinki',
     id: '3d599471-3436-11e9-bc57-8b80ba54c431',
   },
-]
+];
 
 const typeDefs = `
   type Person {
@@ -6113,7 +6117,7 @@ const typeDefs = `
     allPersons: [Person!]!
     findPerson(name: String!): Person
   }
-`
+`;
 
 const resolvers = {
   Query: {
@@ -6128,18 +6132,18 @@ const resolvers = {
     city: (root) => root.city,
     id: (root) => root.id,
   },
-}
+};
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-})
+});
 
 startStandaloneServer(server, {
   listen: { port: 4000 },
 }).then(({ url }) => {
-  console.log(`Server ready at ${url}`)
-})
+  console.log(`Server ready at ${url}`);
+});
 ```
 
 Change typeDefs to use adress object in queries and enums with filtering
@@ -6171,18 +6175,18 @@ const typeDefs = `
     allPersons(phone: YesNo): [Person!]!
     findPerson(name: String!): Person
   }
-`
+`;
 
 const resolvers = {
   Query: {
     personCount: () => persons.length,
     allPersons: (root, args) => {
       if (!args.phone) {
-        return persons
+        return persons;
       }
       const byPhone = (person) =>
-        args.phone === 'YES' ? person.phone : !person.phone
-      return persons.filter(byPhone)
+        args.phone === 'YES' ? person.phone : !person.phone;
+      return persons.filter(byPhone);
     },
     findPerson: (root, args) => persons.find((p) => p.name === args.name),
   },
@@ -6191,10 +6195,10 @@ const resolvers = {
       return {
         street,
         city,
-      }
+      };
     },
   },
-}
+};
 // ...
 ```
 
@@ -6382,21 +6386,21 @@ Update index to use apollo client graphql library and remove all not used code
 > src/index.js
 
 ```js
-import ReactDOM from 'react-dom/client'
-import App from './App'
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000',
   cache: new InMemoryCache(),
-})
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ApolloProvider client={client}>
     <App />
   </ApolloProvider>
-)
+);
 ```
 
 Create a file to keep all querices from Apollo client to server
@@ -6404,7 +6408,7 @@ Create a file to keep all querices from Apollo client to server
 > src/queries.js
 
 ```js
-import { gql } from '@apollo/client'
+import { gql } from '@apollo/client';
 
 export const ALL_PERSONS = gql`
   query {
@@ -6414,7 +6418,7 @@ export const ALL_PERSONS = gql`
       id
     }
   }
-`
+`;
 
 export const FIND_PERSON = gql`
   query findPersonByName($nameToSearch: String!) {
@@ -6428,7 +6432,7 @@ export const FIND_PERSON = gql`
       }
     }
   }
-`
+`;
 
 export const CREATE_PERSON = gql`
   mutation createPerson(
@@ -6447,7 +6451,7 @@ export const CREATE_PERSON = gql`
       }
     }
   }
-`
+`;
 
 export const EDIT_NUMBER = gql`
   mutation editNumber($name: String!, $phone: String!) {
@@ -6461,7 +6465,7 @@ export const EDIT_NUMBER = gql`
       id
     }
   }
-`
+`;
 ```
 
 Create component to display error message.
@@ -6471,12 +6475,12 @@ Create component to display error message.
 ```js
 const Notify = ({ errorMessage }) => {
   if (!errorMessage) {
-    return null
+    return null;
   }
-  return <div style={{ color: 'red' }}>{errorMessage}</div>
-}
+  return <div style={{ color: 'red' }}>{errorMessage}</div>;
+};
 
-export default Notify
+export default Notify;
 ```
 
 Update App to use new components with removing unnecessary code and adding notification for error handeling and fetching data from the server. Add components for display and update persons.
@@ -6484,30 +6488,30 @@ Update App to use new components with removing unnecessary code and adding notif
 > src/App.js
 
 ```js
-import { useState } from 'react'
-import { useQuery } from '@apollo/client'
+import { useState } from 'react';
+import { useQuery } from '@apollo/client';
 
-import { ALL_PERSONS } from './queries'
-import Notify from './components/Notify'
-import Persons from './components/Persons'
-import PersonForm from './components/PersonForm'
-import PhoneForm from './components/PersonForm'
+import { ALL_PERSONS } from './queries';
+import Notify from './components/Notify';
+import Persons from './components/Persons';
+import PersonForm from './components/PersonForm';
+import PhoneForm from './components/PersonForm';
 
 const App = () => {
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  const result = useQuery(ALL_PERSONS)
+  const result = useQuery(ALL_PERSONS);
 
   if (result.loading) {
-    return <div>loading...</div>
+    return <div>loading...</div>;
   }
 
   const notify = (message) => {
-    setErrorMessage(message)
+    setErrorMessage(message);
     setTimeout(() => {
-      setErrorMessage(null)
-    }, 10000)
-  }
+      setErrorMessage(null);
+    }, 10000);
+  };
 
   return (
     <div>
@@ -6516,10 +6520,10 @@ const App = () => {
       <PersonForm setError={notify} />
       <PhoneForm setError={notify} />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 Create component for display all persons or a single person with fetching this person data and using Person component to display
@@ -6527,18 +6531,18 @@ Create component for display all persons or a single person with fetching this p
 > src/component/Persons.js
 
 ```js
-import { useState } from 'react'
-import { useQuery } from '@apollo/client'
+import { useState } from 'react';
+import { useQuery } from '@apollo/client';
 
-import Person from './Person'
-import { FIND_PERSON } from '../queries'
+import Person from './Person';
+import { FIND_PERSON } from '../queries';
 
 const Persons = ({ persons }) => {
-  const [nameToSearch, setNameToSearch] = useState(null)
+  const [nameToSearch, setNameToSearch] = useState(null);
   const result = useQuery(FIND_PERSON, {
     variables: { nameToSearch },
     skip: !nameToSearch,
-  })
+  });
 
   if (nameToSearch && result.data) {
     return (
@@ -6546,7 +6550,7 @@ const Persons = ({ persons }) => {
         person={result.data.findPerson}
         onClose={() => setNameToSearch(null)}
       />
-    )
+    );
   }
 
   return (
@@ -6559,10 +6563,10 @@ const Persons = ({ persons }) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Persons
+export default Persons;
 ```
 
 Create component to display a cirtan person.
@@ -6580,10 +6584,10 @@ const Person = ({ person, onClose }) => {
       <div>{person.phone}</div>
       <button onClick={onClose}>close</button>
     </div>
-  )
-}
+  );
+};
 
-export default Person
+export default Person;
 ```
 
 Create form to add a person to server and update queries and frontend with error handeling
@@ -6591,35 +6595,35 @@ Create form to add a person to server and update queries and frontend with error
 > src/component/PersonForm.js
 
 ```js
-import { useState } from 'react'
-import { useMutation } from '@apollo/client'
+import { useState } from 'react';
+import { useMutation } from '@apollo/client';
 
-import { CREATE_PERSON, ALL_PERSONS } from '../queries'
+import { CREATE_PERSON, ALL_PERSONS } from '../queries';
 
 const PersonForm = ({ setError }) => {
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [street, setStreet] = useState('')
-  const [city, setCity] = useState('')
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [street, setStreet] = useState('');
+  const [city, setCity] = useState('');
 
   const [createPerson] = useMutation(CREATE_PERSON, {
     refetchQueries: [{ query: ALL_PERSONS }],
     onError: (error) => {
-      const messages = error.graphQLErrors[0].message
-      setError(messages)
+      const messages = error.graphQLErrors[0].message;
+      setError(messages);
     },
-  })
+  });
 
   const submit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    createPerson({ variables: { name, phone, street, city } })
+    createPerson({ variables: { name, phone, street, city } });
 
-    setName('')
-    setPhone('')
-    setStreet('')
-    setCity('')
-  }
+    setName('');
+    setPhone('');
+    setStreet('');
+    setCity('');
+  };
 
   return (
     <div>
@@ -6656,10 +6660,10 @@ const PersonForm = ({ setError }) => {
         <button type='submit'>add!</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default PersonForm
+export default PersonForm;
 ```
 
 Create component to change phone number of person on the server with error handleling.
@@ -6667,31 +6671,31 @@ Create component to change phone number of person on the server with error handl
 > src/component/PhoneForm.js
 
 ```js
-import { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/client'
+import { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/client';
 
-import { EDIT_NUMBER } from '../queries'
+import { EDIT_NUMBER } from '../queries';
 
 const PhoneForm = ({ setError }) => {
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
 
-  const [changeNumber, result] = useMutation(EDIT_NUMBER)
+  const [changeNumber, result] = useMutation(EDIT_NUMBER);
 
   useEffect(() => {
     if (result.data && result.data.editNumber === null) {
-      setError('person not found')
+      setError('person not found');
     }
-  }, [result.data]) // eslint-disable-line
+  }, [result.data]); // eslint-disable-line
 
   const submit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    changeNumber({ variables: { name, phone } })
+    changeNumber({ variables: { name, phone } });
 
-    setName('')
-    setPhone('')
-  }
+    setName('');
+    setPhone('');
+  };
 
   return (
     <div>
@@ -6715,10 +6719,10 @@ const PhoneForm = ({ setError }) => {
         <button type='submit'>change number</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default PhoneForm
+export default PhoneForm;
 ```
 
 #### react-select library
@@ -6726,17 +6730,17 @@ export default PhoneForm
 > npm install react-select
 
 ```js
-import React, { useState } from 'react'
-import Select from 'react-select'
+import React, { useState } from 'react';
+import Select from 'react-select';
 
 const options = [
   { value: 'chocolate', label: 'Chocolate' },
   { value: 'strawberry', label: 'Strawberry' },
   { value: 'vanilla', label: 'Vanilla' },
-]
+];
 
 export default function App() {
-  const [selectedOption, setSelectedOption] = useState(null)
+  const [selectedOption, setSelectedOption] = useState(null);
 
   return (
     <div className='App'>
@@ -6746,7 +6750,7 @@ export default function App() {
         options={options}
       />
     </div>
-  )
+  );
 }
 ```
 
@@ -6786,7 +6790,7 @@ Create model for persons
 > /models/person.js
 
 ```js
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
   name: {
@@ -6808,9 +6812,9 @@ const schema = new mongoose.Schema({
     required: true,
     minlength: 3,
   },
-})
+});
 
-module.exports = mongoose.model('Person', schema)
+module.exports = mongoose.model('Person', schema);
 ```
 
 Create dotenv file with setting for database
@@ -6837,37 +6841,37 @@ Update application to use database and dotenv
 
 ```js
 // ...
-const mongoose = require('mongoose')
-mongoose.set('strictQuery', false)
-const Person = require('./models/person')
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', false);
+const Person = require('./models/person');
 
-require('dotenv').config()
+require('dotenv').config();
 
-const MONGODB_URI = process.env.MONGODB_URI
+const MONGODB_URI = process.env.MONGODB_URI;
 
-console.log('connecting to', MONGODB_URI)
+console.log('connecting to', MONGODB_URI);
 
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    console.log('connected to MongoDB')
+    console.log('connected to MongoDB');
   })
   .catch((error) => {
-    console.log('error connection to MongoDB:', error.message)
-  })
+    console.log('error connection to MongoDB:', error.message);
+  });
 
 const typeDefs = `
 // ...
-`
+`;
 
 const resolvers = {
   Query: {
     personCount: async () => Person.collection.countDocuments(),
     allPersons: async (root, args) => {
       if (!args.phone) {
-        return Person.find({})
+        return Person.find({});
       }
-      return Person.find({ phone: { $exists: args.phone === 'YES' } })
+      return Person.find({ phone: { $exists: args.phone === 'YES' } });
     },
     findPerson: async (root, args) => Person.findOne({ name: args.name }),
   },
@@ -6876,15 +6880,15 @@ const resolvers = {
       return {
         street: root.street,
         city: root.city,
-      }
+      };
     },
   },
   Mutation: {
     addPerson: async (root, args) => {
-      const person = new Person({ ...args })
+      const person = new Person({ ...args });
 
       try {
-        await person.save()
+        await person.save();
       } catch (error) {
         throw new GraphQLError('Saving person failed', {
           extensions: {
@@ -6892,17 +6896,17 @@ const resolvers = {
             invalidArgs: args.name,
             error,
           },
-        })
+        });
       }
 
-      return person
+      return person;
     },
     editNumber: async (root, args) => {
-      const person = await Person.findOne({ name: args.name })
-      person.phone = args.phone
+      const person = await Person.findOne({ name: args.name });
+      person.phone = args.phone;
 
       try {
-        await person.save()
+        await person.save();
       } catch (error) {
         throw new GraphQLError('Saving number failed', {
           extensions: {
@@ -6910,24 +6914,24 @@ const resolvers = {
             invalidArgs: args.name,
             error,
           },
-        })
+        });
       }
 
-      return person
+      return person;
     },
   },
-}
+};
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-})
+});
 
 startStandaloneServer(server, {
   listen: { port: process.env.PORT },
 }).then(({ url }) => {
-  console.log(`Server ready at ${url}`)
-})
+  console.log(`Server ready at ${url}`);
+});
 ```
 
 #### Add authorization to the backend
@@ -6942,7 +6946,7 @@ Add JWT_SECRET to dotenv file
 
 ```js
 //...
-JWT_SECRET = your_secret_word
+JWT_SECRET = your_secret_word;
 ```
 
 Create model for user
@@ -6950,7 +6954,7 @@ Create model for user
 > /models/user.js
 
 ```js
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
   username: {
@@ -6964,9 +6968,9 @@ const schema = new mongoose.Schema({
       ref: 'Person',
     },
   ],
-})
+});
 
-module.exports = mongoose.model('User', schema)
+module.exports = mongoose.model('User', schema);
 ```
 
 Update application to use Authorization
@@ -6974,29 +6978,29 @@ Update application to use Authorization
 > index.js
 
 ```js
-const { ApolloServer } = require('@apollo/server')
-const { startStandaloneServer } = require('@apollo/server/standalone')
-const { GraphQLError } = require('graphql')
-const jwt = require('jsonwebtoken')
+const { ApolloServer } = require('@apollo/server');
+const { startStandaloneServer } = require('@apollo/server/standalone');
+const { GraphQLError } = require('graphql');
+const jwt = require('jsonwebtoken');
 
-const mongoose = require('mongoose')
-mongoose.set('strictQuery', false)
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', false);
 
-const User = require('./models/user')
-const Person = require('./models/person')
+const User = require('./models/user');
+const Person = require('./models/person');
 
-require('dotenv').config()
+require('dotenv').config();
 
-const MONGODB_URI = process.env.MONGODB_URI
+const MONGODB_URI = process.env.MONGODB_URI;
 
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    console.log('connected to MongoDB')
+    console.log('connected to MongoDB');
   })
   .catch((error) => {
-    console.log('error connection to MongoDB:', error.message)
-  })
+    console.log('error connection to MongoDB:', error.message);
+  });
 
 const typeDefs = `
   type Address {
@@ -7059,20 +7063,20 @@ const typeDefs = `
       name: String!
     ): User
   }
-`
+`;
 
 const resolvers = {
   Query: {
     personCount: async () => Person.collection.countDocuments(),
     allPersons: async (root, args) => {
       if (!args.phone) {
-        return Person.find({})
+        return Person.find({});
       }
-      return Person.find({ phone: { $exists: args.phone === 'YES' } })
+      return Person.find({ phone: { $exists: args.phone === 'YES' } });
     },
     findPerson: async (root, args) => Person.findOne({ name: args.name }),
     me: (root, args, context) => {
-      return context.currentUser
+      return context.currentUser;
     },
   },
   Person: {
@@ -7080,26 +7084,26 @@ const resolvers = {
       return {
         street: root.street,
         city: root.city,
-      }
+      };
     },
   },
   Mutation: {
     addPerson: async (root, args, context) => {
-      const person = new Person({ ...args })
-      const currentUser = context.currentUser
+      const person = new Person({ ...args });
+      const currentUser = context.currentUser;
 
       if (!currentUser) {
         throw new GraphQLError('not authenticated', {
           extensions: {
             code: 'BAD_USER_INPUT',
           },
-        })
+        });
       }
 
       try {
-        await person.save()
-        currentUser.friends = currentUser.friends.concat(person)
-        await currentUser.save()
+        await person.save();
+        currentUser.friends = currentUser.friends.concat(person);
+        await currentUser.save();
       } catch (error) {
         throw new GraphQLError('Saving user failed', {
           extensions: {
@@ -7107,17 +7111,17 @@ const resolvers = {
             invalidArgs: args.name,
             error,
           },
-        })
+        });
       }
 
-      return person
+      return person;
     },
     editNumber: async (root, args) => {
-      const person = await Person.findOne({ name: args.name })
-      person.phone = args.phone
+      const person = await Person.findOne({ name: args.name });
+      person.phone = args.phone;
 
       try {
-        await person.save()
+        await person.save();
       } catch (error) {
         throw new GraphQLError('Saving number failed', {
           extensions: {
@@ -7125,14 +7129,14 @@ const resolvers = {
             invalidArgs: args.name,
             error,
           },
-        })
+        });
       }
 
-      return person
+      return person;
     },
 
     createUser: async (root, args) => {
-      const user = new User({ username: args.username })
+      const user = new User({ username: args.username });
 
       return user.save().catch((error) => {
         throw new GraphQLError('Creating the user failed', {
@@ -7141,71 +7145,74 @@ const resolvers = {
             invalidArgs: args.name,
             error,
           },
-        })
-      })
+        });
+      });
     },
     login: async (root, args) => {
-      const user = await User.findOne({ username: args.username })
+      const user = await User.findOne({ username: args.username });
 
       if (!user || args.password !== 'secret') {
         throw new GraphQLError('wrong credentials', {
           extensions: {
             code: 'BAD_USER_INPUT',
           },
-        })
+        });
       }
 
       const userForToken = {
         username: user.username,
         id: user._id,
-      }
+      };
 
-      return { value: jwt.sign(userForToken, process.env.JWT_SECRET) }
+      return { value: jwt.sign(userForToken, process.env.JWT_SECRET) };
     },
     addAsFriend: async (root, args, { currentUser }) => {
       const isFriend = (person) =>
         currentUser.friends
           .map((f) => f._id.toString())
-          .includes(person._id.toString())
+          .includes(person._id.toString());
 
       if (!currentUser) {
         throw new GraphQLError('wrong credentials', {
           extensions: { code: 'BAD_USER_INPUT' },
-        })
+        });
       }
 
-      const person = await Person.findOne({ name: args.name })
+      const person = await Person.findOne({ name: args.name });
       if (!isFriend(person)) {
-        currentUser.friends = currentUser.friends.concat(person)
+        currentUser.friends = currentUser.friends.concat(person);
       }
 
-      await currentUser.save()
+      await currentUser.save();
 
-      return currentUser
+      return currentUser;
     },
   },
-}
+};
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-})
+});
 
 startStandaloneServer(server, {
   listen: { port: process.env.PORT },
   context: async ({ req, res }) => {
-    const auth = req ? req.headers.authorization : null
+    const auth = req ? req.headers.authorization : null;
     if (auth && auth.startsWith('Bearer ')) {
-      const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_SECRET)
+      const decodedToken = jwt.verify(
+        auth.substring(7),
+        process.env.JWT_SECRET
+      );
       const currentUser = await User.findById(decodedToken.id).populate(
         'friends'
-      )
-      return { currentUser }
+      );
+      return { currentUser };
     }
   },
 }).then(({ url }) => {
-  console.log(`Server ready at ${url}`)
-})
+  console.log(`Server ready at ${url}`);
+});
 ```
 
 #### Test Authorization through Apollo Studio Explorer
@@ -7305,7 +7312,7 @@ export const LOGIN = gql`
       value
     }
   }
-`
+`;
 ```
 
 Create form component to loggin
@@ -7313,33 +7320,33 @@ Create form component to loggin
 > src/components/LoginForm.js
 
 ```js
-import { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/client'
-import { LOGIN } from '../queries'
+import { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/client';
+import { LOGIN } from '../queries';
 
 const LoginForm = ({ setError, setToken }) => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const [login, result] = useMutation(LOGIN, {
     onError: (error) => {
-      setError(error.graphQLErrors[0].message)
+      setError(error.graphQLErrors[0].message);
     },
-  })
+  });
 
   useEffect(() => {
     if (result.data) {
-      const token = result.data.login.value
-      setToken(token)
-      localStorage.setItem('phonenumbers-user-token', token)
+      const token = result.data.login.value;
+      setToken(token);
+      localStorage.setItem('phonenumbers-user-token', token);
     }
-  }, [result.data]) // eslint-disable-line
+  }, [result.data]); // eslint-disable-line
 
   const submit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    login({ variables: { username, password } })
-  }
+    login({ variables: { username, password } });
+  };
 
   return (
     <div>
@@ -7362,10 +7369,10 @@ const LoginForm = ({ setError, setToken }) => {
         <button type='submit'>login</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;
 ```
 
 Update App component to use LoginForm component and token
@@ -7373,39 +7380,39 @@ Update App component to use LoginForm component and token
 > src/App.cs
 
 ```js
-import { useState } from 'react'
-import { useQuery, useApolloClient } from '@apollo/client'
+import { useState } from 'react';
+import { useQuery, useApolloClient } from '@apollo/client';
 
-import Notify from './components/Notify'
-import LoginForm from './components/LoginForm'
-import Persons from './components/Persons'
-import PersonForm from './components/PersonForm'
-import PhoneForm from './components/PhoneForm'
-import { ALL_PERSONS } from './queries'
+import Notify from './components/Notify';
+import LoginForm from './components/LoginForm';
+import Persons from './components/Persons';
+import PersonForm from './components/PersonForm';
+import PhoneForm from './components/PhoneForm';
+import { ALL_PERSONS } from './queries';
 
 const App = () => {
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [token, setToken] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [token, setToken] = useState(null);
 
-  const result = useQuery(ALL_PERSONS)
-  const client = useApolloClient()
+  const result = useQuery(ALL_PERSONS);
+  const client = useApolloClient();
 
   if (result.loading) {
-    return <div>loading...</div>
+    return <div>loading...</div>;
   }
 
   const notify = (message) => {
-    setErrorMessage(message)
+    setErrorMessage(message);
     setTimeout(() => {
-      setErrorMessage(null)
-    }, 10000)
-  }
+      setErrorMessage(null);
+    }, 10000);
+  };
 
   const logout = () => {
-    setToken(null)
-    localStorage.clear()
-    client.resetStore()
-  }
+    setToken(null);
+    localStorage.clear();
+    client.resetStore();
+  };
 
   if (!token) {
     return (
@@ -7413,7 +7420,7 @@ const App = () => {
         <Notify errorMessage={errorMessage} />
         <LoginForm setToken={setToken} setError={notify} />
       </>
-    )
+    );
   }
 
   return (
@@ -7424,10 +7431,10 @@ const App = () => {
       <PersonForm setError={notify} />
       <PhoneForm setError={notify} />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 ```
 
 Update index.ls file to use create link and context to set token in header
@@ -7435,41 +7442,41 @@ Update index.ls file to use create link and context to set token in header
 > src/index.js
 
 ```js
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom/client';
 
-import App from './App'
+import App from './App';
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from '@apollo/client'
-import { setContext } from '@apollo/client/link/context'
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('phonenumbers-user-token')
+  const token = localStorage.getItem('phonenumbers-user-token');
   return {
     headers: {
       ...headers,
       authorization: token ? `Bearer ${token}` : null,
     },
-  }
-})
+  };
+});
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000',
-})
+});
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: authLink.concat(httpLink),
-})
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ApolloProvider client={client}>
     <App />
   </ApolloProvider>
-)
+);
 ```
 
 Update Person form
@@ -7632,34 +7639,34 @@ const typeDefs = `
   type Subscription {
     personAdded: Person!
   } 
-`
-module.exports = typeDefs
+`;
+module.exports = typeDefs;
 ```
 
 > resolvers.js
 
 ```js
-const { GraphQLError } = require('graphql')
-const jwt = require('jsonwebtoken')
-const { PubSub } = require('graphql-subscriptions')
-const pubsub = new PubSub()
+const { GraphQLError } = require('graphql');
+const jwt = require('jsonwebtoken');
+const { PubSub } = require('graphql-subscriptions');
+const pubsub = new PubSub();
 
-const Person = require('./models/person')
-const User = require('./models/user')
+const Person = require('./models/person');
+const User = require('./models/user');
 
 const resolvers = {
   Query: {
     personCount: async () => Person.collection.countDocuments(),
     allPersons: async (root, args, context) => {
       if (!args.phone) {
-        return Person.find({})
+        return Person.find({});
       }
 
-      return Person.find({ phone: { $exists: args.phone === 'YES' } })
+      return Person.find({ phone: { $exists: args.phone === 'YES' } });
     },
     findPerson: async (root, args) => Person.findOne({ name: args.name }),
     me: (root, args, context) => {
-      return context.currentUser
+      return context.currentUser;
     },
   },
   Person: {
@@ -7667,26 +7674,26 @@ const resolvers = {
       return {
         street,
         city,
-      }
+      };
     },
   },
   Mutation: {
     addPerson: async (root, args, context) => {
-      const person = new Person({ ...args })
-      const currentUser = context.currentUser
+      const person = new Person({ ...args });
+      const currentUser = context.currentUser;
 
       if (!currentUser) {
         throw new GraphQLError('not authenticated', {
           extensions: {
             code: 'BAD_USER_INPUT',
           },
-        })
+        });
       }
 
       try {
-        await person.save()
-        currentUser.friends = currentUser.friends.concat(person)
-        await currentUser.save()
+        await person.save();
+        currentUser.friends = currentUser.friends.concat(person);
+        await currentUser.save();
       } catch (error) {
         throw new GraphQLError('Saving user failed', {
           extensions: {
@@ -7694,19 +7701,19 @@ const resolvers = {
             invalidArgs: args.name,
             error,
           },
-        })
+        });
       }
 
-      pubsub.publish('PERSON_ADDED', { personAdded: person })
+      pubsub.publish('PERSON_ADDED', { personAdded: person });
 
-      return person
+      return person;
     },
     editNumber: async (root, args) => {
-      const person = await Person.findOne({ name: args.name })
-      person.phone = args.phone
+      const person = await Person.findOne({ name: args.name });
+      person.phone = args.phone;
 
       try {
-        await person.save()
+        await person.save();
       } catch (error) {
         throw new GraphQLError('Editing number failed', {
           extensions: {
@@ -7714,13 +7721,13 @@ const resolvers = {
             invalidArgs: args.name,
             error,
           },
-        })
+        });
       }
 
-      return person
+      return person;
     },
     createUser: async (root, args) => {
-      const user = new User({ username: args.username })
+      const user = new User({ username: args.username });
 
       return user.save().catch((error) => {
         throw new GraphQLError('Creating the user failed', {
@@ -7729,45 +7736,45 @@ const resolvers = {
             invalidArgs: args.username,
             error,
           },
-        })
-      })
+        });
+      });
     },
     login: async (root, args) => {
-      const user = await User.findOne({ username: args.username })
+      const user = await User.findOne({ username: args.username });
 
       if (!user || args.password !== 'secret') {
         throw new GraphQLError('wrong credentials', {
           extensions: { code: 'BAD_USER_INPUT' },
-        })
+        });
       }
 
       const userForToken = {
         username: user.username,
         id: user._id,
-      }
+      };
 
-      return { value: jwt.sign(userForToken, process.env.JWT_SECRET) }
+      return { value: jwt.sign(userForToken, process.env.JWT_SECRET) };
     },
     addAsFriend: async (root, args, { currentUser }) => {
       const nonFriendAlready = (person) =>
         !currentUser.friends
           .map((f) => f._id.toString())
-          .includes(person._id.toString())
+          .includes(person._id.toString());
 
       if (!currentUser) {
         throw new GraphQLError('wrong credentials', {
           extensions: { code: 'BAD_USER_INPUT' },
-        })
+        });
       }
 
-      const person = await Person.findOne({ name: args.name })
+      const person = await Person.findOne({ name: args.name });
       if (nonFriendAlready(person)) {
-        currentUser.friends = currentUser.friends.concat(person)
+        currentUser.friends = currentUser.friends.concat(person);
       }
 
-      await currentUser.save()
+      await currentUser.save();
 
-      return currentUser
+      return currentUser;
     },
   },
   Subscription: {
@@ -7775,60 +7782,60 @@ const resolvers = {
       subscribe: () => pubsub.asyncIterator('PERSON_ADDED'),
     },
   },
-}
+};
 
-module.exports = resolvers
+module.exports = resolvers;
 ```
 
 > index.js
 
 ```js
-const { ApolloServer } = require('@apollo/server')
-const { expressMiddleware } = require('@apollo/server/express4')
+const { ApolloServer } = require('@apollo/server');
+const { expressMiddleware } = require('@apollo/server/express4');
 const {
   ApolloServerPluginDrainHttpServer,
-} = require('@apollo/server/plugin/drainHttpServer')
-const { makeExecutableSchema } = require('@graphql-tools/schema')
-const { WebSocketServer } = require('ws')
-const { useServer } = require('graphql-ws/lib/use/ws')
+} = require('@apollo/server/plugin/drainHttpServer');
+const { makeExecutableSchema } = require('@graphql-tools/schema');
+const { WebSocketServer } = require('ws');
+const { useServer } = require('graphql-ws/lib/use/ws');
 
-const http = require('http')
-const express = require('express')
-const cors = require('cors')
-const jwt = require('jsonwebtoken')
+const http = require('http');
+const express = require('express');
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
 
-const typeDefs = require('./schema')
-const resolvers = require('./resolvers')
-const User = require('./models/user')
+const typeDefs = require('./schema');
+const resolvers = require('./resolvers');
+const User = require('./models/user');
 
-require('dotenv').config()
-const MONGODB_URI = process.env.MONGODB_URI
-const PORT = process.env.PORT
+require('dotenv').config();
+const MONGODB_URI = process.env.MONGODB_URI;
+const PORT = process.env.PORT;
 
-console.log('connecting to', MONGODB_URI)
+console.log('connecting to', MONGODB_URI);
 
-const mongoose = require('mongoose')
-mongoose.set('strictQuery', false)
+const mongoose = require('mongoose');
+mongoose.set('strictQuery', false);
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    console.log('connected to MongoDB')
+    console.log('connected to MongoDB');
   })
   .catch((error) => {
-    console.log('error connection to MongoDB:', error.message)
-  })
+    console.log('error connection to MongoDB:', error.message);
+  });
 
 const start = async () => {
-  const app = express()
-  const httpServer = http.createServer(app)
+  const app = express();
+  const httpServer = http.createServer(app);
 
   const wsServer = new WebSocketServer({
     server: httpServer,
     path: '/',
-  })
+  });
 
-  const schema = makeExecutableSchema({ typeDefs, resolvers })
-  const serverCleanup = useServer({ schema }, wsServer)
+  const schema = makeExecutableSchema({ typeDefs, resolvers });
+  const serverCleanup = useServer({ schema }, wsServer);
 
   const server = new ApolloServer({
     schema,
@@ -7838,15 +7845,15 @@ const start = async () => {
         async serverWillStart() {
           return {
             async drainServer() {
-              await serverCleanup.dispose()
+              await serverCleanup.dispose();
             },
-          }
+          };
         },
       },
     ],
-  })
+  });
 
-  await server.start()
+  await server.start();
 
   app.use(
     '/',
@@ -7854,27 +7861,27 @@ const start = async () => {
     express.json(),
     expressMiddleware(server, {
       context: async ({ req }) => {
-        const auth = req ? req.headers.authorization : null
+        const auth = req ? req.headers.authorization : null;
         if (auth && auth.startsWith('Bearer ')) {
           const decodedToken = jwt.verify(
             auth.substring(7),
             process.env.JWT_SECRET
-          )
+          );
           const currentUser = await User.findById(decodedToken.id).populate(
             'friends'
-          )
-          return { currentUser }
+          );
+          return { currentUser };
         }
       },
     })
-  )
+  );
 
   httpServer.listen(PORT, () =>
     console.log(`Server is now running on http://localhost:${PORT}`)
-  )
-}
+  );
+};
 
-start()
+start();
 ```
 
 #### Frontend
@@ -7899,7 +7906,7 @@ const PERSON_DETAILS = gql`
       city
     }
   }
-`
+`;
 
 export const FIND_PERSON = gql`
   query findPersonByName($nameToSearch: String!) {
@@ -7908,7 +7915,7 @@ export const FIND_PERSON = gql`
     }
   }
   ${PERSON_DETAILS}
-`
+`;
 
 export const PERSON_ADDED = gql`
   subscription {
@@ -7917,14 +7924,14 @@ export const PERSON_ADDED = gql`
     }
   }
   ${PERSON_DETAILS}
-`
+`;
 // ...
 ```
 
 > src/index.js
 
 ```js
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom/client';
 
 import {
   ApolloClient,
@@ -7932,115 +7939,115 @@ import {
   ApolloProvider,
   createHttpLink,
   split,
-} from '@apollo/client'
-import { setContext } from '@apollo/client/link/context'
-import { getMainDefinition } from '@apollo/client/utilities'
-import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
-import { createClient } from 'graphql-ws'
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { getMainDefinition } from '@apollo/client/utilities';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+import { createClient } from 'graphql-ws';
 
-import App from './App'
+import App from './App';
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('phonenumbers-user-token')
+  const token = localStorage.getItem('phonenumbers-user-token');
   return {
     headers: {
       ...headers,
       authorization: token ? `Bearer ${token}` : null,
     },
-  }
-})
+  };
+});
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000',
-})
+});
 
-const wsLink = new GraphQLWsLink(createClient({ url: 'ws://localhost:4000' }))
+const wsLink = new GraphQLWsLink(createClient({ url: 'ws://localhost:4000' }));
 
 const splitLink = split(
   ({ query }) => {
-    const definition = getMainDefinition(query)
+    const definition = getMainDefinition(query);
     return (
       definition.kind === 'OperationDefinition' &&
       definition.operation === 'subscription'
-    )
+    );
   },
   wsLink,
   authLink.concat(httpLink)
-)
+);
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: splitLink,
-})
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ApolloProvider client={client}>
     <App />
   </ApolloProvider>
-)
+);
 ```
 
 > src/App.js
 
 ```js
-import { useState } from 'react'
-import { useQuery, useApolloClient, useSubscription } from '@apollo/client'
+import { useState } from 'react';
+import { useQuery, useApolloClient, useSubscription } from '@apollo/client';
 // ...
-import { ALL_PERSONS, PERSON_ADDED } from './queries'
+import { ALL_PERSONS, PERSON_ADDED } from './queries';
 
 export const updateCache = (cache, query, addedPerson) => {
   const uniqByName = (a) => {
-    let seen = new Set()
+    let seen = new Set();
     return a.filter((item) => {
-      let k = item.name
-      return seen.has(k) ? false : seen.add(k)
-    })
-  }
+      let k = item.name;
+      return seen.has(k) ? false : seen.add(k);
+    });
+  };
 
   cache.updateQuery(query, ({ allPersons }) => {
     return {
       allPersons: uniqByName(allPersons.concat(addedPerson)),
-    }
-  })
-}
+    };
+  });
+};
 
 const App = () => {
   // ...
 
   useSubscription(PERSON_ADDED, {
     onData: ({ data }) => {
-      const addedPerson = data.data.personAdded
-      notify(`${addedPerson.name} added`)
+      const addedPerson = data.data.personAdded;
+      notify(`${addedPerson.name} added`);
 
-      updateCache(client.cache, { query: ALL_PERSONS }, addedPerson)
+      updateCache(client.cache, { query: ALL_PERSONS }, addedPerson);
     },
-  })
+  });
 
   // ...
-}
+};
 
-export default App
+export default App;
 ```
 
 > src/components/PersonForm.js
 
 ```js
 // ...
-import { updateCache } from '../App'
+import { updateCache } from '../App';
 
 const PersonForm = ({ setError }) => {
   // ...
   const [createPerson] = useMutation(CREATE_PERSON, {
     // ...
     update: (cache, response) => {
-      updateCache(cache, { query: ALL_PERSONS }, response.data.addPerson)
+      updateCache(cache, { query: ALL_PERSONS }, response.data.addPerson);
     },
-  })
+  });
 
   // ...
-}
+};
 
-export default PersonForm
+export default PersonForm;
 ```
 
 #### Backend n+1 problem
@@ -8052,13 +8059,13 @@ export default PersonForm
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    console.log('connected to MongoDB')
+    console.log('connected to MongoDB');
   })
   .catch((error) => {
-    console.log('error connection to MongoDB:', error.message)
-  })
+    console.log('error connection to MongoDB:', error.message);
+  });
 
-mongoose.set('debug', true)
+mongoose.set('debug', true);
 // ...
 ```
 
@@ -8075,7 +8082,7 @@ type Person {
   id: ID!
 }
 //...
-`
+`;
 ```
 
 > models/person.js
@@ -8089,7 +8096,7 @@ const schema = new mongoose.Schema({
       ref: 'User',
     },
   ],
-})
+});
 ```
 
 > resolvers.js
@@ -8180,13 +8187,13 @@ Example of code with TypeScript
 
 ```ts
 const birthdayGreeter = (name: string, age: number): string => {
-  return `Happy birthday ${name}, you are now ${age} years old!`
-}
+  return `Happy birthday ${name}, you are now ${age} years old!`;
+};
 
-const birthdayHero: string = 'Jane User'
-const age: number = 22
+const birthdayHero: string = 'Jane User';
+const age: number = 22;
 
-console.log(birthdayGreeter(birthdayHero, age))
+console.log(birthdayGreeter(birthdayHero, age));
 ```
 
 </details>
@@ -8235,7 +8242,11 @@ All of these features are extremely helpful when you need to refactor your code
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types" title="TypeScript: Literal Types">TypeScript: Literal Types</a></li>
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases" title="TypeScript: Type Aliases">TypeScript: Type Aliases</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch" title="JavaScript: switch">JavaScript: switch</a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type" title="TypeScript: New unknown top type">TypeScript: New unknown top type</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error" title="JavaScript: Error">JavaScript: Error</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message" title="JavaScript: Error message">JavaScript: Error message</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html" title="TypeScript: Narrowing">TypeScript: Narrowing</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html#instanceof-narrowing" title="TypeScript: instanceof">TypeScript: instanceof</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -8286,10 +8297,10 @@ configuration file for typescript
 
 ```ts
 const multiplicator = (a, b, printText) => {
-  console.log(printText, a * b)
-}
+  console.log(printText, a * b);
+};
 
-multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:')
+multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:');
 ```
 
 If you want to run file.ts with ts-node
