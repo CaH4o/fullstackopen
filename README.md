@@ -8247,8 +8247,8 @@ All of these features are extremely helpful when you need to refactor your code
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message" title="JavaScript: Error message">JavaScript: Error message</a></li>
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html" title="TypeScript: Narrowing">TypeScript: Narrowing</a></li>
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html#instanceof-narrowing" title="TypeScript: instanceof">TypeScript: instanceof</a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://github.com/DefinitelyTyped/DefinitelyTyped" title="Definitely Typed">Definitely Typed</a></li>
+<li><a href="https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies" title="npm Docs: peerDependencies">npm Docs: peerDependencies</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 
@@ -8306,6 +8306,14 @@ multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:');
 If you want to run file.ts with ts-node
 
 > npm run ts-node -- multiplier.ts
+
+Installing an npm package with the name of your package with a @types/ prefix
+
+> npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose
+
+If the version of npm is at least 7.0, the peer dependencies of a project are automatically installed by npm.
+
+> npm install --save-dev @types/node
 
 </details>
 
