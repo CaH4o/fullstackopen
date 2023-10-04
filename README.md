@@ -8249,6 +8249,10 @@ All of these features are extremely helpful when you need to refactor your code
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html#instanceof-narrowing" title="TypeScript: instanceof">TypeScript: instanceof</a></li>
 <li><a href="https://github.com/DefinitelyTyped/DefinitelyTyped" title="Definitely Typed">Definitely Typed</a></li>
 <li><a href="https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies" title="npm Docs: peerDependencies">npm Docs: peerDependencies</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays" title="TypeScript: Arrays">TypeScript: Arrays</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces" title="TypeScript: Interfaces">TypeScript: Interfaces</a></li>
+<li><a href="https://typescript-eslint.io/rules/array-type/#array-simple" title="TypeScript-Eslint: array-simple">TypeScript-Eslint array-simple</a></li>
+<li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 
