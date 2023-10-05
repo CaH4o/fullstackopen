@@ -8252,6 +8252,10 @@ All of these features are extremely helpful when you need to refactor your code
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays" title="TypeScript: Arrays">TypeScript: Arrays</a></li>
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces" title="TypeScript: Interfaces">TypeScript: Interfaces</a></li>
 <li><a href="https://typescript-eslint.io/rules/array-type/#array-simple" title="TypeScript-Eslint: array-simple">TypeScript-Eslint array-simple</a></li>
+<li><a href="https://www.typescriptlang.org/tsconfig#noImplicitAny" title="TypeScript: noImplicitAny">TypeScript: noImplicitAny</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Body_mass_index" title="Body mass index">Body mass index</a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -8454,10 +8458,10 @@ Text
 
 ### Exercises:
 
-#### 9.1-9.x: Name
+#### 9.1-9.7: Calculator
 
 Description:
 
-Create an application according to the requirements described in [exercises 9.1-9.x]()
+Create an application according to the requirements described in [exercises 9.1-9.3](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-1-9-3)
 
-- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/)
+- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/calculator)
