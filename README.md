@@ -8458,7 +8458,7 @@ Text
 
 ### Exercises:
 
-#### 9.1-9.7: Calculator
+#### 9.1-9.7: Calculators
 
 Description:
 
