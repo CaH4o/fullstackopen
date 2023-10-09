@@ -1,3 +1,5 @@
+import { isArgumentsRightAmount, isNotNumber } from './utils';
+
 interface Exercise {
   periodLength: number;
   trainingDays: number;
@@ -53,21 +55,18 @@ const calculatorExercise = (
 };
 
 const parseArguments = (args: string[]): ExerciseValue => {
-  if (args.length < 4) throw new Error('Not enough arguments');
-  if (args.length > 4) throw new Error('Too many arguments');
+  if (isArgumentsRightAmount(args, 2)) throw new Error('Wrong arguments');
 
-  try {
-    const arr: Array<number> = JSON.parse(args[2]);
+  args.slice(2).forEach((a: string) => {
+    if (isNotNumber(a)) throw new Error('Wrong arguments');
+  });
 
-    if (isNaN(Number(args[3]))) {
-      throw new Error('Provided values were not numbers!');
-    }
+  const trainingPeriod: Array<number> = args
+    .slice(3)
+    .map((a: string) => Number(a));
+  const target: number = Number(args[2]);
 
-    return {
-      trainingPeriod: arr,
-      target: Number(args[3]),
-    };
-  } catch (error) {}
+  return { trainingPeriod, target };
 };
 
 try {
@@ -81,13 +80,24 @@ try {
   console.log(errorMessage);
 }
 
-//npm run exerciseCalculator "[3, 0, 2, 4.5, 0, 3, 1]" 2
+//npm run calculateExercises 2 3 0 2 4.5 0 3 1
+/*
+{ periodLength: 7,
+  trainingDays: 5,
+  success: false,
+  rating: 2,
+  ratingDescription: 'not too bad but could be better',
+  target: 2,
+  average: 1.9285714285714286 
+} */
 
-/*     { periodLength: 7,
-        trainingDays: 5,
-        success: false,
-        rating: 2,
-        ratingDescription: 'not too bad but could be better',
-        target: 2,
-        average: 1.9285714285714286 }
- */
+//$ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
+/* 
+{ periodLength: 9,
+  trainingDays: 6,
+  success: false,
+  rating: 2,
+  ratingDescription: 'not too bad but could be better',
+  target: 2,
+  average: 1.7222222222222223 
+} */

@@ -8254,8 +8254,8 @@ All of these features are extremely helpful when you need to refactor your code
 <li><a href="https://typescript-eslint.io/rules/array-type/#array-simple" title="TypeScript-Eslint: array-simple">TypeScript-Eslint array-simple</a></li>
 <li><a href="https://www.typescriptlang.org/tsconfig#noImplicitAny" title="TypeScript: noImplicitAny">TypeScript: noImplicitAny</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Body_mass_index" title="Body mass index">Body mass index</a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules" title="JavaScript modules">JavaScript modules</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/modules.html" title="TypeScript: Modules">TypeScript: Modules</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>

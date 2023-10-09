@@ -1,3 +1,5 @@
+import { isArgumentsRightAmount, isNotNumber } from './utils';
+
 interface BCB {
   from: number;
   to: number;
@@ -15,6 +17,11 @@ const basicCategoriesBmi: Array<BCB> = [
   { from: 40.0, to: 99.0, category: 'Obese (Class III)' },
 ];
 
+interface ExerciseValue {
+  height: number;
+  weight: number;
+}
+
 // The function calculates a BMI based on a given height (in centimeters)
 // and weight (in kilograms) and then returns a message that suits the results.
 const calculateBmi = (height: number, weight: number): string => {
@@ -24,4 +31,29 @@ const calculateBmi = (height: number, weight: number): string => {
   return basicCategoriesBmi.find((c) => c.to >= bmi && bmi >= c.from).category;
 };
 
-console.log(calculateBmi(180, 74));
+const parseArguments = (args: string[]): ExerciseValue => {
+  if (isArgumentsRightAmount(args, 2, 1)) throw new Error('Wrong arguments');
+
+  args.slice(2).forEach((a: string) => {
+    if (isNotNumber(a)) throw new Error('Wrong arguments');
+  });
+
+  const height: number = Number(args[2]);
+  const weight: number = Number(args[3]);
+
+  return { height, weight };
+};
+
+try {
+  const { height, weight } = parseArguments(process.argv);
+  console.log(calculateBmi(height, weight));
+} catch (error: unknown) {
+  let errorMessage = 'Something bad happened.';
+  if (error instanceof Error) {
+    errorMessage += ' Error: ' + error.message;
+  }
+  console.log(errorMessage);
+}
+
+//npm run calculateBmi 180 74
+//npm run calculateBmi 180 91
