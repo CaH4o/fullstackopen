@@ -8256,6 +8256,8 @@ All of these features are extremely helpful when you need to refactor your code
 <li><a href="https://en.wikipedia.org/wiki/Body_mass_index" title="Body mass index">Body mass index</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules" title="JavaScript modules">JavaScript modules</a></li>
 <li><a href="https://www.typescriptlang.org/docs/handbook/modules.html" title="TypeScript: Modules">TypeScript: Modules</a></li>
+<li><a href="https://www.typescriptlang.org/tsconfig" title="TypeScript configurations for tsconfig">TypeScript configurations in tsconfig</a></li>
+<li><a href="http://json.schemastore.org/tsconfig" title="Schema definition for tsconfig">Schema definition for tsconfig</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -8323,12 +8325,29 @@ If the version of npm is at least 7.0, the peer dependencies of a project are au
 
 > npm install --save-dev @types/node
 
+To install auto-reloading fot TS like nodemon
+
+> npm install --save-dev ts-node-dev
+
+```ts
+{
+  // ...
+  "scripts": {
+      // ...
+      "dev": "ts-node-dev index.ts",
+  },
+  // ...
+}
+```
+
 </details>
 
 <details>
 <summary>Сoncepts and definitions:</summary>
 
 The tsconfig.json file is used to define how the TypeScript compiler should interpret the code, how strictly the compiler should work, which files to watch or ignore, and much more
+
+If we not use variable in TS "req" we may to rename it with undersore "\_req" and IDE will not show error.
 
 </details>
 
