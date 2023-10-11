@@ -8325,6 +8325,49 @@ If the version of npm is at least 7.0, the peer dependencies of a project are au
 
 > npm install --save-dev @types/node
 
+Specify the following configurations
+
+> tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
+  }
+}
+```
+
+Install Express
+
+> npm install express
+
+Add index file fith express server
+
+> index.ts
+
+```ts
+import express from 'express';
+const app = express();
+
+app.get('/ping', (_req, res) => {
+  res.send('pong');
+});
+
+const PORT = 3003;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+```
+
 To install auto-reloading fot TS like nodemon
 
 > npm install --save-dev ts-node-dev
@@ -8334,6 +8377,7 @@ To install auto-reloading fot TS like nodemon
   // ...
   "scripts": {
       // ...
+      "start": "ts-node index.ts",
       "dev": "ts-node-dev index.ts",
   },
   // ...
@@ -8481,6 +8525,6 @@ Text
 
 Description:
 
-Create an application according to the requirements described in [exercises 9.1-9.3](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-1-9-3)
+Create an application according to the requirements described in [exercises 9.1-9.3](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-1-9-3), [exercises 9.4-9.5](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-4-9-5)
 
 - [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/calculator)
