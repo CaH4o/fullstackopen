@@ -24,11 +24,14 @@ interface ExerciseValue {
 
 // The function calculates a BMI based on a given height (in centimeters)
 // and weight (in kilograms) and then returns a message that suits the results.
-const calculateBmi = (height: number, weight: number): string => {
+export const calculateBmi = (height: number, weight: number): string => {
   const heightInM: number = height / 100;
   const bmiRaw: number = weight / (heightInM * heightInM);
   const bmi: number = Math.round(bmiRaw * 10) / 10;
-  return basicCategoriesBmi.find((c) => c.to >= bmi && bmi >= c.from).category;
+  const resultBmi: BCB | undefined = basicCategoriesBmi.find(
+    (c: BCB) => c.to >= bmi && bmi >= c.from
+  );
+  return resultBmi ? resultBmi.category : 'error';
 };
 
 const parseArguments = (args: string[]): ExerciseValue => {

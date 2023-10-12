@@ -8258,8 +8258,8 @@ All of these features are extremely helpful when you need to refactor your code
 <li><a href="https://www.typescriptlang.org/docs/handbook/modules.html" title="TypeScript: Modules">TypeScript: Modules</a></li>
 <li><a href="https://www.typescriptlang.org/tsconfig" title="TypeScript configurations for tsconfig">TypeScript configurations in tsconfig</a></li>
 <li><a href="http://json.schemastore.org/tsconfig" title="Schema definition for tsconfig">Schema definition for tsconfig</a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://en.wikipedia.org/wiki/Query_string" title="Query string">Query string</a></li>
+<li><a href="https://expressjs.com/en/5x/api.html#req.query" title="Express: query">Express: query</a></li>
 <li><a href="" title=""></a></li>
 
 </details>
