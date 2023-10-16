@@ -1,4 +1,5 @@
-export const isNotNumber = (argument: any): boolean => isNaN(Number(argument));
+export const isNotNumber = (argument: unknown): boolean =>
+  isNaN(Number(argument));
 
 export const isArgumentsRightAmount = (
   args: string[],
@@ -8,4 +9,10 @@ export const isArgumentsRightAmount = (
   if (args.length - 2 < min) return true;
   if (max && args.length - 2 > min + max) return true;
   return false;
+};
+
+export const isNotNumberArray = (argument: unknown): boolean => {
+  return !(Array.isArray(argument)
+    ? argument.every((value: unknown) => typeof value === 'number')
+    : false);
 };

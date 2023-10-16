@@ -1,22 +1,22 @@
 import { isArgumentsRightAmount, isNotNumber } from './utils';
 
-interface Exercise {
+export interface Exercise {
   periodLength: number;
   trainingDays: number;
   success: boolean;
   rating: number;
-  ratingDescription: String;
+  ratingDescription: string;
   target: number;
   average: number;
 }
 
 interface Raiting {
   rating: number;
-  ratingDescription: String;
+  ratingDescription: string;
 }
 
 interface ExerciseValue {
-  trainingPeriod: Array<number>;
+  daily_exercises: Array<number>;
   target: number;
 }
 
@@ -26,22 +26,22 @@ const ratingExercise: Array<Raiting> = [
   { rating: 3, ratingDescription: 'great work' },
 ];
 
-const calculatorExercise = (
-  trainingPeriod: Array<number>,
+export const calculatorExercise = (
+  daily_exercises: Array<number>,
   target: number
 ): Exercise => {
-  const periodLength: number = trainingPeriod.length;
-  const trainingDays: number = trainingPeriod.filter(
+  const periodLength: number = daily_exercises.length;
+  const trainingDays: number = daily_exercises.filter(
     (a: number) => a !== 0
   ).length;
   const average: number =
-    trainingPeriod.reduce((p: number, a: number) => p + a, 0) / periodLength;
+    daily_exercises.reduce((p: number, a: number) => p + a, 0) / periodLength;
   const success: boolean = target <= average;
-  const ratingRaw: number = target - Math.floor(average);
+  const ratingRaw: number = average - target;
   const rating: number = ratingRaw > 1 ? 3 : -1 > ratingRaw ? 1 : 2;
-  const ratingDescription: String = ratingExercise.find(
+  const ratingDescription: string = ratingExercise.find(
     (r: Raiting) => r.rating === rating
-  ).ratingDescription;
+  )!.ratingDescription;
 
   return {
     periodLength,
@@ -61,17 +61,17 @@ const parseArguments = (args: string[]): ExerciseValue => {
     if (isNotNumber(a)) throw new Error('Wrong arguments');
   });
 
-  const trainingPeriod: Array<number> = args
+  const daily_exercises: Array<number> = args
     .slice(3)
     .map((a: string) => Number(a));
   const target: number = Number(args[2]);
 
-  return { trainingPeriod, target };
+  return { daily_exercises, target };
 };
 
 try {
-  const { trainingPeriod, target } = parseArguments(process.argv);
-  console.log(calculatorExercise(trainingPeriod, target));
+  const { daily_exercises, target } = parseArguments(process.argv);
+  console.log(calculatorExercise(daily_exercises, target));
 } catch (error: unknown) {
   let errorMessage = 'Something bad happened.';
   if (error instanceof Error) {

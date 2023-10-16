@@ -8260,7 +8260,9 @@ All of these features are extremely helpful when you need to refactor your code
 <li><a href="http://json.schemastore.org/tsconfig" title="Schema definition for tsconfig">Schema definition for tsconfig</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Query_string" title="Query string">Query string</a></li>
 <li><a href="https://expressjs.com/en/5x/api.html#req.query" title="Express: query">Express: query</a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any" title="TypeScript: any">TypeScript: any</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number" title="JavaScript: Number">JavaScript: Number</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions" title="TypeScript: type assertion">TypeScript: type assertion</a></li>
 
 </details>
 
@@ -8355,7 +8357,33 @@ Add index file fith express server
 
 ```ts
 import express from 'express';
+
+import { calculator, Operation } from './calculator';
+
 const app = express();
+
+app.use(express.json());
+
+app.post('/calculate', (req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { value1, value2, op } = req.body;
+
+  if (!value1 || isNaN(Number(value1))) {
+    return res.status(400).send({ error: 'value1 is wrong' });
+  }
+
+  if (!value2 || isNaN(Number(value1))) {
+    return res.status(400).send({ error: 'value2 is wrong' });
+  }
+
+  if (!op) {
+    return res.status(400).send({ error: 'op is wrong' });
+  }
+
+  //const result = calculator(value1, value2, op);
+  const result = calculator(Number(value1), Number(value2), op as Operation);
+  return res.send({ result });
+});
 
 app.get('/ping', (_req, res) => {
   res.send('pong');
@@ -8379,6 +8407,62 @@ To install auto-reloading fot TS like nodemon
       // ...
       "start": "ts-node index.ts",
       "dev": "ts-node-dev index.ts",
+  },
+  // ...
+}
+```
+
+#### ESlint
+
+Install ESlint and its TypeScript extensions
+
+> npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
+
+configure ESlint to disallow explicit any
+
+> .eslintrc
+
+```js
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "plugins": ["@typescript-eslint"],
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "@typescript-eslint/semi": ["error"],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/restrict-plus-operands": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_" }
+    ],
+    "no-case-declarations": "off"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
+```
+
+Let us also set up a lint npm script to inspect the files with .ts extension
+
+> package.json
+
+```js
+{
+  // ...
+  "scripts": {
+      //...
+      "lint": "eslint --ext .ts ."
   },
   // ...
 }
@@ -8523,8 +8607,8 @@ Text
 
 #### 9.1-9.7: Calculators
 
-Description:
+Description: Create the project in an empty directory with npm init and install the ts-node and typescript packages. Also, create the file tsconfig.json in the directory. Create the code of this exercise in the file bmiCalculator.ts with a function calculateBmi that calculates a BMI. Create the code of this exercise in file exerciseCalculator.ts with a function calculateExercises. Add Express to your dependencies and create an HTTP GET endpoints: hello, bmi, exercises. Configure your project to use the above ESlint settings and fix all the warnings.
 
-Create an application according to the requirements described in [exercises 9.1-9.3](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-1-9-3), [exercises 9.4-9.5](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-4-9-5)
+Create an application according to the requirements described in [exercises 9.1-9.3](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-1-9-3), [exercises 9.4-9.5](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-4-9-5),[exercises 9.6-9.7](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-6-9-7)
 
 - [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/calculator)
