@@ -8484,9 +8484,9 @@ If we not use variable in TS "req" we may to rename it with undersore "\_req" an
 <details>
 <summary>Links:</summary>
 
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://www.staging-typescript.org/tsconfig#noImplicitAny" title="Typescript: noImplicitAny">Typescript: noImplicitAny</a></li>
+<li><a href="https://www.staging-typescript.org/tsconfig#strict" title="Typescript: strict">Typescript: strict</a></li>
+<li><a href="https://www.staging-typescript.org/tsconfig#esModuleInterop" title="Typescript: esModuleInterop">Typescript: esModuleInterop</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 
@@ -8495,12 +8495,102 @@ If we not use variable in TS "req" we may to rename it with undersore "\_req" an
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Setting up the project
 
->
+> npm init
+
+> npm install typescript --save-dev
+
+> package.json
 
 ```js
+{
+  // ..
+  "scripts": {
+    "tsc": "tsc"
+  },
+  // ..
+}
+```
 
+> npm run tsc -- --init
+
+```js
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "outDir": "./build/",
+    "module": "commonjs",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true
+  }
+}
+```
+
+Installing express
+
+> npm install express
+
+> npm install --save-dev eslint @types/express @typescript-eslint/eslint-plugin @typescript-eslint/parser
+
+Configure ESlint to disallow explicit any
+
+> .eslintrc
+
+```js
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "plugins": ["@typescript-eslint"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "@typescript-eslint/semi": ["error"],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/restrict-plus-operands": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_" }
+    ],
+    "no-case-declarations": "off"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
+```
+
+Set up our development environment
+
+> npm install --save-dev ts-node-dev
+
+> package.json
+
+```js
+{
+  // ...
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev index.ts",
+    "lint": "eslint --ext .ts .",
+    "start": "node build/index.js"
+  },
+  // ...
+}
 ```
 
 </details>
