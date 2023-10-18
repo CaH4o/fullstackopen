@@ -8702,3 +8702,11 @@ Description: Create the project in an empty directory with npm init and install 
 Create an application according to the requirements described in [exercises 9.1-9.3](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-1-9-3), [exercises 9.4-9.5](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-4-9-5),[exercises 9.6-9.7](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-6-9-7)
 
 - [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/calculator)
+
+#### 9.1-9.7: Patientor
+
+Description:
+
+Create an application according to the requirements described in [exercises 9.8-9.9](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-8-9-9)
+
+- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/patientor)
