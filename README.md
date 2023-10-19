@@ -8593,6 +8593,10 @@ Set up our development environment
 }
 ```
 
+> npm install cors
+
+> npm install --save-dev @types/cors
+
 </details>
 
 <details>
