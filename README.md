@@ -8487,6 +8487,18 @@ If we not use variable in TS "req" we may to rename it with undersore "\_req" an
 <li><a href="https://www.staging-typescript.org/tsconfig#noImplicitAny" title="Typescript: noImplicitAny">Typescript: noImplicitAny</a></li>
 <li><a href="https://www.staging-typescript.org/tsconfig#strict" title="Typescript: strict">Typescript: strict</a></li>
 <li><a href="https://www.staging-typescript.org/tsconfig#esModuleInterop" title="Typescript: esModuleInterop">Typescript: esModuleInterop</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Domain-driven_design" title="Domain-driven design">Domain-driven design</a></li>
+<li><a href="https://spring.io/" title="Java: Spring">Java: Spring</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types" title="Typescript: Union">Typescript: Union</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces" title="Typescript: Interfaces">Typescript: Interfaces</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions" title="Typescript: Type Assertions">Typescript: Type Assertions</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties" title="Typescript: Optional Properties">Typescript: Optional Properties</a></li>
+<li><a href="https://nodejs.org/api/modules.html#modules_file_modules" title="NodeJS: File modules">NodeJS: File modules</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys" title="Typescript: Pick">Typescript: Pick</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys" title="Typescript: Omit">Typescript: Omit</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases" title="Typescript: Type Aliases">Typescript: Type Aliases</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/type-compatibility.html" title="Typescript: Type Compatibility">Typescript: Type Compatibility</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html" title="Typescript: Utility Types">Typescript: Utility Types</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 
@@ -8503,19 +8515,21 @@ Setting up the project
 
 > package.json
 
-```js
+```json
 {
   // ..
   "scripts": {
     "tsc": "tsc"
-  },
+  }
   // ..
 }
 ```
 
 > npm run tsc -- --init
 
-```js
+> tsconfig.json
+
+```json
 {
   "compilerOptions": {
     "target": "ES6",
@@ -8541,7 +8555,7 @@ Configure ESlint to disallow explicit any
 
 > .eslintrc
 
-```js
+```json
 {
   "extends": [
     "eslint:recommended",
@@ -8580,7 +8594,7 @@ Set up our development environment
 
 > package.json
 
-```js
+```json
 {
   // ...
   "scripts": {
@@ -8588,7 +8602,7 @@ Set up our development environment
     "dev": "ts-node-dev index.ts",
     "lint": "eslint --ext .ts .",
     "start": "node build/index.js"
-  },
+  }
   // ...
 }
 ```
@@ -8596,6 +8610,175 @@ Set up our development environment
 > npm install cors
 
 > npm install --save-dev @types/cors
+
+Update structure and files:
+
+<pre>
+. project
+├── build
+├── data
+|  └── dataName.ts
+├── src
+|  ├── routes
+|  |   └── routName.ts
+|  ├── servives
+|  |   └── serviseNameService.js
+|  ├── util.ts
+|  ├── types.ts
+|  └── index.ts
+├── .eslintignore
+├── .eslintrc
+├── .gitignore
+├── README.md
+├── package-lock.json
+├── package.json
+└── tsconfig.json
+</pre>
+
+> package.json
+
+````json
+{
+  // ...
+  "scripts": {
+    //...
+    "dev": "ts-node-dev src/index.ts",
+    //...
+  },
+  // ...
+}
+
+
+> tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    // ...
+    "resolveJsonModule": true
+  }
+}
+````
+
+Create types for data
+
+> src/types.ts
+
+```ts
+export type Weather = 'sunny' | 'rainy' | 'cloudy' | 'windy' | 'stormy';
+
+export type Visibility = 'great' | 'good' | 'ok' | 'poor';
+
+export interface DiaryEntry {
+  id: number;
+  date: string;
+  weather: Weather;
+  visibility: Visibility;
+  comment: string;
+}
+
+export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
+```
+
+Create data
+
+> data/entries.ts
+
+```ts
+import { DiaryEntry } from '../src/types';
+
+const diaryEntries: DiaryEntry[] = [
+  {
+    'id': 1,
+    'date': '2017-01-01',
+    'weather': 'rainy',
+    'visibility': 'poor',
+    'comment': "Pretty scary flight, I'm glad I'm alive",
+  },
+  // ...
+];
+
+export default diaryEntries;
+```
+
+Create servise for work with data
+
+> src/services/diaryService.ts
+
+```ts
+import { DiaryEntry, NonSensitiveDiaryEntry } from '../types';
+import diaries from '../../data/entries';
+
+const getEntries = (): DiaryEntry[] => {
+  return diaries;
+};
+
+const getNonSensitiveEntries = (): NonSensitiveDiaryEntry[] => {
+  return diaries.map(({ id, date, weather, visibility }) => ({
+    id,
+    date,
+    weather,
+    visibility,
+  }));
+};
+
+const addDiary = () => {
+  return null;
+};
+
+export default {
+  getEntries,
+  getNonSensitiveEntries,
+  addDiary,
+};
+```
+
+Create route for CRUD data
+
+> src/routes/diaries.ts
+
+```ts
+import express from 'express';
+
+import diaryService from '../services/diaryService';
+
+const router = express.Router();
+
+router.get('/', (_req, res) => {
+  res.send(diaryService.getNonSensitiveEntries());
+});
+
+router.post('/', (_req, res) => {
+  res.send('Saving a diary!');
+});
+
+export default router;
+```
+
+Create server with adding data API endpoints
+
+> index.ts
+
+```ts
+import express from 'express';
+import diaryRouter from './routes/diaries';
+
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
+
+app.get('/ping', (_req, res) => {
+  console.log('someone pinged here');
+  res.send('pong');
+});
+
+app.use('/api/diaries', diaryRouter);
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+```
 
 </details>
 
