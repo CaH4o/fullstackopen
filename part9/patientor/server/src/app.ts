@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 
 import diagnosRoute from './routes/diagnos';
+import pationtRoute from './routes/pationt';
 
 const app = express();
 
@@ -13,5 +14,6 @@ app.get('/api/ping', (_req, res) => {
 });
 
 app.use('/api/diagnoses', diagnosRoute);
+app.use('/api/patients', pationtRoute);
 
 export default app;

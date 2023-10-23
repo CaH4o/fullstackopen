@@ -9,6 +9,8 @@ export interface Patient {
   'occupation': string;
 }
 
+export type PatientWithoutSSN = Omit<Patient, 'ssn'>;
+
 export interface Diagnos {
   'code': string;
   'name': string;
