@@ -8499,8 +8499,12 @@ If we not use variable in TS "req" we may to rename it with undersore "\_req" an
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases" title="Typescript: Type Aliases">Typescript: Type Aliases</a></li>
 <li><a href="https://www.typescriptlang.org/docs/handbook/type-compatibility.html" title="Typescript: Type Compatibility">Typescript: Type Compatibility</a></li>
 <li><a href="https://www.typescriptlang.org/docs/handbook/utility-types.html" title="Typescript: Utility Types">Typescript: Utility Types</a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/functions.html#unknown" title="Typescript: Unknown">Typescript: Unknown</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates" title="Typescript: Using type predicates">Typescript: Using type predicates</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html" title="Typescript: Narrowing">Typescript: Narrowing</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/enums.html" title="Typescript: Enum">Typescript: Enum</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-in-operator-narrowing" title="Typescript: The 'in' operator narrowing">Typescript: The 'in' operator narrowing</a></li>
+<li><a href="https://github.com/uuidjs/uuid" title="uuid">uuid</a></li>
 
 </details>
 
@@ -8665,9 +8669,20 @@ Create types for data
 > src/types.ts
 
 ```ts
-export type Weather = 'sunny' | 'rainy' | 'cloudy' | 'windy' | 'stormy';
+export enum Weather {
+  Sunny = 'sunny',
+  Rainy = 'rainy',
+  Cloudy = 'cloudy',
+  Stormy = 'stormy',
+  Windy = 'windy',
+}
 
-export type Visibility = 'great' | 'good' | 'ok' | 'poor';
+export enum Visibility {
+  Great = 'great',
+  Good = 'good',
+  Ok = 'ok',
+  Poor = 'poor',
+}
 
 export interface DiaryEntry {
   id: number;
@@ -8678,16 +8693,102 @@ export interface DiaryEntry {
 }
 
 export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
+
+export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
 ```
 
-Create data
+Create parser for data
+
+> utils.ts
+
+```ts
+import { NewDiaryEntry, Visibility, Weather } from './types';
+
+const isString = (text: unknown): text is string => {
+  return typeof text === 'string' || text instanceof String;
+};
+
+const parseComment = (comment: unknown): string => {
+  if (!comment || !isString(comment)) {
+    throw new Error('Incorrect or missing comment');
+  }
+
+  return comment;
+};
+
+const isDate = (date: string): boolean => {
+  return Boolean(Date.parse(date));
+};
+
+const parseDate = (date: unknown): string => {
+  if (!isString(date) || !isDate(date)) {
+    throw new Error('Incorrect or missing date: ' + date);
+  }
+  return date;
+};
+
+const isWeather = (param: string): param is Weather => {
+  return Object.values(Weather)
+    .map((v) => v.toString())
+    .includes(param);
+};
+
+const parseWeather = (weather: unknown): Weather => {
+  if (!isString(weather) || !isWeather(weather)) {
+    throw new Error('Incorrect or missing weather: ' + weather);
+  }
+  return weather;
+};
+
+const isVisibility = (param: string): param is Visibility => {
+  return Object.values(Visibility)
+    .map((v) => v.toString())
+    .includes(param);
+};
+
+const parseVisibility = (visibility: unknown): Visibility => {
+  if (!isString(visibility) || !isVisibility(visibility)) {
+    throw new Error('Incorrect or missing visibility: ' + visibility);
+  }
+  return visibility;
+};
+
+const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
+  if (!object || typeof object !== 'object') {
+    throw new Error('Incorrect or missing data');
+  }
+
+  if (
+    'comment' in object &&
+    'date' in object &&
+    'weather' in object &&
+    'visibility' in object
+  ) {
+    const newEntry: NewDiaryEntry = {
+      weather: parseWeather(object.weather),
+      visibility: parseVisibility(object.visibility),
+      date: parseDate(object.date),
+      comment: parseComment(object.comment),
+    };
+
+    return newEntry;
+  }
+
+  throw new Error('Incorrect data: some fields are missing');
+};
+
+export default toNewDiaryEntry;
+```
+
+Create file for keep data
 
 > data/entries.ts
 
 ```ts
 import { DiaryEntry } from '../src/types';
+import toNewDiaryEntry from '../src/utils';
 
-const diaryEntries: DiaryEntry[] = [
+const data = [
   {
     'id': 1,
     'date': '2017-01-01',
@@ -8698,6 +8799,12 @@ const diaryEntries: DiaryEntry[] = [
   // ...
 ];
 
+const diaryEntries: DiaryEntry[] = data.map((obj) => {
+  const object = toNewDiaryEntry(obj) as DiaryEntry;
+  object.id = obj.id;
+  return object;
+});
+
 export default diaryEntries;
 ```
 
@@ -8706,7 +8813,7 @@ Create servise for work with data
 > src/services/diaryService.ts
 
 ```ts
-import { DiaryEntry, NonSensitiveDiaryEntry } from '../types';
+import { NewDiaryEntry, NonSensitiveDiaryEntry, DiaryEntry } from '../types';
 import diaries from '../../data/entries';
 
 const getEntries = (): DiaryEntry[] => {
@@ -8722,18 +8829,30 @@ const getNonSensitiveEntries = (): NonSensitiveDiaryEntry[] => {
   }));
 };
 
-const addDiary = () => {
-  return null;
+const addDiary = (entry: NewDiaryEntry): DiaryEntry => {
+  const newDiaryEntry = {
+    id: Math.max(...diaries.map((d) => d.id)) + 1,
+    ...entry,
+  };
+
+  diaries.push(newDiaryEntry);
+  return newDiaryEntry;
+};
+
+const findById = (id: number): DiaryEntry | undefined => {
+  const entry = diaries.find((d) => d.id === id);
+  return entry;
 };
 
 export default {
   getEntries,
   getNonSensitiveEntries,
   addDiary,
+  findById,
 };
 ```
 
-Create route for CRUD data
+Create the route for CRUD data
 
 > src/routes/diaries.ts
 
@@ -8741,6 +8860,7 @@ Create route for CRUD data
 import express from 'express';
 
 import diaryService from '../services/diaryService';
+import toNewDiaryEntry from '../utils';
 
 const router = express.Router();
 
@@ -8748,8 +8868,29 @@ router.get('/', (_req, res) => {
   res.send(diaryService.getNonSensitiveEntries());
 });
 
-router.post('/', (_req, res) => {
-  res.send('Saving a diary!');
+router.post('/', (req, res) => {
+  try {
+    const newDiaryEntry = toNewDiaryEntry(req.body);
+
+    const addedEntry = diaryService.addDiary(newDiaryEntry);
+    res.json(addedEntry);
+  } catch (error: unknown) {
+    let errorMessage = 'Something went wrong.';
+    if (error instanceof Error) {
+      errorMessage += ' Error: ' + error.message;
+    }
+    res.status(400).send(errorMessage);
+  }
+});
+
+router.get('/:id', (req, res) => {
+  const diary = diaryService.findById(Number(req.params.id));
+
+  if (diary) {
+    res.send(diary);
+  } else {
+    res.sendStatus(404);
+  }
 });
 
 export default router;
@@ -8890,7 +9031,7 @@ Create an application according to the requirements described in [exercises 9.1-
 
 - [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/calculator)
 
-#### 9.1-9.7: Patientor
+#### 9.1-9.11: Patientor
 
 Description:
 

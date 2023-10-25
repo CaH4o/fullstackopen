@@ -4,6 +4,6 @@ lesson - the project for exercises and practice while studying the course
 
 calculators - the project for the exercises #9.1-9.7 "Calculators"
 
-patientor - the project for the exercises #9.8-9.9 "Patientor"
+patientor - the project for the exercises #9.8-9.11 "Patientor"
 
-Time: 7
+Time: 8.5
