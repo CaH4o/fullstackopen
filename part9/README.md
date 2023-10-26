@@ -6,4 +6,4 @@ calculators - the project for the exercises #9.1-9.7 "Calculators"
 
 patientor - the project for the exercises #9.8-9.13 "Patientor"
 
-Time: 9.5
+Time: 10
