@@ -8544,7 +8544,8 @@ Setting up the project
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   }
 }
 ```
@@ -8596,21 +8597,6 @@ Set up our development environment
 
 > npm install --save-dev ts-node-dev
 
-> package.json
-
-```json
-{
-  // ...
-  "scripts": {
-    "tsc": "tsc",
-    "dev": "ts-node-dev index.ts",
-    "lint": "eslint --ext .ts .",
-    "start": "node build/index.js"
-  }
-  // ...
-}
-```
-
 > npm install cors
 
 > npm install --save-dev @types/cors
@@ -8627,7 +8613,7 @@ Update structure and files:
 |  |   └── routName.ts
 |  ├── servives
 |  |   └── serviseNameService.js
-|  ├── util.ts
+|  ├── utils.ts
 |  ├── types.ts
 |  └── index.ts
 ├── .eslintignore
@@ -8641,28 +8627,20 @@ Update structure and files:
 
 > package.json
 
-````json
-{
-  // ...
-  "scripts": {
-    //...
-    "dev": "ts-node-dev src/index.ts",
-    //...
-  },
-  // ...
-}
-
-
-> tsconfig.json
+> package.json
 
 ```json
 {
-  "compilerOptions": {
-    // ...
-    "resolveJsonModule": true
+  // ...
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev src/index.ts",
+    "lint": "eslint --ext .ts .",
+    "start": "node build/index.js"
   }
+  // ...
 }
-````
+```
 
 Create types for data
 
@@ -8699,7 +8677,7 @@ export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
 
 Create parser for data
 
-> utils.ts
+> src/utils.ts
 
 ```ts
 import { NewDiaryEntry, Visibility, Weather } from './types';
@@ -8898,7 +8876,7 @@ export default router;
 
 Create server with adding data API endpoints
 
-> index.ts
+> src/index.ts
 
 ```ts
 import express from 'express';
@@ -8990,37 +8968,6 @@ Text
 
 </details>
 
-### Sub-part F: [Legacy patientor (the old material)](https://fullstackopen.com/en/part9/legacy_patientor_the_old_material)
-
-<details>
-<summary>Links:</summary>
-
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-
-</details>
-
-<details>
-<summary>Сommands and fragments:</summary>
-
-Text
-
->
-
-```js
-
-```
-
-</details>
-
-<details>
-<summary>Сoncepts and definitions:</summary>
-
-</details>
-
 ### Exercises:
 
 #### 9.1-9.7: Calculators
@@ -9031,10 +8978,10 @@ Create an application according to the requirements described in [exercises 9.1-
 
 - [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/calculator)
 
-#### 9.1-9.11: Patientor
+#### 9.1-9.13: Patientor
 
-Description:
+Description: Initialize a new backend project that will work with the frontend. Configure ESlint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers HTTP GET requests for route /api/ping. Create a type Diagnosis and use it to create endpoint /api/diagnoses for fetching all diagnoses with HTTP GET. Create data type Patient and set up the GET endpoint /api/patients which returns all the patients to the frontend, excluding field ssn. Create a POST endpoint /api/patients for adding patients. Set up safe parsing, validation and type predicate to the POST /api/patients request.
 
-Create an application according to the requirements described in [exercises 9.8-9.9](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-8-9-9)
+Create an application according to the requirements described in [exercises 9.8-9.9](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-8-9-9), [exercises 9.10-9.11](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-10-9-11), [exercises 9.12-9.13](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-12-9-13)
 
 - [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/patientor)
