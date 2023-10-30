@@ -8911,9 +8911,9 @@ app.listen(PORT, () => {
 <details>
 <summary>Links:</summary>
 
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://vitejs.dev/" title="Vite">Vite</a></li>
+<li><a href="https://www.typescriptlang.org/tsconfig#lib" title="TypeScript: Lib">TypeScript: Lib</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#non-null-assertion-operator-postfix-" title="TypeScript: Non-null Assertion Operator">TypeScript: Non-null Assertion Operator</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 
@@ -8922,9 +8922,13 @@ app.listen(PORT, () => {
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Create a TypeScript app using Vite
 
->
+> npm create vite@latest my-app-name -- --template react-ts
+
+> cd my-app-name
+
+> npm install
 
 ```js
 
@@ -8934,6 +8938,14 @@ Text
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+TypeScript will help us catch the following errors:
+
+- Trying to pass an extra/unwanted prop to a component
+- Forgetting to pass a required prop to a component
+- Passing a prop with the wrong type to a component
+
+If we make any of these errors, TypeScript can help us catch them in our editor right away. If we didn't use TypeScript, we would have to catch these errors later during testing.
 
 </details>
 
@@ -8976,7 +8988,7 @@ Description: Create the project in an empty directory with npm init and install 
 
 Create an application according to the requirements described in [exercises 9.1-9.3](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-1-9-3), [exercises 9.4-9.5](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-4-9-5),[exercises 9.6-9.7](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-6-9-7)
 
-- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/calculator)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/calculator)
 
 #### 9.1-9.13: Patientor
 
@@ -8984,4 +8996,4 @@ Description: Initialize a new backend project that will work with the frontend. 
 
 Create an application according to the requirements described in [exercises 9.8-9.9](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-8-9-9), [exercises 9.10-9.11](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-10-9-11), [exercises 9.12-9.13](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-12-9-13)
 
-- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/patientor)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/patientor)
