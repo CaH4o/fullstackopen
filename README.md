@@ -8986,7 +8986,7 @@ Text
 
 Description: Create the project in an empty directory with npm init and install the ts-node and typescript packages. Also, create the file tsconfig.json in the directory. Create the code of this exercise in the file bmiCalculator.ts with a function calculateBmi that calculates a BMI. Create the code of this exercise in file exerciseCalculator.ts with a function calculateExercises. Add Express to your dependencies and create an HTTP GET endpoints: hello, bmi, exercises. Configure your project to use the above ESlint settings and fix all the warnings.
 
-Create an application according to the requirements described in [exercises 9.1-9.3](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-1-9-3), [exercises 9.4-9.5](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-4-9-5),[exercises 9.6-9.7](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-6-9-7)
+Create an application according to the requirements described in [exercises 9.1-9.3](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-1-9-3), [exercises 9.4-9.5](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-4-9-5),[exercises 9.6-9.7](https://fullstackopen.com/en/part9/first_steps_with_type_script#exercises-9-6-9-7).
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/calculator)
 
@@ -8994,6 +8994,14 @@ Create an application according to the requirements described in [exercises 9.1-
 
 Description: Initialize a new backend project that will work with the frontend. Configure ESlint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers HTTP GET requests for route /api/ping. Create a type Diagnosis and use it to create endpoint /api/diagnoses for fetching all diagnoses with HTTP GET. Create data type Patient and set up the GET endpoint /api/patients which returns all the patients to the frontend, excluding field ssn. Create a POST endpoint /api/patients for adding patients. Set up safe parsing, validation and type predicate to the POST /api/patients request.
 
-Create an application according to the requirements described in [exercises 9.8-9.9](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-8-9-9), [exercises 9.10-9.11](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-10-9-11), [exercises 9.12-9.13](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-12-9-13)
+Create an application according to the requirements described in [exercises 9.8-9.9](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-8-9-9), [exercises 9.10-9.11](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-10-9-11), [exercises 9.12-9.13](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-12-9-13).
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/patientor)
+
+#### 9.14-9.15: Course info
+
+Description: Create a new Vite app with TypeScript. This exercise is similar to the one you have already done in Part 1 of the course (Course info), but with TypeScript and some extra tweaks.
+
+Create an application according to the requirements described in [exercise 9.14](https://fullstackopen.com/en/part9/react_with_types#exercise-9-14), [exercise 9.15](https://fullstackopen.com/en/part9/react_with_types#exercise-9-15).
+
+- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/courseinfo)
