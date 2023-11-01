@@ -8914,6 +8914,13 @@ app.listen(PORT, () => {
 <li><a href="https://vitejs.dev/" title="Vite">Vite</a></li>
 <li><a href="https://www.typescriptlang.org/tsconfig#lib" title="TypeScript: Lib">TypeScript: Lib</a></li>
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#non-null-assertion-operator-postfix-" title="TypeScript: Non-null Assertion Operator">TypeScript: Non-null Assertion Operator</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types" title="TypeScript: Literal Types">TypeScript: Literal Types</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types" title="TypeScript: Union Types">TypeScript: Union Types</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types" title="TypeScript: Extending Types">TypeScript: Extending Types</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#working-with-union-types" title="TypeScript: Working with Union Types">TypeScript: Working with Union Types</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions" title="TypeScript: Discriminated unions">TypeScript: Discriminated unions</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html#exhaustiveness-checking" title="TypeScript: Exhaustiveness checking">TypeScript: Exhaustiveness checking</a></li>
+<li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 
@@ -8946,6 +8953,8 @@ TypeScript will help us catch the following errors:
 - Passing a prop with the wrong type to a component
 
 If we make any of these errors, TypeScript can help us catch them in our editor right away. If we didn't use TypeScript, we would have to catch these errors later during testing.
+
+TypeScript will only allow an operation (or attribute access) if it is valid for every member of the union.
 
 </details>
 
