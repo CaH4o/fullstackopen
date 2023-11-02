@@ -9009,7 +9009,7 @@ Create an application according to the requirements described in [exercises 9.8-
 
 #### 9.14-9.15: Course info
 
-Description: Create a new Vite app with TypeScript. This exercise is similar to the one you have already done in Part 1 of the course (Course info), but with TypeScript and some extra tweaks.
+Description: Create a new Vite app with TypeScript. This exercise is similar to the one you have already done in Part 1 of the course (Course info), but with TypeScript and some extra tweaks. Extending the app with adding the type information and to declare a new interfaces (extends). Create a component Part that renders all attributes of each type of course part. Add another course part interface.
 
 Create an application according to the requirements described in [exercise 9.14](https://fullstackopen.com/en/part9/react_with_types#exercise-9-14), [exercise 9.15](https://fullstackopen.com/en/part9/react_with_types#exercise-9-15).
 

@@ -49,7 +49,6 @@ const App = () => {
         break;
       default:
         return assertNever(part);
-        break;
     }
   });
 
