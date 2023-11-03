@@ -8920,8 +8920,15 @@ app.listen(PORT, () => {
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#working-with-union-types" title="TypeScript: Working with Union Types">TypeScript: Working with Union Types</a></li>
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions" title="TypeScript: Discriminated unions">TypeScript: Discriminated unions</a></li>
 <li><a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html#exhaustiveness-checking" title="TypeScript: Exhaustiveness checking">TypeScript: Exhaustiveness checking</a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://codewithstyle.info/Using-React-useState-hook-with-TypeScript/" title="React useState Hook with TypeScript: The Complete Guide">React useState Hook with TypeScript: The Complete Guide</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/type-inference.html#handbook-content" title="TypeScript: Type Inference">TypeScript: Type Inference</a></li>
+<li><a href="https://react-typescript-cheatsheet.netlify.app/" title="React TypeScript Cheatsheet">React TypeScript Cheatsheet</a></li>
+<li><a href="https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks/#usestate" title="React TypeScript Cheatsheet: useState">React TypeScript Cheatsheet: useState</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables" title="TypeScript: Generic Type Variables">TypeScript: Generic Type Variables</a></li>
+<li><a href="https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events/" title="React TypeScript Cheatsheet: Forms and Events">React TypeScript Cheatsheet: Forms and Events</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces" title="TypeScript: Interfaces">TypeScript: Interfaces</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases" title="TypeScript: Type Aliases">TypeScript: Type Aliases</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces" title="TypeScript: Differences Between Type Aliases and Interfaces">TypeScript: Differences Between Type Aliases and Interfaces</a></li>
 <li><a href="" title=""></a></li>
 
 </details>
@@ -8933,12 +8940,259 @@ Create a TypeScript app using Vite
 
 > npm create vite@latest my-app-name -- --template react-ts
 
-> cd my-app-name
+#### interface extends and kind
 
+Create types file with interfaces that are inherited.
+
+> src/types.ts
+
+```ts
+interface CoursePartBase {
+  name: string;
+  exerciseCount: number;
+}
+
+interface CoursePartBasic extends CoursePartBase {
+  description: string;
+  kind: 'basic';
+}
+
+interface CoursePartGroup extends CoursePartBase {
+  groupProjectCount: number;
+  kind: 'group';
+}
+
+interface CoursePartBackground extends CoursePartBase {
+  description: string;
+  backgroundMaterial: string;
+  kind: 'background';
+}
+
+export type CoursePart =
+  | CoursePartBasic
+  | CoursePartGroup
+  | CoursePartBackground;
+```
+
+Create assert function to check types
+
+> src/utils.ts
+
+```ts
+export const assertNever = (value: never): never => {
+  throw new Error(
+    `Unhandled discriminated union member: ${JSON.stringify(value)}`
+  );
+};
+```
+
+Create App to work with different types
+
+> src/App.ts
+
+```ts
+import { CoursePart } from './types';
+import { assertNever } from './utils';
+
+const App = () => {
+  const courseParts: CoursePart[] = [
+    {
+      name: 'Fundamentals',
+      exerciseCount: 10,
+      description: 'This is an awesome course part',
+      kind: 'basic',
+    },
+    {
+      name: 'Using props to pass data',
+      exerciseCount: 7,
+      groupProjectCount: 3,
+      kind: 'group',
+    },
+    {
+      name: 'Basics of type Narrowing',
+      exerciseCount: 7,
+      description: 'How to go from unknown to string',
+      kind: 'basic',
+    },
+    {
+      name: 'Deeper type usage',
+      exerciseCount: 14,
+      description: 'Confusing description',
+      backgroundMaterial:
+        'https://type-level-typescript.com/template-literal-types',
+      kind: 'background',
+    },
+  ];
+
+  courseParts.forEach((part: CoursePart) => {
+    switch (part.kind) {
+      case 'basic':
+        console.log(part.name, part.exerciseCount, part.description);
+        break;
+      case 'group':
+        console.log(part.name, part.exerciseCount, part.groupProjectCount);
+        break;
+      case 'background':
+        console.log(
+          part.name,
+          part.exerciseCount,
+          part.description,
+          part.backgroundMaterial
+        );
+        break;
+      default:
+        return assertNever(part);
+    }
+  });
+
+  return <div>App</div>;
+};
+
+export default App;
+```
+
+#### Note app with backend
+
+Create a TypeScript app using Vite and run the server.
+
+> npm create vite@latest notesApp -- --template react-ts
+
+> cd notesApp
 > npm install
+> npm run dev
+
+Create JSON server with data in another terminal
+
+> npm install json-server --save-dev
+
+Added json file-database in root of the project
+
+> db.json
 
 ```js
+{
+  "notes": [
+    {
+      "id": 1,
+      "content": "HTML is easy",
+      "important": true
+    },
+    {
+      "id": 2,
+      "content": "Browser can execute only JavaScript",
+      "important": false
+    },
+    {
+      "id": 3,
+      "content": "GET and POST are the most important methods of HTTP protocol",
+      "important": true
+    }
+  ]
+}
+```
 
+> package.json
+
+```js
+"scripts": {
+  // ...
+  "server": "json-server -p3001 --watch db.json"
+}
+```
+
+Install axios and run the server
+
+> npm install axios
+
+> npm run server
+
+Delete everything in 'src' folder except 'main.tsx' and 'App.tsx'
+
+Update main, create the file to keep types, create the servive to work with backend and update App.ts.
+
+> src.main.tsx
+
+```ts
+import ReactDOM from 'react-dom/client';
+import App from './App.tsx';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
+```
+
+> src/types.ts
+
+```ts
+export interface Note {
+  id: number;
+  content: string;
+}
+
+export type NewNote = Omit<Note, 'id'>;
+```
+
+> src/services/noteService.ts
+
+```ts
+import axios from 'axios';
+
+import { Note, NewNote } from '../types';
+
+const baseUrl = 'http://localhost:3001/notes';
+
+export const getAllNotes = () => {
+  return axios.get<Note[]>(baseUrl).then((response) => response.data);
+};
+
+export const createNote = (object: NewNote) => {
+  return axios.post<Note>(baseUrl, object).then((response) => response.data);
+};
+```
+
+> src/App.ts
+
+```ts
+import { useState, useEffect } from 'react';
+
+import { Note } from './types';
+import { getAllNotes, createNote } from './services/noteService';
+
+const App = (): JSX.Element => {
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [newNote, setNewNote] = useState('');
+
+  useEffect(() => {
+    getAllNotes().then((data) => {
+      setNotes(data);
+    });
+  }, []);
+
+  const noteCreation = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    createNote({ content: newNote }).then((data) => {
+      setNotes(notes.concat(data));
+    });
+    setNewNote('');
+  };
+
+  return (
+    <div>
+      <form onSubmit={noteCreation}>
+        <input
+          value={newNote}
+          onChange={(event) => setNewNote(event.target.value)}
+        />
+        <button type='submit'>add</button>
+      </form>
+      <ul>
+        {notes.map((note) => (
+          <li key={note.id}>{note.content}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default App;
 ```
 
 </details>
@@ -8955,6 +9209,8 @@ TypeScript will help us catch the following errors:
 If we make any of these errors, TypeScript can help us catch them in our editor right away. If we didn't use TypeScript, we would have to catch these errors later during testing.
 
 TypeScript will only allow an operation (or attribute access) if it is valid for every member of the union.
+
+In most cases, you can use either type or interface, whichever syntax you prefer. However, there are a few things to keep in mind. For example, if you define multiple interfaces with the same name, they will result in a merged interface, whereas if you try to define multiple types with the same name, it will result in an error stating that a type with the same name is already declared.
 
 </details>
 
