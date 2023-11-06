@@ -8,4 +8,6 @@ patientor - the project for the exercises #9.8-9.13 "Patientor"
 
 courseinfo - the project for the exercises #9.14-9.15 "Course info"
 
-Time: 13
+flight-diary - (client) the project for the exercises #9.16-9.19 "Flight diary"
+
+Time: 14.5

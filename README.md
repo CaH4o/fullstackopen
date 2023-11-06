@@ -9051,7 +9051,7 @@ const App = () => {
 export default App;
 ```
 
-#### Note app with backend
+#### note app with backend and Vite
 
 Create a TypeScript app using Vite and run the server.
 
@@ -9269,4 +9269,12 @@ Description: Create a new Vite app with TypeScript. This exercise is similar to 
 
 Create an application according to the requirements described in [exercise 9.14](https://fullstackopen.com/en/part9/react_with_types#exercise-9-14), [exercise 9.15](https://fullstackopen.com/en/part9/react_with_types#exercise-9-15).
 
-- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/courseinfo)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/courseinfo)
+
+#### 9.16-9.19: Flight diaries
+
+Description: Create a 'flight diaries' frontend app for backend that was developed. Fetch the diaries from the backend and render those to screen. Make it possible to add new diary entries from the frontend. Notify the user if the the creation of a diary entry fails in the backend, show also the reason for the failure. Modify the input form so that the date is set with a HTML date input element, and the weather and visibility are set with HTML radio buttons. Your app should all the time stay well typed and there should not be any Eslint errors and no Eslint rules should be ignored.
+
+Create an application according to the requirements described in [exercises 9.16-9.19](https://fullstackopen.com/en/part9/react_with_types#exercises-9-16-9-19).
+
+- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/flight-diary)
