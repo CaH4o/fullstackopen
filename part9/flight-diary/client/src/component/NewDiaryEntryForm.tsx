@@ -6,6 +6,7 @@ import { createDiaryEntry } from '../services/diaryEntryService';
 interface NewDiaryEntryFormProps {
   diaryEntries: DiaryEntry[];
   setDiaryEntries: React.Dispatch<React.SetStateAction<DiaryEntry[]>>;
+  setNotification: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const NewDiaryEntryForm = (props: NewDiaryEntryFormProps) => {
@@ -13,7 +14,7 @@ const NewDiaryEntryForm = (props: NewDiaryEntryFormProps) => {
     {} as NewDiaryEntry
   );
 
-  const handleChanger = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewDiaryEntry({
       ...newNewDiaryEntry,
       [event.currentTarget.name]: event.currentTarget.value,
@@ -22,15 +23,15 @@ const NewDiaryEntryForm = (props: NewDiaryEntryFormProps) => {
 
   const diaryEntryCreation = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.log('sent', newNewDiaryEntry);
-
-    createDiaryEntry(newNewDiaryEntry).then((data: DiaryEntry) => {
-      props.setDiaryEntries(props.diaryEntries.concat(data));
+    createDiaryEntry(newNewDiaryEntry).then((data: DiaryEntry | Error) => {
+      if (data instanceof Error) {
+        props.setNotification(data.message);
+      } else {
+        props.setDiaryEntries(props.diaryEntries.concat(data));
+        setNewDiaryEntry({} as NewDiaryEntry);
+      }
     });
-    setNewDiaryEntry({} as NewDiaryEntry);
   };
-
-  console.log('channge', newNewDiaryEntry);
 
   return (
     <form onSubmit={diaryEntryCreation}>
@@ -39,8 +40,8 @@ const NewDiaryEntryForm = (props: NewDiaryEntryFormProps) => {
         <input
           name='date'
           id='newEntry_date'
-          value={newNewDiaryEntry.date}
-          onChange={(event) => handleChanger(event)}
+          value={newNewDiaryEntry.date || ''}
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -48,8 +49,8 @@ const NewDiaryEntryForm = (props: NewDiaryEntryFormProps) => {
         <input
           name='visibility'
           id='newEntry_visibility'
-          value={newNewDiaryEntry.visibility}
-          onChange={(event) => handleChanger(event)}
+          value={newNewDiaryEntry.visibility || ''}
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -57,8 +58,8 @@ const NewDiaryEntryForm = (props: NewDiaryEntryFormProps) => {
         <input
           name='weather'
           id='newEntry_weather'
-          value={newNewDiaryEntry.weather}
-          onChange={(event) => handleChanger(event)}
+          value={newNewDiaryEntry.weather || ''}
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -66,8 +67,8 @@ const NewDiaryEntryForm = (props: NewDiaryEntryFormProps) => {
         <input
           name='comment'
           id='newEntry_comment'
-          value={newNewDiaryEntry.comment}
-          onChange={(event) => handleChanger(event)}
+          value={newNewDiaryEntry.comment || ''}
+          onChange={handleChange}
         />
       </div>
       <button type='submit'>add</button>
