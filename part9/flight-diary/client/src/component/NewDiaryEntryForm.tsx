@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { DiaryEntry, NewDiaryEntry } from '../types';
+import { DiaryEntry, NewDiaryEntry, Visibility, Weather } from '../types';
 import { createDiaryEntry } from '../services/diaryEntryService';
 
 interface NewDiaryEntryFormProps {
@@ -33,11 +33,14 @@ const NewDiaryEntryForm = (props: NewDiaryEntryFormProps) => {
     });
   };
 
+  console.log(newNewDiaryEntry);
+
   return (
     <form onSubmit={diaryEntryCreation}>
       <div>
         <label htmlFor='newEntry_date'>date </label>
         <input
+          type='date'
           name='date'
           id='newEntry_date'
           value={newNewDiaryEntry.date || ''}
@@ -45,26 +48,43 @@ const NewDiaryEntryForm = (props: NewDiaryEntryFormProps) => {
         />
       </div>
       <div>
-        <label htmlFor='newEntry_visibility'>visibility </label>
-        <input
-          name='visibility'
-          id='newEntry_visibility'
-          value={newNewDiaryEntry.visibility || ''}
-          onChange={handleChange}
-        />
+        <span>visibility: </span>
+        {Object.entries(Visibility).map(([key, value]) => {
+          return (
+            <span key={value}>
+              <input
+                type='radio'
+                id={`newEntry_visibility_${value}`}
+                name='visibility'
+                value={value}
+                onChange={handleChange}
+              />
+              <label htmlFor={`newEntry_visibility_${value}`}>{key}</label>
+            </span>
+          );
+        })}
       </div>
       <div>
-        <label htmlFor='newEntry_weather'>weather </label>
-        <input
-          name='weather'
-          id='newEntry_weather'
-          value={newNewDiaryEntry.weather || ''}
-          onChange={handleChange}
-        />
+        <span>weather: </span>
+        {Object.entries(Weather).map(([key, value]) => {
+          return (
+            <span key={value}>
+              <input
+                type='radio'
+                id={`newEntry_weather_${value}`}
+                name='weather'
+                value={value}
+                onChange={handleChange}
+              />
+              <label htmlFor={`newEntry_weather_${value}`}>{key}</label>
+            </span>
+          );
+        })}
       </div>
       <div>
         <label htmlFor='newEntry_comment'>comment </label>
         <input
+          type='text'
           name='comment'
           id='newEntry_comment'
           value={newNewDiaryEntry.comment || ''}
