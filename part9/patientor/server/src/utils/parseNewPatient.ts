@@ -1,31 +1,10 @@
-import { PatientWithoutID, Gender } from './types';
-
-const isString = (text: unknown): text is string => {
-  return typeof text === 'string' || text instanceof String;
-};
-
-const isDate = (date: string): boolean => {
-  return Boolean(Date.parse(date));
-};
-
-const isGender = (param: string): param is Gender => {
-  return Object.values(Gender)
-    .map((v) => v.toString())
-    .includes(param);
-};
-
-//Parsing for PatientWithoutID type
-//  'name': string;
-//  'dateOfBirth': string;
-//  'ssn': string;
-//  'gender': Gender;
-//  'occupation': string;
+import { PatientWithoutID, Gender } from '../types';
+import { isString, isDate, isGender } from './typeValidation';
 
 const parseName = (name: unknown): string => {
   if (!isString(name) || name.split(' ').length < 2) {
     throw new Error('Incorrect or missing name');
   }
-
   return name;
 };
 
@@ -38,7 +17,6 @@ const parseDateOfBirth = (dateOfBirth: unknown): string => {
 
 const parseSSN = (ssn: unknown): string => {
   const regex = /^\w{6}-\w{3,4}$/;
-
   if (!isString(ssn) || !regex.test(ssn)) {
     throw new Error('Incorrect or missing snn');
   }
@@ -56,7 +34,6 @@ const parseOcupation = (occupation: unknown): string => {
   if (!isString(occupation)) {
     throw new Error('Incorrect or missing occupation');
   }
-
   return occupation;
 };
 
@@ -64,7 +41,6 @@ const toNewPatient = (object: unknown): PatientWithoutID => {
   if (!object || typeof object !== 'object') {
     throw new Error('Incorrect or missing data');
   }
-
   if (
     'name' in object &&
     'dateOfBirth' in object &&
@@ -79,10 +55,8 @@ const toNewPatient = (object: unknown): PatientWithoutID => {
       gender: parseGender(object.gender),
       occupation: parseOcupation(object.occupation),
     };
-
     return newEntry;
   }
-
   throw new Error('Incorrect data: some fields are missing');
 };
 

@@ -9221,9 +9221,9 @@ In most cases, you can use either type or interface, whichever syntax you prefer
 <details>
 <summary>Links:</summary>
 
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://en.wikipedia.org/wiki/Dendrochronology#Growth_rings" title="Method: Growth rings">Method: Growth rings</a></li>
+<li><a href="https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example/#basic-prop-types-examples" title="Basic Prop Types Examples">Basic Prop Types Examples (React TypeScript cheatsheet)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#return_value" title="JavaScript: async function">JavaScript: async function</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 
@@ -9245,6 +9245,10 @@ Text
 <details>
 <summary>Сoncepts and definitions:</summary>
 
+When diving into an existing codebase for the first time, it is good to get an overall view of the conventions and structure of the project. You can start your research by reading the README.md in the root of the repository. Usually, the README contains a brief description of the application and the requirements for using it, as well as how to start it for development. If the README is not available or someone has "saved time" and left it as a stub, you can take a peek at the package.json. It is always a good idea to start the application and click around to verify you have a functional development environment.
+
+TypeScript provides types for what kind of data structures, functions, components, and state to expect. You can try looking for types.ts or something similar to get started. VSCode is a big help and simply highlighting variables and parameters can provide quite a lot of insight. All this naturally depends on how types are used in the project.
+
 </details>
 
 ### Exercises:
@@ -9257,13 +9261,13 @@ Create an application according to the requirements described in [exercises 9.1-
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/calculator)
 
-#### 9.1-9.13: Patientor
+#### 9.1-9.13, 9.20-9.21: Patientor
 
 Description: Initialize a new backend project that will work with the frontend. Configure ESlint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers HTTP GET requests for route /api/ping. Create a type Diagnosis and use it to create endpoint /api/diagnoses for fetching all diagnoses with HTTP GET. Create data type Patient and set up the GET endpoint /api/patients which returns all the patients to the frontend, excluding field ssn. Create a POST endpoint /api/patients for adding patients. Set up safe parsing, validation and type predicate to the POST /api/patients request.
 
-Create an application according to the requirements described in [exercises 9.8-9.9](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-8-9-9), [exercises 9.10-9.11](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-10-9-11), [exercises 9.12-9.13](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-12-9-13).
+Create an application according to the requirements described in [exercises 9.8-9.9](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-8-9-9), [exercises 9.10-9.11](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-10-9-11), [exercises 9.12-9.13](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-12-9-13), [exercises 9.20-9.21](https://fullstackopen.com/en/part9/grande_finale_patientor#exercises-9-20-9-21).
 
-- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/patientor)
+- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/patientor)
 
 #### 9.14-9.15: Course info
 
