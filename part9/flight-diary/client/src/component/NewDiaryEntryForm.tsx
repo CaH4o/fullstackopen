@@ -1,49 +1,37 @@
 import { useState } from 'react';
 
-import { DiaryEntry, NewDiaryEntry, Visibility, Weather } from '../types';
-import { createDiaryEntry } from '../services/diaryEntryService';
+import { NewDiaryEntry, Visibility, Weather } from '../types';
 
-interface NewDiaryEntryFormProps {
-  diaryEntries: DiaryEntry[];
-  setDiaryEntries: React.Dispatch<React.SetStateAction<DiaryEntry[]>>;
-  setNotification: React.Dispatch<React.SetStateAction<string>>;
+interface Props {
+  submitNewDiaryEntry: (newDiaryEntry: NewDiaryEntry) => void;
 }
 
-const NewDiaryEntryForm = (props: NewDiaryEntryFormProps) => {
-  const [newNewDiaryEntry, setNewDiaryEntry] = useState<NewDiaryEntry>(
+const NewDiaryEntryForm = ({ submitNewDiaryEntry }: Props) => {
+  const [newDiaryEntry, setNewDiaryEntry] = useState<NewDiaryEntry>(
     {} as NewDiaryEntry
   );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewDiaryEntry({
-      ...newNewDiaryEntry,
+      ...newDiaryEntry,
       [event.currentTarget.name]: event.currentTarget.value,
     });
   };
 
-  const diaryEntryCreation = (event: React.SyntheticEvent) => {
+  const addDiaryEntry = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    createDiaryEntry(newNewDiaryEntry).then((data: DiaryEntry | Error) => {
-      if (data instanceof Error) {
-        props.setNotification(data.message);
-      } else {
-        props.setDiaryEntries(props.diaryEntries.concat(data));
-        setNewDiaryEntry({} as NewDiaryEntry);
-      }
-    });
+    submitNewDiaryEntry(newDiaryEntry);
   };
 
-  console.log(newNewDiaryEntry);
-
   return (
-    <form onSubmit={diaryEntryCreation}>
+    <form onSubmit={addDiaryEntry}>
       <div>
         <label htmlFor='newEntry_date'>date </label>
         <input
           type='date'
           name='date'
           id='newEntry_date'
-          value={newNewDiaryEntry.date || ''}
+          value={newDiaryEntry.date || ''}
           onChange={handleChange}
         />
       </div>
@@ -87,7 +75,7 @@ const NewDiaryEntryForm = (props: NewDiaryEntryFormProps) => {
           type='text'
           name='comment'
           id='newEntry_comment'
-          value={newNewDiaryEntry.comment || ''}
+          value={newDiaryEntry.comment || ''}
           onChange={handleChange}
         />
       </div>
