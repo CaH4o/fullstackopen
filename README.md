@@ -9224,7 +9224,7 @@ In most cases, you can use either type or interface, whichever syntax you prefer
 <li><a href="https://en.wikipedia.org/wiki/Dendrochronology#Growth_rings" title="Method: Growth rings">Method: Growth rings</a></li>
 <li><a href="https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example/#basic-prop-types-examples" title="Basic Prop Types Examples">Basic Prop Types Examples (React TypeScript cheatsheet)</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#return_value" title="JavaScript: async function">JavaScript: async function</a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://mui.com/material-ui/material-icons/" title="Material UI - Material icons">Material UI - Material icons</a></li>
 <li><a href="" title=""></a></li>
 
 </details>
