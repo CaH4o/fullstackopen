@@ -9225,19 +9225,210 @@ In most cases, you can use either type or interface, whichever syntax you prefer
 <li><a href="https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example/#basic-prop-types-examples" title="Basic Prop Types Examples">Basic Prop Types Examples (React TypeScript cheatsheet)</a></li>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#return_value" title="JavaScript: async function">JavaScript: async function</a></li>
 <li><a href="https://mui.com/material-ui/material-icons/" title="Material UI - Material icons">Material UI - Material icons</a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://typescript-eslint.io/rules/array-type/#array-simple" title="Typescript-eslint: array-simple">Typescript-eslint: array-simple</a></li>
+<li><a href="https://github.com/microsoft/TypeScript/issues/42680" title="TypeScript: Multy extends type with omit error.">TypeScript: Multy extends type with omit error.</a></li>
+<li><a href="https://mui.com/" title="Material UI">Material UI</a></li>
+<li><a href="https://mui.com/material-ui/react-select/#multiple-select" title="Material UI: Multiple select">Material UI: Multiple select</a></li>
+<li><a href="https://mui.com/material-ui/api/input/" title="Material UI: Input API">Material UI: Input API</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date" title="HTML: input-date">HTML: input-date</a></li>
 
 </details>
 
 <details>
 <summary>Сommands and fragments:</summary>
 
-Text
+Update data file with complex data of patients-full and update types accordence with the file in backend.
 
->
+> data/patients-full.ts
 
 ```js
+import { Patient, Gender, HealthCheckRating } from '../src/types';
 
+const patients: Patient[] = [
+  {
+    id: 'd2773336-f723-11e9-8f0b-362b9e155667',
+    name: 'John McClane',
+    dateOfBirth: '1986-07-09',
+    ssn: '090786-122X',
+    gender: Gender.Male,
+    occupation: 'New york city cop',
+    entries: [
+      {
+        id: 'd811e46d-70b3-4d90-b090-4535c7cf8fb1',
+        date: '2015-01-02',
+        type: 'Hospital',
+        specialist: 'MD House',
+        diagnosisCodes: ['S62.5'],
+        description:
+          "Healing time appr. 2 weeks. patient doesn't remember how he got the injury.",
+        discharge: {
+          date: '2015-01-16',
+          criteria: 'Thumb has healed.',
+        },
+      },
+    ],
+  },
+  {
+    id: 'd2773598-f723-11e9-8f0b-362b9e155667',
+    name: 'Martin Riggs',
+    dateOfBirth: '1979-01-30',
+    ssn: '300179-777A',
+    gender: Gender.Male,
+    occupation: 'Cop',
+    entries: [
+      {
+        id: 'fcd59fa6-c4b4-4fec-ac4d-df4fe1f85f62',
+        date: '2019-08-05',
+        type: 'OccupationalHealthcare',
+        specialist: 'MD House',
+        employerName: 'HyPD',
+        diagnosisCodes: ['Z57.1', 'Z74.3', 'M51.2'],
+        description:
+          'Patient mistakenly found himself in a nuclear plant waste site without protection gear. Very minor radiation poisoning. ',
+        sickLeave: {
+          startDate: '2019-08-05',
+          endDate: '2019-08-28',
+        },
+      },
+    ],
+  },
+  {
+    id: 'd27736ec-f723-11e9-8f0b-362b9e155667',
+    name: 'Hans Gruber',
+    dateOfBirth: '1970-04-25',
+    ssn: '250470-555L',
+    gender: Gender.Other,
+    occupation: 'Technician',
+    entries: [],
+  },
+  {
+    id: 'd2773822-f723-11e9-8f0b-362b9e155667',
+    name: 'Dana Scully',
+    dateOfBirth: '1974-01-05',
+    ssn: '050174-432N',
+    gender: Gender.Female,
+    occupation: 'Forensic Pathologist',
+    entries: [
+      {
+        id: 'b4f4eca1-2aa7-4b13-9a18-4a5535c3c8da',
+        date: '2019-10-20',
+        specialist: 'MD House',
+        type: 'HealthCheck',
+        description: 'Yearly control visit. Cholesterol levels back to normal.',
+        healthCheckRating: HealthCheckRating.Healthy,
+      },
+      {
+        id: 'fcd59fa6-c4b4-4fec-ac4d-df4fe1f85f62',
+        date: '2019-09-10',
+        specialist: 'MD House',
+        type: 'OccupationalHealthcare',
+        employerName: 'FBI',
+        description: 'Prescriptions renewed.',
+      },
+      {
+        id: '37be178f-a432-4ba4-aac2-f86810e36a15',
+        date: '2018-10-05',
+        specialist: 'MD House',
+        type: 'HealthCheck',
+        description:
+          'Yearly control visit. Due to high cholesterol levels recommended to eat more vegetables.',
+        healthCheckRating: HealthCheckRating.LowRisk,
+      },
+    ],
+  },
+  {
+    id: 'd2773c6e-f723-11e9-8f0b-362b9e155667',
+    name: 'Matti Luukkainen',
+    dateOfBirth: '1971-04-09',
+    ssn: '090471-8890',
+    gender: Gender.Male,
+    occupation: 'Digital evangelist',
+    entries: [
+      {
+        id: '54a8746e-34c4-4cf4-bf72-bfecd039be9a',
+        date: '2019-05-01',
+        specialist: 'Dr Byte House',
+        type: 'HealthCheck',
+        description: 'Digital overdose, very bytestatic. Otherwise healthy.',
+        healthCheckRating: HealthCheckRating.Healthy,
+      },
+    ],
+  },
+];
+
+export default patients;
+```
+
+> src/type.ts
+
+```js
+export interface Diagnosis {
+  'code': string;
+  'name': string;
+  'latin'?: string;
+}
+
+interface BaseEntry {
+  id: string;
+  description: string;
+  date: string;
+  specialist: string;
+  diagnosisCodes?: Array<Diagnosis['code']>;
+}
+
+export enum HealthCheckRating {
+  'Healthy' = 0,
+  'LowRisk' = 1,
+  'HighRisk' = 2,
+  'CriticalRisk' = 3,
+}
+
+interface HealthCheckEntry extends BaseEntry {
+  type: 'HealthCheck';
+  healthCheckRating: HealthCheckRating;
+}
+
+interface HospitalEntry extends BaseEntry {
+  type: 'Hospital';
+  discharge: {
+    date: string;
+    criteria: string;
+  };
+}
+
+interface OccupationalHealthcareEntry extends BaseEntry {
+  type: 'OccupationalHealthcare';
+  employerName: string;
+  sickLeave?: {
+    startDate: string;
+    endDate: string;
+  };
+}
+
+export type Entry =
+  | HospitalEntry
+  | OccupationalHealthcareEntry
+  | HealthCheckEntry;
+
+export enum Gender {
+  Female = 'female',
+  Male = 'male',
+  Other = 'other',
+}
+
+export interface Patient {
+  'id': string;
+  'name': string;
+  'dateOfBirth': string;
+  'ssn': string;
+  'gender': Gender;
+  'occupation': string;
+  'entries': Entry[];
+}
+
+export type NonSensitivePatient = Omit<Patient, 'ssn' | 'entries'>;
+
+export type PatientWithoutID = Omit<Patient, 'id' | 'entries'>;
 ```
 
 </details>
@@ -9261,11 +9452,16 @@ Create an application according to the requirements described in [exercises 9.1-
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/calculator)
 
-#### 9.1-9.13, 9.20-9.21: Patientor
+#### 9.1-9.13, 9.20-9.29: Patientor
 
-Description: Initialize a new backend project that will work with the frontend. Configure ESlint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers HTTP GET requests for route /api/ping. Create a type Diagnosis and use it to create endpoint /api/diagnoses for fetching all diagnoses with HTTP GET. Create data type Patient and set up the GET endpoint /api/patients which returns all the patients to the frontend, excluding field ssn. Create a POST endpoint /api/patients for adding patients. Set up safe parsing, validation and type predicate to the POST /api/patients request.
+Description: Initialize a new backend project that will work with the frontend. Configure ESlint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers HTTP GET requests for route /api/ping. Create a type Diagnosis and use it to create endpoint /api/diagnoses for fetching all diagnoses with HTTP GET. Create data type Patient and set up the GET endpoint /api/patients which returns all the patients to the frontend, excluding field ssn. Create a POST endpoint /api/patients for adding patients. Set up safe parsing, validation and type predicate to the POST /api/patients request. Create an endpoint /api/patients/:id to the backend that returns all of the patient information for one patient, including the array of patient entries that is still empty for all the patients.
+Create a page for showing a patient's full information in the frontend (update it), the user should be able to access a patient's information by clicking the patient's name.
+Define the new types accordance with new data and update app to get data in the backend.
+Extend a patient's page in the frontend to list the date, description and diagnoseCodes of the patient's entries. Fetch and add diagnoses to the application state from the /api/diagnoses endpoint. Use the new diagnosis data to show the descriptions. Extend the entry listing on the patient's page to include the Entry's details, with a new component that shows the rest of the information of the patient's entries, distinguishing different types from each other. You could use eg. Icons or some other Material UI component to get appropriate visuals for your listing.
+Add endpoint /api/patients/:id/entries to your backend, through which you can POST an entry for a patient. The backend should support all those types and check that at least all required fields are given for each type.
+Add the corresponding functionality to the frontend, add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient's page. Show a proper error message to user.
 
-Create an application according to the requirements described in [exercises 9.8-9.9](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-8-9-9), [exercises 9.10-9.11](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-10-9-11), [exercises 9.12-9.13](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-12-9-13), [exercises 9.20-9.21](https://fullstackopen.com/en/part9/grande_finale_patientor#exercises-9-20-9-21).
+Create an application according to the requirements described in [exercises 9.8-9.9](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-8-9-9), [exercises 9.10-9.11](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-10-9-11), [exercises 9.12-9.13](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-12-9-13), [exercises 9.20-9.21](https://fullstackopen.com/en/part9/grande_finale_patientor#exercises-9-20-9-21), [exercises 9.22-9.29](https://fullstackopen.com/en/part9/grande_finale_patientor#exercises-9-22-9-29).
 
 - [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/patientor)
 
@@ -9283,4 +9479,4 @@ Description: Create a 'flight diaries' frontend app for backend that was develop
 
 Create an application according to the requirements described in [exercises 9.16-9.19](https://fullstackopen.com/en/part9/react_with_types#exercises-9-16-9-19).
 
-- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/flight-diary)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/flight-diary)
