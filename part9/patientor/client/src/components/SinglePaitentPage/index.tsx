@@ -8,6 +8,7 @@ import FemaleIcon from '@mui/icons-material/Female';
 import { Gender, Patient } from '../../types';
 
 import patientService from '../../services/patients';
+import EntriesList from './EntriesList';
 
 const SinglePaitentPage = () => {
   const [patient, setPatient] = useState<Patient>({} as Patient);
@@ -38,6 +39,10 @@ const SinglePaitentPage = () => {
       </Typography>
       <Typography variant='body1'>ssn: {patient.ssn!}</Typography>
       <Typography variant='body1'>occupation: {patient.occupation}</Typography>
+      <br />
+      {patient.entries.length ? (
+        <EntriesList entries={patient.entries} />
+      ) : null}
     </Stack>
   );
 };
