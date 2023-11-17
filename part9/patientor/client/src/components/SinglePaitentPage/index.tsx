@@ -8,6 +8,7 @@ import FemaleIcon from '@mui/icons-material/Female';
 import { Gender, Patient } from '../../types';
 
 import patientService from '../../services/patients';
+import diagnosService from '../../services/diagnos';
 import EntriesList from './EntriesList';
 
 const SinglePaitentPage = () => {
@@ -17,7 +18,19 @@ const SinglePaitentPage = () => {
   useEffect(() => {
     const fetchPatientList = async (idPatient: string) => {
       const patient = await patientService.getOne(idPatient);
-      setPatient(patient);
+      const diagnos = await diagnosService.getAll();
+      const entries = patient.entries.map((entry) =>
+        entry.diagnosisCodes
+          ? {
+              ...entry,
+              diagnosis: entry.diagnosisCodes.map(
+                (dc) =>
+                  diagnos.find((d) => d.code === dc) || { code: dc, name: '' }
+              ),
+            }
+          : entry
+      );
+      setPatient({ ...patient, entries });
     };
     if (id) {
       void fetchPatientList(id);
@@ -46,4 +59,5 @@ const SinglePaitentPage = () => {
     </Stack>
   );
 };
+
 export default SinglePaitentPage;

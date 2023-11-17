@@ -1,51 +1,37 @@
-import { useState, useEffect } from 'react';
 import { Stack, Typography, Box } from '@mui/material';
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material/';
 
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
-import { Diagnosis, Entry } from '../../types';
-import diagnosService from '../../services/diagnos';
+import { Entry } from '../../types';
 
 interface Props {
   entries: Entry[];
 }
 
 const EntriesList = ({ entries }: Props) => {
-  const [diagnos, setDiagnos] = useState<Diagnosis[]>([]);
-
-  useEffect(() => {
-    const fetchDiagnosisList = async () => {
-      const diagnos = await diagnosService.getAll();
-      setDiagnos(diagnos);
-    };
-    void fetchDiagnosisList();
-  }, [entries]);
+  console.log(entries);
 
   return (
     <Stack>
       <Typography variant='h6' style={{ margin: '1em 0', fontWeight: 'bold' }}>
         entries
       </Typography>
-      {entries.map((e) => {
+      {entries.map((entry) => {
         return (
-          <Box key={e.id}>
+          <Box key={entry.id}>
             <Typography variant='body1'>
-              {e.date} {e.description}
+              {entry.date} {entry.description}
             </Typography>
-            {e.diagnosisCodes && e.diagnosisCodes.length && diagnos.length ? (
+            {entry.diagnosis && entry.diagnosis.length ? (
               <List>
-                {e.diagnosisCodes.map((dc) => {
+                {entry.diagnosis.map((diagnos) => {
                   return (
-                    <ListItem disablePadding key={dc}>
+                    <ListItem disablePadding key={diagnos.code}>
                       <ListItemIcon>
                         <FiberManualRecordIcon fontSize='small' />
                       </ListItemIcon>
-                      <ListItemText
-                        primary={`${dc} ${
-                          diagnos.find((d) => d.code === dc)?.name || ''
-                        }`}
-                      />
+                      <ListItemText primary={diagnos.name} />
                     </ListItem>
                   );
                 })}
