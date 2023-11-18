@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Stack, Typography, LinearProgress } from '@mui/material';
+import { Stack, Typography, LinearProgress, Button } from '@mui/material';
 
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
@@ -9,7 +9,7 @@ import { Gender, Patient } from '../../types';
 
 import patientService from '../../services/patients';
 import diagnosService from '../../services/diagnos';
-import EntriesList from './EntriesList';
+import EntryDeteils from './EntryDeteils';
 
 const SinglePaitentPage = () => {
   const [patient, setPatient] = useState<Patient>({} as Patient);
@@ -54,8 +54,21 @@ const SinglePaitentPage = () => {
       <Typography variant='body1'>occupation: {patient.occupation}</Typography>
       <br />
       {patient.entries.length ? (
-        <EntriesList entries={patient.entries} />
+        <Stack>
+          <Typography
+            variant='h6'
+            style={{ margin: '1em 0', fontWeight: 'bold' }}
+          >
+            entries
+          </Typography>
+          <Stack>
+            {patient.entries.map((entry) => {
+              return <EntryDeteils entry={entry} key={entry.id} />;
+            })}
+          </Stack>
+        </Stack>
       ) : null}
+      <Button variant='contained'>Add new entry</Button>
     </Stack>
   );
 };
