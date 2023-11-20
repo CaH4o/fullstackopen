@@ -68,7 +68,15 @@ const SinglePaitentPage = () => {
           </Stack>
         </Stack>
       ) : null}
-      <Button variant='contained'>Add new entry</Button>
+      <Button
+        variant='contained'
+        style={{
+          float: 'left',
+          width: '200px',
+        }}
+      >
+        Add new entry
+      </Button>
     </Stack>
   );
 };

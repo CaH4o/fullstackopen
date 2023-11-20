@@ -77,7 +77,6 @@ const HealthCheck: React.FC<{ entry: HealthCheckEntry }> = ({ entry }) => {
             isNaN(Number(value[0])) && index !== array.length - 1
         )
         .map(([key, value]) => {
-          console.log(key, value);
           return (
             <Box component='span' key={key}>
               {Number(value) >= Number(entry.healthCheckRating) ? (
