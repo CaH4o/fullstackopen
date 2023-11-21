@@ -172,7 +172,7 @@ const toNewEntry = (object: unknown): EntryWithoutId => {
 
       return newEntry;
     default:
-      throw new Error('Incorrect data: some fields are missing');
+      throw new Error('something goes wrong');
   }
 };
 

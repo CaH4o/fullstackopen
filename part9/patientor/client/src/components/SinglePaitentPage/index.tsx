@@ -1,18 +1,23 @@
+import axios from 'axios';
+import MaleIcon from '@mui/icons-material/Male';
+import FemaleIcon from '@mui/icons-material/Female';
+
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Stack, Typography, LinearProgress, Button } from '@mui/material';
 
-import MaleIcon from '@mui/icons-material/Male';
-import FemaleIcon from '@mui/icons-material/Female';
-
-import { Gender, Patient } from '../../types';
-
 import patientService from '../../services/patients';
 import diagnosService from '../../services/diagnos';
 import EntryDeteils from './EntryDeteils';
+import AddEntryForm from './AddEntryForm';
+import Notification from './Notification';
+
+import { Gender, Patient, EntryWithoutId } from '../../types';
 
 const SinglePaitentPage = () => {
   const [patient, setPatient] = useState<Patient>({} as Patient);
+  const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
+  const [notification, setNotification] = useState<string | null>(null);
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
@@ -37,6 +42,39 @@ const SinglePaitentPage = () => {
     }
   }, [id]);
 
+  const onSubmit = async (values: EntryWithoutId) => {
+    console.log(values);
+    try {
+      const updatedPatient = await patientService.createEntry({
+        id: patient.id,
+        entry: values,
+      });
+      setIsFormOpen(false);
+      setPatient(updatedPatient);
+    } catch (e: unknown) {
+      if (axios.isAxiosError(e)) {
+        if (e?.response?.data && typeof e?.response?.data === 'string') {
+          const message = e.response.data.replace(
+            'Something went wrong. Error: ',
+            ''
+          );
+          console.error(message);
+          setNotification(message);
+        } else {
+          console.error('Unrecognized axios error', e);
+          setNotification('Unrecognized axios error');
+        }
+      } else {
+        console.error('Unknown error', e);
+        setNotification('Unknown error');
+      }
+    }
+  };
+
+  const onCancel = () => {
+    setIsFormOpen(false);
+  };
+
   if (!patient.id)
     return (
       <Typography style={{ margin: '1em 0' }}>
@@ -53,6 +91,13 @@ const SinglePaitentPage = () => {
       <Typography variant='body1'>ssn: {patient.ssn!}</Typography>
       <Typography variant='body1'>occupation: {patient.occupation}</Typography>
       <br />
+      <Notification
+        notification={notification}
+        setNotification={setNotification}
+      />
+      {isFormOpen ? (
+        <AddEntryForm onSubmit={onSubmit} onCancel={onCancel} />
+      ) : null}
       {patient.entries.length ? (
         <Stack>
           <Typography
@@ -68,15 +113,20 @@ const SinglePaitentPage = () => {
           </Stack>
         </Stack>
       ) : null}
-      <Button
-        variant='contained'
-        style={{
-          float: 'left',
-          width: '200px',
-        }}
-      >
-        Add new entry
-      </Button>
+      {isFormOpen ? null : (
+        <Button
+          variant='contained'
+          style={{
+            float: 'left',
+            width: '200px',
+          }}
+          onClick={() => {
+            setIsFormOpen(true);
+          }}
+        >
+          Add new entry
+        </Button>
+      )}
     </Stack>
   );
 };
