@@ -39,7 +39,6 @@ const parseType = (type: unknown): string => {
 };
 
 const parseDiagnosisCodes = (diagnosis: unknown): Array<Diagnosis['code']> => {
-  console.log(diagnosis);
   if (!isArrayOfString(diagnosis)) {
     // we will just trust the data to be in correct form
     return [] as Array<Diagnosis['code']>;

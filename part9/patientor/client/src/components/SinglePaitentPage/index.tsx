@@ -9,8 +9,8 @@ import { Stack, Typography, LinearProgress, Button } from '@mui/material';
 import patientService from '../../services/patients';
 import diagnosService from '../../services/diagnos';
 import EntryDeteils from './EntryDeteils';
-import AddEntryForm from './AddEntryForm';
 import Notification from './Notification';
+import AddEntryTabs from '../AddEntryTabs';
 
 import { Gender, Patient, EntryWithoutId } from '../../types';
 
@@ -96,7 +96,7 @@ const SinglePaitentPage = () => {
         setNotification={setNotification}
       />
       {isFormOpen ? (
-        <AddEntryForm onSubmit={onSubmit} onCancel={onCancel} />
+        <AddEntryTabs onSubmit={onSubmit} onCancel={onCancel} />
       ) : null}
       {patient.entries.length ? (
         <Stack>
