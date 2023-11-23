@@ -4,7 +4,7 @@ import { Tabs, Tab, Box } from '@mui/material';
 
 import AddEntryForm from './AddEntryForm';
 
-import { EntryWithoutId } from '../../types';
+import { Diagnosis, EntryWithoutId } from '../../types';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -38,9 +38,10 @@ function a11yProps(index: number) {
 interface Props {
   onSubmit: (values: EntryWithoutId) => void;
   onCancel: () => void;
+  diagnosis: Diagnosis[];
 }
 
-const AddEntryTabs = ({ onSubmit, onCancel }: Props) => {
+const AddEntryTabs = ({ onSubmit, onCancel, diagnosis }: Props) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -65,16 +66,23 @@ const AddEntryTabs = ({ onSubmit, onCancel }: Props) => {
           onSubmit={onSubmit}
           onCancel={onCancel}
           type='HealthCheck'
+          diagnosis={diagnosis}
         />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <AddEntryForm onSubmit={onSubmit} onCancel={onCancel} type='Hospital' />
+        <AddEntryForm
+          onSubmit={onSubmit}
+          onCancel={onCancel}
+          type='Hospital'
+          diagnosis={diagnosis}
+        />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         <AddEntryForm
           onSubmit={onSubmit}
           onCancel={onCancel}
           type='OccupationalHealthcare'
+          diagnosis={diagnosis}
         />
       </CustomTabPanel>
     </Box>

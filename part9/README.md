@@ -10,4 +10,4 @@ courseinfo - the project for the exercises #9.14-9.15 "Course info"
 
 flight-diary - (client) the project for the exercises #9.16-9.19 "Flight diary"
 
-Time: 26
+Time: 28

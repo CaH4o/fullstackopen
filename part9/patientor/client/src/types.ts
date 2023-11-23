@@ -19,7 +19,6 @@ export enum HealthCheckRating {
   'HighRisk' = 2,
   'CriticalRisk' = 3,
 }
-
 export interface HealthCheckEntry extends BaseEntry {
   type: 'HealthCheck';
   healthCheckRating: HealthCheckRating;

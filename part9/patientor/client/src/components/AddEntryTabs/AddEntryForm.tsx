@@ -11,9 +11,11 @@ import {
   SelectChangeEvent,
   Stack,
   Typography,
+  Box,
 } from '@mui/material';
 
 import {
+  Diagnosis,
   Discharge,
   EntryWithoutId,
   HealthCheckRating,
@@ -28,6 +30,7 @@ interface Props {
   onSubmit: (values: EntryWithoutId) => void;
   onCancel: () => void;
   type: 'HealthCheck' | 'Hospital' | 'OccupationalHealthcare';
+  diagnosis: Diagnosis[];
 }
 
 const initializeEntry = (
@@ -44,10 +47,11 @@ const initializeEntry = (
   }
 };
 
-const AddEntryForm = ({ onSubmit, onCancel, type }: Props) => {
+const AddEntryForm = ({ onSubmit, onCancel, type, diagnosis }: Props) => {
   const [entry, setEntry] = useState<EntryWithoutId>(initializeEntry(type));
   const [discharge, setDischarge] = useState<Discharge>({} as Discharge);
   const [sickLeave, setSickLeave] = useState<SickLeave>({} as SickLeave);
+  const [diagnosCodes, setDiagnosCods] = useState<Diagnosis['code']>('');
 
   const handleChange = ({
     currentTarget,
@@ -64,6 +68,17 @@ const AddEntryForm = ({ onSubmit, onCancel, type }: Props) => {
         setEntry({ ...entry, healthCheckRating });
       }
     }
+  };
+
+  const handleDiagnosis = () => {
+    const diagnosisCodes: Array<Diagnosis['code']> =
+      entry.diagnosisCodes && entry.diagnosisCodes.length
+        ? entry.diagnosisCodes.some((d) => d === diagnosCodes)
+          ? entry.diagnosisCodes
+          : entry.diagnosisCodes.concat(diagnosCodes)
+        : [diagnosCodes];
+    diagnosCodes;
+    setEntry({ ...entry, diagnosisCodes });
   };
 
   const addPatient = (event: SyntheticEvent) => {
@@ -83,7 +98,7 @@ const AddEntryForm = ({ onSubmit, onCancel, type }: Props) => {
 
   return (
     <Stack
-      sx={{ border: '2px dotted black', p: '0.5rem', gap: '1rem' }}
+      style={{ border: '2px dotted black', padding: '0.5rem', gap: '1rem' }}
       component='form'
       onSubmit={addPatient}
     >
@@ -116,6 +131,7 @@ const AddEntryForm = ({ onSubmit, onCancel, type }: Props) => {
         value={entry.specialist || ''}
         onChange={handleChange}
       />
+
       {entry.type === 'HealthCheck' ? (
         <FormControl fullWidth>
           <InputLabel id='HealthCheck raiting'>HealthCheck rating</InputLabel>
@@ -139,47 +155,43 @@ const AddEntryForm = ({ onSubmit, onCancel, type }: Props) => {
           </Select>
         </FormControl>
       ) : null}
-      <TextField
-        variant='standard'
-        label='Diagnosis codes'
-        name='diagnosisCodes'
-        fullWidth
-        value={entry.diagnosisCodes || ''}
-        onChange={handleChange}
-      />
+
       {entry.type === 'Hospital' ? (
         <>
           <Typography variant='body1'>Discharge:</Typography>
-          <TextField
-            variant='standard'
-            type='date'
-            label='Date'
-            name='date'
-            InputLabelProps={{ shrink: true }}
-            fullWidth
-            value={discharge.date || ''}
-            onChange={({ currentTarget }) => {
-              setDischarge({
-                ...discharge,
-                [currentTarget.name]: currentTarget.value,
-              });
-            }}
-          />
-          <TextField
-            variant='standard'
-            label='Criteria'
-            name='criteria'
-            fullWidth
-            value={discharge.criteria || ''}
-            onChange={({ currentTarget }) => {
-              setDischarge({
-                ...discharge,
-                [currentTarget.name]: currentTarget.value,
-              });
-            }}
-          />
+          <Box style={{ display: 'flex', gap: '1rem' }}>
+            <TextField
+              variant='standard'
+              type='date'
+              label='Date'
+              name='date'
+              InputLabelProps={{ shrink: true }}
+              fullWidth
+              value={discharge.date || ''}
+              onChange={({ currentTarget }) => {
+                setDischarge({
+                  ...discharge,
+                  [currentTarget.name]: currentTarget.value,
+                });
+              }}
+            />
+            <TextField
+              variant='standard'
+              label='Criteria'
+              name='criteria'
+              fullWidth
+              value={discharge.criteria || ''}
+              onChange={({ currentTarget }) => {
+                setDischarge({
+                  ...discharge,
+                  [currentTarget.name]: currentTarget.value,
+                });
+              }}
+            />
+          </Box>
         </>
       ) : null}
+
       {entry.type === 'OccupationalHealthcare' ? (
         <>
           <TextField
@@ -190,39 +202,89 @@ const AddEntryForm = ({ onSubmit, onCancel, type }: Props) => {
             value={entry.employerName || ''}
             onChange={handleChange}
           />
-          <Typography variant='body1'>Discharge:</Typography>
-          <TextField
-            variant='standard'
-            label='Start date'
-            name='startDate'
-            type='date'
-            InputLabelProps={{ shrink: true }}
-            fullWidth
-            value={sickLeave.startDate || ''}
-            onChange={({ currentTarget }) => {
-              setSickLeave({
-                ...sickLeave,
-                [currentTarget.name]: currentTarget.value,
-              });
-            }}
-          />
-          <TextField
-            variant='standard'
-            label='End date'
-            name='endDate'
-            type='date'
-            InputLabelProps={{ shrink: true }}
-            fullWidth
-            value={sickLeave.endDate || ''}
-            onChange={({ currentTarget }) => {
-              setSickLeave({
-                ...sickLeave,
-                [currentTarget.name]: currentTarget.value,
-              });
-            }}
-          />
+          <Typography variant='body1'>Sick leave:</Typography>
+          <Box style={{ display: 'flex', gap: '1rem' }}>
+            <TextField
+              variant='standard'
+              label='Start date'
+              name='startDate'
+              type='date'
+              InputLabelProps={{ shrink: true }}
+              fullWidth
+              value={sickLeave.startDate || ''}
+              onChange={({ currentTarget }) => {
+                setSickLeave({
+                  ...sickLeave,
+                  [currentTarget.name]: currentTarget.value,
+                });
+              }}
+            />
+            <TextField
+              variant='standard'
+              label='End date'
+              name='endDate'
+              type='date'
+              InputLabelProps={{ shrink: true }}
+              fullWidth
+              value={sickLeave.endDate || ''}
+              onChange={({ currentTarget }) => {
+                setSickLeave({
+                  ...sickLeave,
+                  [currentTarget.name]: currentTarget.value,
+                });
+              }}
+            />
+          </Box>
         </>
       ) : null}
+
+      <Box style={{ display: 'flex', gap: '1rem' }}>
+        <TextField
+          variant='standard'
+          label='Diagnosis codes'
+          name='diagnosisCodes'
+          disabled
+          fullWidth
+          value={entry.diagnosisCodes?.join(', ') || ''}
+          onChange={handleChange}
+        />
+        <Select
+          variant='standard'
+          value={diagnosCodes}
+          style={{ maxWidth: '300px', minWidth: '300px' }}
+          onChange={(event: SelectChangeEvent) => {
+            setDiagnosCods(event.target.value);
+          }}
+        >
+          {diagnosis.map((diagnos) => {
+            return (
+              <MenuItem key={diagnos.code} value={diagnos.code}>
+                {diagnos.code} {diagnos.name}
+              </MenuItem>
+            );
+          })}
+        </Select>
+        <Button
+          type='button'
+          variant='contained'
+          onClick={() => {
+            handleDiagnosis();
+          }}
+        >
+          Add
+        </Button>
+        <Button
+          color='secondary'
+          variant='contained'
+          type='button'
+          onClick={() => {
+            setEntry({ ...entry, diagnosisCodes: undefined });
+          }}
+        >
+          Clear
+        </Button>
+      </Box>
+
       <Grid>
         <Grid item>
           <Button

@@ -12,10 +12,26 @@ import EntryDeteils from './EntryDeteils';
 import Notification from './Notification';
 import AddEntryTabs from '../AddEntryTabs';
 
-import { Gender, Patient, EntryWithoutId } from '../../types';
+import { Gender, Patient, EntryWithoutId, Diagnosis } from '../../types';
+
+const addDiagnosis = (patient: Patient, diagnosis: Diagnosis[]): Patient => {
+  const entries = patient.entries.map((entry) =>
+    entry.diagnosisCodes
+      ? {
+          ...entry,
+          diagnosis: entry.diagnosisCodes.map(
+            (dc) =>
+              diagnosis.find((d) => d.code === dc) || { code: dc, name: '' }
+          ),
+        }
+      : entry
+  );
+  return { ...patient, entries };
+};
 
 const SinglePaitentPage = () => {
   const [patient, setPatient] = useState<Patient>({} as Patient);
+  const [diagnosis, setDiagnosis] = useState<Diagnosis[]>([]);
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
   const [notification, setNotification] = useState<string | null>(null);
   const { id } = useParams<{ id: string }>();
@@ -23,19 +39,10 @@ const SinglePaitentPage = () => {
   useEffect(() => {
     const fetchPatientList = async (idPatient: string) => {
       const patient = await patientService.getOne(idPatient);
-      const diagnos = await diagnosService.getAll();
-      const entries = patient.entries.map((entry) =>
-        entry.diagnosisCodes
-          ? {
-              ...entry,
-              diagnosis: entry.diagnosisCodes.map(
-                (dc) =>
-                  diagnos.find((d) => d.code === dc) || { code: dc, name: '' }
-              ),
-            }
-          : entry
-      );
-      setPatient({ ...patient, entries });
+      const diagnosis = await diagnosService.getAll();
+
+      setPatient(addDiagnosis(patient, diagnosis));
+      setDiagnosis(diagnosis);
     };
     if (id) {
       void fetchPatientList(id);
@@ -50,7 +57,7 @@ const SinglePaitentPage = () => {
         entry: values,
       });
       setIsFormOpen(false);
-      setPatient(updatedPatient);
+      setPatient(addDiagnosis(updatedPatient, diagnosis));
     } catch (e: unknown) {
       if (axios.isAxiosError(e)) {
         if (e?.response?.data && typeof e?.response?.data === 'string') {
@@ -96,7 +103,11 @@ const SinglePaitentPage = () => {
         setNotification={setNotification}
       />
       {isFormOpen ? (
-        <AddEntryTabs onSubmit={onSubmit} onCancel={onCancel} />
+        <AddEntryTabs
+          onSubmit={onSubmit}
+          onCancel={onCancel}
+          diagnosis={diagnosis}
+        />
       ) : null}
       {patient.entries.length ? (
         <Stack>
