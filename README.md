@@ -9463,7 +9463,7 @@ Add the corresponding functionality to the frontend, add a form for adding an en
 
 Create an application according to the requirements described in [exercises 9.8-9.9](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-8-9-9), [exercises 9.10-9.11](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-10-9-11), [exercises 9.12-9.13](https://fullstackopen.com/en/part9/typing_an_express_app#exercises-9-12-9-13), [exercises 9.20-9.21](https://fullstackopen.com/en/part9/grande_finale_patientor#exercises-9-20-9-21), [exercises 9.22-9.29](https://fullstackopen.com/en/part9/grande_finale_patientor#exercises-9-22-9-29).
 
-- [ ] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/patientor)
+- [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/patientor)
 
 #### 9.14-9.15: Course info
 
@@ -9480,3 +9480,139 @@ Description: Create a 'flight diaries' frontend app for backend that was develop
 Create an application according to the requirements described in [exercises 9.16-9.19](https://fullstackopen.com/en/part9/react_with_types#exercises-9-16-9-19).
 
 - [x] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part9/flight-diary)
+
+## Part 10: [React Native](https://fullstackopen.com/en/part10)
+
+### Sub-part A: [Introduction to React Native](https://fullstackopen.com/en/part10/introduction_to_react_native)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Test
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part B: [React Native basics](https://fullstackopen.com/en/part10/react_native_basics)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Test
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part C: [Communicating with server](https://fullstackopen.com/en/part10/communicating_with_server)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Test
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Sub-part D: [Testing and extending our application](https://fullstackopen.com/en/part10/testing_and_extending_our_application)
+
+<details>
+<summary>Links:</summary>
+
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+<li><a href="" title=""></a></li>
+
+</details>
+
+<details>
+<summary>Сommands and fragments:</summary>
+
+Test
+
+>
+
+```js
+
+```
+
+</details>
+
+<details>
+<summary>Сoncepts and definitions:</summary>
+
+</details>
+
+### Exercises:
+
+#### 10.1-10.x: Name
+
+Description:
+
+Create an application according to the requirements described in [exercises 10.1-10.x]()
+
+- [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part10/)
