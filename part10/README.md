@@ -2,4 +2,4 @@
 
 lesson - the project for exercises and practice while studying the course
 
-Time: 0
+Time: 0.3

@@ -9488,8 +9488,12 @@ Create an application according to the requirements described in [exercises 9.16
 <details>
 <summary>Links:</summary>
 
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://cordova.apache.org/" title="Cordova">Cordova</a></li>
+<li><a href="https://reactnative.dev/" title="React Native"></a></li>
+<li><a href="https://react-redux.js.org/" title="React Redux">React Redux</a></li>
+<li><a href="https://github.com/apollographql/react-apollo" title="React Apollo">React Apollo</a></li>
+<li><a href="https://reacttraining.com/react-router/core/guides/quick-start" title="React Router">React Router</a></li>
+<li><a href="https://benbronsteiny.wordpress.com/2020/02/27/onboarding-thousands-of-users-with-react-native/" title="Onboarding thousands of users with React Native">Onboarding thousands of users with React Native</a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
 <li><a href="" title=""></a></li>
@@ -9511,6 +9515,8 @@ Test
 
 <details>
 <summary>Сoncepts and definitions:</summary>
+
+React Native is a framework for developing native Android and iOS applications using JavaScript and React. It provides a set of cross-platform components that behind the scenes utilize the platform's native components. Using React Native allows us to bring all the familiar features of React such as JSX, components, props, state, and hooks into native application development. On top of that, we can utilize many familiar libraries in the React ecosystem such as React Redux, Apollo, React Router and many more.
 
 </details>
 
