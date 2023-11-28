@@ -9494,8 +9494,16 @@ Create an application according to the requirements described in [exercises 9.16
 <li><a href="https://github.com/apollographql/react-apollo" title="React Apollo">React Apollo</a></li>
 <li><a href="https://reacttraining.com/react-router/core/guides/quick-start" title="React Router">React Router</a></li>
 <li><a href="https://benbronsteiny.wordpress.com/2020/02/27/onboarding-thousands-of-users-with-react-native/" title="Onboarding thousands of users with React Native">Onboarding thousands of users with React Native</a></li>
-<li><a href="" title=""></a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://docs.expo.dev/versions/latest/" title="Expo">Expo</a></li>
+<li><a href="https://docs.expo.dev/faq/#limitations" title="Expo: limitations">Expo: limitations</a></li>
+<li><a href="https://code.visualstudio.com/" title="Visual Studio Code">Visual Studio Code</a></li>
+<li><a href="https://docs.expo.dev/versions/latest/sdk/register-root-component/" title="Expo: registerRootComponent">Expo: registerRootComponent</a></li>
+<li><a href="https://stackoverflow.com/questions/69692842/error-message-error0308010cdigital-envelope-routinesunsupported" title="Expo: error0308010">Expo: error0308010</a></li>
+<li><a href="https://metrobundler.dev/" title="Metro bundler">Metro bundler</a></li>
+<li><a href="https://webpack.js.org/" title="Webpack">Webpack</a></li>
+<li><a href="https://docs.expo.dev/workflow/android-studio-emulator/" title="Expo: limitations">Expo: Set up the Android emulator with Android Studio</a></li>
+<li><a href="https://docs.expo.dev/workflow/ios-simulator/" title="Expo: Set up the iOS simulator with Xcode">Expo: Set up the iOS simulator with Xcode</a></li>
+<li><a href="https://docs.expo.dev/get-started/installation/#2-expo-go-app-for-ios-and" title="Expo's documentation">Expo's documentation</a></li>
 <li><a href="" title=""></a></li>
 
 </details>
@@ -9503,12 +9511,24 @@ Create an application according to the requirements described in [exercises 9.16
 <details>
 <summary>Сommands and fragments:</summary>
 
-Test
+Initializing the project with Expo
 
->
+> npx create-expo-app rate-repository-app --template expo-template-blank@sdk-46
 
-```js
+Install a few dependencies
 
+> npx expo install react-native-web@~0.18.7 react-dom@18.2.0 @expo/webpack-config@^0.17.0
+
+If error 0308010 Install cross-env and update package.json
+
+> npx install cross-env
+
+> package.json
+
+```json
+"scripts": {
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider expo start",
+}
 ```
 
 </details>
@@ -9517,6 +9537,8 @@ Test
 <summary>Сoncepts and definitions:</summary>
 
 React Native is a framework for developing native Android and iOS applications using JavaScript and React. It provides a set of cross-platform components that behind the scenes utilize the platform's native components. Using React Native allows us to bring all the familiar features of React such as JSX, components, props, state, and hooks into native application development. On top of that, we can utilize many familiar libraries in the React ecosystem such as React Redux, Apollo, React Router and many more.
+
+Expo is a platform that eases the setup, development, building, and deployment of React Native applications
 
 </details>
 
