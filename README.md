@@ -9521,7 +9521,7 @@ Install a few dependencies
 
 If error 0308010 Install cross-env and update package.json
 
-> npx install cross-env
+> npm install cross-env
 
 > package.json
 
@@ -9637,10 +9637,11 @@ Test
 
 ### Exercises:
 
-#### 10.1-10.x: Name
+#### 10.1-10.x: Rate repository app
 
-Description:
+Description: Initialize your application with Expo command-line interface and set up the development environment either using an emulator or Expo's mobile app.
 
-Create an application according to the requirements described in [exercises 10.1-10.x]()
+Create an application according to the requirements described in 
+[exercise 10.1](https://fullstackopen.com/en/part10/introduction_to_react_native#exercise-10-1)
 
 - [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part10/)
