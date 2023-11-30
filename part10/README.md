@@ -4,5 +4,5 @@ lesson - the project for exercises and practice while studying the course
 
 rate-repository-app - the project for the exercises #10.1 "Rate repository app"
 
-Time: 1
+Time: 1.2
 

@@ -6,7 +6,8 @@
     "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider expo start",
     "android": "cross-env NODE_OPTIONS=--openssl-legacy-provider expo start --android",
     "ios": "cross-env NODE_OPTIONS=--openssl-legacy-provider expo start --ios",
-    "web": "cross-env NODE_OPTIONS=--openssl-legacy-provider expo start --web"
+    "web": "cross-env NODE_OPTIONS=--openssl-legacy-provider expo start --web",
+    "lint": "eslint ./src/**/*.{js,jsx} App.js --no-error-on-unmatched-pattern"
   },
   "dependencies": {
     "@expo/webpack-config": "^0.17.0",
@@ -19,7 +20,11 @@
     "react-native-web": "~0.18.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@babel/eslint-parser": "^7.23.3",
+    "eslint": "^8.54.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-native": "^4.1.0"
   },
   "private": true
 }

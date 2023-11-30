@@ -9504,7 +9504,12 @@ Create an application according to the requirements described in [exercises 9.16
 <li><a href="https://docs.expo.dev/workflow/android-studio-emulator/" title="Expo: limitations">Expo: Set up the Android emulator with Android Studio</a></li>
 <li><a href="https://docs.expo.dev/workflow/ios-simulator/" title="Expo: Set up the iOS simulator with Xcode">Expo: Set up the iOS simulator with Xcode</a></li>
 <li><a href="https://docs.expo.dev/get-started/installation/#2-expo-go-app-for-ios-and" title="Expo's documentation">Expo's documentation</a></li>
-<li><a href="" title=""></a></li>
+<li><a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository" title="Inviting collaborators to a personal repository">Inviting collaborators to a personal repository</a></li>
+<li><a href="https://eslint.org/" title="ESLint">ESLint</a></li>
+<li><a href="https://docs.expo.dev/debugging/runtime-issues/?redirected" title="React Native Debugger">React Native Debugger</a></li>
+<li><a href="https://github.com/jhen0409/react-native-debugger#installation" title="React Native Debugger: installation instructions">React Native Debugger: installation instructions</a></li>
+<li><a href="https://github.com/jhen0409/react-native-debugger/releases" title="release page">release page</a></li>
+<li><a href="https://docs.expo.dev/debugging/tools/" title="Expo: Debugging and profiling tools">Expo: Debugging and profiling tools</a></li>
 
 </details>
 
@@ -9526,9 +9531,49 @@ If error 0308010 Install cross-env and update package.json
 > package.json
 
 ```json
+//...
 "scripts": {
     "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider expo start",
+    //...
 }
+//...
+```
+
+Install ESlint and add configuration file and update package.json with eslint connamd
+
+> npm install --save-dev eslint @babel/eslint-parser eslint-plugin-react eslint-plugin-react-native
+
+> .eslintrc.json
+
+```json
+{
+  "plugins": ["react", "react-native"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parser": "@babel/eslint-parser",
+  "env": {
+    "react-native/react-native": true
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off"
+  }
+}
+```
+
+> package.json
+
+```json
+//...
+"scripts": {
+    //...
+    "lint": "eslint ./src/**/*.{js,jsx} App.js --no-error-on-unmatched-pattern"
+}
+//...
 ```
 
 </details>
@@ -9641,7 +9686,7 @@ Test
 
 Description: Initialize your application with Expo command-line interface and set up the development environment either using an emulator or Expo's mobile app.
 
-Create an application according to the requirements described in 
+Create an application according to the requirements described in
 [exercise 10.1](https://fullstackopen.com/en/part10/introduction_to_react_native#exercise-10-1)
 
-- [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part10/)
+- [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part10/rate-repository-app)
