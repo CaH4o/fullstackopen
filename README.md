@@ -9682,11 +9682,11 @@ Test
 
 ### Exercises:
 
-#### 10.1-10.x: Rate repository app
+#### 10.1-10.2: Rate repository app
 
-Description: Initialize your application with Expo command-line interface and set up the development environment either using an emulator or Expo's mobile app.
+Description: Initialize your application with Expo command-line interface and set up the development environment either using an emulator or Expo's mobile app. Set up ESLint in your project.
 
 Create an application according to the requirements described in
-[exercise 10.1](https://fullstackopen.com/en/part10/introduction_to_react_native#exercise-10-1)
+[exercise 10.1](https://fullstackopen.com/en/part10/introduction_to_react_native#exercise-10-1), [exercise 10.2](https://fullstackopen.com/en/part10/introduction_to_react_native#exercise-10-2)
 
 - [] [Exercise is done](https://github.com/CaH4o/fullstackopen/tree/main/part10/rate-repository-app)
